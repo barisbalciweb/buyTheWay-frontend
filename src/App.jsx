@@ -1,10 +1,11 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import routes from "./routers/routes";
+import Layout from "./layout/Layout";
 
 const App = () => {
   return (
-    <div>
+    <Layout>
       <Routes>
         {routes.map((route, index) => {
           return (
@@ -12,7 +13,7 @@ const App = () => {
           );
         })}
       </Routes>
-    </div>
+    </Layout>
   );
 };
 
