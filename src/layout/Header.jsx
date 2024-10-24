@@ -7,13 +7,13 @@ import menuIcon from "../assets/icons/bars-solid.svg";
 
 const Header = () => {
   return (
-    <header className="w-full h-[10vh] bg-red-200">
-      <nav className="flex justify-between">
-        <div className="flex justify-center items-center gap-2">
-          <img src={menuIcon} className="h-[5vw]" alt="menu-icon" />
-          <h1 className="">BuyTheWay</h1>
+    <header className="w-full h-[10vh] bg-white flex items-center shadow-md">
+      <nav className="w-full flex justify-between">
+        <div className="flex justify-center items-center gap-[4vw] ml-[4vw]">
+          <img src={menuIcon} className="h-[7vw]" alt="menu-icon" />
+          <h1 className="text-[6vw] mt-[1vw]">BuyTheWay</h1>
         </div>
-        <ul className="flex items-center gap-5 justify-end p-2">
+        <ul className="flex items-center gap-[5vw] justify-end p-[3vw]">
           <li>
             <img className="h-[5vw]" src={searchIcon} alt="search-icon" />
           </li>
