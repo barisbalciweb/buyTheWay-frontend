@@ -14,33 +14,41 @@ const footTopIconStyle = "text-[4vw]";
 const footBotIconStyle = "text-[7vw]";
 const pStyle = "text-[4vw]";
 
+const liTitles = [
+  "Über uns",
+  "Kontakt",
+  "Versand und Lieferung",
+  "Zahlungsarten",
+  "Rücksendungen und Umtausch",
+];
+
+const icons = [
+  { importName: faTiktok },
+  { importName: faFacebook },
+  { importName: faSquareInstagram },
+  { importName: faSquareWhatsapp },
+  { importName: faTwitter },
+];
+
 const Footer = () => {
   return (
     <footer>
-      <section id="footer-top">
+      {/* FOOTER TOP */}
+      <section id="footer-top" className="mt-[12vw]">
         <ul className="flex flex-col items-center">
-          <li className={liStyle}>
-            <p className={pStyle}>Über uns</p>
-            <FontAwesomeIcon className={footTopIconStyle} icon={faAngleDown} />
-          </li>
-          <li className={liStyle}>
-            <p className={pStyle}>Kontakt</p>
-            <FontAwesomeIcon className={footTopIconStyle} icon={faAngleDown} />
-          </li>
-          <li className={liStyle}>
-            <p className={pStyle}>Versand und Lieferung</p>
-            <FontAwesomeIcon className={footTopIconStyle} icon={faAngleDown} />
-          </li>
-          <li className={liStyle}>
-            <p className={pStyle}>Zahlungsarten</p>
-            <FontAwesomeIcon className={footTopIconStyle} icon={faAngleDown} />
-          </li>
-          <li className={liStyle}>
-            <p className={pStyle}>Rücksendungen und Umtausch</p>
-            <FontAwesomeIcon className={footTopIconStyle} icon={faAngleDown} />
-          </li>
+          {liTitles.map((title) => (
+            <li key={title} className={liStyle}>
+              <p className={pStyle}>{title}</p>
+              <FontAwesomeIcon
+                className={footTopIconStyle}
+                icon={faAngleDown}
+              />
+            </li>
+          ))}
         </ul>
       </section>
+
+      {/* FOOTER BOTTOM */}
       <section
         id="footer-bottom"
         className="flex flex-col items-center gap-[4vw] bg-[#585858] py-[6vw] text-white">
@@ -48,17 +56,13 @@ const Footer = () => {
           <div className="flex flex-col gap-[1vw]">
             <p className="font-bold text-[3vw]">Follow us:</p>
             <div className="flex gap-[7vw] text-[10vw]">
-              <FontAwesomeIcon className={footBotIconStyle} icon={faTiktok} />
-              <FontAwesomeIcon className={footBotIconStyle} icon={faFacebook} />
-              <FontAwesomeIcon
-                className={footBotIconStyle}
-                icon={faSquareInstagram}
-              />
-              <FontAwesomeIcon
-                className={footBotIconStyle}
-                icon={faSquareWhatsapp}
-              />
-              <FontAwesomeIcon className={footBotIconStyle} icon={faTwitter} />
+              {icons.map((icon) => (
+                <FontAwesomeIcon
+                  key={icon.importName}
+                  className={footBotIconStyle}
+                  icon={icon.importName}
+                />
+              ))}
             </div>
           </div>
         </section>
