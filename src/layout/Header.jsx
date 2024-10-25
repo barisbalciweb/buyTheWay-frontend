@@ -9,7 +9,7 @@ import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
 
 const Header = () => {
   return (
-    <header className="w-full h-[10vh] bg-white flex items-center shadow-md">
+    <header className="w-full h-[20vw] bg-white flex items-center shadow-md">
       <nav className="w-full flex justify-between">
         <div className="flex justify-center items-center gap-[4vw] ml-[4vw]">
           <FontAwesomeIcon className="h-[7vw]" icon={faBars} />

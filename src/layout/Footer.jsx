@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const liStyle = "w-[95%] flex justify-between border-b-[0.5vw] py-[4vw]";
 const footTopIconStyle = "text-[4vw]";
 const footBotIconStyle = "text-[7vw]";
+const pStyle = "text-[4vw]";
 
 const Footer = () => {
   return (
@@ -19,23 +20,23 @@ const Footer = () => {
       <section id="footer-top">
         <ul className="flex flex-col items-center">
           <li className={liStyle}>
-            <p>Über uns</p>
+            <p className={pStyle}>Über uns</p>
             <FontAwesomeIcon className={footTopIconStyle} icon={faAngleDown} />
           </li>
           <li className={liStyle}>
-            <p>Kontakt</p>
+            <p className={pStyle}>Kontakt</p>
             <FontAwesomeIcon className={footTopIconStyle} icon={faAngleDown} />
           </li>
           <li className={liStyle}>
-            <p>Versand und Lieferung</p>
+            <p className={pStyle}>Versand und Lieferung</p>
             <FontAwesomeIcon className={footTopIconStyle} icon={faAngleDown} />
           </li>
           <li className={liStyle}>
-            <p>Zahlungsarten</p>
+            <p className={pStyle}>Zahlungsarten</p>
             <FontAwesomeIcon className={footTopIconStyle} icon={faAngleDown} />
           </li>
           <li className={liStyle}>
-            <p>Rücksendungen und Umtausch</p>
+            <p className={pStyle}>Rücksendungen und Umtausch</p>
             <FontAwesomeIcon className={footTopIconStyle} icon={faAngleDown} />
           </li>
         </ul>
