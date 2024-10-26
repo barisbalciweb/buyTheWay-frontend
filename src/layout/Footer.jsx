@@ -49,7 +49,7 @@ const Footer = () => {
                 className={`accordion-content ${
                   openIndex === index ? "accordion-content-open" : ""
                 }`}>
-                <p className="p-[4vw]">{el.content}</p>
+                <p className="text-[4vw] p-[4vw]">{el.content}</p>
               </div>
             )}
           </div>
