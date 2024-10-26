@@ -13,10 +13,10 @@
   font-family: "Comfortaa", sans-serif;
 }
 
+/* CUSTOM STYLE GROUPS */
 .c-home-slider-sections {
   @apply flex flex-col gap-[4vw] mt-[12vw];
 }
-
 .c-h2 {
   @apply w-full text-[6vw] ml-[5vw];
 }
@@ -25,7 +25,15 @@
 .slick-slider {
   margin: 0 4vw;
 }
-
 .slick-slide > div {
   margin: 0 1vw;
+}
+
+/* FOOTER ACCORDION */
+.accordion-content {
+  @apply overflow-hidden transition ease-in;
+  max-height: 0;
+}
+.accordion-content-open {
+  max-height: 200px;
 }

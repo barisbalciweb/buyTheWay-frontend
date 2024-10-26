@@ -5,22 +5,10 @@ import {
   faTiktok,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-// STYLES
-const liStyle = "w-[95%] flex justify-between border-b-[0.5vw] py-[4vw]";
-const footTopIconStyle = "text-[4vw]";
-const footBotIconStyle = "text-[7vw]";
-const pStyle = "text-[4vw]";
-
-const liTitles = [
-  "Über uns",
-  "Kontakt",
-  "Versand und Lieferung",
-  "Zahlungsarten",
-  "Rücksendungen und Umtausch",
-];
+import { useState } from "react";
+import { accordion } from "../data/data";
 
 const icons = [
   { importName: faTiktok },
@@ -31,21 +19,41 @@ const icons = [
 ];
 
 const Footer = () => {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const toggleAccordion = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
     <footer className="mt-[20vw]">
       {/* FOOTER TOP */}
-      <section id="footer-top">
-        <ul className="flex flex-col items-center">
-          {liTitles.map((title) => (
-            <li key={title} className={liStyle}>
-              <p className={pStyle}>{title}</p>
+      <section id="footer-top" className="flex flex-col items-center">
+        {accordion.map((el, index) => (
+          <div className="w-full">
+            <button
+              key={index}
+              className={`w-full flex justify-between border-b-[0.5vw] py-[4vw] px-[2vw] ${
+                openIndex === index ? "bg-[#f1f1f1]" : ""
+              }`}
+              onClick={() => toggleAccordion(index)}>
+              <p className="text-[4vw]">{el.title}</p>
               <FontAwesomeIcon
-                className={footTopIconStyle}
-                icon={faAngleDown}
+                className="text-[4vw]"
+                icon={openIndex === index ? faAngleUp : faAngleDown}
               />
-            </li>
-          ))}
-        </ul>
+            </button>
+
+            {openIndex === index && (
+              <div
+                className={`accordion-content ${
+                  openIndex === index ? "accordion-content-open" : ""
+                }`}>
+                <p className="p-[4vw]">{el.content}</p>
+              </div>
+            )}
+          </div>
+        ))}
       </section>
 
       {/* FOOTER BOTTOM */}
@@ -59,7 +67,7 @@ const Footer = () => {
               {icons.map((icon, i) => (
                 <FontAwesomeIcon
                   key={i}
-                  className={footBotIconStyle}
+                  className="text-[7vw]"
                   icon={icon.importName}
                 />
               ))}
