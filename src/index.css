@@ -12,3 +12,20 @@
   background-color: black;
   font-family: "Comfortaa", sans-serif;
 }
+
+.c-home-slider-sections {
+  @apply flex flex-col gap-[4vw] mt-[12vw];
+}
+
+.c-h2 {
+  @apply w-full text-[6vw] ml-[5vw];
+}
+
+/* SLIDER */
+.slick-slider {
+  margin: 0 4vw;
+}
+
+.slick-slide > div {
+  margin: 0 1vw;
+}

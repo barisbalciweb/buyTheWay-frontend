@@ -7,9 +7,13 @@ const App = () => {
     <div id="container" className="w-full h-full bg-white">
       <Layout>
         <Routes>
-          {routes.map((route, index) => {
+          {routes.map((route) => {
             return (
-              <Route key={index} path={route.path} element={route.element} />
+              <Route
+                key={route.path}
+                path={route.path}
+                element={route.element}
+              />
             );
           })}
         </Routes>

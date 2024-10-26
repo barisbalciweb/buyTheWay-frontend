@@ -32,9 +32,9 @@ const icons = [
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className="mt-[20vw]">
       {/* FOOTER TOP */}
-      <section id="footer-top" className="mt-[12vw]">
+      <section id="footer-top">
         <ul className="flex flex-col items-center">
           {liTitles.map((title) => (
             <li key={title} className={liStyle}>
@@ -56,9 +56,9 @@ const Footer = () => {
           <div className="flex flex-col gap-[1vw]">
             <p className="font-bold text-[3vw]">Follow us:</p>
             <div className="flex gap-[7vw] text-[10vw]">
-              {icons.map((icon) => (
+              {icons.map((icon, i) => (
                 <FontAwesomeIcon
-                  key={icon.importName}
+                  key={i}
                   className={footBotIconStyle}
                   icon={icon.importName}
                 />
