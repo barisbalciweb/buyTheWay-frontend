@@ -18,10 +18,10 @@
   @apply flex flex-col gap-[4vw] mt-[12vw];
 }
 .c-h2 {
-  @apply w-full text-[6vw] ml-[5vw];
+  @apply w-full text-[6vw] pl-[5vw];
 }
 
-/* SLIDER */
+/* SLIDER  */
 .slick-slider {
   margin: 0 4vw;
 }
