@@ -3,20 +3,25 @@ import {
   faCircleArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { toggleFilter } from "../../features/ui/uiSlice";
 import { useDispatch } from "react-redux";
+import { toggleSort } from "../../features/ui/uiSlice";
 
-const filterOptions = [
-  "Sortierung",
-  "Kategorie",
-  "Preis",
-  "Farbe",
-  "Größe",
-  "Marke",
-  "Sale",
+const sortOptions = [
+  "Beliebtheit",
+  "Preis aufsteigend",
+  "Preis absteigend",
+  "Neueste zuerst",
+  "Älteste zuerst",
+  "Bewertung",
+  "Name A-Z",
+  "Name Z-A",
+  "Verfügbarkeit",
+  "Rabatt",
+  "Empfohlen",
+  "Meistverkauft",
 ];
 
-const Filter = () => {
+const Sort = () => {
   const dispatch = useDispatch();
 
   return (
@@ -24,18 +29,18 @@ const Filter = () => {
       <div
         id="navigation-field"
         className="flex items-center gap-[2vw] pl-[2vw]"
-        onClick={() => dispatch(toggleFilter())}>
+        onClick={() => dispatch(toggleSort())}>
         <button>
           <FontAwesomeIcon
             icon={faCircleArrowLeft}
             className="text-[5vw] font-bold text-customOrange"
           />
         </button>
-        <p>Filter</p>
+        <p>Sort</p>
       </div>
 
       <div className="flex flex-col">
-        {filterOptions.map((option) => (
+        {sortOptions.map((option) => (
           <div
             key={option}
             className="flex items-center border-b-customBorder border-black">
@@ -48,4 +53,4 @@ const Filter = () => {
   );
 };
 
-export default Filter;
+export default Sort;

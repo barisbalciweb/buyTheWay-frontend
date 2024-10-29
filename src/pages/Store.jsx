@@ -1,29 +1,30 @@
 import { faSliders, faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fakeProductData } from "../data/fakeData";
+import { useEffect } from "react";
 import SingleProduct from "../components/SingleProduct";
+import Filter from "../components/Store/Filter";
+import Sort from "../components/Store/Sort";
+// REDUX
+import { toggleFilter, toggleSort } from "../features/ui/uiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleFilter, toggleSort } from "../features/UI/UISlice";
-
-const sortOptions = [
-  "Beliebtheit",
-  "Preis aufsteigend",
-  "Preis absteigend",
-  "Neueste zuerst",
-  "Älteste zuerst",
-  "Bewertung",
-  "Name A-Z",
-  "Name Z-A",
-  "Verfügbarkeit",
-  "Rabatt",
-  "Empfohlen",
-  "Meistverkauft",
-];
 
 const Store = () => {
   const dispatch = useDispatch();
   const isFilterOpen = useSelector((state) => state.ui.isFilterOpen);
   const isSortOpen = useSelector((state) => state.ui.isSortOpen);
+
+  // DISABLE SCROLLING WHEN MOBILE MENU IS OPEN
+  useEffect(() => {
+    if (isFilterOpen || isSortOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isFilterOpen, isSortOpen]);
 
   return (
     <div>
@@ -51,28 +52,16 @@ const Store = () => {
       </section>
 
       {/* PRODUCTS */}
-      <section className="grid grid-cols-2 p-[5vw] gap-[4vw] relative">
+      <section className="grid grid-cols-2 p-[5vw] gap-[4vw]">
         {fakeProductData.map((product) => (
           <SingleProduct key={product.productId} product={product} />
         ))}
 
         {/* FILTER DROPDOWN */}
-        {isFilterOpen && (
-          <section className="w-full h-[20vw] bg-white absolute top-0 z-10">
-            Filter
-          </section>
-        )}
+        {isFilterOpen && <Filter />}
 
-        {/* FILTER DROPDOWN */}
-        {isSortOpen && (
-          <section className="w-full bg-[rgba(255,255,255,0.9)] absolute top-0 z-10">
-            {sortOptions.map((option) => (
-              <p key={option} className="p-[2vw]">
-                {option}
-              </p>
-            ))}
-          </section>
-        )}
+        {/* SORT DROPDOWN */}
+        {isSortOpen && <Sort />}
       </section>
     </div>
   );

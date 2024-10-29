@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import SubCategories from "../components/Hamburger/SubCategories";
-import Categories from "../components/Hamburger/Categories";
+import SubCategories from "../components/MobileMenu/SubCategories";
+import Categories from "../components/MobileMenu/Categories";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { toggleMobileMenu } from "../features/UI/UISlice";
+import { toggleMobileMenu } from "../features/ui/uiSlice";
 
 const persons = ["DAMEN", "HERREN", "KINDER"];
 const featuredCategories = [
@@ -56,7 +56,7 @@ const MobileMenu = () => {
         onClick={() => dispatch(toggleMobileMenu())}
       />
 
-      {/* HAMBURGER FIELD */}
+      {/* MOBILE MENU FIELD */}
       <div
         id="ham-field"
         className="w-[80%] h-[calc(100svh-17vw)] flex flex-col top-[17vw] bg-white left-0 absolute z-20 overflow-y-auto scrollbar-hide">
