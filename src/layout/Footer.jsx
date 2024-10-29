@@ -26,13 +26,13 @@ const Footer = () => {
   };
 
   return (
-    <footer className="mt-[20vw]">
+    <footer className="mt-[12vw]">
       {/* FOOTER TOP */}
       <section id="footer-top" className="flex flex-col items-center">
         {accordion.map((el, index) => (
           <div key={index} className="w-full">
             <button
-              className={`w-full flex justify-between border-b-[0.5vw] py-[4vw] px-[2vw] ${
+              className={`w-full flex justify-between border-b-customBorder py-[4vw] px-[2vw] ${
                 openIndex === index ? "bg-[#f1f1f1]" : ""
               }`}
               onClick={() => toggleAccordion(index)}>

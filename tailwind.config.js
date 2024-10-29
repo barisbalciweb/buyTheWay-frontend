@@ -7,6 +7,12 @@ export default {
         productImgBg: "#FAF8F6",
         customOrange: "#EA580C",
       },
+      fontSize: {
+        customH1: "5.5vw",
+      },
+      borderWidth: {
+        customBorder: "0.3vw",
+      },
     },
   },
   plugins: [],

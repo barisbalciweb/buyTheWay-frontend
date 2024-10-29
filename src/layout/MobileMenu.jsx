@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import SubCategories from "../components/SubCategories";
-import Categories from "../components/Categories";
-import { toggleHamburger } from "../features/hamburger/hamburgerSlice";
 import { Link } from "react-router-dom";
+import SubCategories from "../components/Hamburger/SubCategories";
+import Categories from "../components/Hamburger/Categories";
+// REDUX
+import { useDispatch, useSelector } from "react-redux";
+import { toggleMobileMenu } from "../features/UI/UISlice";
 
 const persons = ["DAMEN", "HERREN", "KINDER"];
 const featuredCategories = [
@@ -12,16 +13,17 @@ const featuredCategories = [
   { name: "Beliebte Artikel", path: "/favorites" },
 ];
 
-const Hamburger = () => {
+const MobileMenu = () => {
   const [selectedPerson, setSelectedPerson] = useState("DAMEN");
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
-  const isOpened = useSelector((state) => state.hamburger.value);
+
+  const isMobileMenuOpen = useSelector((state) => state.ui.isMobileMenuOpen);
   const dispatch = useDispatch();
 
   // DISABLE SCROLLING WHEN MOBILE MENU IS OPEN
   useEffect(() => {
-    if (isOpened) {
+    if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -29,7 +31,7 @@ const Hamburger = () => {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [isOpened]);
+  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     handlePersonSelect("DAMEN");
@@ -45,13 +47,13 @@ const Hamburger = () => {
     }, 100);
   };
 
-  return isOpened ? (
+  return isMobileMenuOpen ? (
     <>
       {/* BRIGHTENED BACKGROUND */}
       <div
         id="bg-field"
         className="w-full h-full top-0 left-0 bg-[rgba(255,255,255,0.6)] absolute"
-        onClick={() => dispatch(toggleHamburger())}
+        onClick={() => dispatch(toggleMobileMenu())}
       />
 
       {/* HAMBURGER FIELD */}
@@ -94,7 +96,7 @@ const Hamburger = () => {
           {featuredCategories.map((category, index) => (
             <li
               key={index}
-              className="w-full text-[4vw] flex justify-between py-[4vw] px-[5vw] border-b-[0.5vw]">
+              className="w-full text-[4vw] flex justify-between py-[4vw] px-[5vw] border-b-customBorder">
               <Link to={category.path}>{category.name}</Link>
             </li>
           ))}
@@ -104,4 +106,4 @@ const Hamburger = () => {
   ) : null;
 };
 
-export default Hamburger;
+export default MobileMenu;

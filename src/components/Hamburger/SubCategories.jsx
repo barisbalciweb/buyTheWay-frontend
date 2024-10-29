@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fakeSubCategories } from "../data/fakeData";
+import { fakeSubCategories } from "../../data/fakeData";
 import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 

@@ -17,7 +17,7 @@ const Home = () => {
           {selections.map((selection) => (
             <button
               key={selection}
-              className="w-full h-[11vw] bg-[rgba(255,255,255,0.2)] border border-white text-[4vw]">
+              className="w-full h-[11vw] bg-[rgba(255,255,255,0.2)] border-customBorder border-white text-[4vw]">
               {selection}
             </button>
           ))}
@@ -32,7 +32,7 @@ const Home = () => {
             {fakeTopCategories.map((category) => (
               <button
                 key={category}
-                className="w-[25vw] h-[10vw] text-[4vw] border border-black">
+                className="w-[25vw] h-[10vw] text-[4vw] border-customBorder border-black">
                 {category}
               </button>
             ))}

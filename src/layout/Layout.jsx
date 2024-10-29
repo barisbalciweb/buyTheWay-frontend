@@ -1,15 +1,16 @@
 import Header from "./Header";
 import Footer from "./Footer";
-import Hamburger from "./Hamburger";
+import MobileMenu from "./MobileMenu";
+// REDUX
 import { useSelector } from "react-redux";
 
 const Layout = ({ children }) => {
-  const isHamburgerOpened = useSelector((state) => state.hamburger.value);
+  const isMobileMenuOpen = useSelector((state) => state.ui.isMobileMenuOpen);
 
   return (
     <>
       <Header />
-      {isHamburgerOpened && <Hamburger />}
+      {isMobileMenuOpen && <MobileMenu />}
       {children}
       <Footer />
     </>

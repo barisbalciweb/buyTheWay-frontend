@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import hamburgerReducer from "../features/hamburger/hamburgerSlice";
+import uiReducer from "../features/ui/uiSlice";
 
 export const store = configureStore({
   reducer: {
-    hamburger: hamburgerReducer,
+    ui: uiReducer,
   },
 });

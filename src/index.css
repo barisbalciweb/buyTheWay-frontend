@@ -31,6 +31,9 @@
 .slick-slide > div {
   margin: 0 1vw;
 }
+.slick-dots {
+  position: static !important;
+}
 
 /* FOOTER ACCORDION */
 .accordion-content {

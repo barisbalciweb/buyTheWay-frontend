@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faB,
   faBagShopping,
   faBars,
   faMagnifyingGlass,
@@ -9,7 +8,7 @@ import {
 import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
 // REDUX
 import { useDispatch } from "react-redux";
-import { toggleHamburger } from "../features/hamburger/hamburgerSlice";
+import { toggleMobileMenu } from "../features/UI/UISlice";
 
 const iconsWithLinks = [
   { name: faUser, path: "/account" },
@@ -27,7 +26,7 @@ const Header = () => {
           <FontAwesomeIcon
             className="h-[7vw]"
             icon={faBars}
-            onClick={() => dispatch(toggleHamburger())}
+            onClick={() => dispatch(toggleMobileMenu())}
           />
           <h1 className="text-[6vw] mt-[1vw]">BuyTheWay</h1>
         </div>

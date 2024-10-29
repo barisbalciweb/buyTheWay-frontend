@@ -1,4 +1,4 @@
-import { fakeCategories } from "../data/fakeData";
+import { fakeCategories } from "../../data/fakeData";
 
 const Categories = ({ isAnimating, setSelectedCategory }) => {
   return (
