@@ -30,9 +30,8 @@ const Footer = () => {
       {/* FOOTER TOP */}
       <section id="footer-top" className="flex flex-col items-center">
         {accordion.map((el, index) => (
-          <div className="w-full">
+          <div key={index} className="w-full">
             <button
-              key={index}
               className={`w-full flex justify-between border-b-[0.5vw] py-[4vw] px-[2vw] ${
                 openIndex === index ? "bg-[#f1f1f1]" : ""
               }`}
@@ -64,9 +63,9 @@ const Footer = () => {
           <div className="flex flex-col gap-[1vw]">
             <p className="font-bold text-[3vw]">Follow us:</p>
             <div className="flex gap-[7vw] text-[10vw]">
-              {icons.map((icon, i) => (
+              {icons.map((icon, index) => (
                 <FontAwesomeIcon
-                  key={i}
+                  key={index}
                   className="text-[7vw]"
                   icon={icon.importName}
                 />

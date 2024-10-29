@@ -1,39 +1,48 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faB,
   faBagShopping,
   faBars,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
+// REDUX
+import { useDispatch } from "react-redux";
+import { toggleHamburger } from "../features/hamburger/hamburgerSlice";
+
+const iconsWithLinks = [
+  { name: faUser, path: "/account" },
+  { name: faHeart, path: "/wishlist" },
+  { name: faBagShopping, path: "/cart" },
+];
 
 const Header = () => {
+  const dispatch = useDispatch();
+
   return (
-    <header className="w-full h-[20vw] bg-white flex items-center shadow-md">
+    <header className="w-full h-[17vw] bg-white flex items-center shadow-md relative z-10">
       <nav className="w-full flex justify-between">
         <div className="flex justify-center items-center gap-[4vw] ml-[4vw]">
-          <FontAwesomeIcon className="h-[7vw]" icon={faBars} />
+          <FontAwesomeIcon
+            className="h-[7vw]"
+            icon={faBars}
+            onClick={() => dispatch(toggleHamburger())}
+          />
           <h1 className="text-[6vw] mt-[1vw]">BuyTheWay</h1>
         </div>
-        <ul className="flex items-center gap-[5vw] justify-end p-[3vw]">
-          <li>
+        <ul className="flex gap-[5vw] p-[3vw]">
+          <li className="flex">
             <FontAwesomeIcon className="h-[5vw]" icon={faMagnifyingGlass} />
           </li>
-          <li>
-            <Link to="/account">
-              <FontAwesomeIcon className="h-[5vw]" icon={faUser} />
-            </Link>
-          </li>
-          <li>
-            <Link to="/wishlist">
-              <FontAwesomeIcon className="h-[5vw]" icon={faHeart} />
-            </Link>
-          </li>
-          <li>
-            <Link to="/cart">
-              <FontAwesomeIcon className="h-[5vw]" icon={faBagShopping} />
-            </Link>
-          </li>
+          {/* ICONS WITH LINKS */}
+          {iconsWithLinks.map((icon, index) => (
+            <li key={index}>
+              <Link to={icon.path} className="flex">
+                <FontAwesomeIcon className="h-[5vw]" icon={icon.name} />
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
     </header>

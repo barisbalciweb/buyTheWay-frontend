@@ -2,7 +2,7 @@ import heroMan from "../assets/images/hero-man.jpg";
 import secondHeroImg from "../assets/images/Herbstaktion.jpg";
 import thirdHeroImg from "../assets/images/shopping.jpg";
 import SimpleSlider from "../components/ProductSlider";
-import { fakeProductData, fakeCategories } from "../data/fakeData";
+import { fakeProductData, fakeTopCategories } from "../data/fakeData";
 import { selections } from "../data/data";
 
 const Home = () => {
@@ -29,7 +29,7 @@ const Home = () => {
         <h2 className="c-h2">Meist gesucht</h2>
         <div className="flex justify-center">
           <div className="grid grid-rows-2 grid-cols-3 gap-[3vw]">
-            {fakeCategories.map((category) => (
+            {fakeTopCategories.map((category) => (
               <button
                 key={category}
                 className="w-[25vw] h-[10vw] text-[4vw] border border-black">

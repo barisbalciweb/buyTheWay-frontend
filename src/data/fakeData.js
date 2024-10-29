@@ -8,11 +8,28 @@ export const fakeProductData = [
   { productId: 4, productName: "Jacke", price: 99.99, img: productImg },
 ];
 
-export const fakeCategories = [
+export const fakeTopCategories = [
   "Jeans",
   "Hosen",
   "Schuhe",
   "Jacken",
   "T-Shirts",
   "Hemden",
+];
+
+export const fakeCategories = [
+  { name: "Bekleidung", path: "/bekleidung" },
+  { name: "Oberteile", path: "/oberteile" },
+  { name: "Hosen & Jeans", path: "/hosen-jeans" },
+  { name: "Schuhe & Accessoires", path: "/schuhe-accessoires" },
+  { name: "Sportbekleidung", path: "/sportbekleidung" },
+];
+
+export const fakeSubCategories = [
+  { name: "Jacken", path: "/jacken" },
+  { name: "Hemden", path: "/hemden" },
+  { name: "T-Shirts", path: "/t-shirts" },
+  { name: "Hosen", path: "/hosen" },
+  { name: "Jeans", path: "/jeans" },
+  { name: "Schuhe", path: "/schuhe" },
 ];

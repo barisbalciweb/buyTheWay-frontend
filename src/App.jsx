@@ -4,7 +4,7 @@ import Layout from "./layout/Layout";
 
 const App = () => {
   return (
-    <div id="container" className="w-full h-full bg-white">
+    <div id="container" className="w-full h-full bg-">
       <Layout>
         <Routes>
           {routes.map((route) => {
