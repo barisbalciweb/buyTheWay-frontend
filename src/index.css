@@ -35,9 +35,9 @@
   position: static !important;
 }
 
-/* FOOTER ACCORDION */
+/* ACCORDION */
 .accordion-content {
-  @apply overflow-hidden transition ease-in;
+  @apply overflow-hidden transition duration-500 ease-in;
   max-height: 0;
 }
 .accordion-content-open {

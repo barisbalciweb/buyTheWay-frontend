@@ -23,11 +23,7 @@ const MobileMenu = () => {
 
   // DISABLE SCROLLING WHEN MOBILE MENU IS OPEN
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "auto";
     return () => {
       document.body.style.overflow = "auto";
     };

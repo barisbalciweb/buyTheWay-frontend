@@ -13,7 +13,7 @@ const Home = () => {
         className="w-full h-[120vw] flex flex-col items-center justify-center bg-cover bg-center text-white"
         style={{ backgroundImage: `url(${heroMan})` }}>
         <div className="w-[80%] flex flex-col gap-[3vw] mt-[60vw]">
-          <h2 className="c-h2">Für wen suchts du?</h2>
+          <h2 className="text-[6vw] text-center">Für wen suchts du?</h2>
           {selections.map((selection) => (
             <button
               key={selection}

@@ -16,11 +16,8 @@ const Store = () => {
 
   // DISABLE SCROLLING WHEN MOBILE MENU IS OPEN
   useEffect(() => {
-    if (isFilterOpen || isSortOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow =
+      isFilterOpen || isSortOpen ? "hidden" : "auto";
     return () => {
       document.body.style.overflow = "auto";
     };

@@ -8,7 +8,7 @@ import {
 import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
 // REDUX
 import { useDispatch } from "react-redux";
-import { toggleMobileMenu } from "../features/UI/UISlice";
+import { toggleMobileMenu } from "../features/ui/uiSlice";
 
 const iconsWithLinks = [
   { name: faUser, path: "/account" },

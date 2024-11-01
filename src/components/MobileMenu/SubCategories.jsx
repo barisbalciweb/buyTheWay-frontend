@@ -12,23 +12,20 @@ const SubCategories = ({
     <div
       id="sub-category-field"
       className="w-full flex flex-col gap-[2vw] mt-[5vw]">
-      {/* NAVIGATION FIELD */}
-      <div
-        id="navigation-field"
-        className="flex items-center gap-[2vw] pl-[2vw]"
+      {/* NAVIGATION */}
+      <button
+        className="w-full flex items-center gap-[2vw] pl-[2vw] text-[4vw] text-customOrange"
         onClick={() => setSelectedCategory(null)}>
-        <button>
-          <FontAwesomeIcon
-            icon={faCircleArrowLeft}
-            className="text-[5vw] font-bold text-customOrange"
-          />
-        </button>
-        <p className="text-customOrange text-[4vw]">
+        <FontAwesomeIcon
+          icon={faCircleArrowLeft}
+          className="font-bold pb-[0.5vw]"
+        />
+        <p>
           {selectedPerson}
           {" > "}
           {selectedCategory}
         </p>
-      </div>
+      </button>
 
       {/* SUB-CATEGORY SELECTION */}
       <ul

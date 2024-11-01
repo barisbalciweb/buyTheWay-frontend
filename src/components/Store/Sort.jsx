@@ -25,19 +25,16 @@ const Sort = () => {
   const dispatch = useDispatch();
 
   return (
-    <section className="w-full h-full max-h-[100svh] flex flex-col gap-[5vw] bg-white absolute top-0 left-0 z-20 p-[5vw]">
-      <div
-        id="navigation-field"
-        className="flex items-center gap-[2vw] pl-[2vw]"
+    <section className="w-full h-full max-h-[100svh] overflow-y-auto flex flex-col gap-[5vw] bg-white fixed top-0 left-0 z-20 p-[5vw]">
+      <button
+        className="flex items-center gap-[2vw] text-[5vw]"
         onClick={() => dispatch(toggleSort())}>
-        <button>
-          <FontAwesomeIcon
-            icon={faCircleArrowLeft}
-            className="text-[5vw] font-bold text-customOrange"
-          />
-        </button>
+        <FontAwesomeIcon
+          icon={faCircleArrowLeft}
+          className="font-bold text-customOrange pb-[0.5vw]"
+        />
         <p>Sort</p>
-      </div>
+      </button>
 
       <div className="flex flex-col">
         {sortOptions.map((option) => (

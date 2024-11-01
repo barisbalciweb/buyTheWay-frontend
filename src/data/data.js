@@ -27,3 +27,43 @@ export const accordion = [
       "Ihre Zufriedenheit liegt uns am Herzen. Sollten Sie nicht zufrieden sein, bieten wir eine unkomplizierte Rücksendungs- und Umtauschmöglichkeit innerhalb von 30 Tagen ab Erhalt der Ware.",
   },
 ];
+
+export const sortOptions = ["Neueste", "Preis aufsteigend", "Preis absteigend"];
+
+export const filters = [
+  {
+    filterGroup: "Sortierung",
+    options: ["Neueste", "Preis aufsteigend", "Preis absteigend"],
+    inputType: "radio",
+  },
+  {
+    filterGroup: "Kategorie",
+    options: ["Elektronik", "Bekleidung", "Sport"],
+    inputType: "checkbox",
+  },
+  {
+    filterGroup: "Preis",
+    options: ["0-50€", "50-100€", "100-200€"],
+    inputType: "checkbox",
+  },
+  {
+    filterGroup: "Farbe",
+    options: ["Rot", "Blau", "Grün"],
+    inputType: "checkbox",
+  },
+  {
+    filterGroup: "Größe",
+    options: ["S", "M", "L", "XL"],
+    inputType: "checkbox",
+  },
+  {
+    filterGroup: "Marke",
+    options: ["Marke A", "Marke B", "Marke C"],
+    inputType: "checkbox",
+  },
+  {
+    filterGroup: "Sale",
+    options: ["Ja", "Nein"],
+    inputType: "radio",
+  },
+];
