@@ -14,6 +14,7 @@ const Store = () => {
   const dispatch = useDispatch();
   const isFilterOpen = useSelector((state) => state.ui.isFilterOpen);
   const isSortOpen = useSelector((state) => state.ui.isSortOpen);
+  const sortBy = useSelector((state) => state.sort.sortOption);
 
   // DISABLE SCROLLING WHEN MOBILE MENU IS OPEN
   useEffect(() => {
@@ -30,8 +31,10 @@ const Store = () => {
       {/* FILTER AND SORT ICONS */}
       <section
         id="settings"
-        className="w-full h-[] flex border-y-customBorder border-black py-[2.5vw]">
+        className="w-full flex border-y-customBorder border-black py-[2.5vw]">
+        {/* FILTER */}
         <div
+          id="filter"
           className={`w-full flex justify-center items-center gap-[2vw] text-[4vw] border-r-customBorder border-black ${
             isFilterOpen && "text-customOrange font-bold"
           }`}
@@ -40,13 +43,18 @@ const Store = () => {
           <p>Filter</p>
         </div>
 
+        {/* SORT */}
         <div
+          id="sort"
           className={`w-full flex justify-center items-center gap-[2vw] text-[4vw] relative ${
             isSortOpen && "text-customOrange font-bold"
           }`}
           onClick={() => dispatch(toggleSort())}>
           <FontAwesomeIcon icon={faSort} />
-          <p>Sortieren</p>
+          <div className="flex flex-col justify-center items-start">
+            <p>Sortiere nach:</p>
+            <p className="text-customOrange">{sortBy}</p>
+          </div>
         </div>
       </section>
 

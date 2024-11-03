@@ -5,7 +5,7 @@ import { sortOptions } from "../../data/data";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSort } from "../../features/ui/uiSlice";
-import { setSortOption } from "../../features/sort/sortSlice";
+import { changeSorting } from "../../features/sort/sortSlice";
 
 const Sort = () => {
   const sortOption = useSelector((state) => state.sort.sortOption);
@@ -13,7 +13,7 @@ const Sort = () => {
 
   const handleSorting = (option) => {
     dispatch(toggleSort());
-    dispatch(setSortOption(option));
+    dispatch(changeSorting(option));
   };
 
   return (

@@ -8,11 +8,11 @@ export const sortSlice = createSlice({
   name: "sort",
   initialState,
   reducers: {
-    setSortOption: (state, action) => {
+    changeSorting: (state, action) => {
       state.sortOption = action.payload;
     },
   },
 });
 
-export const { setSortOption } = sortSlice.actions;
+export const { changeSorting } = sortSlice.actions;
 export default sortSlice.reducer;

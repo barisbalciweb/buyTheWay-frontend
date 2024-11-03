@@ -72,7 +72,6 @@ const Filter = () => {
                 />
               </div>
 
-              {/* //! DEBUGGING, STEP 2: SHOW THE SELECTED FILTER IN FILTER PAGE */}
               {/* SELECTED FILTERS PREVIEW */}
               {inputType === "checkbox" ? (
                 <div className="flex">
@@ -96,7 +95,6 @@ const Filter = () => {
               )}
             </button>
 
-            {/* //! DEBUGGING, STEP 1: ADD FILTER INTO STATE */}
             {/* SELECT FILTER */}
             {selectedFilterCategory === filterCategory && (
               // FILTER OPTIONS AS ACCORDION CONTENT
