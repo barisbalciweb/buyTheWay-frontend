@@ -17,31 +17,32 @@ export const filterSlice = createSlice({
   initialState,
   reducers: {
     addSelectedFilter: (state, action) => {
-      const { filterGroup, option, inputType } = action.payload;
+      const { filterCategory, filterOption, inputType } = action.payload;
 
       if (inputType === "radio") {
-        state.selectedFilters[filterGroup] = option;
+        state.selectedFilters[filterCategory] = filterOption;
       } else if (inputType === "checkbox") {
-        const currentSelections = state.selectedFilters[filterGroup] || [];
-        const isOptionSelected = currentSelections.includes(option);
+        const existingOptions = state.selectedFilters[filterCategory] || [];
+        const optionIndex = existingOptions.indexOf(filterOption);
 
-        state.selectedFilters[filterGroup] = isOptionSelected
-          ? currentSelections.filter((item) => item !== option)
-          : [...currentSelections, option];
+        optionIndex === -1
+          ? existingOptions.push(filterOption)
+          : existingOptions.splice(optionIndex, 1);
+
+        state.selectedFilters[filterCategory] = existingOptions;
       }
     },
     deleteSelectedFilter: (state, action) => {
-      // Object.keys(state.selectedFilters).forEach((filterGroup) => {
-      //   if (typeof state.selectedFilters[filterGroup] === "string") {
-      //     state.selectedFilters[filterGroup] = "";
-      //   } else if (Array.isArray(state.selectedFilters[filterGroup])) {
-      //     state.selectedFilters[filterGroup] = state.selectedFilters[
-      //       filterGroup
-      //     ].filter((filter) => filter !== action.payload);
-      //   }
-      // });
-    },
+      const { filterCategory, filterOption, inputType } = action.payload;
 
+      if (inputType === "radio") {
+        state.selectedFilters[filterCategory] = "";
+      } else if (inputType === "checkbox") {
+        state.selectedFilters[filterCategory] = state.selectedFilters[
+          filterCategory
+        ].filter((selectedOption) => selectedOption !== filterOption);
+      }
+    },
     clearFilters: (state) => {
       state.selectedFilters = {
         Sortierung: "",

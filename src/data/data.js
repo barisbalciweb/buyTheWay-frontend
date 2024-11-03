@@ -39,38 +39,38 @@ export const sortOptions = [
 
 export const filters = [
   {
-    filterGroup: "Sortierung",
-    options: sortOptions,
+    filterCategory: "Sortierung",
+    filterOptions: sortOptions,
     inputType: "radio",
   },
   {
-    filterGroup: "Kategorie",
-    options: ["Elektronik", "Bekleidung", "Sport"],
+    filterCategory: "Kategorie",
+    filterOptions: ["Elektronik", "Bekleidung", "Sport"],
     inputType: "checkbox",
   },
   {
-    filterGroup: "Preis",
-    options: ["0-50€", "50-100€", "100-200€"],
+    filterCategory: "Preis",
+    filterOptions: ["0-50€", "50-100€", "100-200€"],
     inputType: "checkbox",
   },
   {
-    filterGroup: "Farbe",
-    options: ["Rot", "Blau", "Grün"],
+    filterCategory: "Farbe",
+    filterOptions: ["Rot", "Blau", "Grün"],
     inputType: "checkbox",
   },
   {
-    filterGroup: "Größe",
-    options: ["S", "M", "L", "XL"],
+    filterCategory: "Größe",
+    filterOptions: ["S", "M", "L", "XL"],
     inputType: "checkbox",
   },
   {
-    filterGroup: "Marke",
-    options: ["Marke A", "Marke B", "Marke C"],
+    filterCategory: "Marke",
+    filterOptions: ["Marke A", "Marke B", "Marke C"],
     inputType: "checkbox",
   },
   {
-    filterGroup: "Sale",
-    options: ["Ja", "Nein"],
+    filterCategory: "Sale",
+    filterOptions: ["Ja", "Nein"],
     inputType: "radio",
   },
 ];
