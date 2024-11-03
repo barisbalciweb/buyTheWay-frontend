@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   selectedFilters: {
-    Sortierung: "",
     Kategorie: [],
     Preis: [],
     Farbe: [],

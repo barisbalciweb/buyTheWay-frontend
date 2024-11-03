@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  sortOption: "bestseller",
+  sortBy: "Meistverkauft",
 };
 
 export const sortSlice = createSlice({
@@ -9,7 +9,7 @@ export const sortSlice = createSlice({
   initialState,
   reducers: {
     changeSorting: (state, action) => {
-      state.sortOption = action.payload;
+      state.sortBy = action.payload;
     },
   },
 });

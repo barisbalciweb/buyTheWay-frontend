@@ -3,12 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { sortOptions } from "../../data/data";
 
 // REDUX
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toggleSort } from "../../features/ui/uiSlice";
 import { changeSorting } from "../../features/sort/sortSlice";
 
 const Sort = () => {
-  const sortOption = useSelector((state) => state.sort.sortOption);
   const dispatch = useDispatch();
 
   const handleSorting = (option) => {

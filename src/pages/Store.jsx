@@ -7,14 +7,14 @@ import Filter from "../components/Store/Filter";
 import Sort from "../components/Store/Sort";
 import FilterPreview from "../components/filterPreview";
 // REDUX
-import { toggleFilter, toggleSort } from "../features/ui/uiSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { toggleFilter, toggleSort } from "../features/ui/uiSlice";
 
 const Store = () => {
   const dispatch = useDispatch();
   const isFilterOpen = useSelector((state) => state.ui.isFilterOpen);
   const isSortOpen = useSelector((state) => state.ui.isSortOpen);
-  const sortBy = useSelector((state) => state.sort.sortOption);
+  const sortBy = useSelector((state) => state.sort.sortBy);
 
   // DISABLE SCROLLING WHEN MOBILE MENU IS OPEN
   useEffect(() => {

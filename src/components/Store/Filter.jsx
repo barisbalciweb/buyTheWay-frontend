@@ -8,17 +8,33 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleFilter } from "../../features/ui/uiSlice";
 import { clearFilters } from "../../features/filter/filterSlice";
 import { addSelectedFilter } from "../../features/filter/filterSlice";
+import { changeSorting } from "../../features/sort/sortSlice";
 
 const Filter = () => {
   const [selectedFilterCategory, setSelectedFilterCategory] = useState(null);
 
   const selectedFilters = useSelector((state) => state.filter.selectedFilters);
+  const sortBy = useSelector((state) => state.sort.sortBy);
   const dispatch = useDispatch();
 
   const toggleAccordion = (filterCategory) => {
     setSelectedFilterCategory(
       selectedFilterCategory === filterCategory ? null : filterCategory
     );
+  };
+
+  const handleAddFilter = (filterCategory, filterOption, inputType) => {
+    if (filterCategory === "Sortierung") {
+      dispatch(changeSorting(filterOption));
+    } else {
+      dispatch(
+        addSelectedFilter({
+          filterCategory,
+          filterOption,
+          inputType,
+        })
+      );
+    }
   };
 
   const handleFiltering = () => {
@@ -95,9 +111,8 @@ const Filter = () => {
               )}
             </button>
 
-            {/* SELECT FILTER */}
+            {/* FILTER OPTIONS AS ACCORDION CONTENT */}
             {selectedFilterCategory === filterCategory && (
-              // FILTER OPTIONS AS ACCORDION CONTENT
               <div
                 className={`accordion-content w-full flex flex-col mb-[5vw] ${
                   selectedFilterCategory === filterCategory
@@ -112,19 +127,20 @@ const Filter = () => {
                           type={inputType}
                           name={filterCategory}
                           checked={
-                            inputType === "checkbox"
+                            filterCategory === "Sortierung"
+                              ? sortBy === filterOption
+                              : inputType === "checkbox"
                               ? selectedFilters[filterCategory]?.includes(
                                   filterOption
-                                )
-                              : selectedFilters[filterCategory] === filterOption
+                                ) || false
+                              : selectedFilters[filterCategory] ===
+                                  filterOption || false
                           }
                           onChange={() =>
-                            dispatch(
-                              addSelectedFilter({
-                                filterCategory,
-                                filterOption,
-                                inputType,
-                              })
+                            handleAddFilter(
+                              filterCategory,
+                              filterOption,
+                              inputType
                             )
                           }
                           className="text-customOrange"
