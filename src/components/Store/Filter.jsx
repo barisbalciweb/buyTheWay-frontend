@@ -4,20 +4,14 @@ import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { filters } from "../../data/data";
 //REDUX
+import { useDispatch, useSelector } from "react-redux";
 import { toggleFilter } from "../../features/ui/uiSlice";
-import { useDispatch } from "react-redux";
+import { clearFilters } from "../../features/filter/filterSlice";
+import { addSelectedFilter } from "../../features/filter/filterSlice";
 
 const Filter = () => {
   const [selectedFilterGroup, setSelectedFilterGroup] = useState(null);
-  const [selectedFilterOptions, setSelectedFilterOptions] = useState({
-    Sortierung: "",
-    Kategorie: [],
-    Preis: [],
-    Farbe: [],
-    Größe: [],
-    Marke: [],
-    Sale: "",
-  });
+  const selectedFilters = useSelector((state) => state.filter.selectedFilters);
 
   const dispatch = useDispatch();
 
@@ -27,41 +21,10 @@ const Filter = () => {
     );
   };
 
-  const handleFilterChange = (filterGroup, option, inputType) => {
-    setSelectedFilterOptions((prevFilters) => {
-      if (inputType === "radio") {
-        return {
-          ...prevFilters,
-          [filterGroup]: option,
-        };
-      } else if (inputType === "checkbox") {
-        const currentSelections = prevFilters[filterGroup] || [];
-        const isOptionSelected = currentSelections.includes(option);
-
-        return {
-          ...prevFilters,
-          [filterGroup]: isOptionSelected
-            ? currentSelections.filter((item) => item !== option)
-            : [...currentSelections, option],
-        };
-      }
-    });
+  const handleFiltering = () => {
+    dispatch(toggleFilter());
+    console.log("Filtering with:", selectedFilters);
   };
-
-  const clearFilters = () => {
-    setSelectedFilterOptions({
-      Sortierung: "",
-      Kategorie: [],
-      Preis: [],
-      Farbe: [],
-      Größe: [],
-      Marke: [],
-      Sale: "",
-    });
-    setSelectedFilterGroup(null);
-  };
-
-  console.log(selectedFilterOptions);
 
   return (
     <section className="w-full h-full max-h-[100svh] overflow-y-auto flex flex-col gap-[5vw] bg-white fixed top-0 left-0 z-20 p-[5vw]">
@@ -106,12 +69,12 @@ const Filter = () => {
               {/* SELECTED FILTERS PREVIEW */}
               {inputType === "checkbox" ? (
                 <div className="flex">
-                  {selectedFilterOptions[filterGroup].map((option, index) => (
+                  {selectedFilters[filterGroup].map((option, index) => (
                     <span
                       key={`${filterGroup}-${option}`}
                       className="text-[3vw] text-blue-700 font-bold">
                       {option}
-                      {index === selectedFilterOptions[filterGroup].length - 1
+                      {index === selectedFilters[filterGroup].length - 1
                         ? ""
                         : ",\u00A0"}
                     </span>
@@ -119,7 +82,7 @@ const Filter = () => {
                 </div>
               ) : (
                 <p className="text-[3vw] text-blue-700 font-bold">
-                  {selectedFilterOptions[filterGroup]}
+                  {selectedFilters[filterGroup]}
                 </p>
               )}
             </button>
@@ -141,13 +104,17 @@ const Filter = () => {
                           name={filterGroup}
                           checked={
                             inputType === "checkbox"
-                              ? selectedFilterOptions[filterGroup]?.includes(
-                                  option
-                                )
-                              : selectedFilterOptions[filterGroup] === option
+                              ? selectedFilters[filterGroup]?.includes(option)
+                              : selectedFilters[filterGroup] === option
                           }
                           onChange={() =>
-                            handleFilterChange(filterGroup, option, inputType)
+                            dispatch(
+                              addSelectedFilter({
+                                filterGroup,
+                                option,
+                                inputType,
+                              })
+                            )
                           }
                           className="text-customOrange"
                         />
@@ -162,14 +129,18 @@ const Filter = () => {
         ))}
       </div>
       <button
-        onClick={() =>
-          console.log("Final filtreler gönderiliyor:", selectedFilterOptions)
-        }
+        onClick={handleFiltering}
         className="mt-4 bg-blue-500 text-white p-2 rounded">
         auswählen
       </button>
 
-      <button onClick={clearFilters}>alle Filter löschen</button>
+      <button
+        onClick={() => {
+          dispatch(clearFilters());
+          setSelectedFilterGroup(null);
+        }}>
+        alle Filter löschen
+      </button>
     </section>
   );
 };

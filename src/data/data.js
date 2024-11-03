@@ -28,12 +28,19 @@ export const accordion = [
   },
 ];
 
-export const sortOptions = ["Neueste", "Preis aufsteigend", "Preis absteigend"];
+export const sortOptions = [
+  "Preis aufsteigend",
+  "Preis absteigend",
+  "Name A-Z",
+  "Name Z-A",
+  "Rabatt",
+  "Meistverkauft",
+];
 
 export const filters = [
   {
     filterGroup: "Sortierung",
-    options: ["Neueste", "Preis aufsteigend", "Preis absteigend"],
+    options: sortOptions,
     inputType: "radio",
   },
   {
