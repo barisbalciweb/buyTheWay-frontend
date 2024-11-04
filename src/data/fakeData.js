@@ -1,4 +1,4 @@
-import productImg from "../assets/images/Jacke.png";
+import productImg from "../../src/assets/images/Jacke.png";
 
 //FAKE DATA
 export const fakeProductData = [

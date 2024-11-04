@@ -25,6 +25,20 @@ const Store = () => {
     };
   }, [isFilterOpen, isSortOpen]);
 
+  useEffect(() => {
+    const getProductData = async () => {
+      try {
+        const allProducts = await fetch("/products.json");
+        const data = await allProducts.json();
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getProductData();
+  }, []);
+
   return (
     <div>
       <h1 className="text-customH1 p-[5vw]">Alle Produkte</h1>

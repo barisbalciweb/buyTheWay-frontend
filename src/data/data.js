@@ -74,3 +74,16 @@ export const filters = [
     inputType: "radio",
   },
 ];
+
+const singleProduct = {
+  productId: 1,
+  productName: "Unnamed Jacke",
+  price: 50,
+  img: "https://via.placeholder.com/300",
+  availableSizes: ["S", "M", "L", "XL"],
+  availableColors: ["Rot", "Blau", "Grün"],
+  sale: false,
+  discount: 0,
+  description:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac metus sit amet urna ultricies ultricies. Nullam nec magna nec sem ultrices ultricies. Nulla facilisi. Sed ut elit nec turpis ultricies ultricies. Nullam nec magna nec sem ultricies ultricies. Nulla facilisi. Sed ut elit nec turpis ultricies ultricies.",
+};

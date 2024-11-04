@@ -1,0 +1,1734 @@
+{
+  "T-Shirts": [
+    {
+      "id": 1001,
+      "name": "Basic T-Shirt",
+      "description": "Klassisches T-Shirt aus Baumwolle, ideal für den Alltag.",
+      "category": "T-Shirt",
+      "targetGroup": "Damen",
+      "brand": "H&M",
+      "price": 19.99,
+      "discountPercentage": 5,
+      "sizes": ["XS", "S", "M", "L", "XL"],
+      "isAvailableSizes": ["S", "M", "L"],
+      "colors": [
+        {
+          "name": "Weiß",
+          "hexCode": "#FFFFFF"
+        },
+        {
+          "name": "Schwarz",
+          "hexCode": "#000000"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Weißes Basic T-Shirt"
+        }
+      ],
+      "material": [
+        {
+          "name": "Baumwolle",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 30°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 120,
+      "soldCount": 340
+    },
+    {
+      "id": 1002,
+      "name": "Sport T-Shirt",
+      "description": "Leichtes T-Shirt für sportliche Aktivitäten.",
+      "category": "T-Shirt",
+      "targetGroup": "Herren",
+      "brand": "Nike",
+      "price": 29.99,
+      "discountPercentage": null,
+      "sizes": ["XS", "S", "M", "L", "XL"],
+      "isAvailableSizes": ["M", "L", "XL"],
+      "colors": [
+        {
+          "name": "Grau",
+          "hexCode": "#A9A9A9"
+        },
+        {
+          "name": "Blau",
+          "hexCode": "#0000FF"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Graues Sport T-Shirt"
+        }
+      ],
+      "material": [
+        {
+          "name": "Polyester",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 40°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 80,
+      "soldCount": 150
+    }
+  ],
+  "Hemden": [
+    {
+      "id": 2001,
+      "name": "Klassisches Hemd",
+      "description": "Zeitloses klassisches Hemd aus Baumwolle.",
+      "category": "Hemd",
+      "targetGroup": "Herren",
+      "brand": "H&M",
+      "price": 29.99,
+      "discountPercentage": 10,
+      "sizes": ["S", "M", "L", "XL"],
+      "isAvailableSizes": ["S", "M", "L"],
+      "colors": [
+        {
+          "name": "Blau",
+          "hexCode": "#0000FF"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Blaues klassisches Hemd"
+        }
+      ],
+      "material": [
+        {
+          "name": "Baumwolle",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 40°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 80,
+      "soldCount": 220
+    },
+    {
+      "id": 2002,
+      "name": "Kurzarm Hemd",
+      "description": "Leichtes Kurzarm Hemd für sommerliche Tage.",
+      "category": "Hemd",
+      "targetGroup": "Herren",
+      "brand": "Zara",
+      "price": 24.99,
+      "discountPercentage": null,
+      "sizes": ["S", "M", "L"],
+      "isAvailableSizes": ["M", "L"],
+      "colors": [
+        {
+          "name": "Weiß",
+          "hexCode": "#FFFFFF"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Weißes Kurzarm Hemd"
+        }
+      ],
+      "material": [
+        {
+          "name": "Baumwolle",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 40°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 60,
+      "soldCount": 180
+    }
+  ],
+  "Blusen": [
+    {
+      "id": 3001,
+      "name": "Elegante Bluse",
+      "description": "Elegante Bluse für besondere Anlässe.",
+      "category": "Bluse",
+      "targetGroup": "Damen",
+      "brand": "Mango",
+      "price": 39.99,
+      "discountPercentage": 15,
+      "sizes": ["XS", "S", "M", "L"],
+      "isAvailableSizes": ["S", "M"],
+      "colors": [
+        {
+          "name": "Rosa",
+          "hexCode": "#FFC0CB"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Rosa Bluse"
+        }
+      ],
+      "material": [
+        {
+          "name": "Seide",
+          "percentage": 0.7
+        },
+        {
+          "name": "Baumwolle",
+          "percentage": 0.3
+        }
+      ],
+      "pflegehinweise": [
+        "Handwäsche empfohlen",
+        "Nicht bleichen",
+        "Flach trocknen"
+      ],
+      "stock": 50,
+      "soldCount": 130
+    },
+    {
+      "id": 3002,
+      "name": "Casual Bluse",
+      "description": "Lässige Bluse für den Alltag.",
+      "category": "Bluse",
+      "targetGroup": "Damen",
+      "brand": "Esprit",
+      "price": 34.99,
+      "discountPercentage": 10,
+      "sizes": ["S", "M", "L"],
+      "isAvailableSizes": ["S", "L"],
+      "colors": [
+        {
+          "name": "Weiß",
+          "hexCode": "#FFFFFF"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Weiße Casual Bluse"
+        }
+      ],
+      "material": [
+        {
+          "name": "Baumwolle",
+          "percentage": 0.8
+        },
+        {
+          "name": "Polyester",
+          "percentage": 0.2
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 30°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 70,
+      "soldCount": 200
+    }
+  ],
+  "Pullover": [
+    {
+      "id": 4001,
+      "name": "Winter Pullover",
+      "description": "Warmer Pullover für kalte Wintertage.",
+      "category": "Pullover",
+      "targetGroup": "Damen",
+      "brand": "Uniqlo",
+      "price": 49.99,
+      "discountPercentage": 20,
+      "sizes": ["S", "M", "L", "XL"],
+      "isAvailableSizes": ["M", "L"],
+      "colors": [
+        {
+          "name": "Grau",
+          "hexCode": "#A9A9A9"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Grauer Winter Pullover"
+        }
+      ],
+      "material": [
+        {
+          "name": "Wolle",
+          "percentage": 0.8
+        },
+        {
+          "name": "Acryl",
+          "percentage": 0.2
+        }
+      ],
+      "pflegehinweise": [
+        "Handwäsche empfohlen",
+        "Nicht bleichen",
+        "Flach trocknen"
+      ],
+      "stock": 45,
+      "soldCount": 320
+    },
+    {
+      "id": 4002,
+      "name": "Strickpullover",
+      "description": "Kuscheliger Strickpullover für den Herbst.",
+      "category": "Pullover",
+      "targetGroup": "Herren",
+      "brand": "Zara",
+      "price": 39.99,
+      "discountPercentage": null,
+      "sizes": ["M", "L", "XL"],
+      "isAvailableSizes": ["M", "L"],
+      "colors": [
+        {
+          "name": "Braun",
+          "hexCode": "#A52A2A"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Brauner Strickpullover"
+        }
+      ],
+      "material": [
+        {
+          "name": "Baumwolle",
+          "percentage": 0.6
+        },
+        {
+          "name": "Wolle",
+          "percentage": 0.4
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 30°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 30,
+      "soldCount": 180
+    }
+  ],
+  "Sweatshirts": [
+    {
+      "id": 5001,
+      "name": "Hoodie Sweatshirt",
+      "description": "Klassisches Hoodie für einen lässigen Look.",
+      "category": "Sweatshirt",
+      "targetGroup": "Unisex",
+      "brand": "Adidas",
+      "price": 59.99,
+      "discountPercentage": 15,
+      "sizes": ["S", "M", "L", "XL"],
+      "isAvailableSizes": ["S", "L", "XL"],
+      "colors": [
+        {
+          "name": "Schwarz",
+          "hexCode": "#000000"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Schwarzes Hoodie Sweatshirt"
+        }
+      ],
+      "material": [
+        {
+          "name": "Baumwolle",
+          "percentage": 0.7
+        },
+        {
+          "name": "Polyester",
+          "percentage": 0.3
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 30°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 100,
+      "soldCount": 540
+    },
+    {
+      "id": 5002,
+      "name": "Crewneck Sweatshirt",
+      "description": "Bequemes Crewneck für den Alltag.",
+      "category": "Sweatshirt",
+      "targetGroup": "Damen",
+      "brand": "Nike",
+      "price": 49.99,
+      "discountPercentage": 10,
+      "sizes": ["XS", "S", "M", "L"],
+      "isAvailableSizes": ["XS", "M"],
+      "colors": [
+        {
+          "name": "Weiß",
+          "hexCode": "#FFFFFF"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Weißes Crewneck Sweatshirt"
+        }
+      ],
+      "material": [
+        {
+          "name": "Baumwolle",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 30°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 75,
+      "soldCount": 240
+    }
+  ],
+  "Jacken": [
+    {
+      "id": 6001,
+      "name": "Regenjacke",
+      "description": "Wasserdichte Jacke für regnerische Tage.",
+      "category": "Jacke",
+      "targetGroup": "Damen",
+      "brand": "The North Face",
+      "price": 99.99,
+      "discountPercentage": 20,
+      "sizes": ["XS", "S", "M", "L", "XL"],
+      "isAvailableSizes": ["S", "M", "L"],
+      "colors": [
+        {
+          "name": "Grün",
+          "hexCode": "#228B22"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Grüne Regenjacke"
+        }
+      ],
+      "material": [
+        {
+          "name": "Polyester",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": [
+        "Handwäsche empfohlen",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 60,
+      "soldCount": 190
+    },
+    {
+      "id": 6002,
+      "name": "Steppjacke",
+      "description": "Warme Steppjacke für kühle Herbsttage.",
+      "category": "Jacke",
+      "targetGroup": "Herren",
+      "brand": "Patagonia",
+      "price": 129.99,
+      "discountPercentage": null,
+      "sizes": ["S", "M", "L", "XL"],
+      "isAvailableSizes": ["M", "L", "XL"],
+      "colors": [
+        {
+          "name": "Blau",
+          "hexCode": "#1E90FF"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Blaue Steppjacke"
+        }
+      ],
+      "material": [
+        {
+          "name": "Nylon",
+          "percentage": 0.8
+        },
+        {
+          "name": "Daunen",
+          "percentage": 0.2
+        }
+      ],
+      "pflegehinweise": [
+        "Handwäsche empfohlen",
+        "Nicht bleichen",
+        "Flach trocknen"
+      ],
+      "stock": 40,
+      "soldCount": 145
+    }
+  ],
+  "Mäntel": [
+    {
+      "id": 7001,
+      "name": "Wollmantel",
+      "description": "Eleganter Wollmantel für formelle Anlässe.",
+      "category": "Mantel",
+      "targetGroup": "Damen",
+      "brand": "Mango",
+      "price": 149.99,
+      "discountPercentage": 10,
+      "sizes": ["S", "M", "L", "XL"],
+      "isAvailableSizes": ["S", "L"],
+      "colors": [
+        {
+          "name": "Schwarz",
+          "hexCode": "#000000"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Schwarzer Wollmantel"
+        }
+      ],
+      "material": [
+        {
+          "name": "Wolle",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": [
+        "Nur chemische Reinigung",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 30,
+      "soldCount": 110
+    },
+    {
+      "id": 7002,
+      "name": "Daunenmantel",
+      "description": "Warmer Daunenmantel für kalte Wintertage.",
+      "category": "Mantel",
+      "targetGroup": "Herren",
+      "brand": "Columbia",
+      "price": 179.99,
+      "discountPercentage": 15,
+      "sizes": ["M", "L", "XL"],
+      "isAvailableSizes": ["M", "XL"],
+      "colors": [
+        {
+          "name": "Dunkelblau",
+          "hexCode": "#00008B"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Dunkelblauer Daunenmantel"
+        }
+      ],
+      "material": [
+        {
+          "name": "Polyester",
+          "percentage": 0.9
+        },
+        {
+          "name": "Daunen",
+          "percentage": 0.1
+        }
+      ],
+      "pflegehinweise": [
+        "Nur chemische Reinigung",
+        "Nicht bleichen",
+        "Flach trocknen"
+      ],
+      "stock": 25,
+      "soldCount": 80
+    }
+  ],
+  "Strickjacken": [
+    {
+      "id": 8001,
+      "name": "Kuschelige Strickjacke",
+      "description": "Warme Strickjacke für den Winter.",
+      "category": "Strickjacke",
+      "targetGroup": "Damen",
+      "brand": "H&M",
+      "price": 59.99,
+      "discountPercentage": 20,
+      "sizes": ["S", "M", "L"],
+      "isAvailableSizes": ["S", "L"],
+      "colors": [
+        {
+          "name": "Creme",
+          "hexCode": "#FFFDD0"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Cremefarbene Strickjacke"
+        }
+      ],
+      "material": [
+        {
+          "name": "Acryl",
+          "percentage": 0.7
+        },
+        {
+          "name": "Wolle",
+          "percentage": 0.3
+        }
+      ],
+      "pflegehinweise": [
+        "Handwäsche empfohlen",
+        "Nicht bleichen",
+        "Flach trocknen"
+      ],
+      "stock": 70,
+      "soldCount": 200
+    },
+    {
+      "id": 8002,
+      "name": "Leichte Strickjacke",
+      "description": "Leichte Strickjacke für kühle Sommerabende.",
+      "category": "Strickjacke",
+      "targetGroup": "Herren",
+      "brand": "Esprit",
+      "price": 39.99,
+      "discountPercentage": null,
+      "sizes": ["XS", "S", "M"],
+      "isAvailableSizes": ["S", "M"],
+      "colors": [
+        {
+          "name": "Grau",
+          "hexCode": "#D3D3D3"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Graue leichte Strickjacke"
+        }
+      ],
+      "material": [
+        {
+          "name": "Baumwolle",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 30°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 55,
+      "soldCount": 120
+    }
+  ],
+  "Hosen": [
+    {
+      "id": 9001,
+      "name": "Chino Hose",
+      "description": "Bequeme Chino Hose für den Alltag.",
+      "category": "Hose",
+      "targetGroup": "Herren",
+      "brand": "Tommy Hilfiger",
+      "price": 69.99,
+      "discountPercentage": 10,
+      "sizes": ["S", "M", "L", "XL"],
+      "isAvailableSizes": ["M", "L"],
+      "colors": [
+        {
+          "name": "Beige",
+          "hexCode": "#F5F5DC"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Beige Chino Hose"
+        }
+      ],
+      "material": [
+        {
+          "name": "Baumwolle",
+          "percentage": 0.9
+        },
+        {
+          "name": "Elasthan",
+          "percentage": 0.1
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 40°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 40,
+      "soldCount": 160
+    },
+    {
+      "id": 9002,
+      "name": "Jeans",
+      "description": "Moderne Jeans für den lässigen Look.",
+      "category": "Hose",
+      "targetGroup": "Damen",
+      "brand": "Levi's",
+      "price": 89.99,
+      "discountPercentage": 5,
+      "sizes": ["XS", "S", "M", "L"],
+      "isAvailableSizes": ["S", "M"],
+      "colors": [
+        {
+          "name": "Dunkelblau",
+          "hexCode": "#00008B"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Dunkelblaue Jeans"
+        }
+      ],
+      "material": [
+        {
+          "name": "Baumwolle",
+          "percentage": 0.8
+        },
+        {
+          "name": "Polyester",
+          "percentage": 0.2
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 30°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 35,
+      "soldCount": 230
+    }
+  ],
+  "Shorts": [
+    {
+      "id": 10001,
+      "name": "Sport Shorts",
+      "description": "Leichte Sport Shorts für optimalen Tragekomfort.",
+      "category": "Shorts",
+      "targetGroup": "Unisex",
+      "brand": "Adidas",
+      "price": 29.99,
+      "discountPercentage": 10,
+      "sizes": ["XS", "S", "M", "L", "XL"],
+      "isAvailableSizes": ["S", "M"],
+      "colors": [
+        {
+          "name": "Schwarz",
+          "hexCode": "#000000"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Schwarze Sport Shorts"
+        }
+      ],
+      "material": [
+        {
+          "name": "Polyester",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 30°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 100,
+      "soldCount": 400
+    },
+    {
+      "id": 10002,
+      "name": "Freizeit Shorts",
+      "description": "Bequeme Shorts für warme Tage.",
+      "category": "Shorts",
+      "targetGroup": "Herren",
+      "brand": "H&M",
+      "price": 19.99,
+      "discountPercentage": null,
+      "sizes": ["S", "M", "L"],
+      "isAvailableSizes": ["S", "L"],
+      "colors": [
+        {
+          "name": "Blau",
+          "hexCode": "#0000FF"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Blaue Freizeit Shorts"
+        }
+      ],
+      "material": [
+        {
+          "name": "Baumwolle",
+          "percentage": 0.8
+        },
+        {
+          "name": "Polyester",
+          "percentage": 0.2
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 40°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 80,
+      "soldCount": 150
+    }
+  ],
+  "Röcke": [
+    {
+      "id": 11001,
+      "name": "Plissee Rock",
+      "description": "Eleganter Plissee Rock für besondere Anlässe.",
+      "category": "Rock",
+      "targetGroup": "Damen",
+      "brand": "Zara",
+      "price": 49.99,
+      "discountPercentage": 15,
+      "sizes": ["XS", "S", "M", "L"],
+      "isAvailableSizes": ["S", "M"],
+      "colors": [
+        {
+          "name": "Rot",
+          "hexCode": "#FF0000"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Roter Plissee Rock"
+        }
+      ],
+      "material": [
+        {
+          "name": "Polyester",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": [
+        "Handwäsche empfohlen",
+        "Nicht bleichen",
+        "Flach trocknen"
+      ],
+      "stock": 50,
+      "soldCount": 230
+    },
+    {
+      "id": 11002,
+      "name": "Maxirock",
+      "description": "Langer Rock für einen eleganten Look.",
+      "category": "Rock",
+      "targetGroup": "Damen",
+      "brand": "Mango",
+      "price": 59.99,
+      "discountPercentage": 10,
+      "sizes": ["S", "M", "L", "XL"],
+      "isAvailableSizes": ["M", "L"],
+      "colors": [
+        {
+          "name": "Schwarz",
+          "hexCode": "#000000"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Schwarzer Maxirock"
+        }
+      ],
+      "material": [
+        {
+          "name": "Viskose",
+          "percentage": 0.6
+        },
+        {
+          "name": "Baumwolle",
+          "percentage": 0.4
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 30°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 40,
+      "soldCount": 140
+    }
+  ],
+  "Jeans": [
+    {
+      "id": 12001,
+      "name": "Slim Fit Jeans",
+      "description": "Moderne Slim Fit Jeans für den Alltag.",
+      "category": "Jeans",
+      "targetGroup": "Herren",
+      "brand": "Levi's",
+      "price": 89.99,
+      "discountPercentage": 5,
+      "sizes": ["XS", "S", "M", "L"],
+      "isAvailableSizes": ["S", "M"],
+      "colors": [
+        {
+          "name": "Dunkelblau",
+          "hexCode": "#00008B"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Dunkelblaue Slim Fit Jeans"
+        }
+      ],
+      "material": [
+        {
+          "name": "Baumwolle",
+          "percentage": 0.8
+        },
+        {
+          "name": "Polyester",
+          "percentage": 0.2
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 30°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 70,
+      "soldCount": 230
+    },
+    {
+      "id": 12002,
+      "name": "Regular Fit Jeans",
+      "description": "Klassische Regular Fit Jeans für alle Gelegenheiten.",
+      "category": "Jeans",
+      "targetGroup": "Unisex",
+      "brand": "Wrangler",
+      "price": 79.99,
+      "discountPercentage": 10,
+      "sizes": ["S", "M", "L", "XL"],
+      "isAvailableSizes": ["M", "L"],
+      "colors": [
+        {
+          "name": "Hellblau",
+          "hexCode": "#ADD8E6"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Hellblaue Regular Fit Jeans"
+        }
+      ],
+      "material": [
+        {
+          "name": "Baumwolle",
+          "percentage": 0.9
+        },
+        {
+          "name": "Elasthan",
+          "percentage": 0.1
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 30°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 90,
+      "soldCount": 150
+    }
+  ],
+  "Stoffhosen": [
+    {
+      "id": 13001,
+      "name": "Elegante Stoffhose",
+      "description": "Elegante Stoffhose für formelle Anlässe.",
+      "category": "Stoffhose",
+      "targetGroup": "Damen",
+      "brand": "Esprit",
+      "price": 69.99,
+      "discountPercentage": 10,
+      "sizes": ["XS", "S", "M", "L", "XL"],
+      "isAvailableSizes": ["S", "M"],
+      "colors": [
+        {
+          "name": "Schwarz",
+          "hexCode": "#000000"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Schwarze elegante Stoffhose"
+        }
+      ],
+      "material": [
+        {
+          "name": "Polyester",
+          "percentage": 0.7
+        },
+        {
+          "name": "Baumwolle",
+          "percentage": 0.3
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 30°C",
+        "Nicht bleichen",
+        "Flach trocknen"
+      ],
+      "stock": 55,
+      "soldCount": 130
+    },
+    {
+      "id": 13002,
+      "name": "Casual Stoffhose",
+      "description": "Bequeme Stoffhose für den Alltag.",
+      "category": "Stoffhose",
+      "targetGroup": "Herren",
+      "brand": "H&M",
+      "price": 49.99,
+      "discountPercentage": 5,
+      "sizes": ["S", "M", "L"],
+      "isAvailableSizes": ["M", "L"],
+      "colors": [
+        {
+          "name": "Grau",
+          "hexCode": "#A9A9A9"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Graue casual Stoffhose"
+        }
+      ],
+      "material": [
+        {
+          "name": "Baumwolle",
+          "percentage": 0.8
+        },
+        {
+          "name": "Elasthan",
+          "percentage": 0.2
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 40°C",
+        "Nicht bleichen",
+        "Flach trocknen"
+      ],
+      "stock": 80,
+      "soldCount": 100
+    }
+  ],
+  "Unterwäsche": [
+    {
+      "id": 14001,
+      "name": "Klassische Unterwäsche",
+      "description": "Bequeme und atmungsaktive Unterwäsche.",
+      "category": "Unterwäsche",
+      "targetGroup": "Unisex",
+      "brand": "Calvin Klein",
+      "price": 19.99,
+      "discountPercentage": 10,
+      "sizes": ["S", "M", "L", "XL"],
+      "isAvailableSizes": ["M", "L"],
+      "colors": [
+        {
+          "name": "Weiß",
+          "hexCode": "#FFFFFF"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Weiße klassische Unterwäsche"
+        }
+      ],
+      "material": [
+        {
+          "name": "Baumwolle",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 30°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 200,
+      "soldCount": 500
+    },
+    {
+      "id": 14002,
+      "name": "Sport Unterwäsche",
+      "description": "Funktionale Unterwäsche für Sport und Freizeit.",
+      "category": "Unterwäsche",
+      "targetGroup": "Herren",
+      "brand": "Nike",
+      "price": 24.99,
+      "discountPercentage": 5,
+      "sizes": ["S", "M", "L", "XL"],
+      "isAvailableSizes": ["S", "M"],
+      "colors": [
+        {
+          "name": "Schwarz",
+          "hexCode": "#000000"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Schwarze Sport Unterwäsche"
+        }
+      ],
+      "material": [
+        {
+          "name": "Polyester",
+          "percentage": 0.8
+        },
+        {
+          "name": "Elasthan",
+          "percentage": 0.2
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 40°C",
+        "Nicht bleichen",
+        "Flach trocknen"
+      ],
+      "stock": 150,
+      "soldCount": 350
+    }
+  ],
+  "Socken": [
+    {
+      "id": 15001,
+      "name": "Wollsocken",
+      "description": "Warme Wollsocken für kalte Tage.",
+      "category": "Socken",
+      "targetGroup": "Unisex",
+      "brand": "Falke",
+      "price": 9.99,
+      "discountPercentage": null,
+      "sizes": ["S", "M", "L"],
+      "isAvailableSizes": ["M", "L"],
+      "colors": [
+        {
+          "name": "Grau",
+          "hexCode": "#D3D3D3"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Graue Wollsocken"
+        }
+      ],
+      "material": [
+        {
+          "name": "Wolle",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 30°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 100,
+      "soldCount": 200
+    },
+    {
+      "id": 15002,
+      "name": "Sportsocken",
+      "description": "Atmungsaktive Socken für sportliche Aktivitäten.",
+      "category": "Socken",
+      "targetGroup": "Unisex",
+      "brand": "Puma",
+      "price": 7.99,
+      "discountPercentage": 10,
+      "sizes": ["S", "M", "L", "XL"],
+      "isAvailableSizes": ["S", "M"],
+      "colors": [
+        {
+          "name": "Weiß",
+          "hexCode": "#FFFFFF"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Weiße Sportsocken"
+        }
+      ],
+      "material": [
+        {
+          "name": "Baumwolle",
+          "percentage": 0.7
+        },
+        {
+          "name": "Polyester",
+          "percentage": 0.3
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 40°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 120,
+      "soldCount": 300
+    }
+  ],
+  "Kleider": [
+    {
+      "id": 16001,
+      "name": "Sommerkleid",
+      "description": "Leichtes Kleid für sommerliche Tage.",
+      "category": "Kleid",
+      "targetGroup": "Damen",
+      "brand": "H&M",
+      "price": 39.99,
+      "discountPercentage": 15,
+      "sizes": ["XS", "S", "M", "L"],
+      "isAvailableSizes": ["S", "M"],
+      "colors": [
+        {
+          "name": "Gelb",
+          "hexCode": "#FFFF00"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Gelbes Sommerkleid"
+        }
+      ],
+      "material": [
+        {
+          "name": "Viskose",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 30°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 60,
+      "soldCount": 250
+    },
+    {
+      "id": 16002,
+      "name": "Abendkleid",
+      "description": "Elegantes Abendkleid für besondere Anlässe.",
+      "category": "Kleid",
+      "targetGroup": "Damen",
+      "brand": "Zara",
+      "price": 89.99,
+      "discountPercentage": 10,
+      "sizes": ["S", "M", "L"],
+      "isAvailableSizes": ["M", "L"],
+      "colors": [
+        {
+          "name": "Schwarz",
+          "hexCode": "#000000"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Schwarzes Abendkleid"
+        }
+      ],
+      "material": [
+        {
+          "name": "Seide",
+          "percentage": 0.7
+        },
+        {
+          "name": "Polyester",
+          "percentage": 0.3
+        }
+      ],
+      "pflegehinweise": [
+        "Nur chemische Reinigung",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 30,
+      "soldCount": 100
+    }
+  ],
+  "Jogginganzüge": [
+    {
+      "id": 17001,
+      "name": "Basic Jogginganzug",
+      "description": "Bequemer Jogginganzug für sportliche Aktivitäten.",
+      "category": "Jogginganzug",
+      "targetGroup": "Unisex",
+      "brand": "Nike",
+      "price": 59.99,
+      "discountPercentage": 10,
+      "sizes": ["S", "M", "L", "XL"],
+      "isAvailableSizes": ["M", "L"],
+      "colors": [
+        {
+          "name": "Grau",
+          "hexCode": "#808080"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Grauer Jogginganzug"
+        }
+      ],
+      "material": [
+        {
+          "name": "Baumwolle",
+          "percentage": 0.6
+        },
+        {
+          "name": "Polyester",
+          "percentage": 0.4
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 40°C",
+        "Nicht bleichen",
+        "Nicht im Trockner trocknen"
+      ],
+      "stock": 80,
+      "soldCount": 220
+    },
+    {
+      "id": 17002,
+      "name": "Sommer Jogginganzug",
+      "description": "Leichter Jogginganzug für warme Tage.",
+      "category": "Jogginganzug",
+      "targetGroup": "Herren",
+      "brand": "Adidas",
+      "price": 69.99,
+      "discountPercentage": null,
+      "sizes": ["S", "M", "L"],
+      "isAvailableSizes": ["S", "L"],
+      "colors": [
+        {
+          "name": "Schwarz",
+          "hexCode": "#000000"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Schwarzer Sommer Jogginganzug"
+        }
+      ],
+      "material": [
+        {
+          "name": "Polyester",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": [
+        "Maschinenwäsche bei 30°C",
+        "Nicht bleichen",
+        "Flach trocknen"
+      ],
+      "stock": 70,
+      "soldCount": 130
+    }
+  ],
+  "Taschen": [
+    {
+      "id": 18001,
+      "name": "Leder Handtasche",
+      "description": "Elegante Leder Handtasche für den Alltag.",
+      "category": "Tasche",
+      "targetGroup": "Damen",
+      "brand": "Michael Kors",
+      "price": 199.99,
+      "discountPercentage": 15,
+      "sizes": ["Einheitsgröße"],
+      "isAvailableSizes": ["Einheitsgröße"],
+      "colors": [
+        {
+          "name": "Braun",
+          "hexCode": "#8B4513"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Braune Leder Handtasche"
+        }
+      ],
+      "material": [
+        {
+          "name": "Leder",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": ["Nur trocken reinigen", "Nicht bleichen"],
+      "stock": 50,
+      "soldCount": 100
+    },
+    {
+      "id": 18002,
+      "name": "Rucksack",
+      "description": "Praktischer Rucksack für Reisen und Freizeit.",
+      "category": "Tasche",
+      "targetGroup": "Unisex",
+      "brand": "Herschel",
+      "price": 89.99,
+      "discountPercentage": 10,
+      "sizes": ["Einheitsgröße"],
+      "isAvailableSizes": ["Einheitsgröße"],
+      "colors": [
+        {
+          "name": "Schwarz",
+          "hexCode": "#000000"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Schwarzer Rucksack"
+        }
+      ],
+      "material": [
+        {
+          "name": "Polyester",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": ["Handwäsche empfohlen", "Nicht bleichen"],
+      "stock": 90,
+      "soldCount": 200
+    }
+  ],
+  "Mützen": [
+    {
+      "id": 19001,
+      "name": "Wintermütze",
+      "description": "Warme Mütze für kalte Wintertage.",
+      "category": "Mütze",
+      "targetGroup": "Unisex",
+      "brand": "The North Face",
+      "price": 19.99,
+      "discountPercentage": null,
+      "sizes": ["Einheitsgröße"],
+      "isAvailableSizes": ["Einheitsgröße"],
+      "colors": [
+        {
+          "name": "Dunkelgrau",
+          "hexCode": "#A9A9A9"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Dunkelgraue Wintermütze"
+        }
+      ],
+      "material": [
+        {
+          "name": "Wolle",
+          "percentage": 0.8
+        },
+        {
+          "name": "Polyester",
+          "percentage": 0.2
+        }
+      ],
+      "pflegehinweise": ["Handwäsche empfohlen", "Nicht bleichen"],
+      "stock": 120,
+      "soldCount": 310
+    },
+    {
+      "id": 19002,
+      "name": "Baseball Cap",
+      "description": "Stylische Cap für sonnige Tage.",
+      "category": "Mütze",
+      "targetGroup": "Unisex",
+      "brand": "Nike",
+      "price": 24.99,
+      "discountPercentage": 5,
+      "sizes": ["Einheitsgröße"],
+      "isAvailableSizes": ["Einheitsgröße"],
+      "colors": [
+        {
+          "name": "Blau",
+          "hexCode": "#0000FF"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Blaue Baseball Cap"
+        }
+      ],
+      "material": [
+        {
+          "name": "Baumwolle",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": ["Maschinenwäsche bei 30°C", "Nicht bleichen"],
+      "stock": 150,
+      "soldCount": 220
+    }
+  ],
+  "Handschuhe": [
+    {
+      "id": 20001,
+      "name": "Lederhandschuhe",
+      "description": "Elegante Lederhandschuhe für kalte Tage.",
+      "category": "Handschuhe",
+      "targetGroup": "Damen",
+      "brand": "Zara",
+      "price": 49.99,
+      "discountPercentage": 10,
+      "sizes": ["S", "M", "L"],
+      "isAvailableSizes": ["M", "L"],
+      "colors": [
+        {
+          "name": "Schwarz",
+          "hexCode": "#000000"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Schwarze Lederhandschuhe"
+        }
+      ],
+      "material": [
+        {
+          "name": "Leder",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": ["Nur trocken reinigen", "Nicht bleichen"],
+      "stock": 60,
+      "soldCount": 140
+    },
+    {
+      "id": 20002,
+      "name": "Sporthandschuhe",
+      "description": "Bequeme Handschuhe für sportliche Aktivitäten.",
+      "category": "Handschuhe",
+      "targetGroup": "Herren",
+      "brand": "Under Armour",
+      "price": 29.99,
+      "discountPercentage": 15,
+      "sizes": ["S", "M", "L", "XL"],
+      "isAvailableSizes": ["S", "L"],
+      "colors": [
+        {
+          "name": "Grau",
+          "hexCode": "#808080"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Graue Sporthandschuhe"
+        }
+      ],
+      "material": [
+        {
+          "name": "Polyester",
+          "percentage": 0.9
+        },
+        {
+          "name": "Elasthan",
+          "percentage": 0.1
+        }
+      ],
+      "pflegehinweise": ["Maschinenwäsche bei 30°C", "Nicht bleichen"],
+      "stock": 80,
+      "soldCount": 180
+    }
+  ],
+  "Schals": [
+    {
+      "id": 21001,
+      "name": "Kaschmir Schal",
+      "description": "Luxuriöser Kaschmir Schal für kalte Wintertage.",
+      "category": "Schal",
+      "targetGroup": "Damen",
+      "brand": "Burberry",
+      "price": 129.99,
+      "discountPercentage": null,
+      "sizes": ["Einheitsgröße"],
+      "isAvailableSizes": ["Einheitsgröße"],
+      "colors": [
+        {
+          "name": "Beige",
+          "hexCode": "#F5F5DC"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Beiger Kaschmir Schal"
+        }
+      ],
+      "material": [
+        {
+          "name": "Kaschmir",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": ["Nur chemische Reinigung", "Nicht bleichen"],
+      "stock": 25,
+      "soldCount": 70
+    },
+    {
+      "id": 21002,
+      "name": "Strickschal",
+      "description": "Warmer Strickschal für Herbst und Winter.",
+      "category": "Schal",
+      "targetGroup": "Unisex",
+      "brand": "H&M",
+      "price": 19.99,
+      "discountPercentage": 20,
+      "sizes": ["Einheitsgröße"],
+      "isAvailableSizes": ["Einheitsgröße"],
+      "colors": [
+        {
+          "name": "Rot",
+          "hexCode": "#FF0000"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Roter Strickschal"
+        }
+      ],
+      "material": [
+        {
+          "name": "Acryl",
+          "percentage": 0.7
+        },
+        {
+          "name": "Wolle",
+          "percentage": 0.3
+        }
+      ],
+      "pflegehinweise": ["Maschinenwäsche bei 30°C", "Nicht bleichen"],
+      "stock": 100,
+      "soldCount": 250
+    }
+  ],
+  "Halsketten": [
+    {
+      "id": 22001,
+      "name": "Goldene Halskette",
+      "description": "Elegante goldene Halskette für besondere Anlässe.",
+      "category": "Halskette",
+      "targetGroup": "Damen",
+      "brand": "Tiffany & Co.",
+      "price": 299.99,
+      "discountPercentage": 5,
+      "sizes": ["Einheitsgröße"],
+      "isAvailableSizes": ["Einheitsgröße"],
+      "colors": [
+        {
+          "name": "Gold",
+          "hexCode": "#FFD700"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Goldene Halskette"
+        }
+      ],
+      "material": [
+        {
+          "name": "Gold",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": ["Nur trocken reinigen", "Von Feuchtigkeit fernhalten"],
+      "stock": 20,
+      "soldCount": 60
+    },
+    {
+      "id": 22002,
+      "name": "Silberne Halskette",
+      "description": "Stilvolle Silberkette für den Alltag.",
+      "category": "Halskette",
+      "targetGroup": "Damen",
+      "brand": "Pandora",
+      "price": 99.99,
+      "discountPercentage": 10,
+      "sizes": ["Einheitsgröße"],
+      "isAvailableSizes": ["Einheitsgröße"],
+      "colors": [
+        {
+          "name": "Silber",
+          "hexCode": "#C0C0C0"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png",
+          "alt": "Silberne Halskette"
+        }
+      ],
+      "material": [
+        {
+          "name": "Silber",
+          "percentage": 1
+        }
+      ],
+      "pflegehinweise": ["Nur trocken reinigen", "Von Feuchtigkeit fernhalten"],
+      "stock": 35,
+      "soldCount": 120
+    }
+  ]
+}
