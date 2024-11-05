@@ -9,12 +9,18 @@ import FilterPreview from "../components/filterPreview";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFilter, toggleSort } from "../features/ui/uiSlice";
+import {
+  setProducts,
+  setSelectedProduct,
+} from "../features/products/productsSlice";
+import { Link } from "react-router-dom";
 
 const Store = () => {
   const dispatch = useDispatch();
   const isFilterOpen = useSelector((state) => state.ui.isFilterOpen);
   const isSortOpen = useSelector((state) => state.ui.isSortOpen);
   const sortBy = useSelector((state) => state.sort.sortBy);
+  const products = useSelector((state) => state.products.products);
 
   // DISABLE SCROLLING WHEN MOBILE MENU IS OPEN
   useEffect(() => {
@@ -25,17 +31,17 @@ const Store = () => {
     };
   }, [isFilterOpen, isSortOpen]);
 
+  // FETCH PRODUCT DATA AND SET IT IN STATE
   useEffect(() => {
     const getProductData = async () => {
       try {
         const allProducts = await fetch("/products.json");
         const data = await allProducts.json();
-        console.log(data);
+        dispatch(setProducts(data));
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
-
     getProductData();
   }, []);
 
@@ -77,9 +83,15 @@ const Store = () => {
 
       {/* PRODUCTS */}
       <section className="grid grid-cols-2 p-[5vw] gap-[4vw]">
-        {fakeProductData.map((product) => (
-          <SingleProduct key={product.productId} product={product} />
-        ))}
+        {products &&
+          products.map((product) => (
+            <Link
+              key={product.id}
+              to={`/store/${product.id}`}
+              onClick={() => dispatch(setSelectedProduct(product))}>
+              <SingleProduct product={product} />
+            </Link>
+          ))}
 
         {/* FILTER DROPDOWN */}
         {isFilterOpen && <Filter />}
