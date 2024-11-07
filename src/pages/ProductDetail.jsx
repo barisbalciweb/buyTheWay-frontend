@@ -11,6 +11,7 @@ import { addToCart } from "../features/cart/cartSlice";
 
 const ProductDetail = () => {
   const [openedAccordion, setOpenedAccordion] = useState(null);
+  const [success, setSuccess] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -38,6 +39,16 @@ const ProductDetail = () => {
     setOpenedAccordion(openedAccordion === id ? null : id);
   };
 
+  const handleAddToCart = () => {
+    dispatch(addToCart(selectedProduct));
+    if (!success) {
+      setSuccess(true);
+      setTimeout(() => {
+        setSuccess(false);
+      }, 3000);
+    }
+  };
+
   return (
     <main className="flex flex-col gap-[10vw]">
       <section className="px-[4vw] mt-[4vw] flex flex-col gap-[2vw]">
@@ -61,8 +72,10 @@ const ProductDetail = () => {
             </button>
           ))}
           <button
-            className="flex items-center justify-center h-[14vw] col-start-1 col-end-5 text-white text-[5vw] font-bold bg-[#52D441]"
-            onClick={() => dispatch(addToCart(selectedProduct))}>
+            className={`flex items-center justify-center h-[14vw] col-start-1 col-end-5 transition duration-[700ms] outline-none text-white text-[5vw] font-bold active:bg-red-600 ${
+              success ? "bg-[#52D441]" : "bg-black"
+            }`}
+            onClick={handleAddToCart}>
             IN DEN WARENKORB
           </button>
           <button className="flex items-center justify-center border">

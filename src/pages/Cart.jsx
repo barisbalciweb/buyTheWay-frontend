@@ -3,11 +3,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductInCart from "../components/Cart/ProductInCart";
 import { updateTotal } from "../features/cart/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { total } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(updateTotal());
@@ -45,7 +47,9 @@ const Cart = () => {
           <p>Gesamtsumme</p>
           <p>{total} €</p>
         </div>
-        <button className="bg-black text-[5vw] text-white px-[20vw] py-[4vw] mt-[5vw]">
+        <button
+          className="bg-black text-[5vw] text-white px-[20vw] py-[4vw] mt-[5vw]"
+          onClick={() => navigate("/checkout")}>
           ZUR KASSE
         </button>
       </section>

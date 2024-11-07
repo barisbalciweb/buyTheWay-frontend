@@ -1,3 +1,4 @@
+import Checkout from "../components/Checkout";
 import Account from "../pages/Account";
 import Cart from "../pages/Cart";
 import Home from "../pages/Home";
@@ -12,6 +13,7 @@ const routes = [
   { path: "/store", element: <Store /> },
   { path: "/store/:productId", element: <ProductDetail /> },
   { path: "/cart", element: <Cart /> },
+  { path: "/checkout", element: <Checkout /> },
   { path: "/wishlist", element: <WishList /> },
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
