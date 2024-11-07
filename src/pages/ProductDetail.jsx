@@ -49,15 +49,17 @@ const ProductDetail = () => {
       <section className="w-full flex justify-center">
         <div className="w-[80%] grid grid-rows-2 grid-cols-5 gap-[2vw]">
           {sizes.map((size, index) => (
-            <button key={index} className="border text-[4vw]">
+            <button
+              key={index}
+              className="flex items-center justify-center border text-[4vw]">
               {size}
             </button>
           ))}
-          <button className="h-[13vw] col-start-1 col-end-5 text-white font-bold bg-[#52D441]">
+          <button className="flex items-center justify-center h-[14vw] col-start-1 col-end-5 text-white text-[5vw] font-bold bg-[#52D441]">
             IN DEN WARENKORB
           </button>
-          <button className="border text-[4vw]">
-            <FontAwesomeIcon icon={faHeart} className=" border" />
+          <button className="flex items-center justify-center border">
+            <FontAwesomeIcon icon={faHeart} className="text-[6vw]" />
           </button>
         </div>
       </section>
@@ -66,7 +68,7 @@ const ProductDetail = () => {
         {/* MATERIALS */}
         <button
           id="materials"
-          className={`w-full flex justify-between text-[4vw] font-bold border-b-customBorder py-[3vw] px-[2vw] ${
+          className={`w-full flex justify-between text-[4vw] font-bold border-b-customBorder py-[4vw] px-[2vw] ${
             openedAccordion === "materials" && "text-customOrange"
           }`}
           onClick={(e) => toggleAccordion(e.target.id)}>
@@ -90,7 +92,7 @@ const ProductDetail = () => {
         {/* CARE INSTRUCTIONS */}
         <button
           id="careInstructions"
-          className={`w-full flex justify-between text-[4vw] font-bold border-b-customBorder py-[3vw] px-[2vw] ${
+          className={`w-full flex justify-between text-[4vw] font-bold border-b-customBorder py-[4vw] px-[2vw] ${
             openedAccordion === "careInstructions" && "text-customOrange"
           }`}
           onClick={(e) => toggleAccordion(e.target.id)}>
