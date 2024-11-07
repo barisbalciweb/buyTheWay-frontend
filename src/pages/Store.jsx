@@ -1,26 +1,27 @@
 import { faSliders, faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fakeProductData } from "../data/fakeData";
 import { useEffect } from "react";
 import SingleProduct from "../components/SingleProduct";
 import Filter from "../components/Store/Filter";
 import Sort from "../components/Store/Sort";
 import FilterPreview from "../components/filterPreview";
+import { Link } from "react-router-dom";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFilter, toggleSort } from "../features/ui/uiSlice";
 import {
-  setProducts,
+  fetchProducts,
   setSelectedProduct,
 } from "../features/products/productsSlice";
-import { Link } from "react-router-dom";
 
 const Store = () => {
   const dispatch = useDispatch();
   const isFilterOpen = useSelector((state) => state.ui.isFilterOpen);
   const isSortOpen = useSelector((state) => state.ui.isSortOpen);
   const sortBy = useSelector((state) => state.sort.sortBy);
-  const products = useSelector((state) => state.products.products);
+
+  const { allProducts, statuses } = useSelector((state) => state.products);
+  const allProductsStatus = statuses.allProducts;
 
   // DISABLE SCROLLING WHEN MOBILE MENU IS OPEN
   useEffect(() => {
@@ -31,19 +32,11 @@ const Store = () => {
     };
   }, [isFilterOpen, isSortOpen]);
 
-  // FETCH PRODUCT DATA AND SET IT IN STATE
   useEffect(() => {
-    const getProductData = async () => {
-      try {
-        const allProducts = await fetch("/products.json");
-        const data = await allProducts.json();
-        dispatch(setProducts(data));
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getProductData();
-  }, []);
+    dispatch(
+      fetchProducts({ endpoint: "/products.json", type: "allProducts" })
+    );
+  }, [dispatch]);
 
   return (
     <div>
@@ -83,15 +76,16 @@ const Store = () => {
 
       {/* PRODUCTS */}
       <section className="grid grid-cols-2 p-[5vw] gap-[4vw]">
-        {products &&
-          products.map((product) => (
-            <Link
-              key={product.id}
-              to={`/store/${product.id}`}
-              onClick={() => dispatch(setSelectedProduct(product))}>
-              <SingleProduct product={product} />
-            </Link>
-          ))}
+        {allProductsStatus === "succeeded"
+          ? allProducts.map((product) => (
+              <Link
+                key={product.id}
+                to={`/store/${product.id}`}
+                onClick={() => dispatch(setSelectedProduct(product))}>
+                <SingleProduct product={product} />
+              </Link>
+            ))
+          : "Loading..."}
 
         {/* FILTER DROPDOWN */}
         {isFilterOpen && <Filter />}

@@ -27,7 +27,7 @@ const SingleProduct = ({ product }) => {
         className="text-[5vw] absolute z-10 top-[1vw] right-[1vw]"
       />
       <img
-        className="w-full bg-productImgBg"
+        className="bg-productImgBg"
         src={images[0].url}
         alt={images[0].alt}
       />

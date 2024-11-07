@@ -1,11 +1,32 @@
+import { useEffect } from "react";
 import heroMan from "../assets/images/hero-man.jpg";
 import secondHeroImg from "../assets/images/Herbstaktion.jpg";
 import thirdHeroImg from "../assets/images/shopping.jpg";
-import SimpleSlider from "../components/ProductSlider";
-import { fakeProductData, fakeTopCategories } from "../data/fakeData";
+import { fakeTopCategories } from "../data/fakeData";
 import { selections } from "../data/data";
+import ProductSlider from "../components/ProductSlider";
+// REDUX
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../features/products/productsSlice";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  //BESTSELLER FETCH STATES
+  const { bestsellers, discounted, favourites, statuses } = useSelector(
+    (state) => state.products
+  );
+  const bestsellersStatus = statuses.bestsellers;
+  const discountedStatus = statuses.discounted;
+  const favouritesStatus = statuses.favourites;
+
+  useEffect(() => {
+    dispatch(
+      fetchProducts({ endpoint: "/products.json", type: "bestsellers" })
+    );
+    dispatch(fetchProducts({ endpoint: "/products.json", type: "discounted" }));
+    dispatch(fetchProducts({ endpoint: "/products.json", type: "favourites" }));
+  }, [dispatch]);
+
   return (
     <main>
       {/* SELECTIONS */}
@@ -41,10 +62,14 @@ const Home = () => {
       </section>
 
       {/* BESTSELLER */}
-      <section className="c-home-slider-sections">
-        <h2 className="c-h2">Unsere Bestseller</h2>
-        <SimpleSlider fakeProductData={fakeProductData} />
-      </section>
+      {bestsellersStatus === "succeeded" ? (
+        <section className="c-home-slider-sections">
+          <h2 className="c-h2">Bestseller</h2>
+          <ProductSlider products={bestsellers} />
+        </section>
+      ) : (
+        "Loading..."
+      )}
 
       {/* HERO (2) */}
       <section
@@ -58,10 +83,14 @@ const Home = () => {
       </section>
 
       {/* DISCOUNTS  */}
-      <section className="c-home-slider-sections">
-        <h2 className="c-h2">Reduzierte Artikel</h2>
-        <SimpleSlider fakeProductData={fakeProductData} />
-      </section>
+      {discountedStatus === "succeeded" ? (
+        <section className="c-home-slider-sections">
+          <h2 className="c-h2">Reduzierte Artikel</h2>
+          <ProductSlider products={discounted} />
+        </section>
+      ) : (
+        "Loading..."
+      )}
 
       {/* HERO (3) */}
       <section
@@ -71,10 +100,14 @@ const Home = () => {
       </section>
 
       {/* FAVORITES */}
-      <section className="c-home-slider-sections">
-        <h2 className="c-h2">Beliebte Artikel</h2>
-        <SimpleSlider fakeProductData={fakeProductData} />
-      </section>
+      {favouritesStatus === "succeeded" ? (
+        <section className="c-home-slider-sections">
+          <h2 className="c-h2">Beliebte Artikel</h2>
+          <ProductSlider products={favourites} />
+        </section>
+      ) : (
+        "Loading..."
+      )}
     </main>
   );
 };

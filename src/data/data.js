@@ -87,3 +87,5 @@ const singleProduct = {
   description:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac metus sit amet urna ultricies ultricies. Nullam nec magna nec sem ultrices ultricies. Nulla facilisi. Sed ut elit nec turpis ultricies ultricies. Nullam nec magna nec sem ultricies ultricies. Nulla facilisi. Sed ut elit nec turpis ultricies ultricies.",
 };
+
+export const sizes = ["XS", "S", "M", "L", "XL"];

@@ -18,7 +18,7 @@
 
 /* CUSTOM STYLE GROUPS */
 .c-home-slider-sections {
-  @apply flex flex-col gap-[4vw] mt-[12vw];
+  @apply w-full flex flex-col gap-[4vw] mt-[12vw];
 }
 .c-h2 {
   @apply w-full text-[6vw] pl-[5vw];

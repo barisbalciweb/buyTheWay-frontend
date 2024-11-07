@@ -1,31 +1,68 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { sizes } from "../data/data";
 // REDUX
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../features/products/productsSlice";
+import ProductSlider from "../components/ProductSlider";
 
 const ProductDetail = () => {
   const [openedAccordion, setOpenedAccordion] = useState(null);
 
+  const dispatch = useDispatch();
+
+  const { recentlyViewed, similar, statuses } = useSelector(
+    (state) => state.products
+  );
+  const recentlyViewedStatus = statuses.recentlyViewed;
+  const similarStatus = statuses.similar;
+
   const { id, name, price, images, careInstructions, description, materials } =
     useSelector((state) => state.products.selectedProduct);
+
+  useEffect(() => {
+    dispatch(
+      fetchProducts({ endpoint: "/products.json", type: "recentlyViewed" })
+    );
+    dispatch(fetchProducts({ endpoint: "/products.json", type: "similar" }));
+  }, [dispatch]);
 
   const toggleAccordion = (id) => {
     setOpenedAccordion(openedAccordion === id ? null : id);
   };
 
   return (
-    <main className="p-[5vw] flex flex-col gap-[3vw]">
-      <img
-        src={images[0].url}
-        alt={images[0].alt}
-        className="bg-productImgBg"
-      />
-      <h1 className="font-bold text-[7vw]">{name}</h1>
-      <p className="text-[4vw]">{description}</p>
-      <p className="text-[6vw]">{price} €</p>
+    <main className="flex flex-col gap-[10vw]">
+      <section className="px-[4vw] mt-[4vw] flex flex-col gap-[2vw]">
+        <img
+          src={images[0].url}
+          alt={images[0].alt}
+          className="bg-productImgBg"
+        />
+        <h1 className="w-full font-bold text-[7vw]">{name}</h1>
+        <p className="text-[4vw]">{description}</p>
+        <p className="w-full text-[6vw]">{price} €</p>
+      </section>
 
-      <section className="bg-gray-100">
+      <section className="w-full flex justify-center">
+        <div className="w-[80%] grid grid-rows-2 grid-cols-5 gap-[2vw]">
+          {sizes.map((size, index) => (
+            <button key={index} className="border text-[4vw]">
+              {size}
+            </button>
+          ))}
+          <button className="h-[13vw] col-start-1 col-end-5 text-white font-bold bg-[#52D441]">
+            IN DEN WARENKORB
+          </button>
+          <button className="border text-[4vw]">
+            <FontAwesomeIcon icon={faHeart} className=" border" />
+          </button>
+        </div>
+      </section>
+
+      <section className="w-full">
         {/* MATERIALS */}
         <button
           id="materials"
@@ -36,7 +73,7 @@ const ProductDetail = () => {
           Material
           <FontAwesomeIcon
             className="text-[4vw]"
-            icon={openedAccordion === "materials" ? faAngleUp : faAngleDown}
+            icon={openedAccordion === "materials" ? faMinus : faPlus}
           />
         </button>
 
@@ -60,9 +97,7 @@ const ProductDetail = () => {
           Pflegehinweise
           <FontAwesomeIcon
             className="text-[4vw]"
-            icon={
-              openedAccordion === "careInstructions" ? faAngleUp : faAngleDown
-            }
+            icon={openedAccordion === "careInstructions" ? faMinus : faPlus}
           />
         </button>
 
@@ -74,6 +109,28 @@ const ProductDetail = () => {
               </li>
             ))}
           </ul>
+        )}
+      </section>
+
+      <section>
+        {/* RECENTLY VIEWED  */}
+        {recentlyViewedStatus === "succeeded" ? (
+          <section className="c-home-slider-sections">
+            <h2 className="c-h2">Zuletzt angesehen</h2>
+            <ProductSlider products={recentlyViewed} />
+          </section>
+        ) : (
+          "Loading..."
+        )}
+
+        {/* SIMILAR PRODUCTS  */}
+        {similarStatus === "succeeded" ? (
+          <section className="c-home-slider-sections">
+            <h2 className="c-h2">Ähnliche Produkte</h2>
+            <ProductSlider products={similar} />
+          </section>
+        ) : (
+          "Loading..."
         )}
       </section>
     </main>
