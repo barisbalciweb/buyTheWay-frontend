@@ -8,12 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../features/products/productsSlice";
 import ProductSlider from "../components/ProductSlider";
 import { addToCart } from "../features/cart/cartSlice";
-import { useNavigate } from "react-router-dom";
 
 const ProductDetail = () => {
-  // ONLY FOR DEMO PURPOSES
-  const navigate = useNavigate();
-
   const [openedAccordion, setOpenedAccordion] = useState(null);
 
   const dispatch = useDispatch();
@@ -66,10 +62,7 @@ const ProductDetail = () => {
           ))}
           <button
             className="flex items-center justify-center h-[14vw] col-start-1 col-end-5 text-white text-[5vw] font-bold bg-[#52D441]"
-            onClick={() => {
-              dispatch(addToCart(selectedProduct));
-              navigate("/cart");
-            }}>
+            onClick={() => dispatch(addToCart(selectedProduct))}>
             IN DEN WARENKORB
           </button>
           <button className="flex items-center justify-center border">

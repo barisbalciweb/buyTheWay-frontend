@@ -28,7 +28,9 @@ const Header = () => {
             icon={faBars}
             onClick={() => dispatch(toggleMobileMenu())}
           />
-          <h1 className="text-[6vw] mt-[1vw]">BuyTheWay</h1>
+          <Link to={"/"}>
+            <h1 className="text-[6vw] mt-[1vw]">BuyTheWay</h1>
+          </Link>
         </div>
         <ul className="flex gap-[5vw] p-[3vw]">
           <li className="flex">

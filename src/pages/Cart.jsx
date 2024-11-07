@@ -6,7 +6,7 @@ import ProductInCart from "../components/Cart/ProductInCart";
 const Cart = () => {
   const { cartItems } = useSelector((state) => state.cart);
 
-  console.log(cartItems);
+  console.log("CART", cartItems);
 
   return (
     <div>
@@ -15,7 +15,7 @@ const Cart = () => {
         {/* PRODUCTS IN CART */}
         {cartItems.length > 0 ? (
           cartItems.map((item) => (
-            <ProductInCart key={item.id} product={item} />
+            <ProductInCart key={item.item.id} item={item} />
           ))
         ) : (
           <p className="text-[4vw]">Your cart is empty</p>

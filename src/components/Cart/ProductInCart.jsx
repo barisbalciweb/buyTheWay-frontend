@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Counter from "./Counter";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const ProductInCart = ({ product }) => {
+const ProductInCart = ({ item }) => {
   const {
     id,
     name,
@@ -20,7 +20,7 @@ const ProductInCart = ({ product }) => {
     careInstructions,
     stock,
     soldCount,
-  } = product;
+  } = item.item;
 
   return (
     <div className="flex relative m-[4vw] gap-[2vw]">
@@ -40,7 +40,7 @@ const ProductInCart = ({ product }) => {
           </p>
         </div>
         <div className="flex gap-[3vw]">
-          <Counter />
+          <Counter item={item} />
           <FontAwesomeIcon
             className="flex justify-center items-center text-[7vw]"
             icon={faHeart}
