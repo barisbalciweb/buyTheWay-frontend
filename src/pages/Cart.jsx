@@ -16,7 +16,7 @@ const Cart = () => {
   return (
     <div>
       <section>
-        <h1 className="text-[8vw] font-bold m-[4vw]">WARENKORB</h1>
+        <h1 className="text-[7vw] font-bold m-[4vw]">WARENKORB</h1>
         {/* PRODUCTS IN CART */}
         {cartItems.length > 0 ? (
           cartItems.map((item) => (
@@ -27,26 +27,25 @@ const Cart = () => {
         )}
       </section>
 
-      <section className="bg-[#D9D9D9] flex flex-col justify-center items-center gap-[2vw] px-[5vw] py-[10vw]">
+      <section className="bg-[#D9D9D9] flex flex-col justify-center gap-[2vw] text-[4.5vw] px-[5vw] py-[10vw]">
         <div className="w-full mb-[5vw]">
-          <h2 className="text-[6vw] font-bold ">Bestellübersicht</h2>
-          <p className="text-[4.5vw] text-gray-600">
-            {cartItems.length} Artikel
-          </p>
+          <h2 className="text-[6vw] font-bold">Bestellübersicht</h2>
+          <p className="text-gray-600">{cartItems.length} Artikel</p>
         </div>
-        <div className="w-full flex justify-between">
-          <p className="text-[4.5vw]">Zwischensumme</p>
-          <p className="text-[4.5vw]">€</p>
+        <div className="flex justify-between">
+          <p>Zwischensumme</p>
+          <p>€</p>
         </div>
-        <div className="w-full flex justify-between">
-          <p className="text-[4.5vw]">Lieferung</p>
-          <p className="text-[4.5vw]">kostenlos</p>
+        <div className="flex justify-between">
+          <p>Lieferung</p>
+          <p>kostenlos</p>
         </div>
-        <div className="w-full flex justify-between border-t-customBorder border-black">
-          <p className="text-[4.5vw] mt-[2vw]">Gesamtsumme</p>
-          <p className="text-[4.5vw]">{total} €</p>
+        <hr className="border-black" />
+        <div className="flex justify-between">
+          <p>Gesamtsumme</p>
+          <p>{total} €</p>
         </div>
-        <button className="bg-black text-white px-[20vw] py-[4vw] mt-[5vw]">
+        <button className="bg-black text-[5vw] text-white px-[20vw] py-[4vw] mt-[5vw]">
           ZUR KASSE
         </button>
       </section>
