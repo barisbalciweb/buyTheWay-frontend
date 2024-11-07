@@ -7,8 +7,13 @@ import { sizes } from "../data/data";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../features/products/productsSlice";
 import ProductSlider from "../components/ProductSlider";
+import { addToCart } from "../features/cart/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 const ProductDetail = () => {
+  // ONLY FOR DEMO PURPOSES
+  const navigate = useNavigate();
+
   const [openedAccordion, setOpenedAccordion] = useState(null);
 
   const dispatch = useDispatch();
@@ -21,6 +26,10 @@ const ProductDetail = () => {
 
   const { id, name, price, images, careInstructions, description, materials } =
     useSelector((state) => state.products.selectedProduct);
+
+  const selectedProduct = useSelector(
+    (state) => state.products.selectedProduct
+  );
 
   useEffect(() => {
     dispatch(
@@ -55,7 +64,12 @@ const ProductDetail = () => {
               {size}
             </button>
           ))}
-          <button className="flex items-center justify-center h-[14vw] col-start-1 col-end-5 text-white text-[5vw] font-bold bg-[#52D441]">
+          <button
+            className="flex items-center justify-center h-[14vw] col-start-1 col-end-5 text-white text-[5vw] font-bold bg-[#52D441]"
+            onClick={() => {
+              dispatch(addToCart(selectedProduct));
+              navigate("/cart");
+            }}>
             IN DEN WARENKORB
           </button>
           <button className="flex items-center justify-center border">
