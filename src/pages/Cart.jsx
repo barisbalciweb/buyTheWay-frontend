@@ -29,6 +29,7 @@ const Cart = () => {
         )}
       </section>
 
+      {/* TOTAL PREVIEW */}
       <section className="bg-[#D9D9D9] flex flex-col justify-center gap-[2vw] text-[4.5vw] px-[5vw] py-[10vw]">
         <div className="w-full mb-[5vw]">
           <h2 className="text-[6vw] font-bold">Bestellübersicht</h2>
@@ -36,7 +37,7 @@ const Cart = () => {
         </div>
         <div className="flex justify-between">
           <p>Zwischensumme</p>
-          <p>€</p>
+          <p>{total} €</p>
         </div>
         <div className="flex justify-between">
           <p>Lieferung</p>

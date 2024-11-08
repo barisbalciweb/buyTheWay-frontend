@@ -12,6 +12,7 @@ import { addToCart } from "../features/cart/cartSlice";
 const ProductDetail = () => {
   const [openedAccordion, setOpenedAccordion] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [selectedSize, setSelectedSize] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -40,10 +41,11 @@ const ProductDetail = () => {
   };
 
   const handleAddToCart = () => {
-    dispatch(addToCart(selectedProduct));
+    dispatch(addToCart({ item: selectedProduct, selectedSize }));
     if (!success) {
       setSuccess(true);
       setTimeout(() => {
+        setSelectedSize(null);
         setSuccess(false);
       }, 3000);
     }
@@ -62,19 +64,28 @@ const ProductDetail = () => {
         <p className="w-full text-[6vw]">{price} €</p>
       </section>
 
-      <section className="w-full flex justify-center">
+      <section className="w-full flex flex-col justify-center items-center">
+        <p className="w-[80%] text-[4vw]">Größe auswählen:</p>
         <div className="w-[80%] grid grid-rows-2 grid-cols-5 gap-[2vw]">
+          {/* SIZES */}
           {sizes.map((size, index) => (
             <button
               key={index}
-              className="flex items-center justify-center border text-[4vw]">
+              className={`flex items-center justify-center border text-[4vw] ${
+                size === selectedSize
+                  ? "bg-[#52D441] text-white font-bold"
+                  : null
+              }`}
+              onClick={() => setSelectedSize(size)}>
               {size}
             </button>
           ))}
+          {/* ADD TO CART BUTTON */}
           <button
-            className={`flex items-center justify-center h-[14vw] col-start-1 col-end-5 transition duration-[700ms] outline-none text-white text-[5vw] font-bold active:bg-red-600 ${
+            className={`flex items-center justify-center h-[14vw] col-start-1 col-end-5 outline-none text-white text-[5vw] font-bold disabled:bg-gray-300 ${
               success ? "bg-[#52D441]" : "bg-black"
             }`}
+            disabled={selectedSize === null}
             onClick={handleAddToCart}>
             IN DEN WARENKORB
           </button>

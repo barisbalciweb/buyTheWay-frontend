@@ -36,7 +36,7 @@ const ProductInCart = ({ item }) => {
             <b>Preis:</b> {price} €
           </p>
           <p className="text-[4vw]">
-            <b>Größe:</b> M
+            <b>Größe:</b> {item.size}
           </p>
         </div>
         <div className="flex gap-[3vw]">
