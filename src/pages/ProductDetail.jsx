@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { sizes } from "../data/data";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../features/products/productsSlice";
 import ProductSlider from "../components/ProductSlider";
 import { addToCart } from "../features/cart/cartSlice";
+import {
+  addToWishlist,
+  inWishlist,
+  removeFromWishlist,
+} from "../features/wishlist/wishListSlice";
 
 const ProductDetail = () => {
   const [openedAccordion, setOpenedAccordion] = useState(null);
@@ -51,6 +57,10 @@ const ProductDetail = () => {
     }
   };
 
+  const isInWishlist = useSelector((state) =>
+    inWishlist(state, selectedProduct.id)
+  );
+
   return (
     <main className="flex flex-col gap-[10vw]">
       <section className="px-[4vw] mt-[4vw] flex flex-col gap-[2vw]">
@@ -90,7 +100,15 @@ const ProductDetail = () => {
             IN DEN WARENKORB
           </button>
           <button className="flex items-center justify-center border">
-            <FontAwesomeIcon icon={faHeart} className="text-[6vw]" />
+            <FontAwesomeIcon
+              icon={isInWishlist ? faHeartSolid : faHeartRegular}
+              className={`text-[6vw] ${isInWishlist && "text-red-500"}`}
+              onClick={() =>
+                isInWishlist
+                  ? dispatch(removeFromWishlist(selectedProduct.id))
+                  : dispatch(addToWishlist(selectedProduct.id))
+              }
+            />
           </button>
         </div>
       </section>

@@ -1,26 +1,29 @@
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Counter from "./Counter";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+// REDUX
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToWishlist,
+  inWishlist,
+  removeFromWishlist,
+} from "../../features/wishlist/wishListSlice";
 
 const ProductInCart = ({ item }) => {
-  const {
-    id,
-    name,
-    description,
-    category,
-    brand,
-    price,
-    discoundPercentage,
-    sizes,
-    availableSizes,
-    colors,
-    images,
-    material,
-    careInstructions,
-    stock,
-    soldCount,
-  } = item.item;
+  const { id, name, price, images } = item.item;
+
+  const dispatch = useDispatch();
+
+  const isInWishlist = useSelector((state) => inWishlist(state, id));
+
+  const handleAddToWishlist = (e) => {
+    e.preventDefault();
+    isInWishlist
+      ? dispatch(removeFromWishlist(id))
+      : dispatch(addToWishlist(id));
+  };
 
   return (
     <div className="flex relative m-[4vw] gap-[2vw]">
@@ -39,11 +42,12 @@ const ProductInCart = ({ item }) => {
             <b>Größe:</b> {item.size}
           </p>
         </div>
-        <div className="flex gap-[3vw]">
+        <div className="flex items-center gap-[3vw]">
           <Counter item={item} />
           <FontAwesomeIcon
-            className="flex justify-center items-center text-[7vw]"
-            icon={faHeart}
+            icon={isInWishlist ? faHeartSolid : faHeartRegular}
+            className={`text-[7vw] ${isInWishlist && "text-red-500"}`}
+            onClick={handleAddToWishlist}
           />
         </div>
       </div>

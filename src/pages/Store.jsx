@@ -78,12 +78,7 @@ const Store = () => {
       <section className="grid grid-cols-2 p-[5vw] gap-[4vw]">
         {allProductsStatus === "succeeded"
           ? allProducts.map((product) => (
-              <Link
-                key={product.id}
-                to={`/store/${product.id}`}
-                onClick={() => dispatch(setSelectedProduct(product))}>
-                <SingleProduct product={product} />
-              </Link>
+              <SingleProduct key={product.id} product={product} />
             ))
           : "Loading..."}
 

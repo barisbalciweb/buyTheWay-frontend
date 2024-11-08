@@ -1,30 +1,43 @@
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { Link } from "react-router-dom";
+import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// REDUX
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedProduct } from "../features/products/productsSlice";
+import {
+  addToWishlist,
+  inWishlist,
+  removeFromWishlist,
+} from "../features/wishlist/wishListSlice";
 
 const SingleProduct = ({ product }) => {
-  const {
-    id,
-    name,
-    description,
-    category,
-    brand,
-    price,
-    discoundPercentage,
-    sizes,
-    availableSizes,
-    colors,
-    images,
-    material,
-    careInstructions,
-    stock,
-    soldCount,
-  } = product;
+  const { id, name, price, images } = product;
+
+  const { selectedProduct } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+
+  const isInWishlist = useSelector((state) => inWishlist(state, product.id));
+
+  const handleAddToWishlist = (e) => {
+    e.preventDefault();
+    isInWishlist
+      ? dispatch(removeFromWishlist(product.id))
+      : dispatch(addToWishlist(product.id));
+  };
+
+  const handleClick = () => {
+    dispatch(setSelectedProduct(product));
+  };
 
   return (
-    <div className="relative">
+    <Link to={`/store/${id}`} className={"relative"} onClick={handleClick}>
       <FontAwesomeIcon
-        icon={faHeart}
-        className="text-[5vw] absolute z-10 top-[1vw] right-[1vw]"
+        icon={isInWishlist ? faHeartSolid : faHeartRegular}
+        className={`text-[6vw] absolute right-[2vw] top-[2vw] z-10 ${
+          isInWishlist && "text-red-500"
+        }`}
+        onClick={handleAddToWishlist}
       />
       <img
         className="bg-productImgBg"
@@ -35,7 +48,7 @@ const SingleProduct = ({ product }) => {
         <h3 className="text-[4vw]">{name}</h3>
         <p className="text-[3.5vw]">{price}€</p>
       </div>
-    </div>
+    </Link>
   );
 };
 
