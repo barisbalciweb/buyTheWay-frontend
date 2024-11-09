@@ -17,13 +17,13 @@ const SingleProduct = ({ product }) => {
   const { selectedProduct } = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
-  const isInWishlist = useSelector((state) => inWishlist(state, product.id));
+  const isInWishlist = useSelector((state) => inWishlist(state, product));
 
   const handleAddToWishlist = (e) => {
     e.preventDefault();
     isInWishlist
-      ? dispatch(removeFromWishlist(product.id))
-      : dispatch(addToWishlist(product.id));
+      ? dispatch(removeFromWishlist(product))
+      : dispatch(addToWishlist(product));
   };
 
   const handleClick = () => {
@@ -31,7 +31,7 @@ const SingleProduct = ({ product }) => {
   };
 
   return (
-    <Link to={`/store/${id}`} className={"relative"} onClick={handleClick}>
+    <Link to={`/store/${id}`} className="relative block" onClick={handleClick}>
       <FontAwesomeIcon
         icon={isInWishlist ? faHeartSolid : faHeartRegular}
         className={`text-[6vw] absolute right-[2vw] top-[2vw] z-10 ${

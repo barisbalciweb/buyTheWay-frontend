@@ -4,7 +4,7 @@ const Login = () => {
   return (
     <div className="w-full flex justify-center">
       <section className="w-[80%] flex flex-col items-center">
-        <h1 className="w-[85%] text-[7vw] font-bold py-[4vw]">ANMELDUNG</h1>
+        <h1 className="w-[85%] text-[7vw] font-bold py-[4vw]">Anmeldung</h1>
         <form className="w-[85%] flex flex-col gap-[5vw]">
           <div className="flex flex-col gap-[2vw]">
             <label htmlFor="e-mail" className="flex flex-col">

@@ -58,7 +58,7 @@ const ProductDetail = () => {
   };
 
   const isInWishlist = useSelector((state) =>
-    inWishlist(state, selectedProduct.id)
+    inWishlist(state, selectedProduct)
   );
 
   return (
@@ -105,8 +105,8 @@ const ProductDetail = () => {
               className={`text-[6vw] ${isInWishlist && "text-red-500"}`}
               onClick={() =>
                 isInWishlist
-                  ? dispatch(removeFromWishlist(selectedProduct.id))
-                  : dispatch(addToWishlist(selectedProduct.id))
+                  ? dispatch(removeFromWishlist(selectedProduct))
+                  : dispatch(addToWishlist(selectedProduct))
               }
             />
           </button>

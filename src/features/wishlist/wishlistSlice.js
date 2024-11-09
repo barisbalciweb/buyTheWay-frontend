@@ -12,13 +12,15 @@ export const wishlistSlice = createSlice({
       state.wishlist.push(action.payload);
     },
     removeFromWishlist: (state, action) => {
-      state.wishlist = state.wishlist.filter((id) => id !== action.payload);
+      state.wishlist = state.wishlist.filter(
+        (item) => item.id !== action.payload.id
+      );
     },
   },
 });
 
-export const inWishlist = (state, productId) => {
-  return state.wishlist.wishlist.some((id) => id === productId);
+export const inWishlist = (state, product) => {
+  return state.wishlist.wishlist.some((item) => item.id === product.id);
 };
 
 export const { addToWishlist, removeFromWishlist } = wishlistSlice.actions;

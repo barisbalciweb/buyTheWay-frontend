@@ -18,14 +18,14 @@ const Cart = () => {
   return (
     <div>
       <section>
-        <h1 className="text-[7vw] font-bold m-[4vw]">WARENKORB</h1>
+        <h1 className="text-[7vw] font-bold m-[4vw]">Warenkorb</h1>
         {/* PRODUCTS IN CART */}
         {cartItems.length > 0 ? (
           cartItems.map((item) => (
             <ProductInCart key={item.item.id} item={item} />
           ))
         ) : (
-          <p className="text-[4vw]">Your cart is empty</p>
+          <p className="text-[4vw]">Dein Warenkorb ist leer</p>
         )}
       </section>
 
