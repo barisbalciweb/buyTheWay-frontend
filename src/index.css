@@ -14,6 +14,7 @@
   align-items: center;
   background-color: white;
   font-family: "Comfortaa", sans-serif;
+  padding-top: 17vw; /* the height of the header */
 }
 
 /* CUSTOM STYLE GROUPS */

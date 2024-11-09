@@ -13,7 +13,7 @@ import {
   addToWishlist,
   inWishlist,
   removeFromWishlist,
-} from "../features/wishlist/wishListSlice";
+} from "../features/wishlist/wishlistSlice";
 
 const ProductDetail = () => {
   const [openedAccordion, setOpenedAccordion] = useState(null);

@@ -9,7 +9,7 @@ import {
   addToWishlist,
   inWishlist,
   removeFromWishlist,
-} from "../../features/wishlist/wishListSlice";
+} from "../../features/wishlist/wishlistSlice";
 
 const ProductInCart = ({ item }) => {
   const { id, name, price, images } = item.item;

@@ -6,7 +6,7 @@ import Login from "../pages/Login";
 import ProductDetail from "../pages/ProductDetail";
 import Register from "../pages/Register";
 import Store from "../pages/Store";
-import WishList from "../pages/WishList";
+import Wishlist from "../pages/Wishlist";
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -14,7 +14,7 @@ const routes = [
   { path: "/store/:productId", element: <ProductDetail /> },
   { path: "/cart", element: <Cart /> },
   { path: "/checkout", element: <Checkout /> },
-  { path: "/wishlist", element: <WishList /> },
+  { path: "/wishlist", element: <Wishlist /> },
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
   { path: "/account", element: <Account /> },

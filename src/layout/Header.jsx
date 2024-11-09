@@ -20,7 +20,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   return (
-    <header className="w-full h-[17vw] bg-white flex items-center shadow-md relative z-10">
+    <header className="w-full h-header bg-white flex items-center shadow-md fixed top-0 left-0 z-50">
       <nav className="w-full flex justify-between">
         <div className="flex justify-center items-center gap-[4vw] ml-[4vw]">
           <FontAwesomeIcon

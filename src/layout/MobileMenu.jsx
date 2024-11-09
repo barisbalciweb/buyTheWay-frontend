@@ -45,17 +45,17 @@ const MobileMenu = () => {
 
   return isMobileMenuOpen ? (
     <>
-      {/* BRIGHTENED BACKGROUND */}
+      {/* BACKGROUND */}
       <div
         id="bg-field"
-        className="w-full h-full top-0 left-0 bg-[rgba(255,255,255,0.6)] absolute"
+        className="w-full h-full bg-[rgba(0,0,0,0.6)] fixed top-0 left-0 z-40"
         onClick={() => dispatch(toggleMobileMenu())}
       />
 
       {/* MOBILE MENU FIELD */}
       <div
         id="ham-field"
-        className="w-[80%] h-[calc(100svh-17vw)] flex flex-col top-[17vw] bg-white left-0 absolute z-20 overflow-y-auto scrollbar-hide">
+        className="w-[80%] h-[calc(100svh-17vw)] flex flex-col bg-white fixed left-0 top-header z-50 overflow-y-auto scrollbar-hide">
         {/* PERSON SELECTION */}
         <div className="w-full flex text-[4.5vw] bg-[#D0D0D0]">
           {persons.map((person) => (

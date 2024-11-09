@@ -6,9 +6,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../features/cart/cartSlice";
 import { sizes } from "../data/data";
-import { removeFromWishlist } from "../features/wishlist/wishListSlice";
+import { removeFromWishlist } from "../features/wishlist/wishlistSlice";
 
-const WishList = () => {
+const Wishlist = () => {
   const [success, setSuccess] = useState(false);
   const { wishlist } = useSelector((state) => state.wishlist);
   const [selectedSize, setSelectedSize] = useState("M");
@@ -53,7 +53,7 @@ const WishList = () => {
         )}
       </div>
 
-      <div className="w-full h-[50%] bg-gray-300 absolute bottom-0 left-0 z-20">
+      <div className="w-full h-[50%] bg-gray-300 absolute bottom-0 left-0 z-10">
         <p>Größe auswählen</p>
         {/* SIZES */}
         <div className="w-[80%] grid grid-rows-2 grid-cols-5 gap-[2vw]">
@@ -75,4 +75,4 @@ const WishList = () => {
   );
 };
 
-export default WishList;
+export default Wishlist;
