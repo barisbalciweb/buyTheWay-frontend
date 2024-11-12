@@ -15,6 +15,9 @@ export default {
       fontSize: {
         customH1: "5.5vw",
       },
+      fontFamily: {
+        comfortaa: ['"Comfortaa"', "sans-serif"],
+      },
       borderWidth: {
         customBorder: "0.3vw",
       },

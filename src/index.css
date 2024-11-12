@@ -4,17 +4,7 @@
 @tailwind utilities;
 
 #root {
-  /* important for proper view in mobile browsers */
-  /* width: 100svw;
-  height: 100svh; */
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  font-family: "Comfortaa", sans-serif;
-  padding-top: 17vw; /* the height of the header */
+  @apply w-screen h-screen flex justify-center items-center font-comfortaa bg-white pt-[17vw];
 }
 
 /* CUSTOM STYLE GROUPS */
@@ -27,10 +17,10 @@
 
 /* SLIDER  */
 .slick-slider {
-  margin: 0 4vw;
+  @apply my-0 mx-[4vw];
 }
 .slick-slide > div {
-  margin: 0 1vw;
+  @apply my-0 mx-[1vw];
 }
 .slick-dots {
   position: static !important;
@@ -38,16 +28,15 @@
 
 /* ACCORDION */
 .accordion-content {
-  @apply overflow-hidden transition duration-500 ease-in;
-  max-height: 0;
+  @apply max-h-0 overflow-hidden transition duration-500 ease-in;
 }
 .accordion-content-open {
-  max-height: 200px;
+  @apply max-h-[200px];
 }
 
 /* MOBILE MENU SCROLLBAR */
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;
+  @apply hidden;
 }
 .scrollbar-hide {
   -ms-overflow-style: none;
