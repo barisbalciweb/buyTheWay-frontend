@@ -5,7 +5,7 @@ import ScrollToTop from "./components/ScrollTop";
 
 const App = () => {
   return (
-    <div id="container" className="w-full h-full bg-">
+    <div id="container" className="w-full h-full">
       <Layout>
         <ScrollToTop />
         <Routes>
