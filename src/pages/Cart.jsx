@@ -48,7 +48,7 @@ const Cart = () => {
               </div>
               <div className="flex justify-between">
                 <p>Zwischensumme</p>
-                <p>{total} €</p>
+                <p>{total.toFixed(2)} €</p>
               </div>
               <div className="flex justify-between">
                 <p>Lieferung</p>
@@ -57,7 +57,7 @@ const Cart = () => {
               <hr className="border-black" />
               <div className="flex justify-between">
                 <p>Gesamtsumme</p>
-                <p>{total} €</p>
+                <p>{total.toFixed(2)} €</p>
               </div>
               <button
                 className="bg-black text-[5vw] text-white px-[20vw] py-[4vw] mt-[5vw]"

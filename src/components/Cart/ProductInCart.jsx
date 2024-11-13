@@ -10,6 +10,7 @@ import {
   inWishlist,
   removeFromWishlist,
 } from "../../features/wishlist/wishlistSlice";
+import { removeFromCart } from "../../features/cart/cartSlice";
 
 const ProductInCart = ({ item }) => {
   const { id, name, price, images } = item.item;
@@ -51,10 +52,13 @@ const ProductInCart = ({ item }) => {
           />
         </div>
       </div>
-      <FontAwesomeIcon
-        className="text-[5vw] text-gray-600 absolute z-10 top-0 right-0"
-        icon={faTrash}
-      />
+
+      {/* REMOVE ITEM FROM CART */}
+      <button
+        className="absolute z-10 top-0 right-0"
+        onClick={() => dispatch(removeFromCart(id))}>
+        <FontAwesomeIcon className="text-[5vw] text-gray-600" icon={faTrash} />
+      </button>
     </div>
   );
 };
