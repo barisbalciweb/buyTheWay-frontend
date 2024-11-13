@@ -16,7 +16,11 @@ const Cart = () => {
   }, [cartItems]);
 
   return (
-    <div className="p-[5vw]">
+    <div>
+      <h1 className="text-[7vw] font-bold m-[4vw]">
+        Warenkorb {cartItems.length > 0 && `(${cartItems.length})`}
+      </h1>
+
       {cartItems.length === 0 ? (
         <section className="w-full h-[30vw] flex flex-col justify-center items-center gap-[5vw] text-[4vw]">
           <p>Dein Warenkorb ist leer</p>
@@ -29,7 +33,6 @@ const Cart = () => {
       ) : (
         <>
           <section>
-            <h1 className="text-[7vw] font-bold m-[4vw]">Warenkorb</h1>
             {/* PRODUCTS IN CART */}
             {cartItems.map((item) => (
               <ProductInCart key={item.item.id} item={item} />

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../features/cart/cartSlice";
 import { sizes } from "../data/data";
 import { removeFromWishlist } from "../features/wishlist/wishlistSlice";
+import { Link } from "react-router-dom";
 
 const Wishlist = () => {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -44,11 +45,22 @@ const Wishlist = () => {
 
   return (
     <div>
-      <h1 className="text-[7vw] font-bold m-[4vw]">Wunschliste</h1>
+      <h1 className="text-[7vw] font-bold m-[4vw]">
+        Wunschliste {wishlist.length > 0 && `(${wishlist.length})`}
+      </h1>
 
-      <div className="grid grid-cols-2 gap-[2vw] p-[4vw]">
-        {wishlist.length > 0 ? (
-          wishlist.map((item) => (
+      {wishlist.length === 0 ? (
+        <section className="w-full h-[30vw] flex flex-col justify-center items-center gap-[5vw] text-[4vw]">
+          <p>Deine Wunschliste ist leer</p>
+          <button className="w-[50%] bg-black text-white p-[4vw] text-[4vw]">
+            <Link to="/" className="w-full">
+              Jetzt shoppen!
+            </Link>
+          </button>
+        </section>
+      ) : (
+        <div className="grid grid-cols-2 gap-[2vw] p-[4vw]">
+          {wishlist.map((item) => (
             <div className="flex flex-col gap-[2vw]" key={item.id}>
               <SingleProduct product={item} />
               <button
@@ -62,11 +74,9 @@ const Wishlist = () => {
                 />
               </button>
             </div>
-          ))
-        ) : (
-          <p className="text-[4vw]">Deine Wunschliste ist leer</p>
-        )}
-      </div>
+          ))}
+        </div>
+      )}
 
       {/* MODAL BACKGROUND */}
       {isSizeSelectionOpen && (
