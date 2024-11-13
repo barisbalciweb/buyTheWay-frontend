@@ -44,75 +44,77 @@ const Wishlist = () => {
   };
 
   return (
-    <div>
+    <>
       <h1 className="text-[7vw] font-bold m-[4vw]">
         Wunschliste {wishlist.length > 0 && `(${wishlist.length})`}
       </h1>
 
-      {wishlist.length === 0 ? (
-        <section className="w-full h-[30vw] flex flex-col justify-center items-center gap-[5vw] text-[4vw]">
-          <p>Deine Wunschliste ist leer</p>
-          <button className="w-[50%] bg-black text-white p-[4vw] text-[4vw]">
-            <Link to="/" className="w-full">
-              Jetzt shoppen!
-            </Link>
-          </button>
-        </section>
-      ) : (
-        <div className="grid grid-cols-2 gap-[2vw] p-[4vw]">
-          {wishlist.map((item) => (
-            <div className="flex flex-col gap-[2vw]" key={item.id}>
-              <SingleProduct product={item} />
+      <div className="flex flex-col flex-grow justify-center item">
+        {wishlist.length === 0 ? (
+          <section className="w-full h-[30vw] flex flex-col justify-center items-center gap-[5vw] text-[4vw]">
+            <p>Deine Wunschliste ist leer</p>
+            <button className="w-[50%] bg-black text-white p-[4vw] text-[4vw]">
+              <Link to="/" className="w-full">
+                Jetzt shoppen!
+              </Link>
+            </button>
+          </section>
+        ) : (
+          <div className="grid grid-cols-2 gap-[2vw] p-[4vw]">
+            {wishlist.map((item) => (
+              <div className="flex flex-col gap-[2vw]" key={item.id}>
+                <SingleProduct product={item} />
+                <button
+                  className={`w-full flex justify-center items-center p-[3vw] ${
+                    success ? "bg-[#52D441]" : "bg-black"
+                  }`}
+                  onClick={() => handleSizeSelection(item)}>
+                  <FontAwesomeIcon
+                    className="text-white text-[5vw]"
+                    icon={faShoppingBag}
+                  />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* MODAL BACKGROUND */}
+        {isSizeSelectionOpen && (
+          <section>
+            <div
+              className="w-full h-full bg-[rgba(0,0,0,0.5)] fixed bottom-0 left-0"
+              onClick={() => setIsSizeSelectionOpen(false)}
+            />
+            <div className="w-full h-[30%] flex flex-col justify-center items-center gap-[3vw] bg-customGray fixed bottom-0 left-0 z-10">
+              <div className="w-[80%] flex flex-col items-center justify-center gap-[3vw]">
+                <p className="w-full">Größe auswählen:</p>
+                <div className="w-full grid grid-cols-5 gap-[2vw]">
+                  {sizes.map((size, index) => (
+                    <button
+                      key={index}
+                      className={`h-[15vw] flex items-center justify-center border border-gray-700 text-[4vw] ${
+                        size === selectedSize
+                          ? "bg-[#52D441] text-white font-bold"
+                          : null
+                      }`}
+                      onClick={() => setSelectedSize(size)}>
+                      {size}
+                    </button>
+                  ))}
+                </div>
+              </div>
               <button
-                className={`w-full flex justify-center items-center p-[3vw] ${
-                  success ? "bg-[#52D441]" : "bg-black"
-                }`}
-                onClick={() => handleSizeSelection(item)}>
-                <FontAwesomeIcon
-                  className="text-white text-[5vw]"
-                  icon={faShoppingBag}
-                />
+                className="w-[80%] flex items-center justify-center h-[14vw] col-start-1 col-end-5 outline-none text-white text-[5vw] p-[5vw] font-bold disabled:bg-gray-400 bg-black"
+                disabled={!selectedSize}
+                onClick={handleAddToCart}>
+                IN DEN WARENKORB
               </button>
             </div>
-          ))}
-        </div>
-      )}
-
-      {/* MODAL BACKGROUND */}
-      {isSizeSelectionOpen && (
-        <section>
-          <div
-            className="w-full h-full bg-[rgba(0,0,0,0.5)] fixed bottom-0 left-0"
-            onClick={() => setIsSizeSelectionOpen(false)}
-          />
-          <div className="w-full h-[30%] flex flex-col justify-center items-center gap-[3vw] bg-customGray fixed bottom-0 left-0 z-10">
-            <div className="w-[80%] flex flex-col items-center justify-center gap-[3vw]">
-              <p className="w-full">Größe auswählen:</p>
-              <div className="w-full grid grid-cols-5 gap-[2vw]">
-                {sizes.map((size, index) => (
-                  <button
-                    key={index}
-                    className={`h-[15vw] flex items-center justify-center border border-gray-700 text-[4vw] ${
-                      size === selectedSize
-                        ? "bg-[#52D441] text-white font-bold"
-                        : null
-                    }`}
-                    onClick={() => setSelectedSize(size)}>
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <button
-              className="w-[80%] flex items-center justify-center h-[14vw] col-start-1 col-end-5 outline-none text-white text-[5vw] p-[5vw] font-bold disabled:bg-gray-400 bg-black"
-              disabled={!selectedSize}
-              onClick={handleAddToCart}>
-              IN DEN WARENKORB
-            </button>
-          </div>
-        </section>
-      )}
-    </div>
+          </section>
+        )}
+      </div>
+    </>
   );
 };
 
