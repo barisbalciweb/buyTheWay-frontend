@@ -72,7 +72,7 @@ const Wishlist = () => {
       {isSizeSelectionOpen && (
         <section>
           <div
-            className="w-full h-full bg-[rgba(0,0,0,0.5)] absolute top-0 left-0"
+            className="w-full h-full bg-[rgba(0,0,0,0.5)] fixed bottom-0 left-0"
             onClick={() => setIsSizeSelectionOpen(false)}
           />
           <div className="w-full h-[30%] flex flex-col justify-center items-center gap-[3vw] bg-customGray fixed bottom-0 left-0 z-10">
