@@ -11,6 +11,7 @@ export default {
       colors: {
         productImgBg: "#FAF8F6",
         customOrange: "#EA580C",
+        customGray: "#D0D0D0",
       },
       fontSize: {
         customH1: "5.5vw",

@@ -45,9 +45,8 @@ const MobileMenu = () => {
 
   return isMobileMenuOpen ? (
     <>
-      {/* BACKGROUND */}
+      {/* MODAL BACKGROUND */}
       <div
-        id="bg-field"
         className="w-full h-full bg-[rgba(0,0,0,0.6)] fixed top-0 left-0 z-40"
         onClick={() => dispatch(toggleMobileMenu())}
       />
