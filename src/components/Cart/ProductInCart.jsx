@@ -16,14 +16,13 @@ const ProductInCart = ({ item }) => {
   const { id, name, price, images } = item.item;
 
   const dispatch = useDispatch();
-
-  const isInWishlist = useSelector((state) => inWishlist(state, id));
+  const isInWishlist = useSelector((state) => inWishlist(state, item.item));
 
   const handleAddToWishlist = (e) => {
     e.preventDefault();
     isInWishlist
-      ? dispatch(removeFromWishlist(id))
-      : dispatch(addToWishlist(id));
+      ? dispatch(removeFromWishlist(item.item))
+      : dispatch(addToWishlist(item.item));
   };
 
   return (

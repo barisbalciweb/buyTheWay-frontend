@@ -9,9 +9,12 @@ export const wishlistSlice = createSlice({
   initialState,
   reducers: {
     addToWishlist: (state, action) => {
+      console.log(action.payload);
+
       state.wishlist.push(action.payload);
     },
     removeFromWishlist: (state, action) => {
+      console.log(action.payload);
       state.wishlist = state.wishlist.filter(
         (item) => item.id !== action.payload.id
       );
