@@ -4,6 +4,8 @@ const initialState = {
   isMobileMenuOpen: false,
   isFilterOpen: false,
   isSortOpen: false,
+  selectedPerson: "Damen",
+  selectedCategory: null,
 };
 
 export const uiSlice = createSlice({
@@ -29,8 +31,20 @@ export const uiSlice = createSlice({
         state.isFilterOpen = false;
       }
     },
+    setSelectedPerson: (state, action) => {
+      state.selectedPerson = action.payload;
+    },
+    setSelectedCategory: (state, action) => {
+      state.selectedCategory = action.payload;
+    },
   },
 });
 
-export const { toggleMobileMenu, toggleFilter, toggleSort } = uiSlice.actions;
+export const {
+  toggleMobileMenu,
+  toggleFilter,
+  toggleSort,
+  setSelectedPerson,
+  setSelectedCategory,
+} = uiSlice.actions;
 export default uiSlice.reducer;

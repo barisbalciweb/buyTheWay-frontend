@@ -2,15 +2,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { categories } from "../../data/fakeData";
 import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { toggleMobileMenu } from "../../features/ui/uiSlice";
-
-const SubCategories = ({
-  selectedPerson,
-  selectedCategory,
+import { useDispatch, useSelector } from "react-redux";
+import {
   setSelectedCategory,
-}) => {
+  toggleMobileMenu,
+} from "../../features/ui/uiSlice";
+
+const SubCategories = () => {
   const dispatch = useDispatch();
+  const { selectedPerson, selectedCategory } = useSelector((state) => state.ui);
 
   // FILTER SUB-CATEGORIES BY SELECTED PERSON AND CATEGORY
   const filteredSubCategories = categories
@@ -26,7 +26,7 @@ const SubCategories = ({
       {/* NAVIGATION */}
       <button
         className="w-full flex items-center gap-[2vw] pl-[2vw] text-[4vw] text-customOrange"
-        onClick={() => setSelectedCategory(null)}>
+        onClick={() => dispatch(setSelectedCategory(null))}>
         <FontAwesomeIcon
           icon={faCircleArrowLeft}
           className="font-bold pb-[0.5vw]"

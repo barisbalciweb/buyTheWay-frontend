@@ -4,7 +4,11 @@ import SubCategories from "../components/MobileMenu/SubCategories";
 import Categories from "../components/MobileMenu/Categories";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { toggleMobileMenu } from "../features/ui/uiSlice";
+import {
+  setSelectedPerson,
+  toggleMobileMenu,
+  setSelectedCategory,
+} from "../features/ui/uiSlice";
 
 const persons = ["Damen", "Herren", "Unisex"];
 const featuredCategories = [
@@ -14,12 +18,12 @@ const featuredCategories = [
 ];
 
 const MobileMenu = () => {
-  const [selectedPerson, setSelectedPerson] = useState("DAMEN");
-  const [selectedCategory, setSelectedCategory] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const isMobileMenuOpen = useSelector((state) => state.ui.isMobileMenuOpen);
   const dispatch = useDispatch();
+  const { selectedCategory } = useSelector((state) => state.ui);
+  const { selectedPerson } = useSelector((state) => state.ui);
+  const isMobileMenuOpen = useSelector((state) => state.ui.isMobileMenuOpen);
 
   // DISABLE SCROLLING WHEN MOBILE MENU IS OPEN
   useEffect(() => {
@@ -30,13 +34,13 @@ const MobileMenu = () => {
   }, [isMobileMenuOpen]);
 
   useEffect(() => {
-    handlePersonSelect("Damen");
+    handlePersonSelect(selectedPerson);
   }, []);
 
   const handlePersonSelect = (person) => {
     setIsAnimating(false);
-    setSelectedPerson(person);
-    setSelectedCategory(null);
+    dispatch(setSelectedPerson(person));
+    dispatch(setSelectedCategory(null));
 
     setTimeout(() => {
       setIsAnimating(true);
@@ -73,17 +77,9 @@ const MobileMenu = () => {
         {/* CATEGORIES */}
         <div className="flex-grow">
           {selectedCategory ? (
-            <SubCategories
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-              selectedPerson={selectedPerson}
-            />
+            <SubCategories />
           ) : (
-            <Categories
-              setSelectedCategory={setSelectedCategory}
-              isAnimating={isAnimating}
-              selectedPerson={selectedPerson}
-            />
+            <Categories isAnimating={isAnimating} />
           )}
         </div>
 

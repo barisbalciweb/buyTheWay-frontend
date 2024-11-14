@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import { categories } from "../../data/fakeData";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedCategory } from "../../features/ui/uiSlice";
 
-const Categories = ({ isAnimating, setSelectedCategory, selectedPerson }) => {
+const Categories = ({ isAnimating }) => {
   const [filteredCategories, setFilteredCategories] = useState([]);
+
+  const dispatch = useDispatch();
+  const { selectedPerson } = useSelector((state) => state.ui);
 
   useEffect(() => {
     // FILTER CATEGORIES BY SELECTED PERSON
@@ -26,7 +31,7 @@ const Categories = ({ isAnimating, setSelectedCategory, selectedPerson }) => {
             <li className="list-none" key={index}>
               <button
                 className="w-full text-[4vw] flex justify-between py-[3vw] px-[5vw]"
-                onClick={() => setSelectedCategory(category.name)}>
+                onClick={() => dispatch(setSelectedCategory(category.name))}>
                 {category.name}
               </button>
             </li>
