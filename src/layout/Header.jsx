@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
 // REDUX
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMobileMenu } from "../features/ui/uiSlice";
 
 const iconsWithLinks = [
@@ -18,15 +18,21 @@ const iconsWithLinks = [
 
 const Header = () => {
   const dispatch = useDispatch();
+  const { isMobileMenuOpen } = useSelector((state) => state.ui);
 
   return (
-    <header className="w-full h-header bg-white flex items-center shadow-md fixed top-0 left-0 z-50">
+    <header
+      className="w-full h-header bg-white flex items-center shadow-md fixed top-0 left-0 z-50"
+      onClick={() => isMobileMenuOpen && dispatch(toggleMobileMenu())}>
       <nav className="w-full flex justify-between">
         <div className="flex justify-center items-center gap-[4vw] ml-[4vw]">
           <FontAwesomeIcon
             className="h-[7vw]"
             icon={faBars}
-            onClick={() => dispatch(toggleMobileMenu())}
+            onClick={(e) => {
+              e.stopPropagation();
+              dispatch(toggleMobileMenu());
+            }}
           />
           <Link to={"/"}>
             <h1 className="text-[6vw] mt-[1vw]">BuyTheWay</h1>
