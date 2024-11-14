@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 #root {
-  @apply w-screen h-screen flex justify-center items-center font-comfortaa bg-white pt-[17vw];
+  @apply w-screen h-screen flex justify-center items-center font-comfortaa bg-white pt-[17vw] overflow-x-hidden;
 }
 
 /* CUSTOM STYLE GROUPS */
@@ -15,15 +15,14 @@
   @apply w-full text-[6vw] pl-[5vw];
 }
 
-/* SLIDER  */
-.slick-slider {
-  @apply my-0 mx-[4vw];
+/* SWIPER  */
+.swiper {
+  @apply w-[90%];
 }
-.slick-slide > div {
-  @apply my-0 mx-[1vw];
-}
-.slick-dots {
-  position: static !important;
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  @apply text-customOrange text-[8vw];
 }
 
 /* ACCORDION */

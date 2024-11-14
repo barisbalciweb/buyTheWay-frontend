@@ -1,13 +1,24 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fakeSubCategories } from "../../data/fakeData";
+import { categories } from "../../data/fakeData";
 import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { toggleMobileMenu } from "../../features/ui/uiSlice";
 
 const SubCategories = ({
   selectedPerson,
   selectedCategory,
   setSelectedCategory,
 }) => {
+  const dispatch = useDispatch();
+
+  // FILTER SUB-CATEGORIES BY SELECTED PERSON AND CATEGORY
+  const filteredSubCategories = categories
+    .find((category) => category.name === selectedCategory)
+    ?.subCategories.filter((subCategory) =>
+      subCategory.targetGroup.includes(selectedPerson)
+    );
+
   return (
     <div
       id="sub-category-field"
@@ -30,9 +41,12 @@ const SubCategories = ({
       {/* SUB-CATEGORY SELECTION */}
       <ul
         className={`flex flex-col gap-[3vw] transform transition-transform duration-300 ease-out`}>
-        {fakeSubCategories.map((category, index) => (
+        {filteredSubCategories.map((category, index) => (
           <li className="list-none" key={index}>
-            <Link className="w-[80vw] text-[4vw] flex justify-between py-[2vw] px-[2vw]">
+            <Link
+              to={`store/${selectedPerson.toLowerCase()}/${selectedCategory.toLowerCase()}/${category.name.toLowerCase()}`}
+              className="w-[80vw] text-[4vw] flex justify-between py-[2vw] px-[2vw]"
+              onClick={() => dispatch(toggleMobileMenu())}>
               {category.name}
             </Link>
           </li>

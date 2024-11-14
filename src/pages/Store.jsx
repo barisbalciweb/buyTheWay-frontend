@@ -5,7 +5,7 @@ import SingleProduct from "../components/SingleProduct";
 import Filter from "../components/Store/Filter";
 import Sort from "../components/Store/Sort";
 import FilterPreview from "../components/filterPreview";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFilter, toggleSort } from "../features/ui/uiSlice";
@@ -15,13 +15,24 @@ import {
 } from "../features/products/productsSlice";
 
 const Store = () => {
-  const dispatch = useDispatch();
+  // GLOBAL STATES
   const isFilterOpen = useSelector((state) => state.ui.isFilterOpen);
   const isSortOpen = useSelector((state) => state.ui.isSortOpen);
   const sortBy = useSelector((state) => state.sort.sortBy);
-
   const { allProducts, statuses } = useSelector((state) => state.products);
+
+  const dispatch = useDispatch();
+  const { targetGroup, category, subCategory } = useParams();
+
   const allProductsStatus = statuses.allProducts;
+
+  //! ONLY FOR TESTING
+  const allProductsFiltered = allProducts.filter((item) => {
+    return (
+      item.targetGroup.toLowerCase() === targetGroup &&
+      item.category.toLowerCase() === subCategory
+    );
+  });
 
   // DISABLE SCROLLING WHEN MOBILE MENU IS OPEN
   useEffect(() => {
@@ -32,6 +43,7 @@ const Store = () => {
     };
   }, [isFilterOpen, isSortOpen]);
 
+  //! ONLY FOR TESTING
   useEffect(() => {
     dispatch(
       fetchProducts({ endpoint: "/products.json", type: "allProducts" })
@@ -77,7 +89,8 @@ const Store = () => {
       {/* PRODUCTS */}
       <section className="grid grid-cols-2 p-[5vw] gap-[4vw]">
         {allProductsStatus === "succeeded"
-          ? allProducts.map((product) => (
+          ? //! ONLY FOR TESTING
+            allProductsFiltered.map((product) => (
               <SingleProduct key={product.id} product={product} />
             ))
           : "Loading..."}

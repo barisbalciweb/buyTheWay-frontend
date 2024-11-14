@@ -11,6 +11,7 @@ import Wishlist from "../pages/Wishlist";
 const routes = [
   { path: "/", element: <Home /> },
   { path: "/store", element: <Store /> },
+  { path: "/store/:targetGroup/:category/:subCategory", element: <Store /> },
   { path: "/store/:productId", element: <ProductDetail /> },
   { path: "/cart", element: <Cart /> },
   { path: "/checkout", element: <Checkout /> },

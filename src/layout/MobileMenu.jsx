@@ -6,7 +6,7 @@ import Categories from "../components/MobileMenu/Categories";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMobileMenu } from "../features/ui/uiSlice";
 
-const persons = ["DAMEN", "HERREN", "KINDER"];
+const persons = ["Damen", "Herren", "Unisex"];
 const featuredCategories = [
   { name: "Bestseller", path: "/bestseller" },
   { name: "Reduzierte Artikel", path: "/sale" },
@@ -30,7 +30,7 @@ const MobileMenu = () => {
   }, [isMobileMenuOpen]);
 
   useEffect(() => {
-    handlePersonSelect("DAMEN");
+    handlePersonSelect("Damen");
   }, []);
 
   const handlePersonSelect = (person) => {
@@ -65,7 +65,7 @@ const MobileMenu = () => {
                 selectedPerson === person &&
                 "bg-white font-bold text-customOrange"
               }`}>
-              {person}
+              {person.toUpperCase()}
             </button>
           ))}
         </div>
@@ -74,7 +74,7 @@ const MobileMenu = () => {
         <div className="flex-grow">
           {selectedCategory ? (
             <SubCategories
-              selectedCategory={selectedCategory.name}
+              selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
               selectedPerson={selectedPerson}
             />
@@ -82,6 +82,7 @@ const MobileMenu = () => {
             <Categories
               setSelectedCategory={setSelectedCategory}
               isAnimating={isAnimating}
+              selectedPerson={selectedPerson}
             />
           )}
         </div>

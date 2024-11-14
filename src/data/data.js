@@ -1,4 +1,4 @@
-export const selections = ["Damen", "Herren", "Kinder"];
+export const selections = ["Damen", "Herren", "Unisex"];
 
 export const accordion = [
   {
