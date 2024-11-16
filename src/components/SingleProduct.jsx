@@ -14,7 +14,7 @@ import {
 const SingleProduct = ({ product }) => {
   const { id, name, price, images } = product;
 
-  const { selectedProduct } = useSelector((state) => state.products);
+  // const { selectedProduct } = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
   const isInWishlist = useSelector((state) => inWishlist(state, product));
@@ -26,12 +26,15 @@ const SingleProduct = ({ product }) => {
       : dispatch(addToWishlist(product));
   };
 
-  const handleClick = () => {
+  const handleProductSelection = () => {
     dispatch(setSelectedProduct(product));
   };
 
   return (
-    <Link to={`/store/${id}`} className="relative block" onClick={handleClick}>
+    <Link
+      to={`/store/product/${id}`}
+      className="relative block"
+      onClick={handleProductSelection}>
       <FontAwesomeIcon
         icon={isInWishlist ? faHeartSolid : faHeartRegular}
         className={`text-[6vw] absolute right-[2vw] top-[2vw] z-10 ${

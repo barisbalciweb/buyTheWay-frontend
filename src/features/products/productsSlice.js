@@ -6,14 +6,14 @@ const initialState = {
   selectedProduct: null,
   bestsellers: [],
   discounted: [],
-  favourites: [],
+  favorites: [],
   similar: [],
   recentlyViewed: [],
   statuses: {
     allProducts: "idle",
     bestsellers: "idle",
     discounted: "idle",
-    favourites: "idle",
+    favorites: "idle",
     similar: "idle",
     recentlyViewed: "idle",
   },
@@ -21,17 +21,23 @@ const initialState = {
     allProducts: null,
     bestsellers: null,
     discounted: null,
-    favourites: null,
+    favorites: null,
     similar: null,
     recentlyViewed: null,
   },
 };
 
+// FETCH PRODUCTS DYNAMICALLY
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
-  async ({ endpoint, type }) => {
-    const response = await axios.get(endpoint);
-    return { data: response.data, type };
+  async ({ endpoint, type }, { rejectWithValue }) => {
+    try {
+      const url = `http://localhost:3000/products/${endpoint}`;
+      const { data } = await axios.get(url);
+      return { data, type };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 
@@ -39,9 +45,6 @@ export const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    setProducts: (state, action) => {
-      state.products = action.payload;
-    },
     setSelectedProduct: (state, action) => {
       state.selectedProduct = action.payload;
     },

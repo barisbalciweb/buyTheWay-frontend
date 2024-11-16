@@ -5,54 +5,60 @@ import SingleProduct from "../components/SingleProduct";
 import Filter from "../components/Store/Filter";
 import Sort from "../components/Store/Sort";
 import FilterPreview from "../components/filterPreview";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFilter, toggleSort } from "../features/ui/uiSlice";
-import {
-  fetchProducts,
-  setSelectedProduct,
-} from "../features/products/productsSlice";
+import { fetchProducts } from "../features/products/productsSlice";
 
 const Store = () => {
+  const { targetGroup, category, subCategory, collection } = useParams();
+
   // GLOBAL STATES
   const isFilterOpen = useSelector((state) => state.ui.isFilterOpen);
   const isSortOpen = useSelector((state) => state.ui.isSortOpen);
   const sortBy = useSelector((state) => state.sort.sortBy);
-  const { allProducts, statuses } = useSelector((state) => state.products);
+  const productsStates = useSelector((state) => state.products);
+  const { statuses } = useSelector((state) => state.products);
+  const products = useSelector((state) => state.products);
+
+  const renderedProducts = collection ? productsStates[collection] : [];
+  const fetchStatus = statuses[collection];
 
   const dispatch = useDispatch();
-  const { targetGroup, category, subCategory } = useParams();
-
-  const allProductsStatus = statuses.allProducts;
 
   //! ONLY FOR TESTING
-  const allProductsFiltered = allProducts.filter((item) => {
-    return (
-      item.targetGroup.toLowerCase() === targetGroup &&
-      item.category.toLowerCase() === subCategory
-    );
-  });
+  // const filterProductsBySubCategory = allProducts.filter((item) => {
+  //   return (
+  //     item.targetGroup.toLowerCase() === targetGroup &&
+  //     item.category.toLowerCase() === subCategory
+  //   );
+  // });
 
-  // DISABLE SCROLLING WHEN MOBILE MENU IS OPEN
+  // FETCH COLLECTIONS DYANMICALLY ACCORDING TO URL PARAMS
   useEffect(() => {
-    document.body.style.overflow =
-      isFilterOpen || isSortOpen ? "hidden" : "auto";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [isFilterOpen, isSortOpen]);
-
-  //! ONLY FOR TESTING
-  useEffect(() => {
-    dispatch(
-      fetchProducts({ endpoint: "/products.json", type: "allProducts" })
-    );
-  }, [dispatch]);
+    if (products[collection].length === 0) {
+      dispatch(
+        fetchProducts({
+          endpoint: `collections/${collection}`,
+          type: collection,
+        })
+      );
+    }
+  }, [collection]);
 
   return (
-    <div>
-      <h1 className="text-customH1 p-[5vw]">Alle Produkte</h1>
+    <div className="flex flex-col flex-grow">
+      <h1 className="text-customH1 p-[5vw]">
+        {collection === "bestsellers"
+          ? "Bestsellers"
+          : collection === "discounted"
+          ? "Reduzierte Artikel"
+          : collection === "favorites"
+          ? "Beliebte Artikel"
+          : ""}
+      </h1>
+
       {/* FILTER AND SORT ICONS */}
       <section
         id="settings"
@@ -88,9 +94,9 @@ const Store = () => {
 
       {/* PRODUCTS */}
       <section className="grid grid-cols-2 p-[5vw] gap-[4vw]">
-        {allProductsStatus === "succeeded"
+        {fetchStatus === "succeeded"
           ? //! ONLY FOR TESTING
-            allProductsFiltered.map((product) => (
+            renderedProducts.map((product) => (
               <SingleProduct key={product.id} product={product} />
             ))
           : "Loading..."}

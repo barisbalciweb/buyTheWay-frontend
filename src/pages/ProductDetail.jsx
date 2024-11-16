@@ -35,12 +35,28 @@ const ProductDetail = () => {
     (state) => state.products.selectedProduct
   );
 
+  // FETCH RECENTY VIEWED AND SIMILAR PRODUCTS
   useEffect(() => {
-    dispatch(
-      fetchProducts({ endpoint: "/products.json", type: "recentlyViewed" })
-    );
-    dispatch(fetchProducts({ endpoint: "/products.json", type: "similar" }));
-  }, [dispatch]);
+    const fetchData = () => {
+      if (recentlyViewed.length === 0) {
+        dispatch(
+          fetchProducts({
+            endpoint: "collections/recentlyViewed",
+            type: "recentlyViewed",
+          })
+        );
+      }
+      if (similar.length === 0) {
+        dispatch(
+          fetchProducts({
+            endpoint: "collections/similar",
+            type: "similar",
+          })
+        );
+      }
+    };
+    fetchData();
+  }, []);
 
   const toggleAccordion = (id) => {
     setOpenedAccordion(openedAccordion === id ? null : id);

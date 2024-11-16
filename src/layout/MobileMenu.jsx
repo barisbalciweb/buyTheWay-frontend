@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SubCategories from "../components/MobileMenu/SubCategories";
 import Categories from "../components/MobileMenu/Categories";
+import { persons, collections } from "../data/data";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,13 +11,6 @@ import {
   setSelectedCategory,
 } from "../features/ui/uiSlice";
 
-const persons = ["Damen", "Herren", "Unisex"];
-const featuredCategories = [
-  { name: "Bestseller", path: "/bestseller" },
-  { name: "Reduzierte Artikel", path: "/sale" },
-  { name: "Beliebte Artikel", path: "/favorites" },
-];
-
 const MobileMenu = () => {
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -24,14 +18,6 @@ const MobileMenu = () => {
   const { selectedCategory } = useSelector((state) => state.ui);
   const { selectedPerson } = useSelector((state) => state.ui);
   const isMobileMenuOpen = useSelector((state) => state.ui.isMobileMenuOpen);
-
-  // DISABLE SCROLLING WHEN MOBILE MENU IS OPEN
-  useEffect(() => {
-    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "auto";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     handlePersonSelect(selectedPerson);
@@ -83,13 +69,17 @@ const MobileMenu = () => {
           )}
         </div>
 
-        {/* FEATURED CATEGORIES */}
+        {/* COLLECTIONS */}
         <ul className="bg-[#D0D0D0]">
-          {featuredCategories.map((category, index) => (
+          {collections.map((category, index) => (
             <li
               key={index}
               className="w-full text-[4vw] flex justify-between py-[4vw] px-[5vw] border-b-customBorder">
-              <Link to={category.path}>{category.name}</Link>
+              <Link
+                to={`store${category.path}`}
+                onClick={() => dispatch(toggleMobileMenu())}>
+                {category.name}
+              </Link>
             </li>
           ))}
         </ul>

@@ -11,21 +11,43 @@ import { fetchProducts } from "../features/products/productsSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
-  //BESTSELLER FETCH STATES
-  const { bestsellers, discounted, favourites, statuses } = useSelector(
+  const { bestsellers, discounted, favorites, statuses } = useSelector(
     (state) => state.products
   );
   const bestsellersStatus = statuses.bestsellers;
   const discountedStatus = statuses.discounted;
-  const favouritesStatus = statuses.favourites;
+  const favoritesStatus = statuses.favorites;
 
+  // FETCH BESTSELLERS, DISCOUNTED AND FAVORITES
   useEffect(() => {
-    dispatch(
-      fetchProducts({ endpoint: "/products.json", type: "bestsellers" })
-    );
-    dispatch(fetchProducts({ endpoint: "/products.json", type: "discounted" }));
-    dispatch(fetchProducts({ endpoint: "/products.json", type: "favourites" }));
-  }, [dispatch]);
+    const fetchData = () => {
+      if (bestsellers.length === 0) {
+        dispatch(
+          fetchProducts({
+            endpoint: "collections/bestsellers",
+            type: "bestsellers",
+          })
+        );
+      }
+      if (discounted.length === 0) {
+        dispatch(
+          fetchProducts({
+            endpoint: "collections/discounted",
+            type: "discounted",
+          })
+        );
+      }
+      if (favorites.length === 0) {
+        dispatch(
+          fetchProducts({
+            endpoint: "collections/favorites",
+            type: "favorites",
+          })
+        );
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <main>
@@ -64,7 +86,7 @@ const Home = () => {
       {/* BESTSELLER */}
       {bestsellersStatus === "succeeded" ? (
         <section className="c-home-slider-sections">
-          <h2 className="c-h2">Bestseller</h2>
+          <h2 className="c-h2">Bestsellers</h2>
           <ProductSlider products={bestsellers} />
         </section>
       ) : (
@@ -100,10 +122,10 @@ const Home = () => {
       </section>
 
       {/* FAVORITES */}
-      {favouritesStatus === "succeeded" ? (
+      {favoritesStatus === "succeeded" ? (
         <section className="c-home-slider-sections">
           <h2 className="c-h2">Beliebte Artikel</h2>
-          <ProductSlider products={favourites} />
+          <ProductSlider products={favorites} />
         </section>
       ) : (
         "Loading..."

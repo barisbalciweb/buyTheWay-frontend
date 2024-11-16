@@ -89,3 +89,11 @@ const singleProduct = {
 };
 
 export const sizes = ["XS", "S", "M", "L", "XL"];
+
+export const persons = ["Damen", "Herren", "Unisex"];
+
+export const collections = [
+  { name: "Bestsellers", path: "/bestsellers" },
+  { name: "Reduzierte Artikel", path: "/discounted" },
+  { name: "Beliebte Artikel", path: "/favorites" },
+];
