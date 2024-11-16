@@ -71,14 +71,14 @@ const MobileMenu = () => {
 
         {/* COLLECTIONS */}
         <ul className="bg-[#D0D0D0]">
-          {collections.map((category, index) => (
+          {collections.map((collection, index) => (
             <li
               key={index}
               className="w-full text-[4vw] flex justify-between py-[4vw] px-[5vw] border-b-customBorder">
               <Link
-                to={`store${category.path}`}
+                to={`store/collections${collection.path}`}
                 onClick={() => dispatch(toggleMobileMenu())}>
-                {category.name}
+                {collection.name}
               </Link>
             </li>
           ))}

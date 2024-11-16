@@ -10,9 +10,12 @@ import Wishlist from "../pages/Wishlist";
 
 const routes = [
   { path: "/", element: <Home /> },
-  { path: "/store", element: <Store /> },
-  { path: "/store/:targetGroup/:category/:subCategory", element: <Store /> },
-  { path: "/store/:collection", element: <Store /> },
+  { path: "/store/products", element: <Store /> },
+  {
+    path: "/store/products/:targetGroup/:category/:subCategory",
+    element: <Store />,
+  },
+  { path: "/store/collections/:collection", element: <Store /> },
   { path: "/store/product/:productId", element: <ProductDetail /> },
   { path: "/cart", element: <Cart /> },
   { path: "/checkout", element: <Checkout /> },

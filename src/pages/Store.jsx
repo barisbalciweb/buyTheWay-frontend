@@ -22,30 +22,34 @@ const Store = () => {
   const { statuses } = useSelector((state) => state.products);
   const products = useSelector((state) => state.products);
 
-  const renderedProducts = collection ? productsStates[collection] : [];
-  const fetchStatus = statuses[collection];
+  // SPECIFY WHICH PRODUCTS TO RENDER
+  const renderedProducts = collection
+    ? productsStates[collection]
+    : productsStates.filteredProducts;
+
+  const fetchStatus =
+    statuses[collection] || statuses.filteredProducts || "idle";
 
   const dispatch = useDispatch();
 
-  //! ONLY FOR TESTING
-  // const filterProductsBySubCategory = allProducts.filter((item) => {
-  //   return (
-  //     item.targetGroup.toLowerCase() === targetGroup &&
-  //     item.category.toLowerCase() === subCategory
-  //   );
-  // });
-
-  // FETCH COLLECTIONS DYANMICALLY ACCORDING TO URL PARAMS
+  // FETCH PRODUCTS DYANMICALLY ACCORDING TO URL PARAMS
   useEffect(() => {
-    if (products[collection].length === 0) {
-      dispatch(
-        fetchProducts({
-          endpoint: `collections/${collection}`,
-          type: collection,
-        })
-      );
+    let endpoint = "";
+
+    if (collection) {
+      endpoint = `collections/${collection}`;
+    } else if (targetGroup && category && subCategory) {
+      const queryParams = new URLSearchParams({
+        targetGroup: targetGroup,
+        subCategory: subCategory,
+      }).toString();
+      endpoint = `?${queryParams}`;
     }
-  }, [collection]);
+
+    dispatch(
+      fetchProducts({ endpoint, type: collection || "filteredProducts" })
+    );
+  }, [targetGroup, category, subCategory, collection]);
 
   return (
     <div className="flex flex-col flex-grow">

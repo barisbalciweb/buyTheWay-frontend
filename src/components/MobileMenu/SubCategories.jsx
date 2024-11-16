@@ -44,7 +44,7 @@ const SubCategories = () => {
         {filteredSubCategories.map((category, index) => (
           <li className="list-none" key={index}>
             <Link
-              to={`store/${selectedPerson.toLowerCase()}/${selectedCategory.toLowerCase()}/${category.name.toLowerCase()}`}
+              to={`store/products/${selectedPerson.toLowerCase()}/${selectedCategory.toLowerCase()}/${category.name.toLowerCase()}`}
               className="w-[80vw] text-[4vw] flex justify-between py-[2vw] px-[2vw]"
               onClick={() => dispatch(toggleMobileMenu())}>
               {category.name}
