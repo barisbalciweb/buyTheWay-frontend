@@ -67,8 +67,6 @@ const Filter = () => {
 
   const handleFilterResults = () => {
     dispatch(toggleFilter());
-    //! ONLY FOR TESTING
-    console.log("Filtering with:", selectedFilters);
   };
 
   const handleClearFilters = () => {
@@ -111,7 +109,7 @@ const Filter = () => {
                         ? "Sortierung"
                         : filterCategory === "price"
                         ? "Preis"
-                        : filterCategory === "discount"
+                        : filterCategory === "discounted"
                         ? "Reduziert"
                         : filterCategory === "category"
                         ? "Kategorie"
@@ -151,7 +149,9 @@ const Filter = () => {
                     </div>
                   ) : (
                     <p className="text-[3vw] text-blue-700 font-bold">
-                      {selectedFilters[filterCategory]}
+                      {filterCategory === "sort"
+                        ? sortBy
+                        : selectedFilters[filterCategory]}
                     </p>
                   )}
                 </button>
@@ -172,7 +172,7 @@ const Filter = () => {
                               type={inputType}
                               name={filterCategory}
                               checked={
-                                filterCategory === "Sortierung"
+                                filterCategory === "sort"
                                   ? sortBy === filterOption
                                   : inputType === "checkbox"
                                   ? selectedFilters[filterCategory]?.includes(

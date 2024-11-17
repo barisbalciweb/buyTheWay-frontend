@@ -20,7 +20,7 @@ const Sort = () => {
 
   // EXTRACT SORT OPTIONS FROM FILTERS
   const sortOptions = filters.find(
-    (filter) => filter.filterCategory === "Sortierung"
+    (filter) => filter.filterCategory === "sort"
   )?.filterOptions;
 
   return (
