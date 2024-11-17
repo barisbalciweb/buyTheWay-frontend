@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 //REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFilter } from "../../features/ui/uiSlice";
-import { clearFilters } from "../../features/filter/filterSlice";
+import {
+  clearFilters,
+  fetchFilteredCount,
+} from "../../features/filter/filterSlice";
 import { addSelectedFilter } from "../../features/filter/filterSlice";
 import { changeSorting } from "../../features/sort/sortSlice";
 
@@ -19,8 +22,28 @@ const Filter = () => {
   const filterStatus = useSelector(
     (state) => state.filter.statuses.filterOptions
   );
+  const filteredCount = useSelector((state) => state.filter.filteredCount);
+  const filteredCountStatus = useSelector(
+    (state) => state.filter.statuses.filteredCount
+  );
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // CHECK COUNT OF SELECTED FILTERS
+    const filtersInArray = Object.values(selectedFilters).flatMap((value) =>
+      typeof value === "string" && value !== ""
+        ? [value]
+        : Array.isArray(value)
+        ? value
+        : []
+    );
+
+    if (filtersInArray.length > 0) {
+      //* FIND A BETTER WAY TO DO THIS
+      dispatch(fetchFilteredCount(selectedFilters));
+    }
+  }, [selectedFilters]);
 
   const toggleAccordion = (filterCategory) => {
     setSelectedFilterCategory(
@@ -28,8 +51,8 @@ const Filter = () => {
     );
   };
 
-  const handleAddFilter = (filterCategory, filterOption, inputType) => {
-    if (filterCategory === "Sortierung") {
+  const handleFilterUpdate = (filterCategory, filterOption, inputType) => {
+    if (filterCategory === "sort") {
       dispatch(changeSorting(filterOption));
     } else {
       dispatch(
@@ -42,7 +65,7 @@ const Filter = () => {
     }
   };
 
-  const handleFiltering = () => {
+  const handleFilterResults = () => {
     dispatch(toggleFilter());
     //! ONLY FOR TESTING
     console.log("Filtering with:", selectedFilters);
@@ -84,7 +107,21 @@ const Filter = () => {
                         selectedFilterCategory === filterCategory &&
                         "text-customOrange font-bold"
                       }`}>
-                      {filterCategory}
+                      {filterCategory === "sort"
+                        ? "Sortierung"
+                        : filterCategory === "price"
+                        ? "Preis"
+                        : filterCategory === "discount"
+                        ? "Reduziert"
+                        : filterCategory === "category"
+                        ? "Kategorie"
+                        : filterCategory === "color"
+                        ? "Farbe"
+                        : filterCategory === "size"
+                        ? "Größe"
+                        : filterCategory === "brand"
+                        ? "Marke"
+                        : ""}
                     </p>
                     <FontAwesomeIcon
                       icon={
@@ -145,7 +182,7 @@ const Filter = () => {
                                       filterOption || false
                               }
                               onChange={() =>
-                                handleAddFilter(
+                                handleFilterUpdate(
                                   filterCategory,
                                   filterOption,
                                   inputType
@@ -166,9 +203,10 @@ const Filter = () => {
       </div>
 
       <button
-        onClick={handleFiltering}
-        className="mt-4 bg-blue-500 text-white p-2 rounded">
-        auswählen
+        disabled={filteredCountStatus !== "succeeded"}
+        onClick={handleFilterResults}
+        className="mt-4 bg-blue-500 text-white p-2 rounded disabled:bg-slate-500">
+        auswählen {`(${filteredCount})`}
       </button>
 
       <button onClick={handleClearFilters}>alle Filter löschen</button>

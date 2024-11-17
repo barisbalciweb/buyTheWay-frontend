@@ -1,7 +1,27 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-//! TO ADD --> fetch all possible filter options from BE
+const initialState = {
+  selectedFilters: {
+    category: [],
+    price: [],
+    color: [],
+    size: [],
+    brand: [],
+    discount: "",
+  },
+  filterOptions: [],
+  filteredCount: 0,
+  statuses: {
+    filterOptions: "idle",
+    filteredCount: "idle",
+  },
+  errors: {
+    filterOptions: null,
+    filteredCount: null,
+  },
+};
+
 // FETCH ALL POSSIBLE FILTER OPTIONS
 export const fetchFilters = createAsyncThunk(
   "products/fetchFilters",
@@ -16,27 +36,22 @@ export const fetchFilters = createAsyncThunk(
   }
 );
 
-//! TO ADD --> fetch results on click of submit button and get detailed results from BE
 //! TO ADD --> fetch results on every change in filter state and show the count of results in Button in FE
+// FETCH PRODUCT COUNT BASED ON SELECTED FILTERS
+export const fetchFilteredCount = createAsyncThunk(
+  "products/fetchFilteredCount",
+  async (filters, { rejectWithValue }) => {
+    try {
+      const url = `http://localhost:3000/products/filteredCount`;
+      const { data } = await axios.post(url, filters);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
-const initialState = {
-  selectedFilters: {
-    sort: "",
-    category: [],
-    price: [],
-    color: [],
-    size: [],
-    brand: [],
-    discount: "",
-  },
-  filterOptions: [],
-  statuses: {
-    filterOptions: "idle",
-  },
-  errors: {
-    filterOptions: null,
-  },
-};
+//! TO ADD --> fetch results on click of submit button and get detailed results from BE
 
 export const filterSlice = createSlice({
   name: "filter",
@@ -83,6 +98,7 @@ export const filterSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // FETCH FILTER OPTIONS
       .addCase(fetchFilters.pending, (state) => {
         state.statuses.filterOptions = "loading";
       })
@@ -92,6 +108,19 @@ export const filterSlice = createSlice({
       })
       .addCase(fetchFilters.rejected, (state) => {
         state.statuses.filterOptions = "failed";
+      });
+
+    // FETCH FILTERED COUNT
+    builder
+      .addCase(fetchFilteredCount.pending, (state) => {
+        state.statuses.filteredCount = "loading";
+      })
+      .addCase(fetchFilteredCount.fulfilled, (state, action) => {
+        state.filteredCount = action.payload.data;
+        state.statuses.filteredCount = "succeeded";
+      })
+      .addCase(fetchFilteredCount.rejected, (state) => {
+        state.statuses.filteredCount = "failed";
       });
   },
 });
