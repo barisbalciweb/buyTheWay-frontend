@@ -30,7 +30,7 @@
   @apply max-h-0 overflow-hidden transition duration-500 ease-in;
 }
 .accordion-content-open {
-  @apply max-h-[200px];
+  @apply max-h-[200px] overflow-y-auto;
 }
 
 /* MOBILE MENU SCROLLBAR */

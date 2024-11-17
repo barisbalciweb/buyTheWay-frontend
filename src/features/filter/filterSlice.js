@@ -1,13 +1,40 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+
+//! TO ADD --> fetch all possible filter options from BE
+// FETCH ALL POSSIBLE FILTER OPTIONS
+export const fetchFilters = createAsyncThunk(
+  "products/fetchFilters",
+  async (_, { rejectWithValue }) => {
+    try {
+      const url = `http://localhost:3000/products/filters`;
+      const { data } = await axios.get(url);
+      return { data, type: "filterOptions" };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+//! TO ADD --> fetch results on click of submit button and get detailed results from BE
+//! TO ADD --> fetch results on every change in filter state and show the count of results in Button in FE
 
 const initialState = {
   selectedFilters: {
-    Kategorie: [],
-    Preis: [],
-    Farbe: [],
-    Größe: [],
-    Marke: [],
-    Sale: "",
+    sort: "",
+    category: [],
+    price: [],
+    color: [],
+    size: [],
+    brand: [],
+    discount: "",
+  },
+  filterOptions: [],
+  statuses: {
+    filterOptions: "idle",
+  },
+  errors: {
+    filterOptions: null,
   },
 };
 
@@ -44,15 +71,28 @@ export const filterSlice = createSlice({
     },
     clearFilters: (state) => {
       state.selectedFilters = {
-        Sortierung: "",
-        Kategorie: [],
-        Preis: [],
-        Farbe: [],
-        Größe: [],
-        Marke: [],
-        Sale: "",
+        sort: "",
+        category: [],
+        price: [],
+        color: [],
+        size: [],
+        brand: [],
+        discount: "",
       };
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchFilters.pending, (state) => {
+        state.statuses.filterOptions = "loading";
+      })
+      .addCase(fetchFilters.fulfilled, (state, action) => {
+        state.filterOptions = action.payload.data;
+        state.statuses.filterOptions = "succeeded";
+      })
+      .addCase(fetchFilters.rejected, (state) => {
+        state.statuses.filterOptions = "failed";
+      });
   },
 });
 

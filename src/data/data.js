@@ -28,66 +28,6 @@ export const accordion = [
   },
 ];
 
-export const sortOptions = [
-  "Preis aufsteigend",
-  "Preis absteigend",
-  "Name A-Z",
-  "Name Z-A",
-  "Rabatt",
-  "Meistverkauft",
-];
-
-export const filters = [
-  {
-    filterCategory: "Sortierung",
-    filterOptions: sortOptions,
-    inputType: "radio",
-  },
-  {
-    filterCategory: "Kategorie",
-    filterOptions: ["Elektronik", "Bekleidung", "Sport"],
-    inputType: "checkbox",
-  },
-  {
-    filterCategory: "Preis",
-    filterOptions: ["0-50€", "50-100€", "100-200€"],
-    inputType: "checkbox",
-  },
-  {
-    filterCategory: "Farbe",
-    filterOptions: ["Rot", "Blau", "Grün"],
-    inputType: "checkbox",
-  },
-  {
-    filterCategory: "Größe",
-    filterOptions: ["S", "M", "L", "XL"],
-    inputType: "checkbox",
-  },
-  {
-    filterCategory: "Marke",
-    filterOptions: ["Marke A", "Marke B", "Marke C"],
-    inputType: "checkbox",
-  },
-  {
-    filterCategory: "Sale",
-    filterOptions: ["Ja", "Nein"],
-    inputType: "radio",
-  },
-];
-
-const singleProduct = {
-  productId: 1,
-  productName: "Unnamed Jacke",
-  price: 50,
-  img: "https://via.placeholder.com/300",
-  availableSizes: ["S", "M", "L", "XL"],
-  availableColors: ["Rot", "Blau", "Grün"],
-  sale: false,
-  discount: 0,
-  description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac metus sit amet urna ultricies ultricies. Nullam nec magna nec sem ultrices ultricies. Nulla facilisi. Sed ut elit nec turpis ultricies ultricies. Nullam nec magna nec sem ultricies ultricies. Nulla facilisi. Sed ut elit nec turpis ultricies ultricies.",
-};
-
 export const sizes = ["XS", "S", "M", "L", "XL"];
 
 export const persons = ["Damen", "Herren", "Unisex"];

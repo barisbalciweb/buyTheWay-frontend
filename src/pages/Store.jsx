@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFilter, toggleSort } from "../features/ui/uiSlice";
 import { fetchProducts } from "../features/products/productsSlice";
+import { fetchFilters } from "../features/filter/filterSlice";
 
 const Store = () => {
   const { targetGroup, category, subCategory, collection } = useParams();
@@ -20,7 +21,9 @@ const Store = () => {
   const sortBy = useSelector((state) => state.sort.sortBy);
   const productsStates = useSelector((state) => state.products);
   const { statuses } = useSelector((state) => state.products);
-  const products = useSelector((state) => state.products);
+  const filterStatus = useSelector(
+    (state) => state.filter.statuses.filterOptions
+  );
 
   // SPECIFY WHICH PRODUCTS TO RENDER
   const renderedProducts = collection
@@ -31,6 +34,13 @@ const Store = () => {
     statuses[collection] || statuses.filteredProducts || "idle";
 
   const dispatch = useDispatch();
+
+  // FETCH CATEGORIE OPTIONS FOR SORTING
+  useEffect(() => {
+    if (filterStatus === "idle") {
+      dispatch(fetchFilters());
+    }
+  }, [filterStatus]);
 
   // FETCH PRODUCTS DYANMICALLY ACCORDING TO URL PARAMS
   useEffect(() => {
@@ -54,13 +64,15 @@ const Store = () => {
   return (
     <div className="flex flex-col flex-grow">
       <h1 className="text-customH1 p-[5vw]">
-        {collection === "bestsellers"
-          ? "Bestsellers"
-          : collection === "discounted"
-          ? "Reduzierte Artikel"
-          : collection === "favorites"
-          ? "Beliebte Artikel"
-          : ""}
+        {collection
+          ? collection === "bestsellers"
+            ? "Bestsellers"
+            : collection === "discounted"
+            ? "Reduzierte Artikel"
+            : collection === "favorites"
+            ? "Beliebte Artikel"
+            : ""
+          : "Ergebnisse"}
       </h1>
 
       {/* FILTER AND SORT ICONS */}

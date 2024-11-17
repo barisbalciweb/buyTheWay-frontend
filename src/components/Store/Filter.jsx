@@ -2,7 +2,6 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
-import { filters } from "../../data/data";
 //REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFilter } from "../../features/ui/uiSlice";
@@ -13,8 +12,14 @@ import { changeSorting } from "../../features/sort/sortSlice";
 const Filter = () => {
   const [selectedFilterCategory, setSelectedFilterCategory] = useState(null);
 
+  // GLOBAL STATES
   const selectedFilters = useSelector((state) => state.filter.selectedFilters);
   const sortBy = useSelector((state) => state.sort.sortBy);
+  const filters = useSelector((state) => state.filter.filterOptions);
+  const filterStatus = useSelector(
+    (state) => state.filter.statuses.filterOptions
+  );
+
   const dispatch = useDispatch();
 
   const toggleAccordion = (filterCategory) => {
@@ -39,6 +44,7 @@ const Filter = () => {
 
   const handleFiltering = () => {
     dispatch(toggleFilter());
+    //! ONLY FOR TESTING
     console.log("Filtering with:", selectedFilters);
   };
 
@@ -62,98 +68,101 @@ const Filter = () => {
 
       {/* FILTER OPTIONS */}
       <div className="flex flex-col">
-        {filters.map(({ filterCategory, filterOptions, inputType }) => (
-          // FILTER CATEGORY AS ACCORDION HEADER
-          <div
-            key={filterCategory}
-            className="flex flex-col items-center border-b-customBorder border-black">
-            <button
-              type="button"
-              className={`w-full h-[15vw] flex flex-col py-[4vw]`}
-              onClick={() => toggleAccordion(filterCategory)}>
-              <div className="w-full flex justify-between">
-                <p
-                  className={`${
-                    selectedFilterCategory === filterCategory &&
-                    "text-customOrange font-bold"
-                  }`}>
-                  {filterCategory}
-                </p>
-                <FontAwesomeIcon
-                  icon={
-                    selectedFilterCategory === filterCategory
-                      ? faAngleUp
-                      : faAngleDown
-                  }
-                />
-              </div>
-
-              {/* SELECTED FILTERS PREVIEW */}
-              {inputType === "checkbox" ? (
-                <div className="flex">
-                  {selectedFilters[filterCategory]?.map(
-                    (filterOption, index) => (
-                      <p
-                        key={`${filterCategory}-${filterOption}`}
-                        className="text-[3vw] text-blue-700 font-bold">
-                        {filterOption}
-                        {index === selectedFilters[filterCategory].length - 1
-                          ? ""
-                          : ",\u00A0"}
-                      </p>
-                    )
-                  )}
-                </div>
-              ) : (
-                <p className="text-[3vw] text-blue-700 font-bold">
-                  {selectedFilters[filterCategory]}
-                </p>
-              )}
-            </button>
-
-            {/* FILTER OPTIONS AS ACCORDION CONTENT */}
-            {selectedFilterCategory === filterCategory && (
+        {filterStatus === "succeeded"
+          ? filters.map(({ filterCategory, filterOptions, inputType }) => (
+              // FILTER CATEGORY AS ACCORDION HEADER
               <div
-                className={`accordion-content w-full flex flex-col mb-[5vw] ${
-                  selectedFilterCategory === filterCategory
-                    ? "accordion-content-open"
-                    : ""
-                }`}>
-                <ul>
-                  {filterOptions.map((filterOption) => (
-                    <li key={filterOption}>
-                      <label className="flex items-center gap-2 p-[2vw]">
-                        <input
-                          type={inputType}
-                          name={filterCategory}
-                          checked={
-                            filterCategory === "Sortierung"
-                              ? sortBy === filterOption
-                              : inputType === "checkbox"
-                              ? selectedFilters[filterCategory]?.includes(
-                                  filterOption
-                                ) || false
-                              : selectedFilters[filterCategory] ===
-                                  filterOption || false
-                          }
-                          onChange={() =>
-                            handleAddFilter(
-                              filterCategory,
-                              filterOption,
-                              inputType
-                            )
-                          }
-                          className="text-customOrange"
-                        />
-                        <span>{filterOption}</span>
-                      </label>
-                    </li>
-                  ))}
-                </ul>
+                key={filterCategory}
+                className="flex flex-col items-center border-b-customBorder border-black">
+                <button
+                  type="button"
+                  className={`w-full h-[15vw] flex flex-col py-[4vw]`}
+                  onClick={() => toggleAccordion(filterCategory)}>
+                  <div className="w-full flex justify-between">
+                    <p
+                      className={`${
+                        selectedFilterCategory === filterCategory &&
+                        "text-customOrange font-bold"
+                      }`}>
+                      {filterCategory}
+                    </p>
+                    <FontAwesomeIcon
+                      icon={
+                        selectedFilterCategory === filterCategory
+                          ? faAngleUp
+                          : faAngleDown
+                      }
+                    />
+                  </div>
+
+                  {/* SELECTED FILTERS PREVIEW */}
+                  {inputType === "checkbox" ? (
+                    <div className="flex">
+                      {selectedFilters[filterCategory]?.map(
+                        (filterOption, index) => (
+                          <p
+                            key={`${filterCategory}-${filterOption}`}
+                            className="text-[3vw] text-blue-700 font-bold">
+                            {filterOption}
+                            {index ===
+                            selectedFilters[filterCategory].length - 1
+                              ? ""
+                              : ",\u00A0"}
+                          </p>
+                        )
+                      )}
+                    </div>
+                  ) : (
+                    <p className="text-[3vw] text-blue-700 font-bold">
+                      {selectedFilters[filterCategory]}
+                    </p>
+                  )}
+                </button>
+
+                {/* FILTER OPTIONS AS ACCORDION CONTENT */}
+                {selectedFilterCategory === filterCategory && (
+                  <div
+                    className={`accordion-content w-full flex flex-col mb-[5vw] ${
+                      selectedFilterCategory === filterCategory
+                        ? "accordion-content-open"
+                        : ""
+                    }`}>
+                    <ul>
+                      {filterOptions.map((filterOption) => (
+                        <li key={filterOption}>
+                          <label className="flex items-center gap-2 p-[2vw]">
+                            <input
+                              type={inputType}
+                              name={filterCategory}
+                              checked={
+                                filterCategory === "Sortierung"
+                                  ? sortBy === filterOption
+                                  : inputType === "checkbox"
+                                  ? selectedFilters[filterCategory]?.includes(
+                                      filterOption
+                                    ) || false
+                                  : selectedFilters[filterCategory] ===
+                                      filterOption || false
+                              }
+                              onChange={() =>
+                                handleAddFilter(
+                                  filterCategory,
+                                  filterOption,
+                                  inputType
+                                )
+                              }
+                              className="text-customOrange"
+                            />
+                            <span>{filterOption}</span>
+                          </label>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        ))}
+            ))
+          : "Loading..."}
       </div>
 
       <button
