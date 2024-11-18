@@ -13,6 +13,7 @@ const initialState = {
   },
   filterOptions: [],
   filteredCount: 0,
+  priceRange: [0, 1000],
   statuses: {
     filterOptions: "idle",
     filteredCount: "idle",
@@ -87,6 +88,7 @@ export const filterSlice = createSlice({
         ].filter((selectedOption) => selectedOption !== filterOption);
       } else if (inputType === "range") {
         state.selectedFilters[filterCategory] = [];
+        state.priceRange = [0, 1000];
       }
     },
     clearFilters: (state) => {
@@ -99,6 +101,10 @@ export const filterSlice = createSlice({
         brand: [],
         discount: "",
       };
+      state.priceRange = [0, 1000];
+    },
+    setPriceRange: (state, action) => {
+      state.priceRange = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -130,6 +136,10 @@ export const filterSlice = createSlice({
   },
 });
 
-export const { addSelectedFilter, deleteSelectedFilter, clearFilters } =
-  filterSlice.actions;
+export const {
+  addSelectedFilter,
+  deleteSelectedFilter,
+  clearFilters,
+  setPriceRange,
+} = filterSlice.actions;
 export default filterSlice.reducer;

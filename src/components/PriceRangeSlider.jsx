@@ -1,17 +1,22 @@
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { addSelectedFilter } from "../features/filter/filterSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addSelectedFilter,
+  setPriceRange,
+} from "../features/filter/filterSlice";
 
-const PriceRangeSlider = ({ priceRange, setPriceRange }) => {
+const PriceRangeSlider = () => {
   const dispatch = useDispatch();
+  const { priceRange } = useSelector((state) => state.filter);
 
   const handleRangeChange = (values) => {
-    setPriceRange(values);
+    dispatch(setPriceRange(values));
   };
 
   useEffect(() => {
+    // ADD PRICE RANGE TO SELECTED FILTERS IF NOT DEFAULT
     dispatch(
       addSelectedFilter({
         filterCategory: "price",

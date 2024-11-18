@@ -22,8 +22,6 @@ const FilterPreview = () => {
     </div>
   );
 
-  console.log(selectedFilters);
-
   return (
     <section id="filters" className="flex flex-wrap gap-[1vw] p-[3vw]">
       {Object.entries(selectedFilters).flatMap(

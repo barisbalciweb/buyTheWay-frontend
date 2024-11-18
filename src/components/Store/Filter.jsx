@@ -15,7 +15,8 @@ import PriceRangeSlider from "../PriceRangeSlider";
 
 const Filter = () => {
   const [selectedFilterCategory, setSelectedFilterCategory] = useState(null);
-  const [priceRange, setPriceRange] = useState([0, 1000]);
+
+  const dispatch = useDispatch();
 
   // GLOBAL STATES
   const selectedFilters = useSelector((state) => state.filter.selectedFilters);
@@ -28,22 +29,12 @@ const Filter = () => {
   const filteredCountStatus = useSelector(
     (state) => state.filter.statuses.filteredCount
   );
-
-  const dispatch = useDispatch();
+  const { priceRange } = useSelector((state) => state.filter);
 
   // CHECK COUNT OF SELECTED FILTERS ON EVERY CHANGE
   useEffect(() => {
-    const filtersInArray = Object.values(selectedFilters).flatMap((value) =>
-      typeof value === "string" && value !== ""
-        ? [value]
-        : Array.isArray(value)
-        ? value
-        : []
-    );
-    if (filtersInArray.length > 0) {
-      //* FIND A BETTER WAY TO DO THIS
-      dispatch(fetchFilteredCount(selectedFilters));
-    }
+    //* FIND A BETTER WAY TO DO THIS
+    dispatch(fetchFilteredCount(selectedFilters));
   }, [selectedFilters]);
 
   const toggleAccordion = (filterCategory) => {
@@ -70,6 +61,7 @@ const Filter = () => {
 
   const handleFilterResults = () => {
     dispatch(toggleFilter());
+    //! HERE WILL BE FETCHED
   };
 
   const handleClearFilters = () => {
@@ -173,10 +165,7 @@ const Filter = () => {
                     }`}>
                     <ul>
                       {inputType === "range" ? (
-                        <PriceRangeSlider
-                          priceRange={priceRange}
-                          setPriceRange={setPriceRange}
-                        />
+                        <PriceRangeSlider />
                       ) : (
                         filterOptions.map((filterOption) => (
                           <li key={filterOption}>
@@ -220,7 +209,7 @@ const Filter = () => {
         disabled={filteredCountStatus !== "succeeded"}
         onClick={handleFilterResults}
         className="mt-4 bg-blue-500 text-white p-2 rounded disabled:bg-slate-500">
-        auswählen {`(${filteredCount})`}
+        Ergebnisse zeigen {`(${filteredCount})`}
       </button>
 
       <button onClick={handleClearFilters}>alle Filter löschen</button>
