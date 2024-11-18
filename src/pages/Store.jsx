@@ -35,7 +35,7 @@ const Store = () => {
 
   const dispatch = useDispatch();
 
-  // FETCH CATEGORIE OPTIONS FOR SORTING
+  // FETCH ALL POSSIBLE FILTER OPTIONS
   useEffect(() => {
     if (filterStatus === "idle") {
       dispatch(fetchFilters());

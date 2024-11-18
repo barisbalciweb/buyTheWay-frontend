@@ -8,6 +8,7 @@ const initialState = {
     color: [],
     size: [],
     brand: [],
+    //! THIS SHOULD BE BOOLEAN, IN BE AS WELL (getFilteredCount)
     discount: "",
   },
   filterOptions: [],
@@ -71,6 +72,8 @@ export const filterSlice = createSlice({
           : existingOptions.splice(optionIndex, 1);
 
         state.selectedFilters[filterCategory] = existingOptions;
+      } else {
+        state.selectedFilters[filterCategory] = filterOption;
       }
     },
     deleteSelectedFilter: (state, action) => {
@@ -82,6 +85,8 @@ export const filterSlice = createSlice({
         state.selectedFilters[filterCategory] = state.selectedFilters[
           filterCategory
         ].filter((selectedOption) => selectedOption !== filterOption);
+      } else if (inputType === "range") {
+        state.selectedFilters[filterCategory] = [];
       }
     },
     clearFilters: (state) => {

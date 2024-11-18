@@ -11,9 +11,11 @@ import {
 } from "../../features/filter/filterSlice";
 import { addSelectedFilter } from "../../features/filter/filterSlice";
 import { changeSorting } from "../../features/sort/sortSlice";
+import PriceRangeSlider from "../PriceRangeSlider";
 
 const Filter = () => {
   const [selectedFilterCategory, setSelectedFilterCategory] = useState(null);
+  const [priceRange, setPriceRange] = useState([0, 1000]);
 
   // GLOBAL STATES
   const selectedFilters = useSelector((state) => state.filter.selectedFilters);
@@ -29,8 +31,8 @@ const Filter = () => {
 
   const dispatch = useDispatch();
 
+  // CHECK COUNT OF SELECTED FILTERS ON EVERY CHANGE
   useEffect(() => {
-    // CHECK COUNT OF SELECTED FILTERS
     const filtersInArray = Object.values(selectedFilters).flatMap((value) =>
       typeof value === "string" && value !== ""
         ? [value]
@@ -38,7 +40,6 @@ const Filter = () => {
         ? value
         : []
     );
-
     if (filtersInArray.length > 0) {
       //* FIND A BETTER WAY TO DO THIS
       dispatch(fetchFilteredCount(selectedFilters));
@@ -54,6 +55,8 @@ const Filter = () => {
   const handleFilterUpdate = (filterCategory, filterOption, inputType) => {
     if (filterCategory === "sort") {
       dispatch(changeSorting(filterOption));
+    } else if (inputType === "range") {
+      return;
     } else {
       dispatch(
         addSelectedFilter({
@@ -147,6 +150,10 @@ const Filter = () => {
                         )
                       )}
                     </div>
+                  ) : inputType === "range" ? (
+                    <p className="text-[3vw] text-blue-700 font-bold">
+                      {priceRange[0]}-{priceRange[1]}
+                    </p>
                   ) : (
                     <p className="text-[3vw] text-blue-700 font-bold">
                       {filterCategory === "sort"
@@ -165,35 +172,42 @@ const Filter = () => {
                         : ""
                     }`}>
                     <ul>
-                      {filterOptions.map((filterOption) => (
-                        <li key={filterOption}>
-                          <label className="flex items-center gap-2 p-[2vw]">
-                            <input
-                              type={inputType}
-                              name={filterCategory}
-                              checked={
-                                filterCategory === "sort"
-                                  ? sortBy === filterOption
-                                  : inputType === "checkbox"
-                                  ? selectedFilters[filterCategory]?.includes(
-                                      filterOption
-                                    ) || false
-                                  : selectedFilters[filterCategory] ===
-                                      filterOption || false
-                              }
-                              onChange={() =>
-                                handleFilterUpdate(
-                                  filterCategory,
-                                  filterOption,
-                                  inputType
-                                )
-                              }
-                              className="text-customOrange"
-                            />
-                            <span>{filterOption}</span>
-                          </label>
-                        </li>
-                      ))}
+                      {inputType === "range" ? (
+                        <PriceRangeSlider
+                          priceRange={priceRange}
+                          setPriceRange={setPriceRange}
+                        />
+                      ) : (
+                        filterOptions.map((filterOption) => (
+                          <li key={filterOption}>
+                            <label className="flex items-center gap-2 p-[2vw]">
+                              <input
+                                type={inputType}
+                                name={filterCategory}
+                                checked={
+                                  filterCategory === "sort"
+                                    ? sortBy === filterOption
+                                    : inputType === "checkbox"
+                                    ? selectedFilters[filterCategory]?.includes(
+                                        filterOption
+                                      ) || false
+                                    : selectedFilters[filterCategory] ===
+                                        filterOption || false
+                                }
+                                onChange={() =>
+                                  handleFilterUpdate(
+                                    filterCategory,
+                                    filterOption,
+                                    inputType
+                                  )
+                                }
+                                className="text-customOrange"
+                              />
+                              <span>{filterOption}</span>
+                            </label>
+                          </li>
+                        ))
+                      )}
                     </ul>
                   </div>
                 )}
