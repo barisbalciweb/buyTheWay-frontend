@@ -5,15 +5,26 @@ import SingleProduct from "../components/SingleProduct";
 import Filter from "../components/Store/Filter";
 import Sort from "../components/Store/Sort";
 import FilterPreview from "../components/filterPreview";
-import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
+import { selectRenderedProducts } from "../features/products/renderedProductsSelector";
 import { toggleFilter, toggleSort } from "../features/ui/uiSlice";
 import { fetchProducts } from "../features/products/productsSlice";
-import { fetchFilters } from "../features/filter/filterSlice";
+import {
+  fetchFilteredProducts,
+  fetchFilters,
+} from "../features/filter/filterSlice";
 
 const Store = () => {
-  const { targetGroup, category, subCategory, collection } = useParams();
+  // FIND OUT WHICH PRODUCTS TO FETCH VIA URL PARAMS
+  const [searchParams] = useSearchParams();
+  const dispatch = useDispatch();
+
+  const collection = searchParams.get("collection");
+  const targetGroup = searchParams.get("targetGroup");
+  const category = searchParams.get("category");
+  const filtering = searchParams.get("filtering");
 
   // GLOBAL STATES
   const isFilterOpen = useSelector((state) => state.ui.isFilterOpen);
@@ -21,59 +32,88 @@ const Store = () => {
   const sortBy = useSelector((state) => state.sort.sortBy);
   const productsStates = useSelector((state) => state.products);
   const { statuses } = useSelector((state) => state.products);
-  const filterStatus = useSelector(
+  const filterOptions = useSelector((state) => state.filter.filterOptions);
+  const filterOptionsStatus = useSelector(
     (state) => state.filter.statuses.filterOptions
   );
+  const { filteredProducts } = useSelector((state) => state.filter);
+  const { filteredProductsStatus } = useSelector(
+    (state) => state.filter.statuses
+  );
+  const { selectedFilters } = useSelector((state) => state.filter);
 
-  // SPECIFY WHICH PRODUCTS TO RENDER
-  const renderedProducts = collection
-    ? productsStates[collection]
-    : productsStates.filteredProducts;
+  // SELECT RENDERED PRODUCTS ACCORDING TO URL PARAMS
+  const renderedProducts = useSelector((state) =>
+    selectRenderedProducts(state, {
+      collection,
+      filtering,
+      targetGroup,
+      category,
+    })
+  );
+  const count = renderedProducts.length;
 
+  // SPECIFY FETCH STATUS DYANMICALLY
   const fetchStatus =
-    statuses[collection] || statuses.filteredProducts || "idle";
-
-  const dispatch = useDispatch();
-
-  // FETCH ALL POSSIBLE FILTER OPTIONS
-  useEffect(() => {
-    if (filterStatus === "idle") {
-      dispatch(fetchFilters());
-    }
-  }, [filterStatus]);
+    statuses[collection] || statuses.productsByCategory || "idle";
 
   // FETCH PRODUCTS DYANMICALLY ACCORDING TO URL PARAMS
   useEffect(() => {
     let endpoint = "";
 
+    // BY COLLECTION
     if (collection) {
-      endpoint = `collections/${collection}`;
-    } else if (targetGroup && category && subCategory) {
+      endpoint = `collection?collection=${collection}`;
+      // BY CATEGORY
+    } else if (targetGroup && category) {
       const queryParams = new URLSearchParams({
-        targetGroup: targetGroup,
-        subCategory: subCategory,
+        targetGroup,
+        category,
       }).toString();
-      endpoint = `?${queryParams}`;
+      endpoint = `category?${queryParams}`;
+    } else if (filtering) {
+      endpoint = `filteredProducts`;
+      dispatch(fetchFilteredProducts(selectedFilters));
+      return;
     }
 
     dispatch(
-      fetchProducts({ endpoint, type: collection || "filteredProducts" })
+      fetchProducts({ endpoint, type: collection || "productsByCategory" })
     );
-  }, [targetGroup, category, subCategory, collection]);
+  }, [targetGroup, category, collection, selectedFilters]);
+
+  // EXCEPTIONALLY FETCH FILTER OPTIONS HERE IN ORDER TO GET SORT OPTIONS FOR SORTING DROPDOWN
+  useEffect(() => {
+    if (filterOptionsStatus === "idle") {
+      dispatch(fetchFilters());
+    }
+  }, [filterOptionsStatus]);
+
+  // GET HEADING ACCORDING TO URL PARAMS
+  const getHeading = () => {
+    const count = renderedProducts?.length || 0;
+
+    if (collection) {
+      switch (collection) {
+        case "bestsellers":
+          return `Bestsellers (${count})`;
+        case "discounted":
+          return `Reduzierte Artikel (${count})`;
+        case "favorites":
+          return `Beliebte Artikel (${count})`;
+        default:
+          return "";
+      }
+    } else if (category) {
+      return `${category[0].toUpperCase() + category.slice(1)} (${count})`;
+    } else {
+      return `Suchergebnisse (${count})`;
+    }
+  };
 
   return (
     <div className="flex flex-col flex-grow">
-      <h1 className="text-customH1 p-[5vw]">
-        {collection
-          ? collection === "bestsellers"
-            ? "Bestsellers"
-            : collection === "discounted"
-            ? "Reduzierte Artikel"
-            : collection === "favorites"
-            ? "Beliebte Artikel"
-            : ""
-          : "Ergebnisse"}
-      </h1>
+      <h1 className="text-customH1 p-[5vw]">{getHeading()}</h1>
 
       {/* FILTER AND SORT ICONS */}
       <section

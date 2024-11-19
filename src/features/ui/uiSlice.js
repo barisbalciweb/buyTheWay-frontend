@@ -5,7 +5,7 @@ const initialState = {
   isFilterOpen: false,
   isSortOpen: false,
   selectedPerson: "Damen",
-  selectedCategory: null,
+  selectedCategoryGroup: null,
 };
 
 export const uiSlice = createSlice({
@@ -34,8 +34,8 @@ export const uiSlice = createSlice({
     setSelectedPerson: (state, action) => {
       state.selectedPerson = action.payload;
     },
-    setSelectedCategory: (state, action) => {
-      state.selectedCategory = action.payload;
+    setSelectedCategoryGroup: (state, action) => {
+      state.selectedCategoryGroup = action.payload;
     },
   },
 });
@@ -45,6 +45,6 @@ export const {
   toggleFilter,
   toggleSort,
   setSelectedPerson,
-  setSelectedCategory,
+  setSelectedCategoryGroup,
 } = uiSlice.actions;
 export default uiSlice.reducer;

@@ -3,7 +3,7 @@ import axios from "axios";
 
 const initialState = {
   allProducts: [],
-  filteredProducts: [],
+  productsByCategory: [],
   selectedProduct: null,
   bestsellers: [],
   discounted: [],
@@ -12,7 +12,7 @@ const initialState = {
   recentlyViewed: [],
   statuses: {
     allProducts: "idle",
-    filteredProducts: "idle",
+    productsByCategory: "idle",
     bestsellers: "idle",
     discounted: "idle",
     favorites: "idle",
@@ -21,7 +21,7 @@ const initialState = {
   },
   errors: {
     allProducts: null,
-    fetchProducts: null,
+    productsByCategory: null,
     bestsellers: null,
     discounted: null,
     favorites: null,
@@ -30,14 +30,13 @@ const initialState = {
   },
 };
 
-// FETCH PRODUCTS DYANMICALLY
+// FETCH PRODUCTS BASED ON ENDPOINT DYNAMICALLY
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
-  async ({ endpoint, type, queryString }, { rejectWithValue }) => {
+  async ({ endpoint, type }, { rejectWithValue }) => {
     try {
-      const url = `http://localhost:3000/products/${
-        endpoint ? endpoint : queryString ? queryString : ""
-      }`;
+      const url = `http://localhost:3000/products/${endpoint}`;
+
       const { data } = await axios.get(url);
       return { data, type };
     } catch (error) {

@@ -24,7 +24,7 @@ const Home = () => {
       if (bestsellers.length === 0) {
         dispatch(
           fetchProducts({
-            endpoint: "collections/bestsellers",
+            endpoint: "collection?collection=bestsellers",
             type: "bestsellers",
           })
         );
@@ -32,7 +32,7 @@ const Home = () => {
       if (discounted.length === 0) {
         dispatch(
           fetchProducts({
-            endpoint: "collections/discounted",
+            endpoint: "collection?collection=discounted",
             type: "discounted",
           })
         );
@@ -40,7 +40,7 @@ const Home = () => {
       if (favorites.length === 0) {
         dispatch(
           fetchProducts({
-            endpoint: "collections/favorites",
+            endpoint: "collection?collection=favorites",
             type: "favorites",
           })
         );

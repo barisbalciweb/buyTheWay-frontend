@@ -8,21 +8,24 @@ import { toggleFilter } from "../../features/ui/uiSlice";
 import {
   clearFilters,
   fetchFilteredCount,
+  fetchFilteredProducts,
 } from "../../features/filter/filterSlice";
 import { addSelectedFilter } from "../../features/filter/filterSlice";
 import { changeSorting } from "../../features/sort/sortSlice";
 import PriceRangeSlider from "../PriceRangeSlider";
+import { useNavigate } from "react-router-dom";
 
 const Filter = () => {
   const [selectedFilterCategory, setSelectedFilterCategory] = useState(null);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // GLOBAL STATES
   const selectedFilters = useSelector((state) => state.filter.selectedFilters);
   const sortBy = useSelector((state) => state.sort.sortBy);
-  const filters = useSelector((state) => state.filter.filterOptions);
-  const filterStatus = useSelector(
+  const { filterOptions } = useSelector((state) => state.filter);
+  const filterOptionsStatus = useSelector(
     (state) => state.filter.statuses.filterOptions
   );
   const filteredCount = useSelector((state) => state.filter.filteredCount);
@@ -61,7 +64,8 @@ const Filter = () => {
 
   const handleFilterResults = () => {
     dispatch(toggleFilter());
-    //! HERE WILL BE FETCHED
+    // NAVIGATE TO STORE AND FETCH FROM THERE
+    navigate("/store?filtering=true");
   };
 
   const handleClearFilters = () => {
@@ -84,132 +88,134 @@ const Filter = () => {
 
       {/* FILTER OPTIONS */}
       <div className="flex flex-col">
-        {filterStatus === "succeeded"
-          ? filters.map(({ filterCategory, filterOptions, inputType }) => (
-              // FILTER CATEGORY AS ACCORDION HEADER
-              <div
-                key={filterCategory}
-                className="flex flex-col items-center border-b-customBorder border-black">
-                <button
-                  type="button"
-                  className={`w-full h-[15vw] flex flex-col py-[4vw]`}
-                  onClick={() => toggleAccordion(filterCategory)}>
-                  <div className="w-full flex justify-between">
-                    <p
-                      className={`${
-                        selectedFilterCategory === filterCategory &&
-                        "text-customOrange font-bold"
-                      }`}>
-                      {filterCategory === "sort"
-                        ? "Sortierung"
-                        : filterCategory === "price"
-                        ? "Preis"
-                        : filterCategory === "discounted"
-                        ? "Reduziert"
-                        : filterCategory === "category"
-                        ? "Kategorie"
-                        : filterCategory === "color"
-                        ? "Farbe"
-                        : filterCategory === "size"
-                        ? "Größe"
-                        : filterCategory === "brand"
-                        ? "Marke"
-                        : ""}
-                    </p>
-                    <FontAwesomeIcon
-                      icon={
-                        selectedFilterCategory === filterCategory
-                          ? faAngleUp
-                          : faAngleDown
-                      }
-                    />
-                  </div>
-
-                  {/* SELECTED FILTERS PREVIEW */}
-                  {inputType === "checkbox" ? (
-                    <div className="flex">
-                      {selectedFilters[filterCategory]?.map(
-                        (filterOption, index) => (
-                          <p
-                            key={`${filterCategory}-${filterOption}`}
-                            className="text-[3vw] text-blue-700 font-bold">
-                            {filterOption}
-                            {index ===
-                            selectedFilters[filterCategory].length - 1
-                              ? ""
-                              : ",\u00A0"}
-                          </p>
-                        )
-                      )}
+        {filterOptionsStatus === "succeeded"
+          ? filterOptions.map(
+              ({ filterCategory, filterOptions, inputType }) => (
+                // FILTER CATEGORY AS ACCORDION HEADER
+                <div
+                  key={filterCategory}
+                  className="flex flex-col items-center border-b-customBorder border-black">
+                  <button
+                    type="button"
+                    className={`w-full h-[15vw] flex flex-col py-[4vw]`}
+                    onClick={() => toggleAccordion(filterCategory)}>
+                    <div className="w-full flex justify-between">
+                      <p
+                        className={`${
+                          selectedFilterCategory === filterCategory &&
+                          "text-customOrange font-bold"
+                        }`}>
+                        {filterCategory === "sort"
+                          ? "Sortierung"
+                          : filterCategory === "price"
+                          ? "Preis"
+                          : filterCategory === "discount"
+                          ? "Reduziert"
+                          : filterCategory === "category"
+                          ? "Kategorie"
+                          : filterCategory === "color"
+                          ? "Farbe"
+                          : filterCategory === "size"
+                          ? "Größe"
+                          : filterCategory === "brand"
+                          ? "Marke"
+                          : ""}
+                      </p>
+                      <FontAwesomeIcon
+                        icon={
+                          selectedFilterCategory === filterCategory
+                            ? faAngleUp
+                            : faAngleDown
+                        }
+                      />
                     </div>
-                  ) : inputType === "range" ? (
-                    <p className="text-[3vw] text-blue-700 font-bold">
-                      {priceRange[0]}-{priceRange[1]}
-                    </p>
-                  ) : (
-                    <p className="text-[3vw] text-blue-700 font-bold">
-                      {filterCategory === "sort"
-                        ? sortBy
-                        : selectedFilters[filterCategory]}
-                    </p>
-                  )}
-                </button>
 
-                {/* FILTER OPTIONS AS ACCORDION CONTENT */}
-                {selectedFilterCategory === filterCategory && (
-                  <div
-                    className={`accordion-content w-full flex flex-col mb-[5vw] ${
-                      selectedFilterCategory === filterCategory
-                        ? "accordion-content-open"
-                        : ""
-                    }`}>
-                    <ul>
-                      {inputType === "range" ? (
-                        <PriceRangeSlider />
-                      ) : (
-                        filterOptions.map((filterOption) => (
-                          <li key={filterOption}>
-                            <label className="flex items-center gap-2 p-[2vw]">
-                              <input
-                                type={inputType}
-                                name={filterCategory}
-                                checked={
-                                  filterCategory === "sort"
-                                    ? sortBy === filterOption
-                                    : inputType === "checkbox"
-                                    ? selectedFilters[filterCategory]?.includes(
-                                        filterOption
-                                      ) || false
-                                    : selectedFilters[filterCategory] ===
-                                        filterOption || false
-                                }
-                                onChange={() =>
-                                  handleFilterUpdate(
-                                    filterCategory,
-                                    filterOption,
-                                    inputType
-                                  )
-                                }
-                                className="text-customOrange"
-                              />
-                              <span>{filterOption}</span>
-                            </label>
-                          </li>
-                        ))
-                      )}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ))
+                    {/* SELECTED FILTERS PREVIEW */}
+                    {inputType === "checkbox" ? (
+                      <div className="flex">
+                        {selectedFilters[filterCategory]?.map(
+                          (filterOption, index) => (
+                            <p
+                              key={`${filterCategory}-${filterOption}`}
+                              className="text-[3vw] text-blue-700 font-bold">
+                              {filterOption}
+                              {index ===
+                              selectedFilters[filterCategory].length - 1
+                                ? ""
+                                : ",\u00A0"}
+                            </p>
+                          )
+                        )}
+                      </div>
+                    ) : inputType === "range" ? (
+                      <p className="text-[3vw] text-blue-700 font-bold">
+                        {priceRange[0]}-{priceRange[1]}
+                      </p>
+                    ) : (
+                      <p className="text-[3vw] text-blue-700 font-bold">
+                        {filterCategory === "sort"
+                          ? sortBy
+                          : selectedFilters[filterCategory]}
+                      </p>
+                    )}
+                  </button>
+
+                  {/* FILTER OPTIONS AS ACCORDION CONTENT */}
+                  {selectedFilterCategory === filterCategory && (
+                    <div
+                      className={`accordion-content w-full flex flex-col mb-[5vw] ${
+                        selectedFilterCategory === filterCategory
+                          ? "accordion-content-open"
+                          : ""
+                      }`}>
+                      <ul>
+                        {inputType === "range" ? (
+                          <PriceRangeSlider />
+                        ) : (
+                          filterOptions.map((filterOption) => (
+                            <li key={filterOption}>
+                              <label className="flex items-center gap-2 p-[2vw]">
+                                <input
+                                  type={inputType}
+                                  name={filterCategory}
+                                  checked={
+                                    filterCategory === "sort"
+                                      ? sortBy === filterOption
+                                      : inputType === "checkbox"
+                                      ? selectedFilters[
+                                          filterCategory
+                                        ]?.includes(filterOption) || false
+                                      : selectedFilters[filterCategory] ===
+                                          filterOption || false
+                                  }
+                                  onChange={() =>
+                                    handleFilterUpdate(
+                                      filterCategory,
+                                      filterOption,
+                                      inputType
+                                    )
+                                  }
+                                  className="text-customOrange"
+                                />
+                                <span>{filterOption}</span>
+                              </label>
+                            </li>
+                          ))
+                        )}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )
+            )
           : "Loading..."}
       </div>
 
       <button
-        disabled={filteredCountStatus !== "succeeded"}
         onClick={handleFilterResults}
         className="mt-4 bg-blue-500 text-white p-2 rounded disabled:bg-slate-500">
-        Ergebnisse zeigen {`(${filteredCount})`}
+        Ergebnisse zeigen{" "}
+        {`(${filterOptionsStatus === "succeeded" && filteredCount})`}
       </button>
 
       <button onClick={handleClearFilters}>alle Filter löschen</button>

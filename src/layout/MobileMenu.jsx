@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import SubCategories from "../components/MobileMenu/SubCategories";
 import Categories from "../components/MobileMenu/Categories";
+import CategoryGroups from "../components/MobileMenu/CategoryGroups";
 import { persons, collections } from "../data/data";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import {
   setSelectedPerson,
   toggleMobileMenu,
-  setSelectedCategory,
+  setSelectedCategoryGroup,
 } from "../features/ui/uiSlice";
 
 const MobileMenu = () => {
   const [isAnimating, setIsAnimating] = useState(false);
 
   const dispatch = useDispatch();
-  const { selectedCategory } = useSelector((state) => state.ui);
+  const { selectedCategoryGroup } = useSelector((state) => state.ui);
   const { selectedPerson } = useSelector((state) => state.ui);
   const isMobileMenuOpen = useSelector((state) => state.ui.isMobileMenuOpen);
 
@@ -26,7 +26,7 @@ const MobileMenu = () => {
   const handlePersonSelect = (person) => {
     setIsAnimating(false);
     dispatch(setSelectedPerson(person));
-    dispatch(setSelectedCategory(null));
+    dispatch(setSelectedCategoryGroup(null));
 
     setTimeout(() => {
       setIsAnimating(true);
@@ -60,12 +60,12 @@ const MobileMenu = () => {
           ))}
         </div>
 
-        {/* CATEGORIES */}
+        {/* CATEGORY GROUPS */}
         <div className="flex-grow">
-          {selectedCategory ? (
-            <SubCategories />
+          {selectedCategoryGroup ? (
+            <Categories />
           ) : (
-            <Categories isAnimating={isAnimating} />
+            <CategoryGroups isAnimating={isAnimating} />
           )}
         </div>
 
@@ -76,7 +76,7 @@ const MobileMenu = () => {
               key={index}
               className="w-full text-[4vw] flex justify-between py-[4vw] px-[5vw] border-b-customBorder">
               <Link
-                to={`store/collections${collection.path}`}
+                to={`store?collection=${collection.path.slice(1)}`}
                 onClick={() => dispatch(toggleMobileMenu())}>
                 {collection.name}
               </Link>

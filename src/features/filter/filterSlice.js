@@ -8,19 +8,22 @@ const initialState = {
     color: [],
     size: [],
     brand: [],
-    //! THIS SHOULD BE BOOLEAN, IN BE AS WELL (getFilteredCount)
+    //! THIS SHOULD BE categoryBOOLEAN, IN BE AS WELL (getFilteredCount)
     discount: "",
   },
   filterOptions: [],
   filteredCount: 0,
+  filteredProducts: [],
   priceRange: [0, 1000],
   statuses: {
     filterOptions: "idle",
     filteredCount: "idle",
+    filteredProducts: "idle",
   },
   errors: {
     filterOptions: null,
     filteredCount: null,
+    filteredProducts: null,
   },
 };
 
@@ -38,7 +41,6 @@ export const fetchFilters = createAsyncThunk(
   }
 );
 
-//! TO ADD --> fetch results on every change in filter state and show the count of results in Button in FE
 // FETCH PRODUCT COUNT BASED ON SELECTED FILTERS
 export const fetchFilteredCount = createAsyncThunk(
   "products/fetchFilteredCount",
@@ -53,7 +55,19 @@ export const fetchFilteredCount = createAsyncThunk(
   }
 );
 
-//! TO ADD --> fetch results on click of submit button and get detailed results from BE
+// FETCH PRODUCTS BASED ON SELECTED FILTERS
+export const fetchFilteredProducts = createAsyncThunk(
+  "products/fetchFilteredProducts",
+  async (filters, { rejectWithValue }) => {
+    try {
+      const url = `http://localhost:3000/products/filteredProducts`;
+      const { data } = await axios.post(url, filters);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 export const filterSlice = createSlice({
   name: "filter",
@@ -132,6 +146,19 @@ export const filterSlice = createSlice({
       })
       .addCase(fetchFilteredCount.rejected, (state) => {
         state.statuses.filteredCount = "failed";
+      });
+
+    // FETCH FILTERED PRODUCTS
+    builder
+      .addCase(fetchFilteredProducts.pending, (state) => {
+        state.statuses.filteredProducts = "loading";
+      })
+      .addCase(fetchFilteredProducts.fulfilled, (state, action) => {
+        state.filteredProducts = action.payload;
+        state.statuses.filteredProducts = "succeeded";
+      })
+      .addCase(fetchFilteredProducts.rejected, (state) => {
+        state.statuses.filteredProducts = "failed";
       });
   },
 });

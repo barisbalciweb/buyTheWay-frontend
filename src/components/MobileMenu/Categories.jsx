@@ -1,44 +1,61 @@
-import { useEffect, useState } from "react";
-import { categories } from "../../data/fakeData";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { categoryGroups } from "../../data/fakeData";
+import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedCategory } from "../../features/ui/uiSlice";
+import {
+  setSelectedCategoryGroup,
+  toggleMobileMenu,
+} from "../../features/ui/uiSlice";
 
-const Categories = ({ isAnimating }) => {
-  const [filteredCategories, setFilteredCategories] = useState([]);
-
+const SubCategories = () => {
   const dispatch = useDispatch();
-  const { selectedPerson } = useSelector((state) => state.ui);
+  const { selectedPerson, selectedCategoryGroup } = useSelector(
+    (state) => state.ui
+  );
 
-  useEffect(() => {
-    // FILTER CATEGORIES BY SELECTED PERSON
-    const filtered = categories.filter((category) =>
-      category.subCategories.some((subCategory) =>
-        subCategory.targetGroup.includes(selectedPerson)
-      )
+  // FILTER CATEGORIES BY SELECTED PERSON AND CATEGORY GROUP
+  const filteredCategories = categoryGroups
+    .find((categoryGroup) => categoryGroup.name === selectedCategoryGroup)
+    ?.categories.filter((category) =>
+      category.targetGroup.includes(selectedPerson)
     );
-    setFilteredCategories(filtered);
-  }, [selectedPerson]);
 
   return (
-    /* CATEGORY SELECTION */
-    <div id="category-field" className="w-full">
+    <div
+      id="sub-category-field"
+      className="w-full flex flex-col gap-[2vw] mt-[5vw]">
+      {/* NAVIGATION */}
+      <button
+        className="w-full flex items-center gap-[2vw] pl-[2vw] text-[4vw] text-customOrange"
+        onClick={() => dispatch(setSelectedCategoryGroup(null))}>
+        <FontAwesomeIcon
+          icon={faCircleArrowLeft}
+          className="font-bold pb-[0.5vw]"
+        />
+        <p>
+          {selectedPerson}
+          {" > "}
+          {selectedCategoryGroup}
+        </p>
+      </button>
+
+      {/* CATEGORY SELECTION */}
       <ul
-        className={`flex flex-col gap-[3vw] pt-[5vw] transform transition-transform duration-300 ease-out ${
-          isAnimating ? "translate-x-[0vw]" : "-translate-x-full"
-        }`}>
-        {filteredCategories.length > 0 &&
-          filteredCategories.map((category, index) => (
-            <li className="list-none" key={index}>
-              <button
-                className="w-full text-[4vw] flex justify-between py-[3vw] px-[5vw]"
-                onClick={() => dispatch(setSelectedCategory(category.name))}>
-                {category.name}
-              </button>
-            </li>
-          ))}
+        className={`flex flex-col gap-[3vw] transform transition-transform duration-300 ease-out`}>
+        {filteredCategories.map((category, index) => (
+          <li className="list-none" key={index}>
+            <Link
+              to={`store?targetGroup=${selectedPerson.toLowerCase()}&category=${category.name.toLowerCase()}`}
+              className="w-[80vw] text-[4vw] flex justify-between py-[2vw] px-[2vw]"
+              onClick={() => dispatch(toggleMobileMenu())}>
+              {category.name}
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
   );
 };
 
-export default Categories;
+export default SubCategories;

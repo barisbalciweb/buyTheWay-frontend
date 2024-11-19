@@ -21,11 +21,11 @@ export const fakeTopCategories = [
   "Hemden",
 ];
 
-export const categories = [
+export const categoryGroups = [
   {
     name: "Bekleidung",
     path: "/bekleidung",
-    subCategories: [
+    categories: [
       {
         name: "T-Shirts",
         path: "/t-shirts",
@@ -51,7 +51,7 @@ export const categories = [
   {
     name: "Oberteile",
     path: "/oberteile",
-    subCategories: [
+    categories: [
       {
         name: "Pullovers",
         path: "/pullovers",
@@ -67,7 +67,7 @@ export const categories = [
   {
     name: "Hosen & Jeans",
     path: "/hosen-jeans",
-    subCategories: [
+    categories: [
       {
         name: "Hosen",
         path: "/hosen",
@@ -93,7 +93,7 @@ export const categories = [
   {
     name: "Accessoires",
     path: "/accessoires",
-    subCategories: [
+    categories: [
       {
         name: "Handschuhen",
         path: "/handschuhen",
@@ -121,7 +121,7 @@ export const categories = [
   {
     name: "Sportbekleidung",
     path: "/sportbekleidung",
-    subCategories: [
+    categories: [
       {
         name: "Unterwaesche",
         path: "/unterwaesche",
