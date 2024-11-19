@@ -1,6 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
+  };
   return (
     <div className="w-full flex justify-center">
       <section className="w-[80%] flex flex-col items-center">
@@ -28,14 +32,17 @@ const Login = () => {
             <p className="w-full text-end underline">Passwort vergessen</p>
           </div>
           <div className="flex flex-col">
-            <button type="submit" className="bg-black text-white p-[4vw]">
+            <button
+              type="submit"
+              className="bg-black text-white p-[4vw]"
+              onClick={handleLogin}>
               anmelden
             </button>
             <p className="w-full text-center mt-[10vw]">Hast du kein Konto?</p>
             <button
               type="button"
               className="border-customBorder border-black p-[4vw]">
-              registrieren
+              <Link to={"/register"}>Registrieren</Link>
             </button>
           </div>
         </form>
