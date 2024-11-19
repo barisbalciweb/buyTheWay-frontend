@@ -140,23 +140,29 @@ const Store = () => {
         </div>
       </section>
 
+      {/* FILTER DROPDOWN */}
+      {isFilterOpen && <Filter />}
+
+      {/* SORT DROPDOWN */}
+      {isSortOpen && <Sort />}
+
       {/* FILTER PREVIEW */}
       <FilterPreview />
 
       {/* PRODUCTS */}
-      <section className="grid grid-cols-2 p-[5vw] gap-[4vw]">
-        {fetchStatus === "succeeded"
-          ? renderedProducts.map((product) => (
-              <SingleProduct key={product.id} product={product} />
-            ))
-          : "Loading..."}
-
-        {/* FILTER DROPDOWN */}
-        {isFilterOpen && <Filter />}
-
-        {/* SORT DROPDOWN */}
-        {isSortOpen && <Sort />}
-      </section>
+      {count === 0 ? (
+        <section className="flex justify-center items-center">
+          <p className="mt-[10vw]">Keine Produkte gefunden</p>
+        </section>
+      ) : (
+        <section className="grid grid-cols-2 p-[5vw] gap-[4vw]">
+          {fetchStatus === "succeeded"
+            ? renderedProducts.map((product) => (
+                <SingleProduct key={product.id} product={product} />
+              ))
+            : "Loading..."}
+        </section>
+      )}
     </div>
   );
 };
