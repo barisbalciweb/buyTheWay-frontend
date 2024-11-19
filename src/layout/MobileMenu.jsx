@@ -10,6 +10,8 @@ import {
   toggleMobileMenu,
   setSelectedCategoryGroup,
 } from "../features/ui/uiSlice";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const MobileMenu = () => {
   const [isAnimating, setIsAnimating] = useState(false);
@@ -38,8 +40,12 @@ const MobileMenu = () => {
       {/* MODAL BACKGROUND */}
       <div
         className="w-full h-full bg-[rgba(0,0,0,0.6)] fixed top-0 left-0 z-40"
-        onClick={() => dispatch(toggleMobileMenu())}
-      />
+        onClick={() => dispatch(toggleMobileMenu())}>
+        <FontAwesomeIcon
+          icon={faXmark}
+          className="absolute text-white text-[8vw] right-[6vw] top-[20vw]"
+        />
+      </div>
 
       {/* MOBILE MENU FIELD */}
       <div
