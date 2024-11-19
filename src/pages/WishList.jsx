@@ -1,6 +1,9 @@
 import SingleProduct from "../components/SingleProduct";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleCheck,
+  faShoppingBag,
+} from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
@@ -49,8 +52,9 @@ const Wishlist = () => {
         Wunschliste {wishlist.length > 0 && `(${wishlist.length})`}
       </h1>
 
-      <div className="flex flex-col flex-grow justify-center item">
+      <div className="flex flex-col flex-grow justify-center">
         {wishlist.length === 0 ? (
+          // EMPTY WISHLIST
           <section className="w-full h-[30vw] flex flex-col justify-center items-center gap-[5vw] text-[4vw]">
             <p>Deine Wunschliste ist leer</p>
             <button className="w-[50%] bg-black text-white p-[4vw] text-[4vw]">
@@ -60,20 +64,39 @@ const Wishlist = () => {
             </button>
           </section>
         ) : (
+          // WISHLIST ITEMS
           <div className="grid grid-cols-2 gap-[2vw] p-[4vw]">
             {wishlist.map((item) => (
-              <div className="flex flex-col gap-[2vw]" key={item.id}>
-                <SingleProduct product={item} />
-                <button
-                  className={`w-full flex justify-center items-center p-[3vw] ${
-                    success ? "bg-[#52D441]" : "bg-black"
+              <div className="relative" key={item.id}>
+                {/* SUCCESS FEEDBACK */}
+                {success && (
+                  <div className="w-full h-full flex flex-col justify-center gap-[2vw] items-center absolute top-0 left-0 z-20 text-black">
+                    <FontAwesomeIcon
+                      icon={faCircleCheck}
+                      className="text-[#52D441] text-[7vw]"
+                    />
+                    <p className="text-center text-[4vw] font-bold">
+                      In den Warenkorb hinzugefügt!
+                    </p>
+                  </div>
+                )}
+                <div
+                  className={`flex flex-col gap-[2vw] relative ${
+                    success && "opacity-20"
                   }`}
-                  onClick={() => handleSizeSelection(item)}>
-                  <FontAwesomeIcon
-                    className="text-white text-[5vw]"
-                    icon={faShoppingBag}
-                  />
-                </button>
+                  key={item.id}>
+                  <SingleProduct product={item} />
+                  <button
+                    className={`w-full flex justify-center items-center p-[3vw] ${
+                      success ? "bg-[#52D441]" : "bg-black"
+                    }`}
+                    onClick={() => handleSizeSelection(item)}>
+                    <FontAwesomeIcon
+                      className="text-white text-[5vw]"
+                      icon={faShoppingBag}
+                    />
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -86,7 +109,7 @@ const Wishlist = () => {
               className="w-full h-full bg-[rgba(0,0,0,0.5)] fixed bottom-0 left-0"
               onClick={() => setIsSizeSelectionOpen(false)}
             />
-            <div className="w-full h-[30%] flex flex-col justify-center items-center gap-[3vw] bg-customGray fixed bottom-0 left-0 z-10">
+            <div className="w-full h-[30%] flex flex-col justify-center items-center gap-[3vw] bg-white fixed bottom-0 left-0 z-10">
               <div className="w-[80%] flex flex-col items-center justify-center gap-[3vw]">
                 <p className="w-full">Größe auswählen:</p>
                 <div className="w-full grid grid-cols-5 gap-[2vw]">
