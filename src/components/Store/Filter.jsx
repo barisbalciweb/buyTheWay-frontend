@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faCircleArrowLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 //REDUX
 import { useDispatch, useSelector } from "react-redux";
@@ -77,7 +80,7 @@ const Filter = () => {
     <section className="w-full h-full max-h-[100svh] overflow-y-auto flex flex-col gap-[5vw] bg-white fixed top-0 left-0 z-20 p-[5vw]">
       {/* NAVIGATION */}
       <button
-        className="flex items-center gap-[2vw] text-[5vw]"
+        className="flex items-center gap-[2vw] text-[5vw] mt-[20vw]"
         onClick={() => dispatch(toggleFilter())}>
         <FontAwesomeIcon
           icon={faCircleArrowLeft}
@@ -213,8 +216,8 @@ const Filter = () => {
 
       <button
         onClick={handleFilterResults}
-        className="mt-4 bg-blue-500 text-white p-2 rounded disabled:bg-slate-500">
-        Ergebnisse zeigen{" "}
+        className="mt-4 bg-black text-white p-[4vw] disabled:bg-slate-500">
+        Ergebnisse anzeigen{" "}
         {`(${filterOptionsStatus === "succeeded" && filteredCount})`}
       </button>
 

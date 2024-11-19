@@ -27,7 +27,7 @@ const Sort = () => {
     <section className="w-full h-full max-h-[100svh] overflow-y-auto flex flex-col gap-[5vw] bg-white fixed top-0 left-0 z-20 p-[5vw]">
       {/* NAVIGATION */}
       <button
-        className="flex items-center gap-[2vw] text-[5vw]"
+        className="flex items-center gap-[2vw] text-[5vw] mt-[20vw]"
         onClick={() => dispatch(toggleSort())}>
         <FontAwesomeIcon
           icon={faCircleArrowLeft}
