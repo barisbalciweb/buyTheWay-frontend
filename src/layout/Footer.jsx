@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { accordion } from "../data/data";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import ScrollToTop from "../components/ScrollTop";
 
 const icons = [
   { importName: faTiktok },
@@ -35,6 +36,7 @@ const Footer = () => {
 
   return (
     <footer className="mt-[12vw]">
+      <ScrollToTop />
       {/* FOOTER TOP */}
       <section id="footer-top" className="flex flex-col items-center">
         {accordion.map((el, index) => (
