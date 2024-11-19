@@ -7,8 +7,9 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 import { accordion } from "../data/data";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const icons = [
   { importName: faTiktok },
@@ -20,6 +21,13 @@ const icons = [
 
 const Footer = () => {
   const [openIndex, setOpenIndex] = useState(null);
+
+  const location = useLocation();
+
+  // CLOSE ACCORDION ON ROUTE CHANGE
+  useEffect(() => {
+    setOpenIndex(null);
+  }, [location]);
 
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);

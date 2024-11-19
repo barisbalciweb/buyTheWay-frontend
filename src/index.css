@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 #root {
-  @apply w-screen h-screen flex justify-center items-center font-comfortaa bg-white pt-[17vw] overflow-x-hidden;
+  @apply w-screen h-screen flex justify-center items-center font-comfortaa bg-white pt-[17vw];
 }
 
 /* CUSTOM STYLE GROUPS */
