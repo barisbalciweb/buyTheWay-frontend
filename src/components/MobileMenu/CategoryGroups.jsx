@@ -23,14 +23,14 @@ const Categories = ({ isAnimating }) => {
     /* CATEGORY GROUP SELECTION */
     <div className="w-full">
       <ul
-        className={`flex flex-col gap-[3vw] pt-[5vw] transform transition-transform duration-300 ease-out ${
+        className={`flex flex-col gap-[3vw] p-[5vw] transform transition-transform duration-300 ease-out ${
           isAnimating ? "translate-x-[0vw]" : "-translate-x-full"
         }`}>
         {filteredCategoryGroups.length > 0 &&
           filteredCategoryGroups.map((category, index) => (
             <li className="list-none" key={index}>
               <button
-                className="w-full text-[4vw] flex justify-between py-[3vw] px-[5vw]"
+                className="w-full text-[4vw] flex justify-between py-[3vw]"
                 onClick={() =>
                   dispatch(setSelectedCategoryGroup(category.name))
                 }>

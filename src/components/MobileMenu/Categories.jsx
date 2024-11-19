@@ -8,7 +8,7 @@ import {
   toggleMobileMenu,
 } from "../../features/ui/uiSlice";
 
-const SubCategories = () => {
+const Categories = () => {
   const dispatch = useDispatch();
   const { selectedPerson, selectedCategoryGroup } = useSelector(
     (state) => state.ui
@@ -22,12 +22,10 @@ const SubCategories = () => {
     );
 
   return (
-    <div
-      id="sub-category-field"
-      className="w-full flex flex-col gap-[2vw] mt-[5vw]">
+    <div className="w-full flex flex-col gap-[5vw] p-[5vw]">
       {/* NAVIGATION */}
       <button
-        className="w-full flex items-center gap-[2vw] pl-[2vw] text-[4vw] text-customOrange"
+        className="w-full flex items-center gap-[2vw] text-[4vw] text-customOrange"
         onClick={() => dispatch(setSelectedCategoryGroup(null))}>
         <FontAwesomeIcon
           icon={faCircleArrowLeft}
@@ -47,7 +45,7 @@ const SubCategories = () => {
           <li className="list-none" key={index}>
             <Link
               to={`store?targetGroup=${selectedPerson.toLowerCase()}&category=${category.name.toLowerCase()}`}
-              className="w-[80vw] text-[4vw] flex justify-between py-[2vw] px-[2vw]"
+              className="text-[4vw] flex justify-between py-[2vw]"
               onClick={() => dispatch(toggleMobileMenu())}>
               {category.name}
             </Link>
@@ -58,4 +56,4 @@ const SubCategories = () => {
   );
 };
 
-export default SubCategories;
+export default Categories;
