@@ -30,16 +30,11 @@ const Store = () => {
   const isFilterOpen = useSelector((state) => state.ui.isFilterOpen);
   const isSortOpen = useSelector((state) => state.ui.isSortOpen);
   const sortBy = useSelector((state) => state.sort.sortBy);
-  const productsStates = useSelector((state) => state.products);
   const { statuses } = useSelector((state) => state.products);
-  const filterOptions = useSelector((state) => state.filter.filterOptions);
   const filterOptionsStatus = useSelector(
     (state) => state.filter.statuses.filterOptions
   );
-  const { filteredProducts } = useSelector((state) => state.filter);
-  const { filteredProductsStatus } = useSelector(
-    (state) => state.filter.statuses
-  );
+
   const { selectedFilters } = useSelector((state) => state.filter);
 
   // SELECT RENDERED PRODUCTS ACCORDING TO URL PARAMS
@@ -151,8 +146,7 @@ const Store = () => {
       {/* PRODUCTS */}
       <section className="grid grid-cols-2 p-[5vw] gap-[4vw]">
         {fetchStatus === "succeeded"
-          ? //! ONLY FOR TESTING
-            renderedProducts.map((product) => (
+          ? renderedProducts.map((product) => (
               <SingleProduct key={product.id} product={product} />
             ))
           : "Loading..."}

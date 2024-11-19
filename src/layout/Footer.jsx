@@ -33,9 +33,10 @@ const Footer = () => {
           <div key={index} className="w-full">
             <button
               className={`w-full flex justify-between border-b-customBorder py-[4vw] px-[2vw] ${
-                openIndex === index ? "bg-[#f1f1f1]" : ""
+                openIndex === index ? "text-customOrange font-bold" : ""
               }`}
               onClick={() => toggleAccordion(index)}>
+              {/* ACCORDION HEADER */}
               <p className="text-[4vw]">{el.title}</p>
               <FontAwesomeIcon
                 className="text-[4vw]"
@@ -44,10 +45,8 @@ const Footer = () => {
             </button>
 
             {openIndex === index && (
-              <div
-                className={`accordion-content ${
-                  openIndex === index ? "accordion-content-open" : ""
-                }`}>
+              <div className={"max-h-[200px] overflow-y-auto bg-orange-50"}>
+                {/* ACCORDION CONTENT */}
                 <p className="text-[4vw] p-[4vw]">{el.content}</p>
               </div>
             )}

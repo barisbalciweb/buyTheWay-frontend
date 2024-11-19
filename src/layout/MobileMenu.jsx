@@ -80,7 +80,7 @@ const MobileMenu = () => {
           {collections.map((collection, index) => (
             <li
               key={index}
-              className="w-full text-[4vw] flex justify-between py-[4vw] px-[5vw] border-b-customBorder">
+              className="w-full text-[4vw] flex justify-between py-[4vw] px-[5vw]">
               <Link
                 to={`store?collection=${collection.path.slice(1)}`}
                 onClick={() => dispatch(toggleMobileMenu())}>

@@ -19,18 +19,9 @@
 .swiper {
   @apply w-[90%];
 }
-
 .swiper-button-prev::after,
 .swiper-button-next::after {
   @apply text-customOrange text-[8vw];
-}
-
-/* ACCORDION */
-.accordion-content {
-  @apply max-h-0 overflow-hidden transition duration-500 ease-in;
-}
-.accordion-content-open {
-  @apply max-h-[200px] overflow-y-auto;
 }
 
 /* MOBILE MENU SCROLLBAR */
