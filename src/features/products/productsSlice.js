@@ -4,7 +4,7 @@ import axios from "axios";
 const initialState = {
   allProducts: [],
   productsByCategory: [],
-  selectedProduct: null,
+  singleProduct: [null],
   bestsellers: [],
   discounted: [],
   favorites: [],
@@ -13,6 +13,7 @@ const initialState = {
   statuses: {
     allProducts: "idle",
     productsByCategory: "idle",
+    singleProduct: "idle",
     bestsellers: "idle",
     discounted: "idle",
     favorites: "idle",
@@ -22,6 +23,7 @@ const initialState = {
   errors: {
     allProducts: null,
     productsByCategory: null,
+    singleProduct: null,
     bestsellers: null,
     discounted: null,
     favorites: null,
@@ -45,14 +47,26 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
+export const fetchSingleProduct = createAsyncThunk(
+  "products/fetchSingleProduct",
+  async (id, { rejectWithValue }) => {
+    try {
+      const url = `http://localhost:3000/products/singleProduct/${id}`;
+
+      const { data } = await axios.get(url);
+
+      return data[0];
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const productsSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {
-    setSelectedProduct: (state, action) => {
-      state.selectedProduct = action.payload;
-    },
-  },
+  reducers: {},
+  // FETCH PRODUCTS
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state, action) => {
@@ -70,8 +84,21 @@ export const productsSlice = createSlice({
         state.statuses[type] = "failed";
         state.errors[type] = action.error.message;
       });
+
+    // FETCH SINGLE PRODUCT
+    builder
+      .addCase(fetchSingleProduct.pending, (state, action) => {
+        state.statuses.singleProduct = "loading";
+      })
+      .addCase(fetchSingleProduct.fulfilled, (state, action) => {
+        state.statuses.singleProduct = "succeded";
+        state.singleProduct = action.payload;
+      })
+      .addCase(fetchSingleProduct.rejected, (state, action) => {
+        state.statuses.singleProduct = "failed";
+      });
   },
 });
 
-export const { setProducts, setSelectedProduct } = productsSlice.actions;
+export const { setProducts } = productsSlice.actions;
 export default productsSlice.reducer;
