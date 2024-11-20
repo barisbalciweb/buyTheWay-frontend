@@ -166,11 +166,7 @@ const Filter = () => {
                   {/* FILTER OPTIONS AS ACCORDION CONTENT */}
                   {selectedFilterCategory === filterCategory && (
                     <div
-                      className={`accordion-content w-full flex flex-col mb-[5vw] ${
-                        selectedFilterCategory === filterCategory
-                          ? "accordion-content-open"
-                          : ""
-                      }`}>
+                      className={`w-full max-h-[60vw] flex flex-col mb-[5vw] overflow-y-auto`}>
                       <ul>
                         {inputType === "range" ? (
                           <PriceRangeSlider />

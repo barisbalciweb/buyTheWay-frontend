@@ -17,7 +17,7 @@
 
 /* SWIPER  */
 .swiper {
-  @apply w-[90%];
+  @apply w-[90%] h-[65vw];
 }
 .swiper-button-prev::after,
 .swiper-button-next::after {
