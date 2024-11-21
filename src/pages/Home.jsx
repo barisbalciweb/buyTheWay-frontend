@@ -5,10 +5,10 @@ import thirdHeroImg from "../assets/images/shopping.jpg";
 import { fakeTopCategories } from "../data/fakeData";
 import { selections } from "../data/data";
 import ProductSlider from "../components/ProductSlider";
+import { Link } from "react-router-dom";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../features/products/productsSlice";
-import { Link } from "react-router-dom";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -62,7 +62,11 @@ const Home = () => {
             <button
               key={selection}
               className="w-full h-[11vw] bg-[rgba(255,255,255,0.2)] border-customBorder border-white text-[4vw]">
-              <Link to={`store?targetGroup=${selection}`}>{selection}</Link>
+              <Link
+                to={`store?targetGroup=${selection}`}
+                className="w-full h-full flex justify-center items-center">
+                {selection}
+              </Link>
             </button>
           ))}
         </div>
@@ -77,7 +81,11 @@ const Home = () => {
               <button
                 key={category}
                 className="w-[25vw] h-[10vw] text-[4vw] border-customBorder border-black">
-                <Link to={`store?category=${category}`}>{category}</Link>
+                <Link
+                  to={`store?category=${category}`}
+                  className="w-full h-full flex justify-center items-center">
+                  {category}
+                </Link>
               </button>
             ))}
           </div>
