@@ -46,11 +46,15 @@ const Store = () => {
       category,
     })
   );
+
   const count = renderedProducts.length;
 
   // SPECIFY FETCH STATUS DYANMICALLY
   const fetchStatus =
-    statuses[collection] || statuses.productsByCategory || "idle";
+    statuses[collection] ||
+    statuses.productsByCategory ||
+    statuses.productsByTargetGroup ||
+    "idle";
 
   // FETCH PRODUCTS DYANMICALLY ACCORDING TO URL PARAMS
   useEffect(() => {
@@ -59,22 +63,25 @@ const Store = () => {
     // BY COLLECTION
     if (collection) {
       endpoint = `collection?collection=${collection}`;
-      // BY CATEGORY
-    } else if (targetGroup && category) {
+      dispatch(fetchProducts({ endpoint, type: collection }));
+      // BY TARGET GROUP OR CATEGORY
+    } else if (targetGroup || category) {
       const queryParams = new URLSearchParams({
         targetGroup,
         category,
       }).toString();
-      endpoint = `category?${queryParams}`;
+      endpoint = `${!category ? "targetGroup" : "category"}?${queryParams}`;
+      dispatch(
+        fetchProducts({
+          endpoint,
+          type: !category ? "productsByTargetGroup" : "productsByCategory",
+        })
+      );
     } else if (filtering) {
       endpoint = `filteredProducts`;
       dispatch(fetchFilteredProducts(selectedFilters));
       return;
     }
-
-    dispatch(
-      fetchProducts({ endpoint, type: collection || "productsByCategory" })
-    );
   }, [targetGroup, category, collection, selectedFilters]);
 
   // EXCEPTIONALLY FETCH FILTER OPTIONS HERE IN ORDER TO GET SORT OPTIONS FOR SORTING DROPDOWN
@@ -156,7 +163,7 @@ const Store = () => {
         </section>
       ) : (
         <section className="grid grid-cols-2 p-[5vw] gap-[4vw]">
-          {fetchStatus === "succeeded"
+          {fetchStatus === "succeeded" || renderedProducts
             ? renderedProducts.map((product) => (
                 <SingleProduct key={product.id} product={product} />
               ))

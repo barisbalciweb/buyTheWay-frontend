@@ -11,14 +11,19 @@ export const selectRenderedProducts = createSelector(
       return productsState[collection] || [];
     }
 
+    if (targetGroup && !category) {
+      // SELECT PRODUCTS BY TARGET GROUP
+      return productsState.productsByTargetGroup || [];
+    }
+
+    if ((targetGroup && category) || category) {
+      // SELECT PRODUCTS BY CATEGORY
+      return productsState.productsByCategory || [];
+    }
+
     // SELECT FILTERED PRODUCTS
     if (filtering) {
       return filterState.filteredProducts || [];
-    }
-
-    if (targetGroup && category) {
-      // SELECT PRODUCTS BY CATEGORY
-      return productsState.productsByCategory || [];
     }
 
     return null;

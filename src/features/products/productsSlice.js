@@ -4,6 +4,7 @@ import axios from "axios";
 const initialState = {
   allProducts: [],
   productsByCategory: [],
+  productsByTargetGroup: [],
   singleProduct: [null],
   bestsellers: [],
   discounted: [],
@@ -13,6 +14,7 @@ const initialState = {
   statuses: {
     allProducts: "idle",
     productsByCategory: "idle",
+    productsByTargetGroup: "idle",
     singleProduct: "idle",
     bestsellers: "idle",
     discounted: "idle",
@@ -23,6 +25,7 @@ const initialState = {
   errors: {
     allProducts: null,
     productsByCategory: null,
+    productsByTargetGroup: null,
     singleProduct: null,
     bestsellers: null,
     discounted: null,
@@ -76,6 +79,7 @@ export const productsSlice = createSlice({
       .addCase(fetchProducts.fulfilled, (state, action) => {
         const { type, data } = action.payload;
         state[type] = data;
+
         state.statuses[type] = "succeeded";
         state.errors[type] = null;
       })

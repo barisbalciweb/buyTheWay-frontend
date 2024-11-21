@@ -8,6 +8,7 @@ import ProductSlider from "../components/ProductSlider";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../features/products/productsSlice";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -61,7 +62,7 @@ const Home = () => {
             <button
               key={selection}
               className="w-full h-[11vw] bg-[rgba(255,255,255,0.2)] border-customBorder border-white text-[4vw]">
-              {selection}
+              <Link to={`store?targetGroup=${selection}`}>{selection}</Link>
             </button>
           ))}
         </div>
