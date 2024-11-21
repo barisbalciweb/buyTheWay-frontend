@@ -77,7 +77,7 @@ const Home = () => {
               <button
                 key={category}
                 className="w-[25vw] h-[10vw] text-[4vw] border-customBorder border-black">
-                {category}
+                <Link to={`store?category=${category}`}>{category}</Link>
               </button>
             ))}
           </div>

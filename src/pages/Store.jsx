@@ -67,8 +67,8 @@ const Store = () => {
       // BY TARGET GROUP OR CATEGORY
     } else if (targetGroup || category) {
       const queryParams = new URLSearchParams({
-        targetGroup,
-        category,
+        targetGroup: targetGroup || "",
+        category: category || "",
       }).toString();
       endpoint = `${!category ? "targetGroup" : "category"}?${queryParams}`;
       dispatch(
