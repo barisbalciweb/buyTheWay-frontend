@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import SingleProduct from "../components/SingleProduct";
 import Filter from "../components/Store/Filter";
 import Sort from "../components/Store/Sort";
-
+import FilterPreview from "../components/FilterPreview";
 import { useSearchParams } from "react-router-dom";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +15,6 @@ import {
   fetchFilteredProducts,
   fetchFilters,
 } from "../features/filter/filterSlice";
-import FilterPreview from "../components/test";
 
 const Store = () => {
   // FIND OUT WHICH PRODUCTS TO FETCH VIA URL PARAMS
