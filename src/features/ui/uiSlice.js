@@ -6,6 +6,8 @@ const initialState = {
   isSortOpen: false,
   selectedPerson: "Damen",
   selectedCategoryGroup: null,
+  warningScreen: false,
+  innerWidth: window.innerWidth,
 };
 
 export const uiSlice = createSlice({
@@ -37,6 +39,12 @@ export const uiSlice = createSlice({
     setSelectedCategoryGroup: (state, action) => {
       state.selectedCategoryGroup = action.payload;
     },
+    setWarningScreen: (state, action) => {
+      state.warningScreen = action.payload;
+    },
+    setInnerWidth: (state, action) => {
+      state.innerWidth = action.payload;
+    },
   },
 });
 
@@ -46,5 +54,7 @@ export const {
   toggleSort,
   setSelectedPerson,
   setSelectedCategoryGroup,
+  setWarningScreen,
+  setInnerWidth,
 } = uiSlice.actions;
 export default uiSlice.reducer;

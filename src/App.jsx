@@ -2,10 +2,17 @@ import { Route, Routes } from "react-router-dom";
 import routes from "./routers/routes";
 import Layout from "./layout/Layout";
 import ScrollToTop from "./components/ScrollTop";
+import { useSelector } from "react-redux";
 
 const App = () => {
+  const { warningScreen } = useSelector((state) => state.ui);
+
   return (
-    <div id="container" className="w-full h-full flex flex-col">
+    <div
+      id="container"
+      className={`w-full h-full flex flex-col ${
+        warningScreen ? "overflow-hidden" : ""
+      }`}>
       <Layout>
         <ScrollToTop />
         <Routes>
