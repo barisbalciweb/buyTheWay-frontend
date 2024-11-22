@@ -6,7 +6,7 @@ import Login from "../pages/Login";
 import ProductDetail from "../pages/ProductDetail";
 import Register from "../pages/Register";
 import Store from "../pages/Store";
-import Wishlist from "../pages/Test";
+import Wishlist from "../pages/Wishlist";
 
 const routes = [
   { path: "/", element: <Home /> },
