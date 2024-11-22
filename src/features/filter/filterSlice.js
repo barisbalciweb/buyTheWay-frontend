@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { apiUrlSwitch } from "../../utils/apiUrlSwitch";
+
+const api_url = apiUrlSwitch();
 
 const initialState = {
   selectedFilters: {
@@ -32,7 +35,7 @@ export const fetchFilters = createAsyncThunk(
   "products/fetchFilters",
   async (_, { rejectWithValue }) => {
     try {
-      const url = `http://localhost:3000/products/filters`;
+      const url = `${api_url}/products/filters`;
       const { data } = await axios.get(url);
       return { data, type: "filterOptions" };
     } catch (error) {
@@ -46,7 +49,7 @@ export const fetchFilteredCount = createAsyncThunk(
   "products/fetchFilteredCount",
   async (filters, { rejectWithValue }) => {
     try {
-      const url = `http://localhost:3000/products/filteredCount`;
+      const url = `${api_url}/products/filteredCount`;
       const { data } = await axios.post(url, filters);
       return data;
     } catch (error) {
@@ -60,7 +63,7 @@ export const fetchFilteredProducts = createAsyncThunk(
   "products/fetchFilteredProducts",
   async (filters, { rejectWithValue }) => {
     try {
-      const url = `http://localhost:3000/products/filteredProducts`;
+      const url = `${api_url}/products/filteredProducts`;
       const { data } = await axios.post(url, filters);
       return data;
     } catch (error) {

@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { apiUrlSwitch } from "../../utils/apiUrlSwitch";
+
+const api_url = apiUrlSwitch();
 
 const initialState = {
   allProducts: [],
@@ -40,7 +43,7 @@ export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async ({ endpoint, type }, { rejectWithValue }) => {
     try {
-      const url = `http://localhost:3000/products/${endpoint}`;
+      const url = `${api_url}/products/${endpoint}`;
 
       const { data } = await axios.get(url);
       return { data, type };
@@ -54,7 +57,7 @@ export const fetchSingleProduct = createAsyncThunk(
   "products/fetchSingleProduct",
   async (id, { rejectWithValue }) => {
     try {
-      const url = `http://localhost:3000/products/singleProduct/${id}`;
+      const url = `${api_url}/products/singleProduct/${id}`;
 
       const { data } = await axios.get(url);
 
