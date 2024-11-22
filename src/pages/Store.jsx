@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import SingleProduct from "../components/SingleProduct";
 import Filter from "../components/Store/Filter";
 import Sort from "../components/Store/Sort";
-import FilterPreview from "../components/filterPreview";
+import FilterPreview from "../components/FilterPreview";
 import { useSearchParams } from "react-router-dom";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
