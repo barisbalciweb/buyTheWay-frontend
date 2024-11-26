@@ -6,6 +6,7 @@ const api_url = apiUrlSwitch();
 
 const initialState = {
   selectedFilters: {
+    targetGroup: [],
     category: [],
     price: [],
     color: [],
