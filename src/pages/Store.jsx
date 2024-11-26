@@ -12,6 +12,7 @@ import { selectRenderedProducts } from "../features/products/renderedProductsSel
 import { toggleFilter, toggleSort } from "../features/ui/uiSlice";
 import { fetchProducts } from "../features/products/productsSlice";
 import {
+  addSelectedFilter,
   fetchFilteredProducts,
   fetchFilters,
 } from "../features/filter/filterSlice";
@@ -94,7 +95,6 @@ const Store = () => {
   // GET HEADING ACCORDING TO URL PARAMS
   const getHeading = () => {
     const count = renderedProducts?.length || 0;
-
     if (collection) {
       switch (collection) {
         case "bestsellers":
@@ -108,6 +108,10 @@ const Store = () => {
       }
     } else if (category) {
       return `${category[0].toUpperCase() + category.slice(1)} (${count})`;
+    } else if (targetGroup) {
+      return `${
+        targetGroup[0].toUpperCase() + targetGroup.slice(1) + "produkte"
+      } (${count})`;
     } else {
       return `Suchergebnisse (${count})`;
     }
