@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowLeft,
-  faCircleArrowLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 //REDUX
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +8,6 @@ import { toggleFilter } from "../../features/ui/uiSlice";
 import {
   clearFilters,
   fetchFilteredCount,
-  fetchFilteredProducts,
 } from "../../features/filter/filterSlice";
 import { addSelectedFilter } from "../../features/filter/filterSlice";
 import { changeSorting } from "../../features/sort/sortSlice";
@@ -19,6 +15,7 @@ import PriceRangeSlider from "../PriceRangeSlider";
 import { useNavigate } from "react-router-dom";
 
 const Filter = () => {
+  // LOCAL STATES
   const [selectedFilterCategory, setSelectedFilterCategory] = useState(null);
 
   const dispatch = useDispatch();
@@ -48,7 +45,7 @@ const Filter = () => {
       selectedFilterCategory === filterCategory ? null : filterCategory
     );
   };
-
+  // HANDLE ON CHANGE OF FILTER OPTIONS
   const handleFilterUpdate = (filterCategory, filterOption, inputType) => {
     if (filterCategory === "sort") {
       dispatch(changeSorting(filterOption));
@@ -65,12 +62,14 @@ const Filter = () => {
     }
   };
 
+  // HANDLE FILTER RESULTS
   const handleFilterResults = () => {
     dispatch(toggleFilter());
     // NAVIGATE TO STORE AND FETCH FROM THERE
     navigate("/store?filtering=true");
   };
 
+  // CLEAR ALL FILTERS
   const handleClearFilters = () => {
     dispatch(clearFilters());
     setSelectedFilterCategory(null);
@@ -122,6 +121,8 @@ const Filter = () => {
                           ? "Größe"
                           : filterCategory === "brand"
                           ? "Marke"
+                          : filterCategory === "targetGroup"
+                          ? "Zielgruppe"
                           : ""}
                       </p>
                       <FontAwesomeIcon

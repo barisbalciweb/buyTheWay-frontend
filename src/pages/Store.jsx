@@ -85,7 +85,7 @@ const Store = () => {
     }
   }, [targetGroup, category, collection, selectedFilters]);
 
-  // EXCEPTIONALLY FETCH FILTER OPTIONS HERE IN ORDER TO GET SORT OPTIONS FOR SORTING DROPDOWN
+  // EXCEPTIONALLY FETCH ALL FILTER OPTIONS HERE IN ORDER TO GET SORT OPTIONS FOR SORTING DROPDOWN
   useEffect(() => {
     if (filterOptionsStatus === "idle") {
       dispatch(fetchFilters());
