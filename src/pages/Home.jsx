@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import heroMan from "../assets/images/hero-man.jpg";
 import secondHeroImg from "../assets/images/Herbstaktion.jpg";
 import thirdHeroImg from "../assets/images/shopping.jpg";
 import { fakeTopCategories } from "../data/fakeData";
@@ -9,6 +8,7 @@ import { Link } from "react-router-dom";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../features/products/productsSlice";
+import HeroSlider from "../components/Home/HeroSlider";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -53,22 +53,25 @@ const Home = () => {
   return (
     <main>
       {/* SELECTIONS */}
-      <section
-        className="w-full h-[120vw] flex flex-col items-center justify-center bg-cover bg-center text-white"
-        style={{ backgroundImage: `url(${heroMan})` }}>
-        <div className="w-[80%] flex flex-col gap-[3vw] mt-[60vw]">
-          <h2 className="text-[6vw] text-center">Für wen suchts du?</h2>
-          {selections.map((selection) => (
-            <button
-              key={selection}
-              className="w-full h-[11vw] bg-[rgba(255,255,255,0.2)] border-customBorder border-white text-[4vw]">
-              <Link
-                to={`store?targetGroup=${selection}`}
-                className="w-full h-full flex justify-center items-center">
-                {selection}
-              </Link>
-            </button>
-          ))}
+      <section className="w-full h-[120vw] flex flex-col items-center justify-center bg-cover bg-center relative">
+        <HeroSlider />
+        <div className="w-full mt-[60vw] absolute flex flex-col items-center justify-center z-20 text-white">
+          <h2 className="text-shadow-black text-[6vw] text-center font-bold">
+            Für wen suchts du?
+          </h2>
+          <div className="w-[70%] flex flex-col items-center justify-center gap-[2vw]">
+            {selections.map((selection) => (
+              <button
+                key={selection}
+                className="w-full h-[12vw] bg-[rgba(0,0,0,0.2)] font-bold border-customBorder border-white text-[4.5vw] rounded-sm">
+                <Link
+                  to={`store?targetGroup=${selection}`}
+                  className="w-full h-full flex justify-center items-center">
+                  {selection}
+                </Link>
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -80,7 +83,7 @@ const Home = () => {
             {fakeTopCategories.map((category) => (
               <button
                 key={category}
-                className="w-[25vw] h-[10vw] text-[4vw] border-customBorder border-black">
+                className="w-[25vw] h-[10vw] text-[4vw] border-customBorder border-black rounded-sm">
                 <Link
                   to={`store?category=${category}`}
                   className="w-full h-full flex justify-center items-center">

@@ -39,7 +39,7 @@ const MobileMenu = () => {
     <>
       {/* MODAL BACKGROUND */}
       <div
-        className="w-full h-full bg-[rgba(0,0,0,0.6)] fixed top-0 left-0 z-40"
+        className="w-full h-full bg-[rgba(0,0,0,0.6)] fixed top-0 left-0 z-30"
         onClick={() => dispatch(toggleMobileMenu())}>
         <FontAwesomeIcon
           icon={faXmark}

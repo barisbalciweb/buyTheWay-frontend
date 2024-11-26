@@ -6,12 +6,13 @@ import { useSelector } from "react-redux";
 
 const App = () => {
   const { warningScreen } = useSelector((state) => state.ui);
+  const { isMobileMenuOpen } = useSelector((state) => state.ui);
 
   return (
     <div
       id="container"
       className={`w-full h-full flex flex-col ${
-        warningScreen ? "overflow-hidden" : ""
+        warningScreen || isMobileMenuOpen ? "overflow-hidden" : ""
       }`}>
       <Layout>
         <ScrollToTop />
