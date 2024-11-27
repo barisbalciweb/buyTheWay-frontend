@@ -4,7 +4,7 @@ export const apiUrlSwitch = () => {
   const api_url =
     env === "dev"
       ? import.meta.env.VITE_API_URL_DEV
-      : import.meta.env.VITE_API_URL_PRODL;
+      : import.meta.env.VITE_API_URL_PROD;
 
   return api_url;
 };
