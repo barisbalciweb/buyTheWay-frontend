@@ -22,7 +22,7 @@ const Warning = () => {
             alt="QR code to open the app on your phone"
             className="w-[30%] max-w-40 mx-auto"
           />
-          <p className="text-center mt-2 text-blue-400">www.buytheway.com</p>
+          <p className="text-center mt-2 text-blue-400">btw.barisbalci.de</p>
         </div>
 
         <p>
