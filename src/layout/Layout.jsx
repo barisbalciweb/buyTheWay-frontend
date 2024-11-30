@@ -13,6 +13,7 @@ const Layout = ({ children }) => {
   const isMobileMenuOpen = useSelector((state) => state.ui.isMobileMenuOpen);
   const { warningScreen } = useSelector((state) => state.ui);
 
+  // SHOW WARNING SCREEN IF INNER WIDTH IS LESS THAN DEFINED
   useEffect(() => {
     const sizeCheck = () => {
       const innerWidth = window.innerWidth;
