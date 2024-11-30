@@ -1,3 +1,4 @@
+import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
 import { space } from "postcss/lib/list";
 
 // tailwind.config.js
@@ -22,6 +23,9 @@ export default {
       },
       borderWidth: {
         customBorder: "0.3vw",
+      },
+      height: {
+        slider: "65vw",
       },
     },
   },

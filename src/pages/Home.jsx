@@ -5,6 +5,7 @@ import { fakeTopCategories } from "../data/fakeData";
 import { selections } from "../data/data";
 import ProductSlider from "../components/ProductSlider";
 import { Link } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../features/products/productsSlice";
@@ -102,7 +103,9 @@ const Home = () => {
           <ProductSlider products={bestsellers} />
         </section>
       ) : (
-        "Loading..."
+        <div className="h-slider flex justify-center items-center mt-[12vw]">
+          <ClipLoader size={"20vw"} className="" />
+        </div>
       )}
 
       {/* HERO (2) */}
@@ -123,7 +126,9 @@ const Home = () => {
           <ProductSlider products={discounted} />
         </section>
       ) : (
-        "Loading..."
+        <div className="h-slider flex justify-center items-center mt-[12vw]">
+          <ClipLoader size={"20vw"} className="" />
+        </div>
       )}
 
       {/* HERO (3) */}
@@ -140,7 +145,9 @@ const Home = () => {
           <ProductSlider products={favorites} />
         </section>
       ) : (
-        "Loading..."
+        <div className="h-slider flex justify-center items-center mt-[12vw]">
+          <ClipLoader size={"20vw"} className="" />
+        </div>
       )}
     </main>
   );
