@@ -18,6 +18,7 @@ export default {
       },
       fontFamily: {
         comfortaa: ['"Comfortaa"', "sans-serif"],
+        courierNew: ['"Courier New"', "monospace"],
       },
       borderWidth: {
         customBorder: "0.3vw",
