@@ -114,7 +114,7 @@ const ProductDetail = () => {
                 }`}
                 disabled={selectedSize === null}
                 onClick={handleAddToCart}>
-                IN DEN WARENKORB
+                {success ? "HINZUGEFÜGT!" : "IN DEN WARENKORB"}
               </button>
               <button className="flex items-center justify-center border">
                 <FontAwesomeIcon
