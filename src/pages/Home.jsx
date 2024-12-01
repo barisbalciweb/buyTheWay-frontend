@@ -146,7 +146,7 @@ const Home = () => {
         </section>
       ) : (
         <div className="h-slider flex justify-center items-center mt-[12vw]">
-          <ClipLoader size={"20vw"} className="" />
+          <ClipLoader size={"20vw"} />
         </div>
       )}
     </main>

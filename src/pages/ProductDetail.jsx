@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
-import { sizes } from "../data/data";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../features/products/productsSlice";
@@ -14,6 +13,7 @@ import {
   inWishlist,
   removeFromWishlist,
 } from "../features/wishlist/wishlistSlice";
+import { ClipLoader } from "react-spinners";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -71,12 +71,10 @@ const ProductDetail = () => {
     }
   };
 
-  console.log(singleProduct);
-
   const isInWishlist = useSelector((state) => inWishlist(state, singleProduct));
 
   return (
-    <main>
+    <main className="flex flex-col flex-grow">
       {singleProductStatus === "succeded" && singleProduct ? (
         <div className="flex flex-col gap-[10vw]">
           <section className="px-[4vw] mt-[4vw] flex flex-col gap-[2vw]">
@@ -205,8 +203,8 @@ const ProductDetail = () => {
           </section>
         </div>
       ) : (
-        <div>
-          <p>Loading...</p>
+        <div className="w-full h-full flex justify-center items-center">
+          <ClipLoader size={"20vw"} />
         </div>
       )}
     </main>
