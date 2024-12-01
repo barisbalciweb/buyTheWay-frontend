@@ -188,7 +188,9 @@ const ProductDetail = () => {
                 <ProductSlider products={recentlyViewed} />
               </section>
             ) : (
-              "Loading..."
+              <div className="h-slider flex justify-center items-center mt-[12vw]">
+                <ClipLoader size={"20vw"} />
+              </div>
             )}
 
             {/* SIMILAR PRODUCTS  */}
@@ -198,7 +200,9 @@ const ProductDetail = () => {
                 <ProductSlider products={similar} />
               </section>
             ) : (
-              "Loading..."
+              <div className="h-slider flex justify-center items-center mt-[12vw]">
+                <ClipLoader size={"20vw"} />
+              </div>
             )}
           </section>
         </div>
