@@ -27,7 +27,7 @@ const Cart = () => {
             <p>Dein Warenkorb ist leer</p>
             <button className="w-[50%] bg-black text-white p-[4vw] text-[4vw]">
               <Link to="/" className="w-full">
-                Jetzt shoppen!
+                JETZT SHOPPEN!
               </Link>
             </button>
           </section>
