@@ -25,21 +25,19 @@ const ProductDetail = () => {
   const [openedAccordion, setOpenedAccordion] = useState(null);
   const [success, setSuccess] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
+  const [recentlyViewed, setRecentlyViewed] = useState([]);
 
   // GLOBAL STATES
-  const { singleProduct, recentlyViewed, similar, statuses } = useSelector(
+  const { singleProduct, similar, statuses } = useSelector(
     (state) => state.products
   );
 
-  const recentlyViewedStatus = statuses.recentlyViewed;
   const similarStatus = statuses.similar;
   const singleProductStatus = statuses.singleProduct;
 
-  // FETCH RECENTY VIEWED AND SIMILAR PRODUCTS
+  // FETCH SIMILAR PRODUCTS
   useEffect(() => {
-    // CLEAR SIMILAR PRODUCTS
     dispatch(clearSimilar());
-
     const fetchData = () => {
       dispatch(
         fetchProducts({
@@ -53,6 +51,32 @@ const ProductDetail = () => {
       fetchData();
     }
   }, [singleProduct]);
+
+  // FETCH RECENTLY VIEWED PRODUCTS
+  useEffect(() => {
+    if (singleProductStatus === "succeded" && singleProduct) {
+      // GET PRODUCTS FROM PREVIOUS VIEWS
+      let items = JSON.parse(localStorage.getItem("recentlyViewed") || "[]");
+
+      // IF PRODUCT ALREADY EXISTS, REMOVE IT
+      const index = items.findIndex((item) => item.id === singleProduct.id);
+      if (index !== -1) {
+        items.splice(index, 1);
+      }
+
+      // ADD THE CURRENT PRODUCT TO THE BEGINNING OF THE LIST
+      items.unshift(singleProduct);
+
+      // LIMIT THE LIST TO 10 ITEMS
+      if (items.length > 10) {
+        items = items.slice(0, 10);
+      }
+
+      // UPDATE STATE AND LOCALSTORAGE
+      setRecentlyViewed(items);
+      localStorage.setItem("recentlyViewed", JSON.stringify(items));
+    }
+  }, [singleProduct, singleProductStatus]);
 
   const toggleAccordion = (id) => {
     setOpenedAccordion(openedAccordion === id ? null : id);
@@ -180,7 +204,7 @@ const ProductDetail = () => {
 
           <section>
             {/* RECENTLY VIEWED  */}
-            {recentlyViewedStatus === "succeeded" && (
+            {singleProductStatus === "succeded" && singleProduct && (
               <section className="c-home-slider-sections">
                 <h2 className="c-h2">Zuletzt angesehen</h2>
                 <ProductSlider products={recentlyViewed} />
@@ -188,7 +212,7 @@ const ProductDetail = () => {
             )}
 
             {/* SIMILAR PRODUCTS  */}
-            {similarStatus === "succeeded" && similar.length > 0 && (
+            {similarStatus === "succeded" && similar.length > 0 && (
               <section className="c-home-slider-sections">
                 <h2 className="c-h2">Ähnliche Produkte</h2>
                 <ProductSlider products={similar} />
