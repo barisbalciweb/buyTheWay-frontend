@@ -43,7 +43,7 @@ const ProductDetail = () => {
     const fetchData = () => {
       dispatch(
         fetchProducts({
-          endpoint: `collection?collection=similar&category=${singleProduct.category}`,
+          endpoint: `collection?collection=similar&category=${singleProduct.category}&targetGroup=${singleProduct.targetGroup}`,
           type: "similar",
         })
       );
