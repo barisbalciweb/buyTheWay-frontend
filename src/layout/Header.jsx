@@ -20,6 +20,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const { isMobileMenuOpen } = useSelector((state) => state.ui);
 
+  const { cartItems } = useSelector((state) => state.cart);
+
   return (
     <header
       className="w-full h-header bg-white flex items-center shadow-md fixed top-0 left-0 z-40"
@@ -39,14 +41,26 @@ const Header = () => {
           </Link>
         </div>
         <ul className="flex gap-[5vw] p-[3vw]">
+          {/* SEARCH ICON */}
           <li className="flex">
-            <FontAwesomeIcon className="h-[5vw]" icon={faMagnifyingGlass} />
+            <FontAwesomeIcon className="h-[6vw]" icon={faMagnifyingGlass} />
           </li>
+
           {/* ICONS WITH LINKS */}
           {iconsWithLinks.map((icon, index) => (
             <li key={index}>
-              <Link to={icon.path} className="flex">
-                <FontAwesomeIcon className="h-[5vw]" icon={icon.name} />
+              <Link
+                to={icon.path}
+                className="flex items-center justify-center relative">
+                <FontAwesomeIcon className="h-[6vw]" icon={icon.name} />
+                {/* COUNT OF ITEMS IN CART */}
+                {icon.path === "/cart" && cartItems.length > 0 && (
+                  <div className="w-[6vw] h-[6vw] flex justify-center items-center ml-[3vw] mt-[6.5vw] absolute bg-customOrange rounded-full">
+                    <p className="text-white text-[3.5vw] font-bold mt-[0.5vw]">
+                      {cartItems.length}
+                    </p>
+                  </div>
+                )}
               </Link>
             </li>
           ))}

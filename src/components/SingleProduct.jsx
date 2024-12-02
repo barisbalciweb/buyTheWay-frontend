@@ -48,7 +48,9 @@ const SingleProduct = ({ product }) => {
         alt={images[0].alt}
       />
       <div>
-        <h3 className="text-[4vw]">{name}</h3>
+        <h3 className="text-[4vw]">
+          {name.length > 20 ? name.slice(0, 18) + "..." : name}
+        </h3>
         <p className="text-[3.5vw]">{price}€</p>
       </div>
     </Link>

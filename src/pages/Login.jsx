@@ -36,13 +36,13 @@ const Login = () => {
               type="submit"
               className="bg-black text-white p-[4vw]"
               onClick={handleLogin}>
-              anmelden
+              ANMELDEN
             </button>
             <p className="w-full text-center mt-[10vw]">Hast du kein Konto?</p>
             <button
               type="button"
               className="border-customBorder border-black p-[4vw]">
-              <Link to={"/register"}>Registrieren</Link>
+              <Link to={"/register"}>REGISTRIEREN</Link>
             </button>
           </div>
         </form>
