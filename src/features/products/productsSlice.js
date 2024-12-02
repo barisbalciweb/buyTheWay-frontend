@@ -42,6 +42,8 @@ const initialState = {
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async ({ endpoint, type }, { rejectWithValue }) => {
+    console.log("endpoint", endpoint);
+
     try {
       const url = `${api_url}/products/${endpoint}`;
 

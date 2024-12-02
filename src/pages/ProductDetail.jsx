@@ -43,17 +43,13 @@ const ProductDetail = () => {
     const fetchData = () => {
       dispatch(
         fetchProducts({
-          endpoint: `collection?collection=similar&category=${singleProduct.category}&targetGroup=${singleProduct.targetGroup}`,
+          endpoint: `collection?collection=similar&category=${singleProduct.category}&targetGroup=${singleProduct.targetGroup}&id=${singleProduct.id}`,
           type: "similar",
         })
       );
     };
 
-    if (
-      singleProductStatus === "succeded" &&
-      singleProduct &&
-      similar.length === 0
-    ) {
+    if (singleProductStatus === "succeded" && singleProduct) {
       fetchData();
     }
   }, [singleProduct]);
