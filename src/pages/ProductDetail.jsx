@@ -50,7 +50,7 @@ const ProductDetail = () => {
     if (singleProductStatus === "succeded" && singleProduct) {
       fetchData();
     }
-  }, [singleProduct]);
+  }, [singleProductStatus, singleProduct]);
 
   // FETCH RECENTLY VIEWED PRODUCTS
   useEffect(() => {
@@ -204,15 +204,17 @@ const ProductDetail = () => {
 
           <section>
             {/* RECENTLY VIEWED  */}
-            {singleProductStatus === "succeded" && singleProduct && (
+            {recentlyViewed && recentlyViewed.length > 0 && (
               <section className="c-home-slider-sections">
                 <h2 className="c-h2">Zuletzt angesehen</h2>
-                <ProductSlider products={recentlyViewed} />
+                <ProductSlider
+                  products={Array.isArray(recentlyViewed) ? recentlyViewed : []}
+                />
               </section>
             )}
 
             {/* SIMILAR PRODUCTS  */}
-            {similarStatus === "succeded" && similar.length > 0 && (
+            {similar && similar.length > 0 && (
               <section className="c-home-slider-sections">
                 <h2 className="c-h2">Ähnliche Produkte</h2>
                 <ProductSlider products={similar} />

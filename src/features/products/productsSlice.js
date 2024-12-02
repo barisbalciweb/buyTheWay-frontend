@@ -72,7 +72,7 @@ export const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    clearSimilar: (state) => {
+    clearSimilar: (state, action) => {
       state.similar = [];
     },
   },
@@ -86,7 +86,6 @@ export const productsSlice = createSlice({
       .addCase(fetchProducts.fulfilled, (state, action) => {
         const { type, data } = action.payload;
         state[type] = data;
-
         state.statuses[type] = "succeeded";
         state.errors[type] = null;
       })
