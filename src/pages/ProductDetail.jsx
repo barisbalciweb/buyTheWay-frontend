@@ -182,28 +182,28 @@ const ProductDetail = () => {
 
           <section>
             {/* RECENTLY VIEWED  */}
-            {recentlyViewedStatus === "succeeded" ? (
-              <section className="c-home-slider-sections">
-                <h2 className="c-h2">Zuletzt angesehen</h2>
+            <section className="c-home-slider-sections">
+              <h2 className="c-h2">Zuletzt angesehen</h2>
+              {recentlyViewedStatus === "succeeded" ? (
                 <ProductSlider products={recentlyViewed} />
-              </section>
-            ) : (
-              <div className="h-slider flex justify-center items-center mt-[12vw]">
-                <ClipLoader size={"20vw"} />
-              </div>
-            )}
+              ) : (
+                <div className="h-slider flex justify-center items-center">
+                  <ClipLoader size={"20vw"} />
+                </div>
+              )}
+            </section>
 
             {/* SIMILAR PRODUCTS  */}
-            {similarStatus === "succeeded" ? (
-              <section className="c-home-slider-sections">
-                <h2 className="c-h2">Ähnliche Produkte</h2>
+            <section className="c-home-slider-sections">
+              <h2 className="c-h2">Ähnliche Produkte</h2>
+              {similarStatus === "succeeded" ? (
                 <ProductSlider products={similar} />
-              </section>
-            ) : (
-              <div className="h-slider flex justify-center items-center mt-[12vw]">
-                <ClipLoader size={"20vw"} />
-              </div>
-            )}
+              ) : (
+                <div className="h-slider flex justify-center items-center">
+                  <ClipLoader size={"20vw"} />
+                </div>
+              )}
+            </section>
           </section>
         </div>
       ) : (

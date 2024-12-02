@@ -97,16 +97,16 @@ const Home = () => {
       </section>
 
       {/* BESTSELLER */}
-      {bestsellersStatus === "succeeded" ? (
-        <section className="c-home-slider-sections">
-          <h2 className="c-h2">Bestsellers</h2>
+      <section className="c-home-slider-sections">
+        <h2 className="c-h2">Bestsellers</h2>
+        {bestsellersStatus === "succeeded" ? (
           <ProductSlider products={bestsellers} />
-        </section>
-      ) : (
-        <div className="h-slider flex justify-center items-center mt-[12vw]">
-          <ClipLoader size={"20vw"} className="" />
-        </div>
-      )}
+        ) : (
+          <div className="h-slider flex justify-center items-center">
+            <ClipLoader size={"20vw"} className="" />
+          </div>
+        )}
+      </section>
 
       {/* HERO (2) */}
       <section
@@ -120,16 +120,16 @@ const Home = () => {
       </section>
 
       {/* DISCOUNTS  */}
-      {discountedStatus === "succeeded" ? (
-        <section className="c-home-slider-sections">
-          <h2 className="c-h2">Reduzierte Artikel</h2>
+      <section className="c-home-slider-sections">
+        <h2 className="c-h2">Reduzierte Artikel</h2>
+        {discountedStatus === "succeeded" ? (
           <ProductSlider products={discounted} />
-        </section>
-      ) : (
-        <div className="h-slider flex justify-center items-center mt-[12vw]">
-          <ClipLoader size={"20vw"} className="" />
-        </div>
-      )}
+        ) : (
+          <div className="h-slider flex justify-center items-center">
+            <ClipLoader size={"20vw"} className="" />
+          </div>
+        )}
+      </section>
 
       {/* HERO (3) */}
       <section
@@ -139,16 +139,16 @@ const Home = () => {
       </section>
 
       {/* FAVORITES */}
-      {favoritesStatus === "succeeded" ? (
-        <section className="c-home-slider-sections">
-          <h2 className="c-h2">Beliebte Artikel</h2>
+      <section className="c-home-slider-sections">
+        <h2 className="c-h2">Beliebte Artikel</h2>
+        {favoritesStatus === "succeeded" ? (
           <ProductSlider products={favorites} />
-        </section>
-      ) : (
-        <div className="h-slider flex justify-center items-center mt-[12vw]">
-          <ClipLoader size={"20vw"} />
-        </div>
-      )}
+        ) : (
+          <div className="h-slider flex justify-center items-center">
+            <ClipLoader size={"20vw"} />
+          </div>
+        )}
+      </section>
     </main>
   );
 };
