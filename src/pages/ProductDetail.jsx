@@ -5,7 +5,10 @@ import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../features/products/productsSlice";
+import {
+  clearSimilar,
+  fetchProducts,
+} from "../features/products/productsSlice";
 import ProductSlider from "../components/ProductSlider";
 import { addToCart } from "../features/cart/cartSlice";
 import {
@@ -24,8 +27,7 @@ const ProductDetail = () => {
   const [selectedSize, setSelectedSize] = useState(null);
 
   // GLOBAL STATES
-  const { singleProduct } = useSelector((state) => state.products);
-  const { recentlyViewed, similar, statuses } = useSelector(
+  const { singleProduct, recentlyViewed, similar, statuses } = useSelector(
     (state) => state.products
   );
 
@@ -35,26 +37,26 @@ const ProductDetail = () => {
 
   // FETCH RECENTY VIEWED AND SIMILAR PRODUCTS
   useEffect(() => {
+    // CLEAR SIMILAR PRODUCTS
+    dispatch(clearSimilar());
+
     const fetchData = () => {
-      if (recentlyViewed.length === 0) {
-        dispatch(
-          fetchProducts({
-            endpoint: "collections/recentlyViewed",
-            type: "recentlyViewed",
-          })
-        );
-      }
-      if (similar.length === 0) {
-        dispatch(
-          fetchProducts({
-            endpoint: "collections/similar",
-            type: "similar",
-          })
-        );
-      }
+      dispatch(
+        fetchProducts({
+          endpoint: `collection?collection=similar&category=${singleProduct.category}`,
+          type: "similar",
+        })
+      );
     };
-    fetchData();
-  }, []);
+
+    if (
+      singleProductStatus === "succeded" &&
+      singleProduct &&
+      similar.length === 0
+    ) {
+      fetchData();
+    }
+  }, [singleProduct]);
 
   const toggleAccordion = (id) => {
     setOpenedAccordion(openedAccordion === id ? null : id);

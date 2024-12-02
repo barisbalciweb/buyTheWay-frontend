@@ -71,7 +71,11 @@ export const fetchSingleProduct = createAsyncThunk(
 export const productsSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    clearSimilar: (state) => {
+      state.similar = [];
+    },
+  },
   // FETCH PRODUCTS
   extraReducers: (builder) => {
     builder
@@ -107,5 +111,5 @@ export const productsSlice = createSlice({
   },
 });
 
-export const { setProducts } = productsSlice.actions;
+export const { clearSimilar } = productsSlice.actions;
 export default productsSlice.reducer;
