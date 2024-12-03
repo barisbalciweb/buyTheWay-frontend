@@ -9,8 +9,10 @@
 ⚠️ **Note**: This project is currently under development. Some sections and functionalities are still in progress.
 
 ## Introduction
-
 "buyTheWay" is a modern e-commerce application that allows users to shop conveniently and efficiently. With intuitive features and seamless navigation, "buyTheWay" becomes a practical companion for everyday shopping.
+
+## Design
+You can view the UI design of the page at the following link: [buyTheWay Figma Design](https://barisbalci.de/buyTheWay-UI.pdf)
 
 ## Features
 - **Shopping Experience**
@@ -35,7 +37,6 @@
   - [ ] Chat support based on multi-agent systems with ChatGPT. 🚧
 
 ## Technologies
-
 - **Frontend**: React
 - **Backend**: Node.js, Express
 - **Database**: MySQL
@@ -45,26 +46,21 @@
 - **Design Tools**: Figma
 
 ## Client-Side Routing
-
 - [x] The application uses **React Router** to enable fast and user-friendly navigation.
 
 ## Performance Optimization
-
 - [ ] **Lazy Loading**: Components and resources are loaded as needed to minimize load times. 🚧
 
 ## SEO and Accessibility
-
 - [ ] **Lighthouse Score**: The application is optimized for SEO, performance, and accessibility. 🚧
 - [x] **Semantic HTML**: For better user experience and accessibility.
 
 ## Testing and Code Quality
-
 - [ ] **Unit Tests**: Jest for test coverage. 🚧
 - [x] **Code Style**: ESLint and Prettier for consistency.
 - [x] **Version Control**: Git with a clear branching strategy.
 
 ## Security
-
 - [x] **Proxy Server**: All API requests are routed through a proxy server before reaching the API server, keeping the direct API address hidden for additional security.
 - [ ] **Data Encryption**: Sensitive data such as passwords and authentication tokens are encrypted during transmission and in the database. 🚧
 - [ ] **CORS Policies**: Strict Cross-Origin Resource Sharing (CORS) policies are implemented to prevent unauthorized requests. 🚧
@@ -150,8 +146,10 @@
 ⚠️ **Hinweis**: Dieses Projekt befindet sich derzeit in der Entwicklung. Einige Abschnitte und Funktionalitäten sind noch in Bearbeitung.
 
 ## Einleitung
-
 "buyTheWay" ist eine moderne E-Commerce-Anwendung, die es Benutzern ermöglicht, bequem und effizient einzukaufen. Mit intuitiven Funktionen und reibungsloser Navigation wird "buyTheWay" zu einem praktischen Begleiter für den Alltag.
+
+## Design
+Das UI-Design der Seite können Sie unter folgendem Link ansehen: [buyTheWay Figma Design](https://barisbalci.de/buyTheWay-UI.pdf)
 
 ## Funktionen
 - **Einkaufserlebnis**
@@ -176,7 +174,6 @@
   - [ ] Chat-Support basierend auf Multi-Agent-Systemen mit ChatGPT. 🚧
 
 ## Technologien
-
 - **Frontend**: React
 - **Backend**: Node.js, Express
 - **Datenbank**: MySQL
@@ -190,22 +187,18 @@
 - [x] Die Anwendung verwendet **React Router**, um eine schnelle und benutzerfreundliche Navigation zu ermöglichen.
 
 ## Performance-Optimierung 
-
 - [ ] **Lazy Loading**: Komponenten und Ressourcen werden bei Bedarf geladen, um die Ladezeiten zu minimieren. 🚧
 
 ## SEO und Barrierefreiheit (Accessibility)
-
 - [ ] **Lighthouse Score**: Die Anwendung wird auf SEO, Performance und Barrierefreiheit optimiert. 🚧
 - [x] **Semantisches HTML**: Für eine bessere Benutzererfahrung und Barrierefreiheit.
 
 ## Testing und Codequalität
-
 - [ ] **Unit Tests**: Jest für die Testabdeckung. 🚧
 - [x] **Code Style**: ESLint und Prettier für Konsistenz.
 - [x] **Versionskontrolle**: Git mit einer klaren Branch-Strategie.
 
 ## Sicherheit
-
 - [x] **Proxy-Server**: Alle API-Anfragen werden über einen Proxy-Server geleitet, bevor sie den API-Server erreichen. Dadurch bleibt die direkte API-Adresse verborgen, was ein zusätzliches Sicherheitsniveau bietet.
 - [ ] **Datenverschlüsselung**: Sensible Daten wie Passwörter und Authentifizierungs-Tokens werden sowohl bei der Übertragung als auch in der Datenbank verschlüsselt. 🚧
 - [ ] **CORS-Richtlinien**: Strikte Cross-Origin Resource Sharing (CORS)-Richtlinien werden implementiert, um unautorisierte Anfragen zu verhindern. 🚧
