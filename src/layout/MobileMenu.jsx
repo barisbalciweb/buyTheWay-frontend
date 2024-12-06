@@ -9,6 +9,7 @@ import {
   setSelectedPerson,
   toggleMobileMenu,
   setSelectedCategoryGroup,
+  toggleSearch,
 } from "../features/ui/uiSlice";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,12 +18,18 @@ const MobileMenu = () => {
   const [isAnimating, setIsAnimating] = useState(false);
 
   const dispatch = useDispatch();
-  const { selectedCategoryGroup } = useSelector((state) => state.ui);
-  const { selectedPerson } = useSelector((state) => state.ui);
-  const isMobileMenuOpen = useSelector((state) => state.ui.isMobileMenuOpen);
+
+  // GLOBAL STATES
+  const {
+    isMobileMenuOpen,
+    selectedPerson,
+    selectedCategoryGroup,
+    isSearchOpen,
+  } = useSelector((state) => state.ui);
 
   useEffect(() => {
     handlePersonSelect(selectedPerson);
+    if (isSearchOpen) dispatch(toggleSearch());
   }, []);
 
   const handlePersonSelect = (person) => {

@@ -8,7 +8,7 @@ import {
 import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { toggleMobileMenu } from "../features/ui/uiSlice";
+import { toggleMobileMenu, toggleSearch } from "../features/ui/uiSlice";
 
 const iconsWithLinks = [
   { name: faUser, path: "/account" },
@@ -18,14 +18,21 @@ const iconsWithLinks = [
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { isMobileMenuOpen } = useSelector((state) => state.ui);
 
+  // GLOBAL STATES
+  const { isMobileMenuOpen } = useSelector((state) => state.ui);
   const { cartItems } = useSelector((state) => state.cart);
+
+  const handleClick = () => {
+    if (isMobileMenuOpen) {
+      dispatch(toggleMobileMenu());
+    }
+  };
 
   return (
     <header
       className="w-full h-header bg-white flex items-center shadow-md fixed top-0 left-0 z-40"
-      onClick={() => isMobileMenuOpen && dispatch(toggleMobileMenu())}>
+      onClick={handleClick}>
       <nav className="w-full flex justify-between">
         <div className="flex justify-center items-center gap-[4vw] ml-[4vw]">
           <FontAwesomeIcon
@@ -43,9 +50,12 @@ const Header = () => {
         <ul className="flex gap-[5vw] p-[3vw]">
           {/* SEARCH ICON */}
           <li className="flex">
-            <FontAwesomeIcon className="h-[6vw]" icon={faMagnifyingGlass} />
+            <FontAwesomeIcon
+              className="h-[6vw]"
+              icon={faMagnifyingGlass}
+              onClick={() => dispatch(toggleSearch())}
+            />
           </li>
-
           {/* ICONS WITH LINKS */}
           {iconsWithLinks.map((icon, index) => (
             <li key={index}>

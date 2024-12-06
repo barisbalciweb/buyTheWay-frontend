@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isMobileMenuOpen: false,
+  isSearchOpen: false,
   isFilterOpen: false,
   isSortOpen: false,
   selectedPerson: "Damen",
@@ -33,6 +34,9 @@ export const uiSlice = createSlice({
         state.isFilterOpen = false;
       }
     },
+    toggleSearch: (state) => {
+      state.isSearchOpen = !state.isSearchOpen;
+    },
     setSelectedPerson: (state, action) => {
       state.selectedPerson = action.payload;
     },
@@ -52,6 +56,7 @@ export const {
   toggleMobileMenu,
   toggleFilter,
   toggleSort,
+  toggleSearch,
   setSelectedPerson,
   setSelectedCategoryGroup,
   setWarningScreen,
