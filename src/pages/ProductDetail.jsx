@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   clearSimilar,
   fetchProducts,
+  fetchSingleProduct,
 } from "../features/products/productsSlice";
 import ProductSlider from "../components/ProductSlider";
 import { addToCart } from "../features/cart/cartSlice";
@@ -28,12 +29,19 @@ const ProductDetail = () => {
   const [recentlyViewed, setRecentlyViewed] = useState([]);
 
   // GLOBAL STATES
-  const { singleProduct, similar, statuses } = useSelector(
+  const { singleProduct, similar, statuses, selectedProductId } = useSelector(
     (state) => state.products
   );
 
   const similarStatus = statuses.similar;
   const singleProductStatus = statuses.singleProduct;
+
+  // FETCH DETAILS OF SELECTED PRODUCT
+  useEffect(() => {
+    if (selectedProductId) {
+      dispatch(fetchSingleProduct(selectedProductId));
+    }
+  }, [selectedProductId]);
 
   // FETCH SIMILAR PRODUCTS
   useEffect(() => {

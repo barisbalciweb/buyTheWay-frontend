@@ -4,7 +4,7 @@ import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSingleProduct } from "../features/products/productsSlice";
+import { setSelectedProductId } from "../features/products/productsSlice";
 import {
   addToWishlist,
   inWishlist,
@@ -27,7 +27,7 @@ const SingleProduct = ({ product }) => {
   };
 
   const handleProductSelection = () => {
-    dispatch(fetchSingleProduct(id));
+    dispatch(setSelectedProductId(id));
   };
 
   return (
