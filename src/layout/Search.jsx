@@ -50,7 +50,7 @@ const Search = () => {
     if (inputValue !== "") {
       timeout = setTimeout(() => {
         dispatch(fetchSearchList(inputValue));
-      }, 1000);
+      }, 300);
     } else {
       dispatch(clearSearchResults());
     }
@@ -60,6 +60,21 @@ const Search = () => {
   const handleSearchResults = () => {
     dispatch(fetchSearchResults(inputValue));
     navigate("/store?search=true");
+  };
+
+  const highlightMatch = (text, query) => {
+    if (!query) return text;
+    const regex = new RegExp(`(${query})`, "gi");
+    const parts = text.split(regex);
+    return parts.map((part, index) =>
+      regex.test(part) ? (
+        <span key={index} className="font-bold text-customOrange">
+          {part}
+        </span>
+      ) : (
+        part
+      )
+    );
   };
 
   return (
@@ -124,7 +139,10 @@ const Search = () => {
               searchList.map((result) => (
                 <li key={result?.id}>
                   <Link to={`/store/product/${result?.id}`}>
-                    {result?.brand + " " + result?.name}
+                    {highlightMatch(
+                      result?.brand + " " + result?.name,
+                      inputValue
+                    )}
                   </Link>
                 </li>
               ))
