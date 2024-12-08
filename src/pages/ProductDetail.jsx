@@ -115,7 +115,7 @@ const ProductDetail = () => {
               className="bg-productImgBg"
             />
             <h1 className="w-full font-bold text-[7vw]">
-              {singleProduct.name}
+              {singleProduct.brand + " " + singleProduct.name}
             </h1>
             <p className="text-[4vw]">{singleProduct.description}</p>
             <p className="w-full text-[6vw]">{singleProduct.price} €</p>

@@ -11,7 +11,9 @@ import {
 } from "../features/wishlist/wishlistSlice";
 
 const SingleProduct = ({ product }) => {
-  const { id, name, price, images } = product;
+  const { id, name, price, images, brand } = product;
+
+  const productTitle = brand + " " + name;
 
   // const { selectedProduct } = useSelector((state) => state.products);
   const dispatch = useDispatch();
@@ -41,7 +43,9 @@ const SingleProduct = ({ product }) => {
       />
       <div>
         <h3 className="text-[4vw]">
-          {name.length > 20 ? name.slice(0, 18) + "..." : name}
+          {productTitle.length > 20
+            ? productTitle.slice(0, 18) + "..."
+            : productTitle}
         </h3>
         <p className="text-[3.5vw]">{price}€</p>
       </div>

@@ -13,7 +13,9 @@ import {
 import { removeFromCart } from "../../features/cart/cartSlice";
 
 const ProductInCart = ({ item }) => {
-  const { id, name, price, images } = item.item;
+  const { id, name, price, images, brand } = item.item;
+
+  const productTitle = brand + " " + name;
 
   const dispatch = useDispatch();
   const isInWishlist = useSelector((state) => inWishlist(state, item.item));
@@ -33,7 +35,7 @@ const ProductInCart = ({ item }) => {
         alt={images[0].alt}
       />
       <div className="flex flex-col justify-between">
-        <h3 className="text-[5vw]">{name}</h3>
+        <h3 className="text-[5vw]">{productTitle}</h3>
         <div>
           <p className="text-[4vw]">
             <b>Preis:</b> {price} €
