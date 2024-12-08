@@ -21,7 +21,7 @@ You can view the UI design of the page at the following link: [buyTheWay Figma D
   - [x] Users are suggested similar products from the same category and gender when available.
   - [x] Users can quickly browse products through the mobile menu.
   - [x] Users can filter products by categories, price, size, etc.
-  - [ ] Users can search for products. 🚧
+  - [x] Users can search for products.
 
 - **User Management**:
   - [ ] Users can register and log in with a secure password. 🚧
@@ -158,7 +158,7 @@ Das UI-Design der Seite können Sie unter folgendem Link ansehen: [buyTheWay Fig
   - [x] Benutzern werden, falls vorhanden, ähnliche Produkte aus der gleichen Kategorie und Geschlecht vorgeschlagen.
   - [x] Benutzer können schnell über das Mobile-Menü durch die Produkte browsen.
   - [x] Benutzer können Produkte nach z.B. Kategorien, Preis, Größe, etc. filtern.
-  - [ ] Benutzer können Produkte durchsuchen. 🚧
+  - [x] Benutzer können Produkte durchsuchen.
 
 - **Benutzerverwaltung**:
   - [ ] Benutzer können sich registrieren und mit einem sicheren Passwort einloggen. 🚧
