@@ -4,7 +4,6 @@ import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedProductId } from "../features/products/productsSlice";
 import {
   addToWishlist,
   inWishlist,
@@ -26,15 +25,8 @@ const SingleProduct = ({ product }) => {
       : dispatch(addToWishlist(product));
   };
 
-  const handleProductSelection = () => {
-    dispatch(setSelectedProductId(id));
-  };
-
   return (
-    <Link
-      to={`/store/product/${id}`}
-      className="relative block"
-      onClick={handleProductSelection}>
+    <Link to={`/store/product/${id}`} className="relative block">
       <FontAwesomeIcon
         icon={isInWishlist ? faHeartSolid : faHeartRegular}
         className={`text-[6vw] absolute right-[2vw] top-[2vw] z-10 ${

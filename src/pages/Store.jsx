@@ -12,7 +12,6 @@ import { selectRenderedProducts } from "../features/products/renderedProductsSel
 import { toggleFilter, toggleSort } from "../features/ui/uiSlice";
 import { fetchProducts } from "../features/products/productsSlice";
 import {
-  addSelectedFilter,
   fetchFilteredProducts,
   fetchFilters,
 } from "../features/filter/filterSlice";
@@ -26,17 +25,19 @@ const Store = () => {
   const targetGroup = searchParams.get("targetGroup");
   const category = searchParams.get("category");
   const filtering = searchParams.get("filtering");
+  const search = searchParams.get("search");
 
   // GLOBAL STATES
-  const isFilterOpen = useSelector((state) => state.ui.isFilterOpen);
-  const isSortOpen = useSelector((state) => state.ui.isSortOpen);
-  const sortBy = useSelector((state) => state.sort.sortBy);
+  const { isFilterOpen, isSortOpen } = useSelector((state) => state.ui);
+  const { sortBy } = useSelector((state) => state.sort);
   const { statuses } = useSelector((state) => state.products);
+  const { selectedFilters } = useSelector((state) => state.filter);
   const filterOptionsStatus = useSelector(
     (state) => state.filter.statuses.filterOptions
   );
-
-  const { selectedFilters } = useSelector((state) => state.filter);
+  const { searchResults, searchResultsStatus } = useSelector(
+    (state) => state.search
+  );
 
   // SELECT RENDERED PRODUCTS ACCORDING TO URL PARAMS
   const renderedProducts = useSelector((state) =>
@@ -45,6 +46,7 @@ const Store = () => {
       filtering,
       targetGroup,
       category,
+      searchResults,
     })
   );
 
@@ -55,6 +57,7 @@ const Store = () => {
     statuses[collection] ||
     statuses.productsByCategory ||
     statuses.productsByTargetGroup ||
+    searchResultsStatus ||
     "idle";
 
   // FETCH PRODUCTS DYANMICALLY ACCORDING TO URL PARAMS
@@ -167,7 +170,7 @@ const Store = () => {
         </section>
       ) : (
         <section className="grid grid-cols-2 p-[5vw] gap-[4vw]">
-          {fetchStatus === "succeeded" || renderedProducts
+          {fetchStatus === "succeded" || renderedProducts
             ? renderedProducts.map((product) => (
                 <SingleProduct key={product.id} product={product} />
               ))

@@ -18,9 +18,11 @@ import {
   removeFromWishlist,
 } from "../features/wishlist/wishlistSlice";
 import { ClipLoader } from "react-spinners";
+import { useParams } from "react-router-dom";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
+  const { productId } = useParams();
 
   // LOCAL STATES
   const [openedAccordion, setOpenedAccordion] = useState(null);
@@ -29,19 +31,18 @@ const ProductDetail = () => {
   const [recentlyViewed, setRecentlyViewed] = useState([]);
 
   // GLOBAL STATES
-  const { singleProduct, similar, statuses, selectedProductId } = useSelector(
+  const { singleProduct, similar, statuses } = useSelector(
     (state) => state.products
   );
 
-  const similarStatus = statuses.similar;
   const singleProductStatus = statuses.singleProduct;
 
   // FETCH DETAILS OF SELECTED PRODUCT
   useEffect(() => {
-    if (selectedProductId) {
-      dispatch(fetchSingleProduct(selectedProductId));
+    if (productId) {
+      dispatch(fetchSingleProduct(productId));
     }
-  }, [selectedProductId]);
+  }, [productId]);
 
   // FETCH SIMILAR PRODUCTS
   useEffect(() => {

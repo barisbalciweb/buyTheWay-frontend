@@ -5,16 +5,34 @@ import axios from "axios";
 const api_url = apiUrlSwitch();
 
 const initialState = {
+  searchList: [],
   searchResults: [],
-  status: "idle",
-  error: null,
+  searchListStatus: "idle",
+  searchResultsStatus: "idle",
+  searchListError: null,
+  searhResultsError: null,
 };
 
+// FETCH SEARCH LIST
+export const fetchSearchList = createAsyncThunk(
+  "search/fetchSearchList",
+  async (inputValue, { rejectWithValue }) => {
+    try {
+      const url = `${api_url}/products/searchList?inputValue=${inputValue}`;
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// FETCH SEARCH RESULTS
 export const fetchSearchResults = createAsyncThunk(
   "search/fetchSearchResults",
   async (inputValue, { rejectWithValue }) => {
     try {
-      const url = `${api_url}/products/search?inputValue=${inputValue}`;
+      const url = `${api_url}/products/searchResults?inputValue=${inputValue}`;
       const { data } = await axios.get(url);
       return data;
     } catch (error) {
@@ -28,20 +46,34 @@ export const searchSlice = createSlice({
   initialState,
   reducers: {
     clearSearchResults: (state, action) => {
-      state.searchResults = [];
+      state.searchList = [];
     },
   },
   extraReducers: (builder) => {
+    // SEARCH LIST
+    builder
+      .addCase(fetchSearchList.pending, (state, action) => {
+        state.searchListStatus = "loading";
+      })
+      .addCase(fetchSearchList.fulfilled, (state, action) => {
+        state.searchListStatus = "succeded";
+        state.searchList = action.payload;
+      })
+      .addCase(fetchSearchList.rejected, (state, action) => {
+        state.searchListError = "failed";
+      });
+
+    // SEARCH RESULTS
     builder
       .addCase(fetchSearchResults.pending, (state, action) => {
-        state.status = "loading";
+        state.searchResultsStatus = "loading";
       })
       .addCase(fetchSearchResults.fulfilled, (state, action) => {
-        state.status = "succeded";
+        state.searchResultsStatus = "succeded";
         state.searchResults = action.payload;
       })
       .addCase(fetchSearchResults.rejected, (state, action) => {
-        state.error = "failed";
+        state.searhResultsError = "failed";
       });
   },
 });

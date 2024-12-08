@@ -47,7 +47,7 @@ const Header = () => {
             <h1 className="text-[6vw] mt-[1vw]">BuyTheWay</h1>
           </Link>
         </div>
-        <ul className="flex gap-[5vw] p-[3vw]">
+        <ul className="flex gap-[5vw] p-[4vw]">
           {/* SEARCH ICON */}
           <li className="flex">
             <FontAwesomeIcon

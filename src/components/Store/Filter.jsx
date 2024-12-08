@@ -215,7 +215,7 @@ const Filter = () => {
         onClick={handleFilterResults}
         className="mt-4 bg-black text-white p-[4vw] disabled:bg-slate-500">
         Ergebnisse anzeigen{" "}
-        {`(${filterOptionsStatus === "succeeded" && filteredCount})`}
+        {`(${filterOptionsStatus === "succeded" && filteredCount})`}
       </button>
 
       <button onClick={handleClearFilters}>alle Filter löschen</button>

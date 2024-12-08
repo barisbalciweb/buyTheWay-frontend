@@ -9,7 +9,6 @@ const initialState = {
   productsByCategory: [],
   productsByTargetGroup: [],
   singleProduct: [null],
-  selectedProductId: null,
   bestsellers: [],
   discounted: [],
   favorites: [],
@@ -76,9 +75,6 @@ export const productsSlice = createSlice({
     clearSimilar: (state, action) => {
       state.similar = [];
     },
-    setSelectedProductId: (state, action) => {
-      state.selectedProductId = action.payload;
-    },
   },
   // FETCH PRODUCTS
   extraReducers: (builder) => {
@@ -114,5 +110,5 @@ export const productsSlice = createSlice({
   },
 });
 
-export const { clearSimilar, setSelectedProductId } = productsSlice.actions;
+export const { clearSimilar } = productsSlice.actions;
 export default productsSlice.reducer;
