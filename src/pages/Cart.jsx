@@ -15,10 +15,14 @@ const Cart = () => {
     dispatch(updateTotal());
   }, [cartItems]);
 
+  const cartItemsCount = cartItems.reduce((total, curr) => {
+    return total + curr.quantity;
+  }, 0);
+
   return (
     <>
       <h1 className="text-[7vw] font-bold m-[4vw]">
-        Warenkorb {cartItems.length > 0 && `(${cartItems.length})`}
+        Warenkorb {cartItems.length > 0 && `(${cartItemsCount})`}
       </h1>
 
       <div className="flex flex-col flex-grow justify-center item">
@@ -44,7 +48,7 @@ const Cart = () => {
             <section className="bg-[#D9D9D9] flex flex-col justify-center gap-[2vw] text-[4.5vw] px-[5vw] py-[10vw]">
               <div className="w-full mb-[5vw]">
                 <h2 className="text-[6vw] font-bold">Bestellübersicht</h2>
-                <p className="text-gray-600">{cartItems.length} Artikel</p>
+                <p className="text-gray-600">{cartItemsCount} Artikel</p>
               </div>
               <div className="flex justify-between">
                 <p>Zwischensumme</p>
