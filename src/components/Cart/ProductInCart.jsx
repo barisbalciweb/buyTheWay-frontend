@@ -57,7 +57,7 @@ const ProductInCart = ({ item }) => {
       {/* REMOVE ITEM FROM CART */}
       <button
         className="absolute z-10 top-0 right-0"
-        onClick={() => dispatch(removeFromCart(id))}>
+        onClick={() => dispatch(removeFromCart({ id, size: item.size }))}>
         <FontAwesomeIcon className="text-[5vw] text-gray-600" icon={faTrash} />
       </button>
     </div>

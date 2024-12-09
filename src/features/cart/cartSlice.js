@@ -30,8 +30,9 @@ const cartSlice = createSlice({
       state.cartItemsCount = updateCartItemsCount(state.cartItems);
     },
     removeFromCart: (state, action) => {
+      const { id, size } = action.payload;
       state.cartItems = state.cartItems.filter(
-        (item) => item.item.id !== action.payload
+        (item) => !(item.item.id === id && item.size === size)
       );
       state.cartItemsCount = updateCartItemsCount(state.cartItems);
     },

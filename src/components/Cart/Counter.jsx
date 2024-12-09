@@ -9,6 +9,8 @@ import {
 const Counter = ({ item }) => {
   const dispatch = useDispatch();
 
+  console.log(item.size);
+
   return (
     <div className="w-[25vw] grid grid-cols-3 border">
       <button
