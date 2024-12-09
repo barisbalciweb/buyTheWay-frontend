@@ -23,6 +23,9 @@
 .swiper-button-next::after {
   @apply text-customOrange text-[8vw];
 }
+.swiper-pagination-bullet-active {
+  @apply bg-customOrange;
+}
 
 /* MOBILE MENU SCROLLBAR */
 .scrollbar-hide::-webkit-scrollbar {
