@@ -92,7 +92,7 @@ const ProductDetail = () => {
   };
 
   const handleAddToCart = () => {
-    dispatch(addToCart({ item: singleProduct, selectedSize }));
+    dispatch(addToCart({ item: singleProduct, size: selectedSize }));
     if (!success) {
       setSuccess(true);
       setTimeout(() => {
@@ -129,10 +129,8 @@ const ProductDetail = () => {
                 <button
                   key={index}
                   disabled={el.isAvailable === 0}
-                  className={`flex items-center justify-center border text-[4vw] disabled:bg-gray-300 disabled:opacity-20 ${
-                    el.size === selectedSize
-                      ? "bg-[#52D441] text-white font-bold"
-                      : null
+                  className={`flex items-center justify-center border-customBorder font-bold border-gray-400 text-[4vw] disabled:bg-gray-300 disabled:opacity-50 rounded-sm ${
+                    el.size === selectedSize ? "bg-orange-300" : null
                   }`}
                   onClick={() => setSelectedSize(el.size)}>
                   {el.size === "Einheitsgröße" ? "OS" : el.size}
@@ -147,7 +145,7 @@ const ProductDetail = () => {
                 onClick={handleAddToCart}>
                 {success ? "HINZUGEFÜGT!" : "IN DEN WARENKORB"}
               </button>
-              <button className="flex items-center justify-center border">
+              <button className="flex items-center justify-center border-customBorder border-gray-400">
                 <FontAwesomeIcon
                   icon={isInWishlist ? faHeartSolid : faHeartRegular}
                   className={`text-[6vw] ${isInWishlist && "text-red-500"}`}

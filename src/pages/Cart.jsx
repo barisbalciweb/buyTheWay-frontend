@@ -36,7 +36,7 @@ const Cart = () => {
             <section>
               {/* PRODUCTS IN CART */}
               {cartItems.map((item) => (
-                <ProductInCart key={item.item.id} item={item} />
+                <ProductInCart key={item.item.id + item.size} item={item} />
               ))}
             </section>
 
