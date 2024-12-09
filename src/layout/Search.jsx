@@ -101,7 +101,7 @@ const Search = () => {
             id="search-input"
             type="text"
             placeholder="Wonach suchen Sie?"
-            className="w-full h-full outline-0 rounded-full bg-gray-100 text-[4vw] pl-[4vw] pr-[18vw]"
+            className="w-full h-full focus:shadow-[0px_0px_1vw_theme(colors.customOrange)] focus:outline-0 rounded-full bg-gray-100 text-[4vw] pl-[4vw] pr-[18vw]"
             onChange={(e) => setInputValue(e.target.value)}
           />
           <div
