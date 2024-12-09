@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
+import { useParams } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,8 +19,6 @@ import {
   inWishlist,
   removeFromWishlist,
 } from "../features/wishlist/wishlistSlice";
-import { ClipLoader } from "react-spinners";
-import { useParams } from "react-router-dom";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();

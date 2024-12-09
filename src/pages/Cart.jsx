@@ -2,7 +2,7 @@ import { useEffect } from "react";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import ProductInCart from "../components/Cart/ProductInCart";
-import { setCartItemsCount, updateTotal } from "../features/cart/cartSlice";
+import { updateTotal } from "../features/cart/cartSlice";
 import { Link, useNavigate } from "react-router-dom";
 
 const Cart = () => {
@@ -12,7 +12,6 @@ const Cart = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(setCartItemsCount());
     dispatch(updateTotal());
   }, [cartItems]);
 

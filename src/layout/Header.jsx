@@ -21,7 +21,7 @@ const Header = () => {
 
   // GLOBAL STATES
   const { isMobileMenuOpen } = useSelector((state) => state.ui);
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItemsCount } = useSelector((state) => state.cart);
 
   const handleClick = () => {
     if (isMobileMenuOpen) {
@@ -64,10 +64,10 @@ const Header = () => {
                 className="flex items-center justify-center relative">
                 <FontAwesomeIcon className="h-[6vw]" icon={icon.name} />
                 {/* COUNT OF ITEMS IN CART */}
-                {icon.path === "/cart" && cartItems.length > 0 && (
+                {icon.path === "/cart" && cartItemsCount > 0 && (
                   <div className="w-[6vw] h-[6vw] flex justify-center items-center ml-[3vw] mt-[6.5vw] absolute bg-customOrange rounded-full">
                     <p className="text-white text-[3.5vw] font-bold mt-[0.5vw]">
-                      {cartItems.length}
+                      {cartItemsCount}
                     </p>
                   </div>
                 )}

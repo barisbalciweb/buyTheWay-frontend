@@ -6,6 +6,11 @@ const initialState = {
   total: 0,
 };
 
+// UPDATE CART ITEMS COUNT
+const updateCartItemsCount = (cartItems) => {
+  return cartItems.reduce((total, item) => total + item.quantity, 0);
+};
+
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -22,11 +27,13 @@ const cartSlice = createSlice({
       } else {
         state.cartItems.push({ item, size, quantity: 1 });
       }
+      state.cartItemsCount = updateCartItemsCount(state.cartItems);
     },
     removeFromCart: (state, action) => {
       state.cartItems = state.cartItems.filter(
         (item) => item.item.id !== action.payload
       );
+      state.cartItemsCount = updateCartItemsCount(state.cartItems);
     },
     incrementQuantity: (state, action) => {
       const id = action.payload;
@@ -37,6 +44,7 @@ const cartSlice = createSlice({
       if (existingItem) {
         existingItem.quantity += 1;
       }
+      state.cartItemsCount = updateCartItemsCount(state.cartItems);
     },
     decrementQuantity: (state, action) => {
       const id = action.payload;
@@ -53,12 +61,7 @@ const cartSlice = createSlice({
           return;
         }
       }
-    },
-    setCartItemsCount: (state, action) => {
-      const reducedCount = state.cartItems.reduce((total, curr) => {
-        return total + curr.quantity;
-      }, 0);
-      state.cartItemsCount = reducedCount;
+      state.cartItemsCount = updateCartItemsCount(state.cartItems);
     },
     updateTotal: (state) => {
       state.total = state.cartItems.reduce(
@@ -74,7 +77,6 @@ export const {
   removeFromCart,
   incrementQuantity,
   decrementQuantity,
-  setCartItemsCount,
   updateTotal,
 } = cartSlice.actions;
 export default cartSlice.reducer;
