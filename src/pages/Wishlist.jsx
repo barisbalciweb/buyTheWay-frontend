@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../features/cart/cartSlice";
-import { sizes } from "../data/data";
 import { removeFromWishlist } from "../features/wishlist/wishlistSlice";
 import { Link } from "react-router-dom";
 
@@ -106,20 +105,21 @@ const Wishlist = () => {
         {isSizeSelectionOpen && (
           <section>
             <div
-              className="w-full h-full bg-[rgba(0,0,0,0.5)] fixed bottom-0 left-0"
+              className="w-full h-full bg-[rgba(0,0,0,0.5)] fixed bottom-0 left-0 z-20"
               onClick={() => setIsSizeSelectionOpen(false)}
             />
-            <div className="w-full h-[30%] flex flex-col justify-center items-center gap-[3vw] bg-white fixed bottom-0 left-0 z-10">
+            <div className="w-full h-[30%] flex flex-col justify-center items-center gap-[3vw] bg-white fixed bottom-0 left-0 z-20">
               <div className="w-[80%] flex flex-col items-center justify-center gap-[3vw]">
                 <p className="w-full">Größe auswählen:</p>
                 <div className="w-full grid grid-cols-5 gap-[2vw]">
-                  {sizes.map((size, index) => (
+                  {
+                    /!* the problem is that selectedItem doesnt have any size property! */
+                  }
+                  {selectedItem.sizes.map((size, index) => (
                     <button
                       key={index}
-                      className={`h-[15vw] flex items-center justify-center border border-gray-700 text-[4vw] ${
-                        size === selectedSize
-                          ? "bg-[#52D441] text-white font-bold"
-                          : null
+                      className={`h-[15vw] flex items-center justify-center font-bold border border-gray-400 text-[4vw] ${
+                        size === selectedSize ? "bg-orange-300" : null
                       }`}
                       onClick={() => setSelectedSize(size)}>
                       {size}

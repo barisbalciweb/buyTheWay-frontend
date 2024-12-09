@@ -10,6 +10,7 @@ import {
   removeFromWishlist,
 } from "../features/wishlist/wishlistSlice";
 
+//! product doesnt contain any size property
 const SingleProduct = ({ product }) => {
   const { id, name, price, images, brand } = product;
 
@@ -21,10 +22,13 @@ const SingleProduct = ({ product }) => {
   const isInWishlist = useSelector((state) => inWishlist(state, product));
 
   const handleAddToWishlist = (e) => {
+    console.log(product);
+
     e.preventDefault();
     isInWishlist
       ? dispatch(removeFromWishlist(product))
-      : dispatch(addToWishlist(product));
+      : //! the problem is her, size is missing
+        dispatch(addToWishlist(product));
   };
 
   return (

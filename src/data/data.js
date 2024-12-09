@@ -28,8 +28,6 @@ export const accordion = [
   },
 ];
 
-export const sizes = ["XS", "S", "M", "L", "XL"];
-
 export const persons = ["Damen", "Herren", "Unisex"];
 
 export const collections = [
