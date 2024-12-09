@@ -53,11 +53,9 @@ const cartSlice = createSlice({
       );
 
       if (existingItem) {
-        if (state.cartItems.length > 0) {
+        if (existingItem.quantity > 0) {
           existingItem.quantity -= 1;
         } else {
-          console.log("0 ya da kücük");
-
           return;
         }
       }
