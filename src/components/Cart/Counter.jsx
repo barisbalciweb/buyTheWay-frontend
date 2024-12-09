@@ -9,13 +9,13 @@ import {
 const Counter = ({ item }) => {
   const dispatch = useDispatch();
 
-  console.log(item.size);
-
   return (
     <div className="w-[25vw] grid grid-cols-3 border">
       <button
         className="h-[8vw] flex justify-center items-center text-[6vw] bg-[#E2E2E2] disabled:opacity-50"
-        onClick={() => dispatch(decrementQuantity(item.item.id))}
+        onClick={() =>
+          dispatch(decrementQuantity({ id: item.item.id, size: item.size }))
+        }
         disabled={item.quantity === 0}>
         -
       </button>
@@ -24,7 +24,9 @@ const Counter = ({ item }) => {
       </p>
       <button
         className="h-[8vw] flex justify-center items-center text-[6vw] bg-[#E2E2E2]"
-        onClick={() => dispatch(incrementQuantity(item.item.id))}>
+        onClick={() =>
+          dispatch(incrementQuantity({ id: item.item.id, size: item.size }))
+        }>
         +
       </button>
     </div>
