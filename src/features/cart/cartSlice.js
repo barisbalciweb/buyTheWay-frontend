@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   cartItems: [],
+  cartItemsCount: 0,
   total: 0,
 };
 
@@ -44,8 +45,20 @@ const cartSlice = createSlice({
       );
 
       if (existingItem) {
-        existingItem.quantity -= 1;
+        if (state.cartItems.length > 0) {
+          existingItem.quantity -= 1;
+        } else {
+          console.log("0 ya da kücük");
+
+          return;
+        }
       }
+    },
+    setCartItemsCount: (state, action) => {
+      const reducedCount = state.cartItems.reduce((total, curr) => {
+        return total + curr.quantity;
+      }, 0);
+      state.cartItemsCount = reducedCount;
     },
     updateTotal: (state) => {
       state.total = state.cartItems.reduce(
@@ -61,6 +74,7 @@ export const {
   removeFromCart,
   incrementQuantity,
   decrementQuantity,
+  setCartItemsCount,
   updateTotal,
 } = cartSlice.actions;
 export default cartSlice.reducer;

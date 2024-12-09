@@ -2,22 +2,19 @@ import { useEffect } from "react";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import ProductInCart from "../components/Cart/ProductInCart";
-import { updateTotal } from "../features/cart/cartSlice";
+import { setCartItemsCount, updateTotal } from "../features/cart/cartSlice";
 import { Link, useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems, cartItemsCount } = useSelector((state) => state.cart);
   const { total } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
+    dispatch(setCartItemsCount());
     dispatch(updateTotal());
   }, [cartItems]);
-
-  const cartItemsCount = cartItems.reduce((total, curr) => {
-    return total + curr.quantity;
-  }, 0);
 
   return (
     <>
