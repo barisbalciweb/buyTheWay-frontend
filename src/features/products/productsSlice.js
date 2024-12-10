@@ -101,7 +101,7 @@ export const productsSlice = createSlice({
         state.statuses.singleProduct = "loading";
       })
       .addCase(fetchSingleProduct.fulfilled, (state, action) => {
-        state.statuses.singleProduct = "succeded";
+        state.statuses.singleProduct = "succeeded";
         state.singleProduct = action.payload;
       })
       .addCase(fetchSingleProduct.rejected, (state, action) => {

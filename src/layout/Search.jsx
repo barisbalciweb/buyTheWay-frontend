@@ -39,7 +39,7 @@ const Search = () => {
 
   // LOADING SPINNER LOGIC - 2
   useEffect(() => {
-    if (searchListStatus === "succeded" || searchListStatus === "failed") {
+    if (searchListStatus === "succeeded" || searchListStatus === "failed") {
       setIsLoading(false);
     }
   }, [searchListStatus]);

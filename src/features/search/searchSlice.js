@@ -56,7 +56,7 @@ export const searchSlice = createSlice({
         state.searchListStatus = "loading";
       })
       .addCase(fetchSearchList.fulfilled, (state, action) => {
-        state.searchListStatus = "succeded";
+        state.searchListStatus = "succeeded";
         state.searchList = action.payload;
       })
       .addCase(fetchSearchList.rejected, (state, action) => {
@@ -69,7 +69,7 @@ export const searchSlice = createSlice({
         state.searchResultsStatus = "loading";
       })
       .addCase(fetchSearchResults.fulfilled, (state, action) => {
-        state.searchResultsStatus = "succeded";
+        state.searchResultsStatus = "succeeded";
         state.searchResults = action.payload;
       })
       .addCase(fetchSearchResults.rejected, (state, action) => {

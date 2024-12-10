@@ -56,14 +56,14 @@ const ProductDetail = () => {
       );
     };
 
-    if (singleProductStatus === "succeded" && singleProduct) {
+    if (singleProductStatus === "succeeded" && singleProduct) {
       fetchData();
     }
   }, [singleProductStatus, singleProduct]);
 
   // FETCH RECENTLY VIEWED PRODUCTS
   useEffect(() => {
-    if (singleProductStatus === "succeded" && singleProduct) {
+    if (singleProductStatus === "succeeded" && singleProduct) {
       // GET PRODUCTS FROM PREVIOUS VIEWS
       let items = JSON.parse(localStorage.getItem("recentlyViewed") || "[]");
 
@@ -106,7 +106,7 @@ const ProductDetail = () => {
 
   return (
     <main className="flex flex-col flex-grow">
-      {singleProductStatus === "succeded" && singleProduct ? (
+      {singleProductStatus === "succeeded" && singleProduct ? (
         <div className="flex flex-col gap-[10vw]">
           <section className="px-[4vw] mt-[4vw] flex flex-col gap-[2vw]">
             <img
