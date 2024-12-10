@@ -112,17 +112,15 @@ const Wishlist = () => {
               <div className="w-[80%] flex flex-col items-center justify-center gap-[3vw]">
                 <p className="w-full">Größe auswählen:</p>
                 <div className="w-full grid grid-cols-5 gap-[2vw]">
-                  {
-                    /!* the problem is that selectedItem doesnt have any size property! */
-                  }
                   {selectedItem.sizes.map((size, index) => (
                     <button
                       key={index}
-                      className={`h-[15vw] flex items-center justify-center font-bold border border-gray-400 text-[4vw] ${
-                        size === selectedSize ? "bg-orange-300" : null
+                      className={`h-[15vw] flex items-center justify-center font-bold border disabled:bg-gray-300 disabled:opacity-50 border-gray-400 text-[4vw] rounded-sm ${
+                        size.size === selectedSize ? "bg-orange-300" : null
                       }`}
-                      onClick={() => setSelectedSize(size)}>
-                      {size}
+                      onClick={() => setSelectedSize(size.size)}
+                      disabled={size.isAvailable === 0}>
+                      {size.size}
                     </button>
                   ))}
                 </div>
