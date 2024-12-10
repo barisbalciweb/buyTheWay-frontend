@@ -54,7 +54,7 @@ const cartSlice = createSlice({
       );
 
       if (existingItem) {
-        if (existingItem.quantity > 0) {
+        if (existingItem.quantity > 1) {
           existingItem.quantity -= 1;
         } else {
           return;

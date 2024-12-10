@@ -16,7 +16,7 @@ const Counter = ({ item }) => {
         onClick={() =>
           dispatch(decrementQuantity({ id: item.item.id, size: item.size }))
         }
-        disabled={item.quantity === 0}>
+        disabled={item.quantity <= 1}>
         -
       </button>
       <p className=" h-[8vw] flex justify-center items-center text-[5vw]">
