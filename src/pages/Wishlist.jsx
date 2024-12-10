@@ -37,11 +37,11 @@ const Wishlist = () => {
     dispatch(addToCart({ item: selectedItem, size: selectedSize }));
     setSuccess(true);
     setIsSizeSelectionOpen(false);
-    setSelectedSize(null);
-    setSelectedItem(null);
     setTimeout(() => {
       dispatch(removeFromWishlist(selectedItem));
       setSuccess(false);
+      setSelectedSize(null);
+      setSelectedItem(null);
     }, 3000);
   };
 
@@ -68,7 +68,7 @@ const Wishlist = () => {
             {wishlist.map((item) => (
               <div className="relative" key={item.id}>
                 {/* SUCCESS FEEDBACK */}
-                {success && (
+                {success && selectedItem.id === item.id && (
                   <div className="w-full h-full flex flex-col justify-center gap-[2vw] items-center absolute top-0 left-0 z-20 text-black">
                     <FontAwesomeIcon
                       icon={faCircleCheck}
@@ -81,13 +81,15 @@ const Wishlist = () => {
                 )}
                 <div
                   className={`flex flex-col gap-[2vw] relative ${
-                    success && "opacity-20"
+                    success && selectedItem.id === item.id && "opacity-20"
                   }`}
                   key={item.id}>
                   <SingleProduct product={item} />
                   <button
                     className={`w-full flex justify-center items-center p-[3vw] ${
-                      success ? "bg-[#52D441]" : "bg-black"
+                      success && selectedItem.id === item.id
+                        ? "bg-[#52D441]"
+                        : "bg-black"
                     }`}
                     onClick={() => handleSizeSelection(item)}>
                     <FontAwesomeIcon
