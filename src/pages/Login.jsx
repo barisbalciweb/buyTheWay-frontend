@@ -1,10 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+//REDUX
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../features/auth/authSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
+
+  // LOCAL STATES
+  const [emailValue, setEmailValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // GLOBAL STATES
+
+  const { loginError } = useSelector((state) => state.auth);
+
+  console.log(loginError);
+
   const handleLogin = (e) => {
     e.preventDefault();
+    setIsSubmitted(true);
   };
+
+  useEffect(() => {
+    if (isSubmitted) {
+      dispatch(login({ email: emailValue, password: passwordValue }));
+    }
+  }, [isSubmitted]);
+
   return (
     <div className="w-full flex justify-center">
       <section className="w-[80%] flex flex-col items-center">
@@ -14,23 +38,29 @@ const Login = () => {
             <label htmlFor="e-mail" className="flex flex-col">
               E-Mail
               <input
+                value={emailValue}
                 type="email"
                 id="e-mail"
                 className="bg-[#F4F4F4] p-[4vw] outline-none"
                 placeholder="E-Mail-Adresse"
+                onChange={(e) => setEmailValue(e.target.value)}
               />
             </label>
+
             <label htmlFor="password" className="flex flex-col">
               Passwort
               <input
+                value={passwordValue}
                 type="password"
                 id="password"
                 className="bg-[#F4F4F4] p-[4vw] outline-none"
                 placeholder="Passwort"
+                onChange={(e) => setPasswordValue(e.target.value)}
               />
             </label>
             <p className="w-full text-end underline">Passwort vergessen</p>
           </div>
+
           <div className="flex flex-col">
             <button
               type="submit"
