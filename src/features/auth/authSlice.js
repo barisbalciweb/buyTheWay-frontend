@@ -1,15 +1,50 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { apiUrlSwitch } from "../../utils/apiUrlSwitch";
+
+const api_url = apiUrlSwitch();
 
 const initialState = {
   isLoggedIn: false,
+  registration: {
+    result: null,
+    status: "idle",
+    error: null,
+  },
 };
 
+const register = createAsyncThunk(
+  "auth/register",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const url = `${api_url}/auth/register`;
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const authSlice = createSlice({
-  name: "sort",
+  name: "auth",
   initialState,
   reducers: {
     setIsLoggedIn: (state, action) => {
       state.isLoggedIn = !state.isLoggedIn;
+    },
+    extraReducers: (builder) => {
+      builder
+        .addCase(register.pending, (state) => {
+          state.registration.status = "loading";
+        })
+        .addCase(register.fulfilled, (state, action) => {
+          state.registration.status = "succeeded";
+          state.registration.result = action.payload;
+        })
+        .addCase(register.rejected, (state, action) => {
+          state.registration.status = "failed";
+          state.registration.error = action.payload;
+        });
     },
   },
 });
