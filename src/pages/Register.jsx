@@ -9,6 +9,7 @@ import {
   invalidEmailFormatMsg,
   invalidPasswordMsg,
   missingInputMsg,
+  passwordMatchMsg,
   serverErrorMsg,
   successMsg,
   vorbiddenInputMsg,
@@ -126,12 +127,14 @@ const Register = () => {
           break;
       }
     }
+
+    setIsSubmitted(false);
   }, [registration]);
 
   const handleRegister = (e) => {
     e.preventDefault();
     if (passwordValue !== passwordRepeatValue) {
-      setWarning("Passwörter stimmen nicht überein");
+      setWarning(passwordMatchMsg);
       return;
     }
     setIsSubmitted(true);
