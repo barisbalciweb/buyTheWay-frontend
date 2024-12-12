@@ -1,10 +1,18 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../features/auth/authSlice";
 import { BeatLoader } from "react-spinners";
+import {
+  emailAlreadyExistsMsg,
+  invalidEmailFormatMsg,
+  invalidPasswordMsg,
+  missingInputMsg,
+  serverErrorMsg,
+  successMsg,
+  vorbiddenInputMsg,
+} from "../utils/feedbacks";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -91,27 +99,28 @@ const Register = () => {
     }
     if (registration.status === "succeeded") {
       isWaiting(false);
-      setRegisterMessage(registration.result);
+      setRegisterMessage(registration.result === "success" && successMsg);
     }
     if (registration.status === "failed") {
       isWaiting(false);
       switch (registration.error) {
         case "missingInput":
-          setWarning("Bitte fülle alle Felder aus.");
+          setWarning(missingInputMsg);
           break;
         case "vorbiddenInput":
-          setWarning("Unerlaubte Zeichen in den Feldern.");
+          setWarning(vorbiddenInputMsg);
           break;
         case "emailAlreadyExists":
-          setWarning("Diese E-Mail-Adresse ist bereits registriert.");
+          setWarning(emailAlreadyExistsMsg);
           break;
         case "invalidEmailFormat":
-          setWarning("Bitte gib eine gültige E-Mail-Adresse ein.");
+          setWarning(invalidEmailFormatMsg);
+          break;
+        case "invalidPassword":
+          setWarning(invalidPasswordMsg);
           break;
         default:
-          setWarning(
-            "Es ist ein Fehler aufgetreten. Bitte versuche es später erneut."
-          );
+          setWarning(serverErrorMsg);
           break;
       }
     }
