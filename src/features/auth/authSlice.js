@@ -34,6 +34,13 @@ export const authSlice = createSlice({
     setIsLoggedIn: (state, action) => {
       state.isLoggedIn = !state.isLoggedIn;
     },
+    reset: (state) => {
+      state.registration = {
+        result: null,
+        status: "idle",
+        error: null,
+      };
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -51,5 +58,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setIsLoggedIn } = authSlice.actions;
+export const { setIsLoggedIn, reset } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../features/auth/authSlice";
+import { register, reset } from "../features/auth/authSlice";
 import { BeatLoader } from "react-spinners";
 import {
   emailAlreadyExistsMsg,
@@ -17,6 +17,8 @@ import {
 
 const Register = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // LOCAL STATES
   const [firstnameValue, setFirstnameValue] = useState("");
@@ -81,6 +83,15 @@ const Register = () => {
   const email = emailValue.trim().toLowerCase();
   const password = passwordValue.trim();
 
+  // RESET FEEDBACKS
+  useEffect(() => {
+    return () => {
+      setWarning(null);
+      setSuccessMessage(null);
+      dispatch(reset());
+    };
+  }, []);
+
   useEffect(() => {
     if (isSubmitted) {
       dispatch(
@@ -133,6 +144,8 @@ const Register = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    setWarning(null);
+    setSuccessMessage(null);
     if (passwordValue !== passwordRepeatValue) {
       setWarning(passwordMatchMsg);
       return;
@@ -191,8 +204,9 @@ const Register = () => {
             </p>
             <button
               type="button"
-              className="h-input border-customBorder border-black p-[4vw]">
-              <Link to={"/login"}>LOGIN</Link>
+              className="h-input border-customBorder border-black p-[4vw]"
+              onClick={() => navigate("/login")}>
+              LOGIN
             </button>
           </div>
         </form>
