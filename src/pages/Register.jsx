@@ -105,6 +105,9 @@ const Register = () => {
         case "emailAlreadyExists":
           setWarning("Diese E-Mail-Adresse ist bereits registriert.");
           break;
+        case "invalidEmailFormat":
+          setWarning("Bitte gib eine gültige E-Mail-Adresse ein.");
+          break;
         default:
           setWarning(
             "Es ist ein Fehler aufgetreten. Bitte versuche es später erneut."
