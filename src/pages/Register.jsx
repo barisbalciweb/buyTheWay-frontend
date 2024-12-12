@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 // REDUX
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { register } from "../features/auth/authSlice";
+import { BeatLoader } from "react-spinners";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -20,31 +21,17 @@ const Register = () => {
   const [passwordHidden, setPasswordHidden] = useState(true);
   const [waiting, isWaiting] = useState(false);
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    setIsSubmitted(true);
-  };
+  // GLOBAL STATES
+  const { registration } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    if (isSubmitted) {
-      dispatch(
-        register({
-          firstname: firstnameValue,
-          lastname: lastnameValue,
-          email: emailValue,
-          password: passwordValue,
-        })
-      );
-    }
-  }, [isSubmitted]);
-
-  // TRIM & LOWERCASE EMAIL
+  // SANITIZE INPUTS
+  const firstname = firstnameValue.trim().toUpperCase();
+  const lastname = lastnameValue.trim().toUpperCase();
   const email = emailValue.trim().toLowerCase();
-  // TRIM PASSWORD
   const password = passwordValue.trim();
 
   const labelStyle = "flex flex-col";
-  const inputStyle = "bg-[#F4F4F4] p-[4vw] outline-none";
+  const inputStyle = "h-input bg-[#F4F4F4] p-[4vw] outline-none";
   const inputs = [
     {
       labelText: "Vorname",
@@ -85,6 +72,32 @@ const Register = () => {
     },
   ];
 
+  useEffect(() => {
+    if (isSubmitted) {
+      dispatch(
+        register({
+          firstname: firstnameValue,
+          lastname: lastnameValue,
+          email: emailValue,
+          password: passwordValue,
+        })
+      );
+    }
+  }, [isSubmitted]);
+
+  useEffect(() => {
+    if (registration.status === "loading") {
+      isWaiting(true);
+    } else {
+      isWaiting(false);
+    }
+  }, [registration]);
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    setIsSubmitted(true);
+  };
+
   return (
     <div className="w-full flex justify-center">
       <section className="w-[80%] flex flex-col items-center">
@@ -110,16 +123,25 @@ const Register = () => {
           <div className="flex flex-col">
             <button
               type="submit"
-              className="bg-black text-white p-[4vw]"
-              onClick={handleRegister}>
-              REGISTRIEREN
+              className="h-input flex justify-center items-center bg-black text-white"
+              onClick={handleRegister}
+              disabled={waiting}>
+              {waiting ? (
+                <BeatLoader size={"2vw"} color="white" />
+              ) : (
+                "REGISTRIEREN"
+              )}
             </button>
+
+            {/* SHOW REGISTER FEEDBACK */}
+            {registerMessage && <p>{registerMessage}</p>}
+
             <p className="w-full text-center mt-[10vw]">
               Hast du schon ein Konto?
             </p>
             <button
               type="button"
-              className="border-customBorder border-black p-[4vw]">
+              className="h-input border-customBorder border-black p-[4vw]">
               <Link to={"/login"}>LOGIN</Link>
             </button>
           </div>
