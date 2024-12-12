@@ -130,10 +130,12 @@ const Register = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    if (passwordValue !== passwordRepeatValue) {
+      setWarning("Passwörter stimmen nicht überein");
+      return;
+    }
     setIsSubmitted(true);
   };
-
-  console.log(successMessage);
 
   return (
     <div className="w-full flex justify-center">
