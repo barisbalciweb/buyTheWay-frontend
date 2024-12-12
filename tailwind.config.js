@@ -1,7 +1,3 @@
-import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
-import { Input } from "postcss";
-import { space } from "postcss/lib/list";
-
 // tailwind.config.js
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],

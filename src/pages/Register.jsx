@@ -24,12 +24,6 @@ const Register = () => {
   // GLOBAL STATES
   const { registration } = useSelector((state) => state.auth);
 
-  // SANITIZE INPUTS
-  const firstname = firstnameValue.trim().toUpperCase();
-  const lastname = lastnameValue.trim().toUpperCase();
-  const email = emailValue.trim().toLowerCase();
-  const password = passwordValue.trim();
-
   const labelStyle = "flex flex-col";
   const inputStyle = "h-input bg-[#F4F4F4] p-[4vw] outline-none";
   const inputs = [
@@ -72,14 +66,20 @@ const Register = () => {
     },
   ];
 
+  // SANITIZE INPUTS
+  const firstname = firstnameValue.trim().toUpperCase();
+  const lastname = lastnameValue.trim().toUpperCase();
+  const email = emailValue.trim().toLowerCase();
+  const password = passwordValue.trim();
+
   useEffect(() => {
     if (isSubmitted) {
       dispatch(
         register({
-          firstname: firstnameValue,
-          lastname: lastnameValue,
-          email: emailValue,
-          password: passwordValue,
+          firstname,
+          lastname,
+          email,
+          password,
         })
       );
     }
@@ -88,8 +88,29 @@ const Register = () => {
   useEffect(() => {
     if (registration.status === "loading") {
       isWaiting(true);
-    } else {
+    }
+    if (registration.status === "succeeded") {
       isWaiting(false);
+      setRegisterMessage(registration.result);
+    }
+    if (registration.status === "failed") {
+      isWaiting(false);
+      switch (registration.error) {
+        case "missingInput":
+          setWarning("Bitte fülle alle Felder aus.");
+          break;
+        case "vorbiddenInput":
+          setWarning("Unerlaubte Zeichen in den Feldern.");
+          break;
+        case "emailAlreadyExists":
+          setWarning("Diese E-Mail-Adresse ist bereits registriert.");
+          break;
+        default:
+          setWarning(
+            "Es ist ein Fehler aufgetreten. Bitte versuche es später erneut."
+          );
+          break;
+      }
     }
   }, [registration]);
 
@@ -134,7 +155,9 @@ const Register = () => {
             </button>
 
             {/* SHOW REGISTER FEEDBACK */}
-            {registerMessage && <p>{registerMessage}</p>}
+            {(registerMessage || warning) && (
+              <p>{registerMessage || warning}</p>
+            )}
 
             <p className="w-full text-center mt-[10vw]">
               Hast du schon ein Konto?

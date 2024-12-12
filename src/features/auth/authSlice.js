@@ -22,7 +22,7 @@ export const register = createAsyncThunk(
       const { data } = await axios.post(url, userData);
       return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response.data.message);
     }
   }
 );
