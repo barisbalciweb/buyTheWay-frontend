@@ -24,8 +24,8 @@ const Register = () => {
   const [passwordValue, setPasswordValue] = useState("");
   const [passwordRepeatValue, setPasswordRepeatValue] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [warning, setWarning] = useState(false);
-  const [registerMessage, setRegisterMessage] = useState(null);
+  const [warning, setWarning] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
   const [passwordHidden, setPasswordHidden] = useState(true);
   const [waiting, isWaiting] = useState(false);
 
@@ -99,7 +99,9 @@ const Register = () => {
     }
     if (registration.status === "succeeded") {
       isWaiting(false);
-      setRegisterMessage(registration.result === "success" && successMsg);
+      setSuccessMessage(
+        registration.result.message === "success" ? successMsg : null
+      );
     }
     if (registration.status === "failed") {
       isWaiting(false);
@@ -130,6 +132,8 @@ const Register = () => {
     e.preventDefault();
     setIsSubmitted(true);
   };
+
+  console.log(successMessage);
 
   return (
     <div className="w-full flex justify-center">
@@ -167,8 +171,14 @@ const Register = () => {
             </button>
 
             {/* SHOW REGISTER FEEDBACK */}
-            {(registerMessage || warning) && (
-              <p>{registerMessage || warning}</p>
+            {(successMessage || warning) && (
+              <div
+                className={`w-full ${
+                  (successMessage && "bg-green-200") ||
+                  (warning && "bg-red-200")
+                } p-[2vw] mt-[2vw]`}>
+                <p className="text-[4vw]">{successMessage || warning}</p>
+              </div>
             )}
 
             <p className="w-full text-center mt-[10vw]">
