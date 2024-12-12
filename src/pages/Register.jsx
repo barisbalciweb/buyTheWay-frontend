@@ -9,7 +9,7 @@ const Register = () => {
   const dispatch = useDispatch();
 
   // LOCAL STATES
-  const [nameValue, setNameValue] = useState("");
+  const [firstnameValue, setFirstnameValue] = useState("");
   const [lastnameValue, setLastnameValue] = useState("");
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
@@ -27,7 +27,14 @@ const Register = () => {
 
   useEffect(() => {
     if (isSubmitted) {
-      dispatch(register({ email: emailValue, password: passwordValue }));
+      dispatch(
+        register({
+          firstname: firstnameValue,
+          lastname: lastnameValue,
+          email: emailValue,
+          password: passwordValue,
+        })
+      );
     }
   }, [isSubmitted]);
 
@@ -41,10 +48,10 @@ const Register = () => {
   const inputs = [
     {
       labelText: "Vorname",
-      value: nameValue,
+      value: firstnameValue,
       id: "register-name",
       type: "text",
-      setter: setNameValue,
+      setter: setFirstnameValue,
     },
     {
       labelText: "Nachname",
@@ -86,7 +93,7 @@ const Register = () => {
           <div className="flex flex-col gap-[2vw]">
             {inputs.map(
               ({ labelText, value, id, type, setter, placeholder }) => (
-                <label className={labelStyle}>
+                <label key={id} className={labelStyle}>
                   {labelText}
                   <input
                     value={value}
