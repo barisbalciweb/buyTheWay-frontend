@@ -78,6 +78,8 @@ const Login = () => {
     setIsSubmitted(true);
   };
 
+  const disableSubmit = waiting || emailValue === "" || passwordValue === "";
+
   return (
     <div className="w-full flex justify-center">
       <section className="w-[80%] flex flex-col items-center">
@@ -114,9 +116,9 @@ const Login = () => {
           <div className="w-full">
             <button
               type="submit"
-              className="h-input w-full bg-black text-white"
+              className="h-input w-full bg-black text-white disabled:bg-slate-300"
               onClick={handleLogin}
-              disabled={waiting}>
+              disabled={disableSubmit}>
               {waiting ? <BeatLoader size={"2vw"} color="white" /> : "ANMELDEN"}
             </button>
 
