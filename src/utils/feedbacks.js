@@ -22,3 +22,9 @@ export const passwordMatchMsg = "Die Passwörter stimmen nicht überein.";
 export const missingCaptchaMsg = "Bitte bestätige das Captcha.";
 
 export const userNotFoundMsg = "Passwort oder E-Mail-Adresse falsch.";
+
+export const emailHintMsg = "Ungültige E-Mail-Adresse.";
+
+export const passwordHintMsg = "mind. 8 Zeichen, A-Z, a-z, 0-9";
+
+export const passwordsMatchMsg = "Passwörter stimmen nicht überein.";

@@ -3,16 +3,20 @@ import { useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 import {
   emailAlreadyExistsMsg,
+  emailHintMsg,
   invalidEmailFormatMsg,
   invalidPasswordMsg,
   missingCaptchaMsg,
   missingInputMsg,
+  passwordHintMsg,
   passwordMatchMsg,
   serverErrorMsg,
   successMsg,
   vorbiddenInputMsg,
 } from "../utils/feedbacks";
 import { BeatLoader } from "react-spinners";
+import { validateEmail } from "../utils/validateEmail";
+import { testPassword } from "../utils/testPassword";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, resetRegistration } from "../features/auth/authSlice";
@@ -21,6 +25,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const recaptchaRef = useRef();
+  const inputRef = useRef();
 
   // LOCAL STATES
   const [firstnameValue, setFirstnameValue] = useState("");
@@ -30,6 +35,9 @@ const Register = () => {
   const [passwordRepeatValue, setPasswordRepeatValue] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [warning, setWarning] = useState(null);
+  const [emailHint, setEmailHint] = useState("");
+  const [passwordHint, setPasswordHint] = useState("");
+  const [passwordMatchHint, setPasswordMatchHint] = useState("");
   const [successMessage, setSuccessMessage] = useState(null);
   const [passwordHidden, setPasswordHidden] = useState(true);
   const [waiting, isWaiting] = useState(false);
@@ -57,7 +65,7 @@ const Register = () => {
     {
       labelText: "E-Mail",
       value: emailValue,
-      id: "register-e-mail",
+      id: "register-email",
       type: "email",
       placeholder: "E-Mail-Adresse",
       setter: setEmailValue,
@@ -79,20 +87,52 @@ const Register = () => {
     },
   ];
 
-  // SANITIZE INPUTS
-  const firstname = firstnameValue.trim().toUpperCase();
-  const lastname = lastnameValue.trim().toUpperCase();
-  const email = emailValue.trim().toLowerCase();
-  const password = passwordValue.trim();
-
-  // RESET FEEDBACKS
   useEffect(() => {
+    // FOCUS INPUT ON LOAD
+    inputRef.current.focus();
+    // RESET FEEDBACKS
     return () => {
       setWarning(null);
       setSuccessMessage(null);
       dispatch(resetRegistration());
     };
   }, []);
+
+  // SANITIZE INPUTS
+  const firstname = firstnameValue.trim().toUpperCase();
+  const lastname = lastnameValue.trim().toUpperCase();
+  const email = emailValue.trim().toLowerCase();
+  const password = passwordValue.trim();
+
+  // CHECK EMAIL FORMAT AND GIVE FEEDBACK
+  useEffect(() => {
+    if (emailValue.length > 0) {
+      const isEmailValid = validateEmail(emailValue);
+      setEmailHint(isEmailValid ? null : emailHintMsg);
+    } else {
+      setEmailHint(null);
+    }
+  }, [emailValue]);
+
+  // CHECK PASSWORD STRENGTH AND GIVE FEEDBACK
+  useEffect(() => {
+    if (passwordValue.length > 0) {
+      const isPasswordValid = testPassword(passwordValue);
+      setPasswordHint(isPasswordValid ? null : passwordHintMsg);
+    } else {
+      setPasswordHint(null);
+    }
+  }, [passwordValue]);
+
+  // CHECK IF PASSWORDS MATCH AND GIVE FEEDBACK
+  useEffect(() => {
+    if (passwordRepeatValue.length > 0) {
+      const passwordsMatch = passwordValue === passwordRepeatValue;
+      setPasswordMatchHint(passwordsMatch ? null : passwordMatchMsg);
+    } else {
+      setPasswordMatchHint(null);
+    }
+  }, [passwordValue, passwordRepeatValue]);
 
   // FETCH REGISTER DATA
   useEffect(() => {
@@ -154,6 +194,7 @@ const Register = () => {
     e.preventDefault();
     setWarning(null);
     setSuccessMessage(null);
+    // CHECK IF PASSWORDS MATCH
     if (passwordValue !== passwordRepeatValue) {
       setWarning(passwordMatchMsg);
       return;
@@ -168,10 +209,11 @@ const Register = () => {
         <form className="w-[85%] flex flex-col gap-[5vw]">
           <div className="flex flex-col gap-[2vw]">
             {inputs.map(
-              ({ labelText, value, id, type, setter, placeholder }) => (
+              ({ labelText, value, id, type, setter, placeholder }, index) => (
                 <label key={id} className={labelStyle}>
                   {labelText}
                   <input
+                    ref={index === 0 ? inputRef : null}
                     value={value}
                     id={id}
                     type={type}
@@ -179,6 +221,20 @@ const Register = () => {
                     placeholder={placeholder || labelText}
                     onChange={(e) => setter(e.target.value)}
                   />
+                  {/* SHOW HINTS SELECTIVELY */}
+                  {id === "register-email" ? (
+                    <p className="w-full text-[3.5vw] text-red-500">
+                      {emailHint}
+                    </p>
+                  ) : id === "register-password" ? (
+                    <p className="w-full text-[3.5vw] text-red-500">
+                      {passwordHint}
+                    </p>
+                  ) : id === "register-password-repeat" ? (
+                    <p className="w-full text-[3.5vw] text-red-500">
+                      {passwordMatchHint}
+                    </p>
+                  ) : null}
                 </label>
               )
             )}
