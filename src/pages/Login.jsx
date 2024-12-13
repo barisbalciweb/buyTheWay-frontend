@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
 //REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../features/auth/authSlice";
@@ -11,6 +12,8 @@ const Login = () => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [warning, setWarning] = useState(null);
+  const [waiting, isWaiting] = useState(false);
 
   // GLOBAL STATES
 
@@ -63,8 +66,9 @@ const Login = () => {
             <button
               type="submit"
               className="bg-black text-white p-[4vw]"
-              onClick={handleLogin}>
-              ANMELDEN
+              onClick={handleLogin}
+              disabled={waiting}>
+              {waiting ? <BeatLoader size={"2vw"} color="white" /> : "ANMELDEN"}
             </button>
             <p className="w-full text-center mt-[10vw]">Hast du kein Konto?</p>
             <button
