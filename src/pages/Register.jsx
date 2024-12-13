@@ -41,6 +41,7 @@ const Register = () => {
   const [successMessage, setSuccessMessage] = useState(null);
   const [passwordHidden, setPasswordHidden] = useState(true);
   const [waiting, isWaiting] = useState(false);
+  const [captchaVerified, setCaptchaVerified] = useState(false);
 
   // GLOBAL STATES
   const { registration } = useSelector((state) => state.auth);
@@ -134,6 +135,12 @@ const Register = () => {
     }
   }, [passwordValue, passwordRepeatValue]);
 
+  // UPDATE CAPTCHA VERIFICATION STATUS
+  const handleCaptchaChange = () => {
+    const recaptchaValue = recaptchaRef?.current?.getValue();
+    setCaptchaVerified(!!recaptchaValue);
+  };
+
   // FETCH REGISTER DATA
   useEffect(() => {
     const recaptchaValue = recaptchaRef.current.getValue();
@@ -202,6 +209,19 @@ const Register = () => {
     setIsSubmitted(true);
   };
 
+  // DISABLE BUTTON IF WAITING FOR RESPONSE OR INVALID INPUT
+  const disableSubmit =
+    waiting ||
+    !captchaVerified ||
+    emailHint?.length > 0 ||
+    passwordHint?.length > 0 ||
+    passwordMatchHint?.length > 0 ||
+    !firstname ||
+    !lastname ||
+    !email ||
+    !password ||
+    !passwordRepeatValue;
+
   return (
     <div className="w-full flex justify-center">
       <section className="w-[80%] flex flex-col items-center">
@@ -242,9 +262,9 @@ const Register = () => {
           <div className="w-full">
             <button
               type="submit"
-              className="h-input w-full flex justify-center items-center bg-black text-white"
+              className="h-input w-full flex justify-center disabled:bg-slate-300 items-center bg-black text-white"
               onClick={handleRegister}
-              disabled={waiting}>
+              disabled={disableSubmit}>
               {waiting ? (
                 <BeatLoader size={"2vw"} color="white" />
               ) : (
@@ -270,6 +290,7 @@ const Register = () => {
           sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
           size="compact"
           className="mt-[5vw]"
+          onChange={handleCaptchaChange}
         />
 
         <div className="w-[85%] mt-[5vw]">
