@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
+import {
+  missingInputMsg,
+  serverErrorMsg,
+  userNotFoundMsg,
+} from "../utils/feedbacks";
 //REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../features/auth/authSlice";
+import { loginUser, resetLogin } from "../features/auth/authSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // LOCAL STATES
   const [emailValue, setEmailValue] = useState("");
@@ -16,19 +22,58 @@ const Login = () => {
   const [waiting, isWaiting] = useState(false);
 
   // GLOBAL STATES
-
   const { login } = useSelector((state) => state.auth);
+
+  // RESET FEEDBACKS
+  useEffect(() => {
+    return () => {
+      setWarning(null);
+      dispatch(resetLogin());
+    };
+  }, []);
+
+  // FETCH LOGIN DATA
+  useEffect(() => {
+    if (isSubmitted) {
+      dispatch(loginUser({ email: emailValue, password: passwordValue }));
+    }
+  }, [isSubmitted]);
+
+  // SHOW FEEDBACK
+  useEffect(() => {
+    if (login.status === "loading") {
+      isWaiting(true);
+    }
+    if (login.status === "succeeded") {
+      isWaiting(false);
+      // REDIRECT TO HOME
+      login.result?.message === "success" && navigate("/");
+    }
+    if (login.status === "failed") {
+      isWaiting(false);
+      switch (login.error) {
+        case "missingInput":
+          setWarning(missingInputMsg);
+          break;
+        case "userNotFound":
+          setWarning(userNotFoundMsg);
+          break;
+        case "invalidCredentials":
+          setWarning(userNotFoundMsg);
+          break;
+        default:
+          setWarning(serverErrorMsg);
+          break;
+      }
+    }
+    setIsSubmitted(false);
+  }, [login]);
 
   const handleLogin = (e) => {
     e.preventDefault();
+    setWarning(null);
     setIsSubmitted(true);
   };
-
-  useEffect(() => {
-    if (isSubmitted) {
-      dispatch(login({ email: emailValue, password: passwordValue }));
-    }
-  }, [isSubmitted]);
 
   return (
     <div className="w-full flex justify-center">
@@ -42,7 +87,7 @@ const Login = () => {
                 value={emailValue}
                 type="email"
                 id="e-mail"
-                className="bg-[#F4F4F4] p-[4vw] outline-none"
+                className="h-input bg-[#F4F4F4] p-[4vw] outline-none"
                 placeholder="E-Mail-Adresse"
                 onChange={(e) => setEmailValue(e.target.value)}
               />
@@ -54,7 +99,7 @@ const Login = () => {
                 value={passwordValue}
                 type="password"
                 id="password"
-                className="bg-[#F4F4F4] p-[4vw] outline-none"
+                className="h-input bg-[#F4F4F4] p-[4vw] outline-none"
                 placeholder="Passwort"
                 onChange={(e) => setPasswordValue(e.target.value)}
               />
@@ -62,22 +107,36 @@ const Login = () => {
             <p className="w-full text-end underline">Passwort vergessen</p>
           </div>
 
-          <div className="flex flex-col">
+          <div className="w-full">
             <button
               type="submit"
-              className="bg-black text-white p-[4vw]"
+              className="h-input w-full bg-black text-white"
               onClick={handleLogin}
               disabled={waiting}>
               {waiting ? <BeatLoader size={"2vw"} color="white" /> : "ANMELDEN"}
             </button>
-            <p className="w-full text-center mt-[10vw]">Hast du kein Konto?</p>
-            <button
-              type="button"
-              className="border-customBorder border-black p-[4vw]">
-              <Link to={"/register"}>REGISTRIEREN</Link>
-            </button>
+
+            {/* SHOW LOGIN FEEDBACK */}
+            {warning && (
+              <div
+                className={`w-full ${
+                  warning && "bg-red-200"
+                } p-[2vw] mt-[2vw]`}>
+                <p className="text-[4vw]">{warning}</p>
+              </div>
+            )}
           </div>
         </form>
+
+        <div className="w-[85%]">
+          <p className="w-full text-center mt-[10vw]">Hast du kein Konto?</p>
+          <button
+            type="button"
+            className="h-input w-full border-customBorder border-black"
+            onClick={() => navigate("/register")}>
+            REGISTRIEREN
+          </button>
+        </div>
       </section>
     </div>
   );

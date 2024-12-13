@@ -20,3 +20,5 @@ export const serverErrorMsg =
 export const passwordMatchMsg = "Die Passwörter stimmen nicht überein.";
 
 export const missingCaptchaMsg = "Bitte bestätige das Captcha.";
+
+export const userNotFoundMsg = "Passwort oder E-Mail-Adresse falsch.";

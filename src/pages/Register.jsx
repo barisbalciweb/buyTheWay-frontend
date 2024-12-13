@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 import {
   emailAlreadyExistsMsg,
@@ -15,12 +15,11 @@ import {
 import { BeatLoader } from "react-spinners";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { register, resetRegistration } from "../features/auth/authSlice";
+import { registerUser, resetRegistration } from "../features/auth/authSlice";
 
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const recaptchaRef = useRef();
 
   // LOCAL STATES
@@ -95,13 +94,12 @@ const Register = () => {
     };
   }, []);
 
-  // FETCH REGISTER
+  // FETCH REGISTER DATA
   useEffect(() => {
     const recaptchaValue = recaptchaRef.current.getValue();
-
     if (isSubmitted) {
       dispatch(
-        register({
+        registerUser({
           firstname,
           lastname,
           email,
@@ -112,6 +110,7 @@ const Register = () => {
     }
   }, [isSubmitted]);
 
+  // SHOW FEEDBACK
   useEffect(() => {
     if (registration.status === "loading") {
       isWaiting(true);
@@ -148,7 +147,6 @@ const Register = () => {
           break;
       }
     }
-
     setIsSubmitted(false);
   }, [registration]);
 
@@ -185,10 +183,10 @@ const Register = () => {
               )
             )}
           </div>
-          <div className="flex flex-col">
+          <div className="w-full">
             <button
               type="submit"
-              className="h-input flex justify-center items-center bg-black text-white"
+              className="h-input w-full flex justify-center items-center bg-black text-white"
               onClick={handleRegister}
               disabled={waiting}>
               {waiting ? (
@@ -218,13 +216,13 @@ const Register = () => {
           className="mt-[5vw]"
         />
 
-        <div className="w-[85%] flex flex-col mt-[5vw]">
+        <div className="w-[85%] mt-[5vw]">
           <p className="w-full text-center">Hast du schon ein Konto?</p>
           <button
             type="button"
-            className="h-input border-customBorder border-black p-[4vw]"
+            className="h-input w-full border-customBorder border-black"
             onClick={() => navigate("/login")}>
-            LOGIN
+            ANMELDEN
           </button>
         </div>
       </section>
