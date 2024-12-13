@@ -1,24 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-// REDUX
-import { useDispatch, useSelector } from "react-redux";
-import { register, reset } from "../features/auth/authSlice";
-import { BeatLoader } from "react-spinners";
+import ReCAPTCHA from "react-google-recaptcha";
 import {
   emailAlreadyExistsMsg,
   invalidEmailFormatMsg,
   invalidPasswordMsg,
+  missingCaptchaMsg,
   missingInputMsg,
   passwordMatchMsg,
   serverErrorMsg,
   successMsg,
   vorbiddenInputMsg,
 } from "../utils/feedbacks";
+import { BeatLoader } from "react-spinners";
+// REDUX
+import { useDispatch, useSelector } from "react-redux";
+import { register, reset } from "../features/auth/authSlice";
 
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const recaptchaRef = useRef();
 
   // LOCAL STATES
   const [firstnameValue, setFirstnameValue] = useState("");
@@ -92,7 +95,10 @@ const Register = () => {
     };
   }, []);
 
+  // FETCH REGISTER
   useEffect(() => {
+    const recaptchaValue = recaptchaRef.current.getValue();
+
     if (isSubmitted) {
       dispatch(
         register({
@@ -100,6 +106,7 @@ const Register = () => {
           lastname,
           email,
           password,
+          recaptchaValue,
         })
       );
     }
@@ -132,6 +139,9 @@ const Register = () => {
           break;
         case "invalidPassword":
           setWarning(invalidPasswordMsg);
+          break;
+        case "missingCaptcha":
+          setWarning(missingCaptchaMsg);
           break;
         default:
           setWarning(serverErrorMsg);
@@ -198,18 +208,25 @@ const Register = () => {
                 <p className="text-[4vw]">{successMessage || warning}</p>
               </div>
             )}
-
-            <p className="w-full text-center mt-[10vw]">
-              Hast du schon ein Konto?
-            </p>
-            <button
-              type="button"
-              className="h-input border-customBorder border-black p-[4vw]"
-              onClick={() => navigate("/login")}>
-              LOGIN
-            </button>
           </div>
         </form>
+
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+          size="compact"
+          className="mt-[4vw]"
+        />
+
+        <div className="w-[85%] flex flex-col mt-[10vw]">
+          <p className="w-full text-center">Hast du schon ein Konto?</p>
+          <button
+            type="button"
+            className="h-input border-customBorder border-black p-[4vw]"
+            onClick={() => navigate("/login")}>
+            LOGIN
+          </button>
+        </div>
       </section>
     </div>
   );

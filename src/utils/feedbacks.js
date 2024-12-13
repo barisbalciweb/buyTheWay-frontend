@@ -18,3 +18,5 @@ export const serverErrorMsg =
   "Es ist ein Fehler aufgetreten. Bitte versuche es später erneut.";
 
 export const passwordMatchMsg = "Die Passwörter stimmen nicht überein.";
+
+export const missingCaptchaMsg = "Bitte bestätige das Captcha.";
