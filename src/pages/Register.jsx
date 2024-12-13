@@ -44,7 +44,7 @@ const Register = () => {
   const [captchaVerified, setCaptchaVerified] = useState(false);
 
   // GLOBAL STATES
-  const { registration } = useSelector((state) => state.auth);
+  const { registration, isLoggedIn } = useSelector((state) => state.auth);
 
   const labelStyle = "flex flex-col";
   const inputStyle = "h-input bg-[#F4F4F4] p-[4vw] outline-none";

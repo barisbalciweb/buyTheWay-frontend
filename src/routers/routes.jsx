@@ -7,6 +7,7 @@ import ProductDetail from "../pages/ProductDetail";
 import Register from "../pages/Register";
 import Store from "../pages/Store";
 import Wishlist from "../pages/Wishlist";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -18,8 +19,22 @@ const routes = [
   { path: "/cart", element: <Cart /> },
   { path: "/checkout", element: <Checkout /> },
   { path: "/wishlist", element: <Wishlist /> },
-  { path: "/login", element: <Login /> },
-  { path: "/register", element: <Register /> },
+  {
+    path: "/login",
+    element: (
+      <ProtectedRoute redirectTo="/account">
+        <Login />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/register",
+    element: (
+      <ProtectedRoute redirectTo="/account">
+        <Register />
+      </ProtectedRoute>
+    ),
+  },
   { path: "/account", element: <Account /> },
 ];
 
