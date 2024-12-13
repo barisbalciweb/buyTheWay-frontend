@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import {
@@ -13,6 +13,7 @@ import { loginUser, resetLogin } from "../features/auth/authSlice";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const inputRef = useRef();
 
   // LOCAL STATES
   const [emailValue, setEmailValue] = useState("");
@@ -24,8 +25,10 @@ const Login = () => {
   // GLOBAL STATES
   const { login } = useSelector((state) => state.auth);
 
-  // RESET FEEDBACKS
   useEffect(() => {
+    // FOCUS INPUT ON LOAD
+    inputRef.current.focus();
+    // RESET FEEDBACKS
     return () => {
       setWarning(null);
       dispatch(resetLogin());
@@ -84,6 +87,7 @@ const Login = () => {
             <label htmlFor="e-mail" className="flex flex-col">
               E-Mail
               <input
+                ref={inputRef}
                 value={emailValue}
                 type="email"
                 id="e-mail"
