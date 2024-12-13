@@ -215,10 +215,10 @@ const Register = () => {
           ref={recaptchaRef}
           sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
           size="compact"
-          className="mt-[4vw]"
+          className="mt-[5vw]"
         />
 
-        <div className="w-[85%] flex flex-col mt-[10vw]">
+        <div className="w-[85%] flex flex-col mt-[5vw]">
           <p className="w-full text-center">Hast du schon ein Konto?</p>
           <button
             type="button"
