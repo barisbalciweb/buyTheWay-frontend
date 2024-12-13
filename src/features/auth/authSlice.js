@@ -6,21 +6,42 @@ const api_url = apiUrlSwitch();
 
 const initialState = {
   isLoggedIn: false,
-  loginStatus: "idle",
-  loginError: null,
+  login: {
+    result: null,
+    status: "idle",
+    error: null,
+  },
+  registration: {
+    result: null,
+    status: "idle",
+    error: null,
+  },
 };
 
+// REGISTER NEW USER
+export const register = createAsyncThunk(
+  "auth/register",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const url = `${api_url}/auth/register`;
+      const { data } = await axios.post(url, userData);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+// LOGIN USER
 export const login = createAsyncThunk(
   "login",
   async (credentials, { rejectWithValue }) => {
     try {
       const url = `${api_url}/auth/login`;
-
       const { data } = await axios.post(url, credentials);
-
       return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.message.data.message);
     }
   }
 );
@@ -32,22 +53,43 @@ export const authSlice = createSlice({
     setIsLoggedIn: (state, action) => {
       state.isLoggedIn = !state.isLoggedIn;
     },
+    resetRegistration: (state) => {
+      state.registration = {
+        result: null,
+        status: "idle",
+        error: null,
+      };
+    },
   },
   extraReducers: (builder) => {
     builder
+      // REGISTER
+      .addCase(register.pending, (state) => {
+        state.registration.status = "loading";
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.registration.status = "succeeded";
+        state.registration.result = action.payload;
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.registration.status = "failed";
+        state.registration.error = action.payload;
+      })
+
+      // LOGIN
       .addCase(login.pending, (state, action) => {
-        state.loginStatus = "loading";
+        state.login.status = "loading";
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.loginStatus = "succeeded";
-        console.log(action.payload);
+        state.login.status = "succeeded";
+        state.login.result = action.payload;
       })
       .addCase(login.rejected, (state, action) => {
-        state.loginStatus = "failed";
-        state.loginError = action.error.message;
+        state.login.status = "failed";
+        state.login.error = action.error.message;
       });
   },
 });
 
-export const { setIsLoggedIn } = authSlice.actions;
+export const { setIsLoggedIn, resetRegistration } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,6 +1,3 @@
-import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
-import { space } from "postcss/lib/list";
-
 // tailwind.config.js
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -27,6 +24,7 @@ export default {
       },
       height: {
         slider: "65vw",
+        input: "13vw",
       },
     },
   },

@@ -14,9 +14,7 @@ const Login = () => {
 
   // GLOBAL STATES
 
-  const { loginError } = useSelector((state) => state.auth);
-
-  console.log(loginError);
+  const { login } = useSelector((state) => state.auth);
 
   const handleLogin = (e) => {
     e.preventDefault();
