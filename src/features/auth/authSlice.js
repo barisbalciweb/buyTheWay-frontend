@@ -5,13 +5,17 @@ import axios from "axios";
 const api_url = apiUrlSwitch();
 
 const initialState = {
-  isLoggedIn: false,
   login: {
     result: null,
     status: "idle",
     error: null,
   },
   registration: {
+    result: null,
+    status: "idle",
+    error: null,
+  },
+  authentication: {
     result: null,
     status: "idle",
     error: null,
@@ -41,6 +45,22 @@ export const loginUser = createAsyncThunk(
     try {
       const url = `${api_url}/auth/login`;
       const { data } = await axios.post(url, credentials, {
+        withCredentials: true,
+      });
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+// VERIFY COOKIE
+export const verifyCookie = createAsyncThunk(
+  "auth/verifyCookie",
+  async (_, { rejectWithValue }) => {
+    try {
+      const url = `${api_url}/auth/verifyCookie`;
+      const { data } = await axios.get(url, {
         withCredentials: true,
       });
       return data;
@@ -94,12 +114,23 @@ export const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.login.status = "succeeded";
         state.login.result = action.payload;
-        // SET LOGGED IN
-        state.isLoggedIn = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.login.status = "failed";
         state.login.error = action.payload;
+      })
+
+      // VERIFY COOKIE
+      .addCase(verifyCookie.pending, (state, action) => {
+        state.authentication.status = "loading";
+      })
+      .addCase(verifyCookie.fulfilled, (state, action) => {
+        state.authentication.status = "succeeded";
+        state.authentication.result = action.payload.isValid;
+      })
+      .addCase(verifyCookie.rejected, (state, action) => {
+        state.authentication.status = "failed";
+        state.authentication.error = action.payload;
       });
   },
 });

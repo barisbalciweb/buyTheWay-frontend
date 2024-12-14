@@ -8,7 +8,11 @@ import {
 } from "../utils/feedbacks";
 //REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, resetLogin } from "../features/auth/authSlice";
+import {
+  loginUser,
+  resetLogin,
+  verifyCookie,
+} from "../features/auth/authSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -23,7 +27,7 @@ const Login = () => {
   const [waiting, isWaiting] = useState(false);
 
   // GLOBAL STATES
-  const { login } = useSelector((state) => state.auth);
+  const { login, authentication } = useSelector((state) => state.auth);
 
   useEffect(() => {
     // FOCUS INPUT ON LOAD
@@ -49,8 +53,8 @@ const Login = () => {
     }
     if (login.status === "succeeded") {
       isWaiting(false);
-      // REDIRECT TO HOME
-      login.result?.message === "success" && navigate("/");
+      // CHECK IF COOKIE IS SETTED
+      dispatch(verifyCookie());
     }
     if (login.status === "failed") {
       isWaiting(false);
@@ -71,6 +75,13 @@ const Login = () => {
     }
     setIsSubmitted(false);
   }, [login]);
+
+  // VERIFY COOKIE AND REDIRECT
+  useEffect(() => {
+    if (authentication.result) {
+      navigate("/");
+    }
+  }, [authentication]);
 
   const handleLogin = (e) => {
     e.preventDefault();
