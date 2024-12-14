@@ -8,11 +8,7 @@ import {
 } from "../utils/feedbacks";
 //REDUX
 import { useDispatch, useSelector } from "react-redux";
-import {
-  loginUser,
-  resetLogin,
-  verifyCookie,
-} from "../features/auth/authSlice";
+import { loginUser, resetLogin } from "../features/auth/authSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -22,9 +18,8 @@ const Login = () => {
   // LOCAL STATES
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [warning, setWarning] = useState(null);
   const [waiting, isWaiting] = useState(false);
+  const [warning, setWarning] = useState(null);
 
   // GLOBAL STATES
   const { login, authentication } = useSelector((state) => state.auth);
@@ -39,13 +34,6 @@ const Login = () => {
     };
   }, []);
 
-  // FETCH LOGIN DATA
-  useEffect(() => {
-    if (isSubmitted) {
-      dispatch(loginUser({ email: emailValue, password: passwordValue }));
-    }
-  }, [isSubmitted]);
-
   // SHOW FEEDBACK
   useEffect(() => {
     if (login.status === "loading") {
@@ -53,8 +41,8 @@ const Login = () => {
     }
     if (login.status === "succeeded") {
       isWaiting(false);
-      // CHECK IF COOKIE IS SETTED
-      dispatch(verifyCookie());
+      // REDIRECT TO HOME AFTER LOGIN
+      navigate("/");
     }
     if (login.status === "failed") {
       isWaiting(false);
@@ -73,20 +61,13 @@ const Login = () => {
           break;
       }
     }
-    setIsSubmitted(false);
   }, [login]);
-
-  // VERIFY COOKIE AND REDIRECT
-  useEffect(() => {
-    if (authentication.result) {
-      navigate("/");
-    }
-  }, [authentication]);
 
   const handleLogin = (e) => {
     e.preventDefault();
     setWarning(null);
-    setIsSubmitted(true);
+    // FETCH LOGIN DATA
+    dispatch(loginUser({ email: emailValue, password: passwordValue }));
   };
 
   const disableSubmit = waiting || emailValue === "" || passwordValue === "";

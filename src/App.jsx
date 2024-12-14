@@ -1,12 +1,23 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import routes from "./routers/routes";
 import Layout from "./layout/Layout";
 import ScrollToTop from "./components/ScrollTop";
-import { useSelector } from "react-redux";
+// REDUX
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { verifyCookie } from "./features/auth/authSlice";
 
 const App = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+
   const { warningScreen } = useSelector((state) => state.ui);
   const { isMobileMenuOpen, isSearchOpen } = useSelector((state) => state.ui);
+
+  // VERIFY COOKIE ON LOAD
+  useEffect(() => {
+    dispatch(verifyCookie());
+  }, [location]);
 
   return (
     <div

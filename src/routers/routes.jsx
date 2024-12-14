@@ -12,17 +12,15 @@ import { ProtectedRoute } from "./ProtectedRoute";
 const routes = [
   { path: "/", element: <Home /> },
   { path: "/store/product/:productId", element: <ProductDetail /> },
-  {
-    path: "/store",
-    element: <Store />,
-  },
+  { path: "/store", element: <Store /> },
   { path: "/cart", element: <Cart /> },
   { path: "/checkout", element: <Checkout /> },
   { path: "/wishlist", element: <Wishlist /> },
+
   {
     path: "/login",
     element: (
-      <ProtectedRoute redirectTo="/account">
+      <ProtectedRoute targetPath="login">
         <Login />
       </ProtectedRoute>
     ),
@@ -30,12 +28,20 @@ const routes = [
   {
     path: "/register",
     element: (
-      <ProtectedRoute redirectTo="/account">
+      <ProtectedRoute targetPath="register">
         <Register />
       </ProtectedRoute>
     ),
   },
-  { path: "/account", element: <Account /> },
+
+  {
+    path: "/account",
+    element: (
+      <ProtectedRoute targetPath="account">
+        <Account />
+      </ProtectedRoute>
+    ),
+  },
 ];
 
 export default routes;
