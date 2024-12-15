@@ -35,3 +35,11 @@ export const collections = [
   { name: "Reduzierte Artikel", path: "/discounted" },
   { name: "Beliebte Artikel", path: "/favorites" },
 ];
+
+export const settings = [
+  { title: "Meine Bestellungen" },
+  { title: "Meine Benutzerdaten" },
+  { title: "Mein Adressbuch" },
+  { title: "Meine Zahlungsarten" },
+  { title: "Konto löschen" },
+];
