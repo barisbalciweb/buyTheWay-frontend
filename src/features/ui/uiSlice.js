@@ -9,6 +9,7 @@ const initialState = {
   selectedCategoryGroup: null,
   warningScreen: false,
   innerWidth: window.innerWidth,
+  activeComponent: null,
 };
 
 export const uiSlice = createSlice({
@@ -49,6 +50,9 @@ export const uiSlice = createSlice({
     setInnerWidth: (state, action) => {
       state.innerWidth = action.payload;
     },
+    setActiveComponent: (state, action) => {
+      state.activeComponent = action.payload;
+    },
   },
 });
 
@@ -61,5 +65,6 @@ export const {
   setSelectedCategoryGroup,
   setWarningScreen,
   setInnerWidth,
+  setActiveComponent,
 } = uiSlice.actions;
 export default uiSlice.reducer;

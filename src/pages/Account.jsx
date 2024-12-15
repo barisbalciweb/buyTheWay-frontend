@@ -1,31 +1,65 @@
+import Orders from "../components/Account/Orders";
 import { settings } from "../data/data";
+import UserData from "../components/Account/UserData";
+import AddressBook from "../components/Account/AddressBook";
+import PaymentMethods from "../components/Account/PaymentMethods";
+import AccountSettings from "../components/Account/AccountSettings";
+// REDUX
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveComponent } from "../features/ui/uiSlice";
 
 const Account = () => {
-  const handleClick = (e) => {};
+  const dispatch = useDispatch();
+
+  // GLOBAL STATE
+  const { activeComponent } = useSelector((state) => state.ui);
+
+  const handleClick = (title, id) => {
+    dispatch(setActiveComponent({ title, id }));
+  };
+
+  const renderActiveComponent = () => {
+    switch (activeComponent.id) {
+      case "orders":
+        return <Orders />;
+      case "user-data":
+        return <UserData />;
+      case "address-book":
+        return <AddressBook />;
+      case "payment-methods":
+        return <PaymentMethods />;
+      case "account-settings":
+        return <AccountSettings />;
+      default:
+        return null;
+    }
+  };
 
   return (
-    //! TO FIX: can't give h-screen to main element
-    <main>
-      <div className="p-[4vw]">
-        <section>
-          <h1 className="text-[7vw] font-bold mb-[4vw]">Mein Konto</h1>
-          <h2 className="text-[5vw]">Wilkommen, {}</h2>
-          <p className="text-[4vw]">Kundennummer: {}</p>
-        </section>
-        <section className="my-[10vw]">
+    <main className="p-[4vw] flex flex-col flex-grow">
+      <section className="mb-[10vw]">
+        <h1 className="text-[7vw] font-bold mb-[4vw]">Mein Konto</h1>
+        <h2 className="text-[5vw]">Wilkommen, {}</h2>
+        <p className="text-[4vw]">Kundennummer: {}</p>
+      </section>
+
+      {activeComponent ? (
+        renderActiveComponent()
+      ) : (
+        <section className="mb-[10vw]">
           <ul className="flex flex-col gap-[2vw]">
-            {settings.map(({ title }, index) => (
-              <li key={index}>
+            {settings.map(({ title, id }) => (
+              <li key={id}>
                 <button
                   className="w-full border-gray-400 border-customBorder rounded-md text-[4vw] shadow-md font-bold text-center py-[6vw] px-[2vw]"
-                  onClick={handleClick}>
+                  onClick={() => handleClick(title, id)}>
                   {title}
                 </button>
               </li>
             ))}
           </ul>
         </section>
-      </div>
+      )}
     </main>
   );
 };

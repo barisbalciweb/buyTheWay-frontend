@@ -37,9 +37,9 @@ export const collections = [
 ];
 
 export const settings = [
-  { title: "Meine Bestellungen" },
-  { title: "Meine Benutzerdaten" },
-  { title: "Mein Adressbuch" },
-  { title: "Meine Zahlungsarten" },
-  { title: "Konto löschen" },
+  { title: "Meine Bestellungen", id: "orders" },
+  { title: "Meine Benutzerdaten", id: "user-data" },
+  { title: "Mein Adressbuch", id: "address-book" },
+  { title: "Meine Zahlungsarten", id: "payment-methods" },
+  { title: "Kontoeinstellungen", id: "account-settings" },
 ];
