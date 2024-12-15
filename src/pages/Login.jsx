@@ -16,13 +16,13 @@ const Login = () => {
   const inputRef = useRef();
 
   // LOCAL STATES
-  const [emailValue, setEmailValue] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
+  const [emailValue, setEmailValue] = useState("test@user.com");
+  const [passwordValue, setPasswordValue] = useState("testUSER123");
   const [waiting, isWaiting] = useState(false);
   const [warning, setWarning] = useState(null);
 
   // GLOBAL STATES
-  const { login, authentication } = useSelector((state) => state.auth);
+  const { login } = useSelector((state) => state.auth);
 
   useEffect(() => {
     // FOCUS INPUT ON LOAD

@@ -6,13 +6,16 @@ import AddressBook from "../components/Account/AddressBook";
 import PaymentMethods from "../components/Account/PaymentMethods";
 import AccountSettings from "../components/Account/AccountSettings";
 import _ from "lodash";
+import { useNavigate } from "react-router-dom";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveComponent } from "../features/ui/uiSlice";
 import { getUserData } from "../features/account/accountSlice";
+import { logoutUser } from "../features/auth/authSlice";
 
 const Account = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // GET USER DATA
   useEffect(() => {
@@ -24,6 +27,12 @@ const Account = () => {
   const { userData } = useSelector((state) => state.account);
 
   const handleClick = (title, id) => {
+    // LOGOUT USER
+    if (id === "logout") {
+      dispatch(logoutUser());
+      navigate("/");
+      return;
+    }
     dispatch(setActiveComponent({ title, id }));
   };
 
@@ -62,7 +71,9 @@ const Account = () => {
             {settings.map(({ title, id }) => (
               <li key={id}>
                 <button
-                  className="w-full border-gray-400 border-customBorder rounded-md text-[4vw] shadow-md font-bold text-center py-[6vw] px-[2vw]"
+                  className={`w-full border-gray-400 border-customBorder rounded-md text-[4vw] shadow-md font-bold text-center py-[5vw] px-[2vw] ${
+                    id === "logout" && "bg-black text-white"
+                  }`}
                   onClick={() => handleClick(title, id)}>
                   {title}
                 </button>

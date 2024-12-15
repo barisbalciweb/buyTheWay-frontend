@@ -42,4 +42,5 @@ export const settings = [
   { title: "Mein Adressbuch", id: "address-book" },
   { title: "Meine Zahlungsarten", id: "payment-methods" },
   { title: "Kontoeinstellungen", id: "account-settings" },
+  { title: "Abmelden", id: "logout" },
 ];

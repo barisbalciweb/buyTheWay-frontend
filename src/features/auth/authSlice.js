@@ -20,6 +20,11 @@ const initialState = {
     status: "idle",
     error: null,
   },
+  logout: {
+    result: null,
+    status: "idle",
+    error: null,
+  },
 };
 
 // REGISTER NEW USER
@@ -61,6 +66,22 @@ export const verifyCookie = createAsyncThunk(
     try {
       const url = `${api_url}/auth/verifyCookie`;
       const { data } = await axios.get(url, {
+        withCredentials: true,
+      });
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+// LOGOUT USER
+export const logoutUser = createAsyncThunk(
+  "auth/logoutUser",
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const url = `${api_url}/auth/logout`;
+      const { data } = await axios.post(url, credentials, {
         withCredentials: true,
       });
       return data;
@@ -131,6 +152,21 @@ export const authSlice = createSlice({
       .addCase(verifyCookie.rejected, (state, action) => {
         state.authentication.status = "failed";
         state.authentication.error = action.payload;
+        state.authentication.result = false;
+      })
+
+      // LOGOUT
+      .addCase(logoutUser.pending, (state, action) => {
+        state.logout.status = "loading";
+      })
+      .addCase(logoutUser.fulfilled, (state, action) => {
+        state.logout.status = "succeeded";
+        state.logout.result = action.payload.message;
+        state.authentication.result = false;
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.logout.status = "failed";
+        state.logout.error = action.payload;
       });
   },
 });
