@@ -24,8 +24,8 @@ You can view the UI design of the page at the following link: [buyTheWay Figma D
   - [x] Users can search for products.
 
 - **User Management**:
-  - [ ] Users can register and log in with a secure password. 🚧
-  - [ ] Authentication methods such as email-password authentication or OAuth (e.g., via Google). 🚧
+  - [x] Users can register and log in with a secure password.
+  - [x] Authentication is implemented using JWT (JSON Web Token).
 
 - **Profile Management**:
   - [ ] Users can manage their profiles, update information, and save their favorites. 🚧
@@ -62,8 +62,8 @@ You can view the UI design of the page at the following link: [buyTheWay Figma D
 
 ## Security
 - [x] **Proxy Server**: All API requests are routed through a proxy server before reaching the API server, keeping the direct API address hidden for additional security.
-- [ ] **Data Encryption**: Sensitive data such as passwords and authentication tokens are encrypted during transmission and in the database. 🚧
-- [ ] **CORS Policies**: Strict Cross-Origin Resource Sharing (CORS) policies are implemented to prevent unauthorized requests. 🚧
+- [x] **Data Encryption**: Sensitive data such as passwords and authentication tokens are encrypted during transmission and in the database. 
+- [x] **CORS Policies**: Strict Cross-Origin Resource Sharing (CORS) policies are implemented to prevent unauthorized requests. 
 
 ## Installation
 
@@ -161,8 +161,8 @@ Das UI-Design der Seite können Sie unter folgendem Link ansehen: [buyTheWay Fig
   - [x] Benutzer können Produkte durchsuchen.
 
 - **Benutzerverwaltung**:
-  - [ ] Benutzer können sich registrieren und mit einem sicheren Passwort einloggen. 🚧
-  - [ ] Authentifizierungsmethoden wie E-Mail- und Passwort-Authentifizierung oder OAuth (z.B. über Google). 🚧
+  - [x] Benutzer können sich registrieren und mit einem sicheren Passwort einloggen. 
+  - [x] Die Authentifizierung erfolgt über JWT (JSON Web Token).
 
 - **Profilverwaltung**:
   - [ ] Benutzer können ihr Profil verwalten, Informationen aktualisieren und ihre Favoriten speichern. 🚧
@@ -200,8 +200,8 @@ Das UI-Design der Seite können Sie unter folgendem Link ansehen: [buyTheWay Fig
 
 ## Sicherheit
 - [x] **Proxy-Server**: Alle API-Anfragen werden über einen Proxy-Server geleitet, bevor sie den API-Server erreichen. Dadurch bleibt die direkte API-Adresse verborgen, was ein zusätzliches Sicherheitsniveau bietet.
-- [ ] **Datenverschlüsselung**: Sensible Daten wie Passwörter und Authentifizierungs-Tokens werden sowohl bei der Übertragung als auch in der Datenbank verschlüsselt. 🚧
-- [ ] **CORS-Richtlinien**: Strikte Cross-Origin Resource Sharing (CORS)-Richtlinien werden implementiert, um unautorisierte Anfragen zu verhindern. 🚧
+- [x] **Datenverschlüsselung**: Sensible Daten wie Passwörter und Authentifizierungs-Tokens werden sowohl bei der Übertragung als auch in der Datenbank verschlüsselt. 
+- [x] **CORS-Richtlinien**: Strikte Cross-Origin Resource Sharing (CORS)-Richtlinien werden implementiert, um unautorisierte Anfragen zu verhindern. 
 
 ## Installation
 
