@@ -121,3 +121,9 @@ export const categoryGroups = [
     ],
   },
 ];
+
+export const orders = [
+  { id: 1, date: "2021-09-01", total: 1000, details: "Detaylar 1" },
+  { id: 2, date: "2021-09-02", total: 2000, details: "Detaylar 2" },
+  { id: 3, date: "2021-09-03", total: 3000, details: "Detaylar 3" },
+];
