@@ -1,8 +1,8 @@
 export const apiUrlSwitch = () => {
-  const env = import.meta.env.VITE_NODE_ENV;
+  const nodeEnv = import.meta.env.VITE_NODE_ENV;
 
   const api_url =
-    env === "prod"
+    nodeEnv === "prod"
       ? import.meta.env.VITE_API_URL_PROD
       : import.meta.env.VITE_API_URL_DEV;
 
