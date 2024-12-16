@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AccountNavigation from "./AccountNavigation";
-import { orders } from "../../data/fakeData";
+import { orders, productsInOrder } from "../../data/fakeData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 
@@ -14,7 +14,7 @@ const Orders = () => {
       <section className="mt-[5vw]">
         <h2 className="text-[5vw] font-bold">Bestellungen</h2>
         <div className="flex flex-col gap-[3vw] mt-[2vw]">
-          {/* FOR TESTING */}
+          {/* FAKE DATA FOR TESTING */}
           {orders.map(({ id, date, total }) => (
             <div
               key={id}
@@ -36,8 +36,26 @@ const Orders = () => {
 
               {/* ACCORDION CONTENT (ORDER DETAILS)*/}
               {openOrderId === id && (
-                <div className="p-[2vw] bg-gray-50 text-gray-700">
-                  <p>test</p>
+                <div className="bg-white text-gray-700 p-[2vw] mb-[2vw] rounded-md shadow-[inset_2px_2px_5px_0px_rgba(0,0,0,0.2)]">
+                  <table className="w-full">
+                    <thead className="font-bold">
+                      <tr className="p-2">
+                        <td>Artikelnr.</td>
+                        <td>Stückpreis</td>
+                        <td>Menge</td>
+                      </tr>
+                    </thead>
+                    {/* FAKE DATA FOR TESTING */}
+                    <tbody>
+                      {productsInOrder.map((product) => (
+                        <tr>
+                          <td>{product.id}</td>
+                          <td>{product.price}€</td>
+                          <td>{product.quantity}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               )}
 

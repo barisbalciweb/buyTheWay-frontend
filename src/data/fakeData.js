@@ -127,3 +127,24 @@ export const orders = [
   { id: 2, date: "2021-09-02", total: 2000, details: "Detaylar 2" },
   { id: 3, date: "2021-09-03", total: 3000, details: "Detaylar 3" },
 ];
+
+export const productsInOrder = [
+  {
+    id: 1,
+    name: "Product 1",
+    price: 100,
+    quantity: 5,
+  },
+  {
+    id: 2,
+    name: "Product 2",
+    price: 200,
+    quantity: 3,
+  },
+  {
+    id: 3,
+    name: "Product 3",
+    price: 300,
+    quantity: 2,
+  },
+];
