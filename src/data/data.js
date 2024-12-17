@@ -47,22 +47,22 @@ export const settings = [
 
 export const inputs = [
   {
-    labelText: "Vorname",
+    labelText: "Vorname:",
     fieldId: "firstname",
     type: "text",
   },
   {
-    labelText: "Nachname",
+    labelText: "Nachname:",
     fieldId: "lastname",
     type: "text",
   },
   {
-    labelText: "E-Mail",
+    labelText: "E-Mail:",
     fieldId: "email",
     type: "email",
   },
   {
-    labelText: "Passwort",
+    labelText: "Passwort:",
     fieldId: "password",
     type: "password",
   },

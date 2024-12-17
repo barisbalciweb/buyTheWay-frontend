@@ -35,7 +35,7 @@ const UserData = () => {
   const { userAccountInfo } = useSelector((state) => state.account);
   const infoStatus = userAccountInfo.status;
   const infoResult = userAccountInfo.result;
-  const updateStatus = useSelector((state) => state.account.userUpdate.statu);
+  const updateStatus = useSelector((state) => state.account.userUpdate.status);
 
   useEffect(() => {
     // GET USER DATA FROM COOKIES
@@ -60,6 +60,7 @@ const UserData = () => {
   useEffect(() => {
     if (updateStatus === "succeeded") {
       setUpdateSuccess(true);
+
       setTimeout(() => {
         setUpdateSuccess(false);
         dispatch(resetUserUpdate());
@@ -102,8 +103,8 @@ const UserData = () => {
   return (
     <div>
       <AccountNavigation />
-      <section className="w-full flex justify-center items-center bg-gray-200 p-[2vw]">
-        <form className="w-[80%] flex flex-col gap-[3vw] justify-center items-center">
+      <section className="w-full flex justify-center items-center bg-gray-200 p-[2vw] mt-[5vw]">
+        <form className="w-[80%] flex flex-col gap-[3vw] justify-center items-center py-[10vw]">
           {inputs.map(({ labelText, fieldId, type }) => (
             <div key={fieldId} className="w-full flex flex-col gap-[1vw]">
               <label htmlFor={fieldId}>{labelText}</label>
@@ -114,24 +115,26 @@ const UserData = () => {
                   value={formValues[fieldId] || ""}
                   onChange={handleChange}
                   disabled={!editOpen[fieldId]}
-                  className="w-full h-[10vw] focus:outline-none px-[3vw] disabled:bg-gray-100 focus:border-customOrange"
+                  className="w-[90%] h-[10vw] focus:outline-none px-[3vw] disabled:bg-gray-100 focus:border-customOrange"
                 />
                 {/* EDIT || SAVE */}
-                {editOpen[fieldId] ? (
-                  <FontAwesomeIcon
-                    icon={faFloppyDisk}
-                    className="text-[6vw] absolute right-[-7vw] text-customOrange"
-                    aria-label="Speichern"
-                    onClick={() => handleSave(fieldId)}
-                  />
-                ) : (
-                  <FontAwesomeIcon
-                    icon={faPenToSquare}
-                    className="text-[6vw] absolute right-[-8vw]"
-                    aria-label="Bearbeiten"
-                    onClick={() => handleEdit(fieldId)}
-                  />
-                )}
+                <div className="w-[10%] h-[10vw] flex justify-center items-center">
+                  {editOpen[fieldId] ? (
+                    <FontAwesomeIcon
+                      icon={faFloppyDisk}
+                      className="text-[6vw] text-customOrange"
+                      aria-label="Speichern"
+                      onClick={() => handleSave(fieldId)}
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={faPenToSquare}
+                      className="text-[6vw] mb-[1vw]"
+                      aria-label="Bearbeiten"
+                      onClick={() => handleEdit(fieldId)}
+                    />
+                  )}
+                </div>
               </div>
             </div>
           ))}
@@ -141,7 +144,7 @@ const UserData = () => {
       {/* SUCCESS FEEDBACK */}
       {updateSuccess && (
         <section>
-          <div className="w-full h-[15%] flex justify-center items-center text-[4vw] bg-[rgba(0,100,0,0.9)] text-white fixed bottom-0 left-0">
+          <div className="w-[100%] h-[15%] flex justify-center items-center text-[4vw] bg-[rgba(0,100,0,0.9)] text-white fixed bottom-0 left-0">
             <p>Änderungen wurden erfolgreich gespeichert!</p>
           </div>
         </section>
