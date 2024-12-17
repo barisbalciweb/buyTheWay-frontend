@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import AccountNavigation from "./AccountNavigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFloppyDisk, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFloppyDisk,
+  faPenToSquare,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { inputs } from "../../data/data";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
@@ -100,32 +104,50 @@ const UserData = () => {
     );
   };
 
+  const handleCancel = (fieldId) => {
+    setEditOpen((prev) => ({
+      ...prev,
+      [fieldId]: false,
+    }));
+    setFormValues((prev) => ({
+      ...prev,
+      [fieldId]: infoResult.data[fieldId],
+    }));
+  };
+
   return (
     <div>
       <AccountNavigation />
       <section className="w-full flex justify-center items-center bg-gray-200 p-[2vw] mt-[5vw]">
-        <form className="w-[80%] flex flex-col gap-[3vw] justify-center items-center py-[10vw]">
+        <form className="w-[90%] flex flex-col gap-[3vw] justify-center items-center py-[10vw]">
           {inputs.map(({ labelText, fieldId, type }) => (
             <div key={fieldId} className="w-full flex flex-col gap-[1vw]">
               <label htmlFor={fieldId}>{labelText}</label>
-              <div className="w-full flex justify-between items-center gap-[2vw] relative">
+              <div className="w-full flex justify-between items-center gap-[3vw] relative">
                 <input
                   id={fieldId}
                   type={type}
                   value={formValues[fieldId] || ""}
                   onChange={handleChange}
                   disabled={!editOpen[fieldId]}
-                  className="w-[90%] h-[10vw] focus:outline-none px-[3vw] disabled:bg-gray-100 focus:border-customOrange"
+                  className="w-full h-[10vw] focus:outline-none px-[3vw] disabled:bg-gray-100 focus:border-customOrange"
                 />
                 {/* EDIT || SAVE */}
-                <div className="w-[10%] h-[10vw] flex justify-center items-center">
+                <div className="w-[20%] h-[10vw] flex justify-center items-center">
                   {editOpen[fieldId] ? (
-                    <FontAwesomeIcon
-                      icon={faFloppyDisk}
-                      className="text-[6vw] text-customOrange"
-                      aria-label="Speichern"
-                      onClick={() => handleSave(fieldId)}
-                    />
+                    <div className="w-full h-full flex justify-between items-center">
+                      <FontAwesomeIcon
+                        icon={faFloppyDisk}
+                        className="text-[6vw] text-customOrange"
+                        aria-label="Speichern"
+                        onClick={() => handleSave(fieldId)}
+                      />
+                      <FontAwesomeIcon
+                        icon={faXmark}
+                        className="text-[7.5vw]"
+                        onClick={() => handleCancel(fieldId)}
+                      />
+                    </div>
                   ) : (
                     <FontAwesomeIcon
                       icon={faPenToSquare}
