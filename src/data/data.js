@@ -44,3 +44,26 @@ export const settings = [
   { title: "Kontoeinstellungen", id: "account-settings" },
   { title: "Abmelden", id: "logout" },
 ];
+
+export const inputs = [
+  {
+    labelText: "Vorname",
+    fieldId: "firstname",
+    type: "text",
+  },
+  {
+    labelText: "Nachname",
+    fieldId: "lastname",
+    type: "text",
+  },
+  {
+    labelText: "E-Mail",
+    fieldId: "email",
+    type: "email",
+  },
+  {
+    labelText: "Passwort",
+    fieldId: "password",
+    type: "password",
+  },
+];
