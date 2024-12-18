@@ -127,40 +127,42 @@ const UserData = () => {
           {inputs.map(({ labelText, fieldId, type }) => (
             <div key={fieldId} className="w-full flex flex-col gap-[1vw]">
               <label htmlFor={fieldId}>{labelText}</label>
-              <div className="w-full flex justify-between items-center gap-[3vw] relative">
+              <div className="w-full flex justify-between items-center relative">
                 <input
                   id={fieldId}
                   type={type}
                   value={formValues[fieldId] || ""}
                   onChange={handleChange}
-                  disabled={!editOpen[fieldId]}
-                  className="w-full h-[10vw] focus:outline-none px-[3vw] disabled:bg-gray-100 focus:border-customOrange"
+                  disabled={fieldId === "email" ? true : !editOpen[fieldId]}
+                  className="w-[75%] h-[10vw] focus:outline-none px-[3vw] disabled:bg-gray-100 focus:border-customOrange"
                 />
                 {/* EDIT || SAVE */}
-                <div className="w-[25%] h-[10vw] flex justify-end items-center">
-                  {editOpen[fieldId] ? (
-                    <div className="w-full h-full flex justify-between items-center">
+                {fieldId !== "email" && (
+                  <div className="w-[25%] h-[10vw] flex justify-end items-center">
+                    {editOpen[fieldId] ? (
+                      <div className="w-full h-full flex justify-between items-center ml-[3vw]">
+                        <FontAwesomeIcon
+                          icon={faFloppyDisk}
+                          className="text-[6vw] text-customOrange"
+                          aria-label="Speichern"
+                          onClick={() => handleSave(fieldId)}
+                        />
+                        <FontAwesomeIcon
+                          icon={faXmark}
+                          className="text-[7.5vw]"
+                          onClick={() => handleCancel(fieldId)}
+                        />
+                      </div>
+                    ) : (
                       <FontAwesomeIcon
-                        icon={faFloppyDisk}
-                        className="text-[6vw] text-customOrange"
-                        aria-label="Speichern"
-                        onClick={() => handleSave(fieldId)}
+                        icon={faPenToSquare}
+                        className="text-[6vw] mb-[1vw]"
+                        aria-label="Bearbeiten"
+                        onClick={() => handleEdit(fieldId)}
                       />
-                      <FontAwesomeIcon
-                        icon={faXmark}
-                        className="text-[7.5vw]"
-                        onClick={() => handleCancel(fieldId)}
-                      />
-                    </div>
-                  ) : (
-                    <FontAwesomeIcon
-                      icon={faPenToSquare}
-                      className="text-[6vw] mb-[1vw]"
-                      aria-label="Bearbeiten"
-                      onClick={() => handleEdit(fieldId)}
-                    />
-                  )}
-                </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           ))}

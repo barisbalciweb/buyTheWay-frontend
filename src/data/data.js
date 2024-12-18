@@ -47,6 +47,11 @@ export const settings = [
 
 export const inputs = [
   {
+    labelText: "E-Mail:",
+    fieldId: "email",
+    type: "email",
+  },
+  {
     labelText: "Vorname:",
     fieldId: "firstname",
     type: "text",
@@ -56,11 +61,7 @@ export const inputs = [
     fieldId: "lastname",
     type: "text",
   },
-  {
-    labelText: "E-Mail:",
-    fieldId: "email",
-    type: "email",
-  },
+
   {
     labelText: "Passwort:",
     fieldId: "password",
