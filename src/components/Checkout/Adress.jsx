@@ -1,6 +1,12 @@
 import { useState } from "react";
+// REDUX
+import { useDispatch } from "react-redux";
+import { setCheckoutActiveComponent } from "../../features/ui/uiSlice";
 
 const Adress = () => {
+  const dispatch = useDispatch();
+
+  // LOCAL STATES
   const [titleValue, setTitleValue] = useState("");
   const [firstNameValue, setFirstNameValue] = useState("");
   const [lastNameValue, setLastNameValue] = useState("");
@@ -10,7 +16,10 @@ const Adress = () => {
   const [cityValue, setCityValue] = useState("");
   const [countryValue, setCountryValue] = useState("");
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(setCheckoutActiveComponent("payment"));
+  };
 
   const adressInputs = [
     {
@@ -101,10 +110,7 @@ const Adress = () => {
             );
           }
         )}
-        <button
-          type="submit"
-          onClick={handleSubmit}
-          className="h-input bg-black text-white">
+        <button onClick={handleSubmit} className="h-input bg-black text-white">
           Weiter
         </button>
       </form>

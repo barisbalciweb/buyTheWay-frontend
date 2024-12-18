@@ -10,7 +10,7 @@ const initialState = {
   warningScreen: false,
   innerWidth: window.innerWidth,
   accountActiveComponent: null,
-  checkoutActiveComponent: null,
+  checkoutActiveComponent: "adress",
 };
 
 export const uiSlice = createSlice({
@@ -55,7 +55,7 @@ export const uiSlice = createSlice({
       state.accountActiveComponent = action.payload;
     },
     setCheckoutActiveComponent: (state, action) => {
-      state.accountActiveComponent = action.payload;
+      state.checkoutActiveComponent = action.payload;
     },
   },
 });
