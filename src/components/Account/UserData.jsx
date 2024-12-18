@@ -122,51 +122,54 @@ const UserData = () => {
   return (
     <div>
       <AccountNavigation />
-      <section className="w-full flex justify-center items-center bg-gray-200 p-[2vw] mt-[5vw]">
-        <form className="w-[90%] flex flex-col gap-[3vw] justify-center items-center py-[10vw]">
-          {inputs.map(({ labelText, fieldId, type }) => (
-            <div key={fieldId} className="w-full flex flex-col gap-[1vw]">
-              <label htmlFor={fieldId}>{labelText}</label>
-              <div className="w-full flex justify-between items-center relative">
-                <input
-                  id={fieldId}
-                  type={type}
-                  value={formValues[fieldId] || ""}
-                  onChange={handleChange}
-                  disabled={fieldId === "email" ? true : !editOpen[fieldId]}
-                  className="w-[75%] h-[10vw] focus:outline-none px-[3vw] disabled:bg-gray-100 focus:border-customOrange"
-                />
-                {/* EDIT || SAVE */}
-                {fieldId !== "email" && (
-                  <div className="w-[25%] h-[10vw] flex justify-end items-center">
-                    {editOpen[fieldId] ? (
-                      <div className="w-full h-full flex justify-between items-center ml-[3vw]">
+      <section className="w-full mt-[5vw]">
+        <h2 className="text-[5vw] font-bold">Benutzerdaten</h2>
+        <div className="flex justify-center items-center bg-gray-200 mt-[2vw]">
+          <form className="w-[90%] flex flex-col gap-[3vw] justify-center items-center py-[10vw]">
+            {inputs.map(({ labelText, fieldId, type }) => (
+              <div key={fieldId} className="w-full flex flex-col gap-[1vw]">
+                <label htmlFor={fieldId}>{labelText}</label>
+                <div className="w-full flex justify-between items-center relative">
+                  <input
+                    id={fieldId}
+                    type={type}
+                    value={formValues[fieldId] || ""}
+                    onChange={handleChange}
+                    disabled={fieldId === "email" ? true : !editOpen[fieldId]}
+                    className="w-[75%] h-[10vw] focus:outline-none px-[3vw] disabled:bg-gray-100 focus:border-customOrange"
+                  />
+                  {/* EDIT || SAVE */}
+                  {fieldId !== "email" && (
+                    <div className="w-[25%] h-[10vw] flex justify-end items-center">
+                      {editOpen[fieldId] ? (
+                        <div className="w-full h-full flex justify-between items-center ml-[4vw]">
+                          <FontAwesomeIcon
+                            icon={faFloppyDisk}
+                            className="text-[6vw] text-customOrange"
+                            aria-label="Speichern"
+                            onClick={() => handleSave(fieldId)}
+                          />
+                          <FontAwesomeIcon
+                            icon={faXmark}
+                            className="text-[7.5vw]"
+                            onClick={() => handleCancel(fieldId)}
+                          />
+                        </div>
+                      ) : (
                         <FontAwesomeIcon
-                          icon={faFloppyDisk}
-                          className="text-[6vw] text-customOrange"
-                          aria-label="Speichern"
-                          onClick={() => handleSave(fieldId)}
+                          icon={faPenToSquare}
+                          className="text-[6vw] mb-[1vw]"
+                          aria-label="Bearbeiten"
+                          onClick={() => handleEdit(fieldId)}
                         />
-                        <FontAwesomeIcon
-                          icon={faXmark}
-                          className="text-[7.5vw]"
-                          onClick={() => handleCancel(fieldId)}
-                        />
-                      </div>
-                    ) : (
-                      <FontAwesomeIcon
-                        icon={faPenToSquare}
-                        className="text-[6vw] mb-[1vw]"
-                        aria-label="Bearbeiten"
-                        onClick={() => handleEdit(fieldId)}
-                      />
-                    )}
-                  </div>
-                )}
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
-        </form>
+            ))}
+          </form>
+        </div>
       </section>
 
       {/* SUCCESS FEEDBACK */}
