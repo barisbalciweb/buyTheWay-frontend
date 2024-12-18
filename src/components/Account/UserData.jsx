@@ -7,6 +7,12 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { inputs } from "../../data/data";
+import {
+  invalidPasswordMsg,
+  missingInputMsg,
+  serverErrorMsg,
+  vorbiddenInputMsg,
+} from "../../utils/feedbacks";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -14,6 +20,7 @@ import {
   resetUserUpdate,
   updateUserData,
 } from "../../features/account/accountSlice";
+import _ from "lodash";
 
 const UserData = () => {
   const dispatch = useDispatch();
@@ -23,15 +30,14 @@ const UserData = () => {
     firstname: "",
     lastname: "",
     email: "",
-    password: "",
   });
   const [editOpen, setEditOpen] = useState({
     firstname: false,
     lastname: false,
     email: false,
-    password: false,
   });
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [warning, setWarning] = useState(null);
 
   // GLOBAL STATES
   const { userData } = useSelector((state) => state.account);
@@ -39,6 +45,7 @@ const UserData = () => {
   const infoStatus = userAccountInfo.status;
   const infoResult = userAccountInfo.result;
   const updateStatus = useSelector((state) => state.account.userUpdate.status);
+  const updateError = useSelector((state) => state.account.userUpdate.error);
 
   // GET USER ACCOUNT INFO (FIRSNAME, LASTNAME, EMAIL)
   useEffect(() => {
@@ -46,7 +53,7 @@ const UserData = () => {
       dispatch(
         getUserAccountInfo({
           userId: userData.result.id,
-          requestedFields: ["firstname", "lastname", "email"],
+          requestedFields: ["email", "firstname", "lastname"],
         })
       );
     }
@@ -59,7 +66,6 @@ const UserData = () => {
         firstname: infoResult.data.firstname,
         lastname: infoResult.data.lastname,
         email: infoResult.data.email,
-        password: infoResult.data.password,
       });
     }
   }, [userAccountInfo]);
@@ -68,11 +74,27 @@ const UserData = () => {
   useEffect(() => {
     if (updateStatus === "succeeded") {
       setUpdateSuccess(true);
+      setWarning(false);
 
       setTimeout(() => {
         setUpdateSuccess(false);
         dispatch(resetUserUpdate());
       }, 3000);
+    }
+
+    // SHOW FEEDBACK IF UPDATE FAILED
+    if (updateStatus === "failed") {
+      switch (updateError) {
+        case "missingInput":
+          setWarning(missingInputMsg);
+          break;
+        case "vorbiddenInput":
+          setWarning(vorbiddenInputMsg);
+          break;
+        default:
+          setWarning(serverErrorMsg);
+          break;
+      }
     }
   }, [updateStatus]);
 
@@ -133,7 +155,11 @@ const UserData = () => {
                   <input
                     id={fieldId}
                     type={type}
-                    value={formValues[fieldId] || ""}
+                    value={
+                      (fieldId === "email"
+                        ? formValues[fieldId]
+                        : _.capitalize(formValues[fieldId])) || ""
+                    }
                     onChange={handleChange}
                     disabled={fieldId === "email" ? true : !editOpen[fieldId]}
                     className="w-[75%] h-[10vw] focus:outline-none px-[3vw] disabled:bg-gray-100 focus:border-customOrange"
@@ -168,6 +194,12 @@ const UserData = () => {
                 </div>
               </div>
             ))}
+            {/* SHOW UPDATE WARNING */}
+            {warning && (
+              <p className="bg-red-200 p-[2vw]">
+                Änderungen fehlgeschlagen: {warning}
+              </p>
+            )}
           </form>
         </div>
       </section>

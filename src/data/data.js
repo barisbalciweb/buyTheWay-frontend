@@ -61,10 +61,4 @@ export const inputs = [
     fieldId: "lastname",
     type: "text",
   },
-
-  {
-    labelText: "Passwort:",
-    fieldId: "password",
-    type: "password",
-  },
 ];
