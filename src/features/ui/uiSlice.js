@@ -10,6 +10,7 @@ const initialState = {
   warningScreen: false,
   innerWidth: window.innerWidth,
   accountActiveComponent: null,
+  checkoutActiveComponent: null,
 };
 
 export const uiSlice = createSlice({
@@ -53,6 +54,9 @@ export const uiSlice = createSlice({
     setAccountActiveComponent: (state, action) => {
       state.accountActiveComponent = action.payload;
     },
+    setCheckoutActiveComponent: (state, action) => {
+      state.accountActiveComponent = action.payload;
+    },
   },
 });
 
@@ -66,5 +70,6 @@ export const {
   setWarningScreen,
   setInnerWidth,
   setAccountActiveComponent,
+  setCheckoutActiveComponent,
 } = uiSlice.actions;
 export default uiSlice.reducer;
