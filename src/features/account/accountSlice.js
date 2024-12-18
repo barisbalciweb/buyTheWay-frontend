@@ -41,9 +41,16 @@ export const getUserData = createAsyncThunk(
 // FETCH USER ACCOUNT INFO
 export const getUserAccountInfo = createAsyncThunk(
   "account/getUserAccountInfo",
-  async (userId, { rejectWithValue }) => {
+  async ({ userId, requestedFields }, { rejectWithValue }) => {
+    let requestedFieldsQuery = "";
+    if (requestedFields) {
+      requestedFieldsQuery = requestedFields
+        .map((field) => `requestedFields=${field}`)
+        .join("&");
+    }
+
     try {
-      const url = `${api_url}/user/accountInfo?userId=${userId}`;
+      const url = `${api_url}/user/accountInfo?userId=${userId}&${requestedFieldsQuery}`;
       const { data } = await axios.get(url, {
         withCredentials: true,
       });

@@ -8,13 +8,11 @@ import {
 import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { toggleMobileMenu, toggleSearch } from "../features/ui/uiSlice";
-
-const iconsWithLinks = [
-  { name: faUser, path: "/account" },
-  { name: faHeart, path: "/wishlist" },
-  { name: faBagShopping, path: "/cart" },
-];
+import {
+  setActiveComponent,
+  toggleMobileMenu,
+  toggleSearch,
+} from "../features/ui/uiSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -22,6 +20,18 @@ const Header = () => {
   // GLOBAL STATES
   const { isMobileMenuOpen } = useSelector((state) => state.ui);
   const { cartItemsCount } = useSelector((state) => state.cart);
+
+  const iconsWithLinks = [
+    {
+      name: faUser,
+      path: "/account",
+      clickEvent: () => {
+        dispatch(setActiveComponent(null));
+      },
+    },
+    { name: faHeart, path: "/wishlist" },
+    { name: faBagShopping, path: "/cart" },
+  ];
 
   const handleClick = () => {
     if (isMobileMenuOpen) {
@@ -57,14 +67,15 @@ const Header = () => {
             />
           </li>
           {/* ICONS WITH LINKS */}
-          {iconsWithLinks.map((icon, index) => (
+          {iconsWithLinks.map(({ name, path, clickEvent }, index) => (
             <li key={index}>
               <Link
-                to={icon.path}
-                className="flex items-center justify-center relative">
-                <FontAwesomeIcon className="h-[6vw]" icon={icon.name} />
+                to={path}
+                className="flex items-center justify-center relative"
+                onClick={clickEvent ? clickEvent : null}>
+                <FontAwesomeIcon className="h-[6vw]" icon={name} />
                 {/* COUNT OF ITEMS IN CART */}
-                {icon.path === "/cart" && cartItemsCount > 0 && (
+                {path === "/cart" && cartItemsCount > 0 && (
                   <div className="w-[6vw] h-[6vw] flex justify-center items-center ml-[3vw] mt-[6.5vw] absolute bg-customOrange rounded-full">
                     <p className="text-white text-[3.5vw] font-bold mt-[0.5vw]">
                       {cartItemsCount}

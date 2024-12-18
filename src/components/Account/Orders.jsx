@@ -14,7 +14,7 @@ const Orders = () => {
       <section className="mt-[5vw]">
         <h2 className="text-[5vw] font-bold">Bestellungen</h2>
         <div className="flex flex-col gap-[3vw] mt-[2vw]">
-          {/* FAKE DATA FOR TESTING */} 
+          {/* FAKE DATA FOR TESTING */}
           {orders.map(({ id, date, total }) => (
             <div
               key={id}

@@ -10,21 +10,37 @@ import { useNavigate } from "react-router-dom";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveComponent } from "../features/ui/uiSlice";
-import { getUserData } from "../features/account/accountSlice";
+import {
+  getUserAccountInfo,
+  getUserData,
+} from "../features/account/accountSlice";
 import { logoutUser } from "../features/auth/authSlice";
 
 const Account = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // GET USER DATA
+  // GLOBAL STATE
+  const { activeComponent } = useSelector((state) => state.ui);
+  const { userData } = useSelector((state) => state.account);
+  const { userAccountInfo } = useSelector((state) => state.account);
+
+  // GET USER DATA FROM COOKIES
   useEffect(() => {
     dispatch(getUserData());
   }, []);
 
-  // GLOBAL STATE
-  const { activeComponent } = useSelector((state) => state.ui);
-  const { userData } = useSelector((state) => state.account);
+  // GET USER ACCOUNT INFO (ONLY FIRSTNAME)
+  useEffect(() => {
+    if (userData.status === "succeeded") {
+      dispatch(
+        getUserAccountInfo({
+          userId: userData.result.id,
+          requestedFields: ["firstname"],
+        })
+      );
+    }
+  }, [userData.status]);
 
   const handleClick = (title, id) => {
     // LOGOUT USER
@@ -58,7 +74,7 @@ const Account = () => {
       <section className="mb-[10vw]">
         <h1 className="text-[7vw] font-bold mb-[4vw]">Mein Konto</h1>
         <h2 className="text-[5vw]">
-          Wilkommen, {_.capitalize(userData.result?.firstname)}
+          Wilkommen, {_.capitalize(userAccountInfo.result?.data?.firstname)}
         </h2>
         <p className="text-[4vw]">Kundennummer: {userData.result?.id}</p>
       </section>

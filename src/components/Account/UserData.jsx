@@ -11,7 +11,6 @@ import { inputs } from "../../data/data";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getUserAccountInfo,
-  getUserData,
   resetUserUpdate,
   updateUserData,
 } from "../../features/account/accountSlice";
@@ -35,18 +34,23 @@ const UserData = () => {
   const [updateSuccess, setUpdateSuccess] = useState(false);
 
   // GLOBAL STATES
-  const userId = useSelector((state) => state.account.userData.result.id);
+  const { userData } = useSelector((state) => state.account);
   const { userAccountInfo } = useSelector((state) => state.account);
   const infoStatus = userAccountInfo.status;
   const infoResult = userAccountInfo.result;
   const updateStatus = useSelector((state) => state.account.userUpdate.status);
 
+  // GET USER ACCOUNT INFO (FIRSNAME, LASTNAME, EMAIL)
   useEffect(() => {
-    // GET USER DATA FROM COOKIES
-    dispatch(getUserData());
-    // GET USER ACCOUNT INFO
-    dispatch(getUserAccountInfo(userId));
-  }, []);
+    if (userData.status === "succeeded") {
+      dispatch(
+        getUserAccountInfo({
+          userId: userData.result.id,
+          requestedFields: ["firstname", "lastname", "email"],
+        })
+      );
+    }
+  }, [userData.status, updateStatus]);
 
   useEffect(() => {
     // SET FORM VALUES AFTER FETCHING USER ACCOUNT INFO
@@ -99,7 +103,7 @@ const UserData = () => {
       updateUserData({
         fieldToEdit: fieldId,
         newValue: formValues[fieldId],
-        userId,
+        userId: userData.result.id,
       })
     );
   };
@@ -133,7 +137,7 @@ const UserData = () => {
                   className="w-full h-[10vw] focus:outline-none px-[3vw] disabled:bg-gray-100 focus:border-customOrange"
                 />
                 {/* EDIT || SAVE */}
-                <div className="w-[20%] h-[10vw] flex justify-center items-center">
+                <div className="w-[25%] h-[10vw] flex justify-end items-center">
                   {editOpen[fieldId] ? (
                     <div className="w-full h-full flex justify-between items-center">
                       <FontAwesomeIcon
