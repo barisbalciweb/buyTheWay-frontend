@@ -39,9 +39,6 @@ export const collections = [
 export const settings = [
   { title: "Meine Bestellungen", id: "orders" },
   { title: "Meine Benutzerdaten", id: "user-data" },
-  { title: "Mein Adressbuch", id: "address-book" },
-  { title: "Meine Zahlungsarten", id: "payment-methods" },
-  { title: "Kontoeinstellungen", id: "account-settings" },
   { title: "Abmelden", id: "logout" },
 ];
 

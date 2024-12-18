@@ -2,9 +2,6 @@ import { useEffect } from "react";
 import Orders from "../components/Account/Orders";
 import { settings } from "../data/data";
 import UserData from "../components/Account/UserData";
-import AddressBook from "../components/Account/AddressBook";
-import PaymentMethods from "../components/Account/PaymentMethods";
-import AccountSettings from "../components/Account/AccountSettings";
 import _ from "lodash";
 import { useNavigate } from "react-router-dom";
 // REDUX
@@ -58,12 +55,6 @@ const Account = () => {
         return <Orders />;
       case "user-data":
         return <UserData />;
-      case "address-book":
-        return <AddressBook />;
-      case "payment-methods":
-        return <PaymentMethods />;
-      case "account-settings":
-        return <AccountSettings />;
       default:
         return null;
     }
