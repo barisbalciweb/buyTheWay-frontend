@@ -18,8 +18,6 @@ const Checkout = () => {
     }
   };
 
-  console.log(checkoutActiveComponent);
-
   return (
     <div className="w-full flex flex-col flex-grow">
       <h1 className="text-[7vw] font-bold m-[4vw]">Kasse</h1>

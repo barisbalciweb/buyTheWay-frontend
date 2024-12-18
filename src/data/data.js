@@ -42,7 +42,7 @@ export const settings = [
   { title: "Abmelden", id: "logout" },
 ];
 
-export const inputs = [
+export const userDataInputs = [
   {
     labelText: "E-Mail:",
     fieldId: "email",
@@ -57,5 +57,54 @@ export const inputs = [
     labelText: "Nachname:",
     fieldId: "lastname",
     type: "text",
+  },
+];
+
+export const adressInputs = [
+  {
+    label: "Anrede",
+    inputId: "title",
+    type: "select",
+  },
+  {
+    label: "Vorname",
+    inputId: "firstName",
+    type: "text",
+    placeholder: "Vorname",
+  },
+  {
+    label: "Nachname",
+    inputId: "lastName",
+    type: "text",
+    placeholder: "Nachname",
+  },
+  {
+    label: "Straße",
+    inputId: "street",
+    type: "text",
+    placeholder: "Straße",
+  },
+  {
+    label: "Hausnummer",
+    inputId: "houseNumber",
+    type: "number",
+    placeholder: "Hausnummer",
+  },
+  {
+    label: "PLZ",
+    inputId: "zipCode",
+    type: "text",
+    placeholder: "PLZ",
+  },
+  {
+    label: "Stadt",
+    inputId: "city",
+    type: "text",
+    placeholder: "Stadt",
+  },
+  {
+    label: "Land",
+    inputId: "country",
+    type: "select",
   },
 ];

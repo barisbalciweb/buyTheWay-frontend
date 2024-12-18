@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import AccountNavigation from "./AccountNavigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { inputs } from "../../data/data";
+import { userDataInputs } from "../../data/data";
 import _ from "lodash";
 import {
   faFloppyDisk,
@@ -147,7 +147,7 @@ const UserData = () => {
         <h2 className="text-[5vw] font-bold">Benutzerdaten</h2>
         <div className="flex justify-center items-center bg-gray-200 mt-[2vw]">
           <form className="w-[90%] flex flex-col gap-[3vw] justify-center items-center py-[10vw]">
-            {inputs.map(({ labelText, fieldId, type }) => (
+            {userDataInputs.map(({ labelText, fieldId, type }) => (
               <div key={fieldId} className="w-full flex flex-col gap-[1vw]">
                 <label htmlFor={fieldId}>{labelText}</label>
                 <div className="w-full flex justify-between items-center relative">
