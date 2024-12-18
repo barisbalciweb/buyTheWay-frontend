@@ -6,7 +6,7 @@ import _ from "lodash";
 import { useNavigate } from "react-router-dom";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveComponent } from "../features/ui/uiSlice";
+import { setAccountActiveComponent } from "../features/ui/uiSlice";
 import {
   getUserAccountInfo,
   getUserData,
@@ -18,7 +18,7 @@ const Account = () => {
   const navigate = useNavigate();
 
   // GLOBAL STATE
-  const { activeComponent } = useSelector((state) => state.ui);
+  const { accountActiveComponent } = useSelector((state) => state.ui);
   const { userData } = useSelector((state) => state.account);
   const { userAccountInfo } = useSelector((state) => state.account);
 
@@ -46,11 +46,11 @@ const Account = () => {
       navigate("/");
       return;
     }
-    dispatch(setActiveComponent({ title, id }));
+    dispatch(setAccountActiveComponent({ title, id }));
   };
 
   const renderActiveComponent = () => {
-    switch (activeComponent.id) {
+    switch (accountActiveComponent.id) {
       case "orders":
         return <Orders />;
       case "user-data":
@@ -70,7 +70,7 @@ const Account = () => {
         <p className="text-[4vw]">Kundennummer: {userData.result?.id}</p>
       </section>
 
-      {activeComponent ? (
+      {accountActiveComponent ? (
         renderActiveComponent()
       ) : (
         <section className="mb-[10vw]">

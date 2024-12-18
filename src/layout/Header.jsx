@@ -9,7 +9,7 @@ import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setActiveComponent,
+  setAccountActiveComponent,
   toggleMobileMenu,
   toggleSearch,
 } from "../features/ui/uiSlice";
@@ -26,7 +26,7 @@ const Header = () => {
       name: faUser,
       path: "/account",
       clickEvent: () => {
-        dispatch(setActiveComponent(null));
+        dispatch(setAccountActiveComponent(null));
       },
     },
     { name: faHeart, path: "/wishlist" },
