@@ -1,14 +1,13 @@
 import { useState } from "react";
+import { adressInputs, countries, titles } from "../../data/data";
 // REDUX
 import { useDispatch } from "react-redux";
 import { setCheckoutActiveComponent } from "../../features/ui/uiSlice";
-import { adressInputs } from "../../data/data";
 
 const Adress = () => {
   const dispatch = useDispatch();
 
   // LOCAL STATES
-
   const [formValues, setFormValues] = useState({
     title: "",
     firstName: "",
@@ -22,7 +21,6 @@ const Adress = () => {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    console.log(id, value);
 
     setFormValues((prevValues) => ({
       ...prevValues,
@@ -43,7 +41,19 @@ const Adress = () => {
             return type === "select" ? (
               <>
                 <label htmlFor={inputId}>{label}</label>
-                <select id={inputId} className="h-[12vw]"></select>
+                <select id={inputId} className="h-[12vw]">
+                  {inputId === "title"
+                    ? titles.map((country) => (
+                        <option key={country} value={country}>
+                          {country}
+                        </option>
+                      ))
+                    : countries.map((country) => (
+                        <option key={country} value={country}>
+                          {country}
+                        </option>
+                      ))}
+                </select>
               </>
             ) : (
               <>

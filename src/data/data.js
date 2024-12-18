@@ -108,3 +108,7 @@ export const adressInputs = [
     type: "select",
   },
 ];
+
+export const titles = ["Herr", "Frau", "Divers"];
+
+export const countries = ["Deutschland", "Österreich", "Schweiz"];
