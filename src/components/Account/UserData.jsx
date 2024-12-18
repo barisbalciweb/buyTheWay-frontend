@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import AccountNavigation from "./AccountNavigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { inputs } from "../../data/data";
+import _ from "lodash";
 import {
   faFloppyDisk,
   faPenToSquare,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { inputs } from "../../data/data";
 import {
-  invalidPasswordMsg,
   missingInputMsg,
   serverErrorMsg,
   vorbiddenInputMsg,
@@ -20,7 +20,6 @@ import {
   resetUserUpdate,
   updateUserData,
 } from "../../features/account/accountSlice";
-import _ from "lodash";
 
 const UserData = () => {
   const dispatch = useDispatch();
@@ -195,11 +194,7 @@ const UserData = () => {
               </div>
             ))}
             {/* SHOW UPDATE WARNING */}
-            {warning && (
-              <p className="bg-red-200 p-[2vw]">
-                Änderungen fehlgeschlagen: {warning}
-              </p>
-            )}
+            {warning && <p className="bg-red-200 p-[2vw]">Fehler: {warning}</p>}
           </form>
         </div>
       </section>
