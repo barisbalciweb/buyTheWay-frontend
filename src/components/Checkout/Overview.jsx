@@ -1,5 +1,6 @@
 import ProductInOverview from "./ProductInOverview";
 import { useEffect, useState } from "react";
+import OrderSummary from "../OrderSummary";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -14,7 +15,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import { emptyCart } from "../../features/cart/cartSlice";
 import { resetCheckoutActiveComponent } from "../../features/ui/uiSlice";
-
 const Overview = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,6 +29,7 @@ const Overview = () => {
   const { userData } = useSelector((state) => state.account);
   const { userAccountInfo } = useSelector((state) => state.account);
   const { selectedPaymentMethod } = useSelector((state) => state.checkout);
+  const { total, cartItemsCount } = useSelector((state) => state.cart);
   const { order } = useSelector((state) => state.checkout);
   const { addressFormValues } = useSelector((state) => state.checkout);
   const {
@@ -147,12 +148,18 @@ const Overview = () => {
           ))}
         </div>
       </div>
-      <button
-        className="h-input w-full items-center disabled:bg-green-500 bg-black text-white mt-[5vw]"
-        disabled={success}
-        onClick={handleOrder}>
-        {success ? "BESTELLUNG ABGESCHLOSSEN!" : " ZAHLUNGSPFLICHTIG BESTELLEN"}
-      </button>
+
+      {/* ORDER SUMMARY */}
+      <OrderSummary total={total} cartItemsCount={cartItemsCount}>
+        <button
+          className="h-input w-full items-center disabled:bg-green-500 bg-black text-white mt-[5vw]"
+          disabled={success}
+          onClick={handleOrder}>
+          {success ? "KAUF ABGESCHLOSSEN!" : "JETZT KAUFEN"}
+        </button>
+      </OrderSummary>
+
+      {/* FEEDBACKS */}
       {success && (
         <div className="bg-green-200 text-[4vw] mt-[5vw] p-[2vw]">
           <p>Vielen Dank für Ihre Bestellung!</p>
