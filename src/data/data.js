@@ -65,6 +65,7 @@ export const adressInputs = [
     label: "Anrede",
     inputId: "title",
     type: "select",
+    options: ["Herr", "Frau", "Divers"],
   },
   {
     label: "Vorname",
@@ -87,7 +88,7 @@ export const adressInputs = [
   {
     label: "Hausnummer",
     inputId: "houseNumber",
-    type: "number",
+    type: "text",
     placeholder: "Hausnummer",
   },
   {
@@ -106,9 +107,6 @@ export const adressInputs = [
     label: "Land",
     inputId: "country",
     type: "select",
+    options: ["Deutschland", "Österreich", "Schweiz"],
   },
 ];
-
-export const titles = ["Herr", "Frau", "Divers"];
-
-export const countries = ["Deutschland", "Österreich", "Schweiz"];
