@@ -16,12 +16,12 @@ const Payment = () => {
   return (
     <section className="m-[4vw]">
       <div className="bg-gray-200 p-[6vw]">
-        <h2 className="text-[5vw] font-bold mb-[5vw]">Zahlungsmethode</h2>
+        <h2 className="text-[5vw] font-bold mb-[5vw]">Zahlungsart</h2>
         <div>
           <input
             type="radio"
             id="paymentMethod"
-            checked
+            defaultChecked
             value={paymentMethodValue}
           />
           <label htmlFor="paymentMethod" className="ml-[2vw]">
