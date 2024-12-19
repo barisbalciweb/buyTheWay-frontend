@@ -13,7 +13,8 @@ const CheckoutProcess = () => {
       {checkoutNavigation.map(({ title, component }, index) => (
         <button
           key={title}
-          className="flex gap-[1vw] justify-center items-center "
+          className="flex gap-[1vw] justify-center items-center disabled:opacity-50"
+          disabled={checkoutActiveComponent === component}
           onClick={() => dispatch(setCheckoutActiveComponent(component))}>
           <p
             className={`w-[5vw] h-[5vw] flex justify-center items-center rounded-full text-[3.5vw] text-white pt-[0.5vw] ${
