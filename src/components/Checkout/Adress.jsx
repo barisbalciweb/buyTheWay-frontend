@@ -18,6 +18,7 @@ const Adress = () => {
     city: "",
     country: "",
   });
+  const [warning, setWarning] = useState("");
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -31,8 +32,15 @@ const Adress = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const isFormValid = Object.values(formValues).every(
+      (value) => value.trim() !== ""
+    );
+    // CHECK IF FORM IS FILLED OUT
+    if (!isFormValid) {
+      setWarning("Bitte füllen Sie alle Felder aus");
+      return;
+    }
     dispatch(setCheckoutActiveComponent("payment"));
-    console.log(formValues);
   };
 
   return (
@@ -47,7 +55,7 @@ const Adress = () => {
                 className="h-[12vw]"
                 value={formValues[inputId]}
                 onChange={handleChange}>
-                <option value="Bitte wählen" selected hidden>
+                <option value="Bitte wählen" hidden>
                   Bitte wählen
                 </option>
                 {options.map((title) => (
@@ -70,6 +78,9 @@ const Adress = () => {
             </div>
           );
         })}
+        {warning && (
+          <p className="bg-red-200 text-[4vw] p-[2vw] text-center">{warning}</p>
+        )}
         <button onClick={handleSubmit} className="h-input bg-black text-white">
           Weiter
         </button>
