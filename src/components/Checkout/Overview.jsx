@@ -6,6 +6,7 @@ import {
   getUserAccountInfo,
   getUserData,
 } from "../../features/account/accountSlice";
+import _ from "lodash";
 
 const Overview = () => {
   const dispatch = useDispatch();
@@ -13,11 +14,17 @@ const Overview = () => {
   // GLOBAL STATES
   const { cartItems } = useSelector((state) => state.cart);
   const { userData } = useSelector((state) => state.account);
+  const { userAccountInfo } = useSelector((state) => state.account);
   const {
-    firstname = "",
-    lastname = "",
-    email = "",
-  } = useSelector((state) => state.account.result?.data || {});
+    title,
+    firstName,
+    lastName,
+    street,
+    houseNumber,
+    zipCode,
+    city,
+    country,
+  } = useSelector((state) => state.checkout.addressFormValues);
 
   // GET USER DATA FROM COOKIES
   useEffect(() => {
@@ -44,15 +51,24 @@ const Overview = () => {
         <div>
           <h3 className="font-bold">Kundendaten</h3>
           <p>
-            {firstname} {lastname}
+            {_.capitalize(userAccountInfo.result?.data.firstname)}{" "}
+            {_.capitalize(userAccountInfo.result?.data.lastname)}
           </p>
-          <p>{email}</p>
+          <p> {userAccountInfo.result?.data.email}</p>
         </div>
         {/* INVOICE ADRESS */}
         <div>
           <h3 className="font-bold">Rechnungsadresse</h3>
-          <p></p>
-          <p></p>
+          <p>
+            {title} {firstName} {lastName}
+          </p>
+          <p>
+            {street} {houseNumber}
+          </p>
+          <p>
+            {zipCode} {city}
+          </p>
+          <p>{country}</p>
         </div>
         {/* SHIPPING ADRESS */}
         <div className="">
