@@ -114,5 +114,5 @@ export const addressInputs = [
 export const checkoutNavigation = [
   { title: "Adresse", component: "adress" },
   { title: "Zahlung", component: "payment" },
-  { title: "Übersicht", component: "overview" },
+  { title: "Zusammenfassung", component: "overview" },
 ];

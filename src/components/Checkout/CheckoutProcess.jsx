@@ -12,7 +12,7 @@ const CheckoutProcess = () => {
   );
 
   return (
-    <div className="w-full flex justify-between gap-[3vw] text-[4vw] my-[5vw]">
+    <div className="w-full flex justify-between text-[3.5vw] my-[5vw]">
       {checkoutNavigation.map(({ title, component }, index) => (
         <button
           key={title}
@@ -31,7 +31,7 @@ const CheckoutProcess = () => {
             {index + 1}
           </p>
           <p
-            className={`mt-[1vw] ${
+            className={`mt-[0.5vw] ${
               checkoutActiveComponent === component && "font-bold"
             }`}>
             {title}
