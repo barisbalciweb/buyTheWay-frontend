@@ -12,6 +12,7 @@ import {
   resetOrderStatus,
 } from "../../features/checkout/checkoutSlice";
 import { useNavigate } from "react-router-dom";
+import { emptyCart } from "../../features/cart/cartSlice";
 
 const Overview = () => {
   const dispatch = useDispatch();
@@ -78,8 +79,9 @@ const Overview = () => {
       return () => clearTimeout(timer);
     }
     if (countdown === 0) {
-      navigate("/");
       dispatch(resetOrderStatus());
+      dispatch(emptyCart());
+      navigate("/");
     }
   }, [success, countdown]);
 
