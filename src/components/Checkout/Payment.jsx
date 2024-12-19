@@ -1,13 +1,31 @@
-import { useState } from "react";
+import { useEffect } from "react";
 // REDUX
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCheckoutActiveComponent } from "../../features/ui/uiSlice";
+import {
+  setIsProgressStepDisabled,
+  setSelectedPaymentMethod,
+} from "../../features/checkout/checkoutSlice";
 
 const Payment = () => {
   const dispatch = useDispatch();
 
-  // LOCAL STATES
-  const [paymentMethodValue, setPaymentMethodValue] = useState("Rechnung");
+  // GLOBAL STATES
+  const { selectedPaymentMethod } = useSelector((state) => state.checkout);
+
+  useEffect(() => {
+    // ENABLE NEXT BUTTON IF PAYMENT METHOD IS SELECTED
+    dispatch(
+      setIsProgressStepDisabled({
+        component: "overview",
+        value: selectedPaymentMethod === "",
+      })
+    );
+  }, [selectedPaymentMethod]);
+
+  const handleChange = (e) => {
+    dispatch(setSelectedPaymentMethod(e.target.value));
+  };
 
   const handleNext = () => {
     dispatch(setCheckoutActiveComponent("overview"));
@@ -20,17 +38,20 @@ const Payment = () => {
         <div>
           <input
             type="radio"
-            id="paymentMethod"
-            defaultChecked
-            value={paymentMethodValue}
+            id="invoice"
+            name="paymentMethod"
+            value="invoice"
+            checked={selectedPaymentMethod === "invoice"}
+            onChange={handleChange}
           />
-          <label htmlFor="paymentMethod" className="ml-[2vw]">
+          <label htmlFor="invoice" className="ml-[2vw]">
             Rechnung
           </label>
         </div>
         <button
           onClick={handleNext}
-          className="h-input w-full bg-black text-white mt-[10vw]">
+          className="h-input w-full bg-black text-white mt-[10vw] disabled:bg-slate-300"
+          disabled={!selectedPaymentMethod}>
           Weiter
         </button>
       </div>

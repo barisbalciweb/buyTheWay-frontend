@@ -1,42 +1,56 @@
-import { useState } from "react";
-import { adressInputs } from "../../data/data";
+import { useEffect, useState } from "react";
+import { addressInputs } from "../../data/data";
 // REDUX
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCheckoutActiveComponent } from "../../features/ui/uiSlice";
+import {
+  setAddressFormValues,
+  setIsProgressStepDisabled,
+} from "../../features/checkout/checkoutSlice";
 
-const Adress = () => {
+const Address = () => {
   const dispatch = useDispatch();
 
   // LOCAL STATES
-  const [formValues, setFormValues] = useState({
-    title: "",
-    firstName: "",
-    lastName: "",
-    street: "",
-    houseNumber: "",
-    zipCode: "",
-    city: "",
-    country: "",
-  });
-  const [warning, setWarning] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  //GLOBAL STATES
+  const { addressFormValues } = useSelector((state) => state.checkout);
+  const { selectedPaymentMethod } = useSelector((state) => state.checkout);
+
+  // CHECK IF FORM IS FILLED OUT ON EVERY CHANGE
+  useEffect(() => {
+    // DEBOUNCE
+    const checkFormValues = setTimeout(() => {
+      const formCheck = Object.values(addressFormValues).every(
+        (value) => value.trim() !== ""
+      );
+
+      setIsFormValid(formCheck);
+
+      // DISABLE NEXT BUTTON IF FORM IS NOT FILLED OUT
+      dispatch(
+        setIsProgressStepDisabled({ component: "payment", value: !formCheck })
+      );
+      if (selectedPaymentMethod) {
+        dispatch(
+          setIsProgressStepDisabled({
+            component: "overview",
+            value: !formCheck,
+          })
+        );
+      }
+    }, 300);
+
+    return () => clearTimeout(checkFormValues);
+  }, [addressFormValues]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [id]: value,
-    }));
+    dispatch(setAddressFormValues({ id, value }));
   };
 
   const handleNext = () => {
-    const isFormValid = Object.values(formValues).every(
-      (value) => value.trim() !== ""
-    );
-    // CHECK IF FORM IS FILLED OUT
-    if (!isFormValid) {
-      setWarning("Bitte füllen Sie alle Felder aus");
-      return;
-    }
     dispatch(setCheckoutActiveComponent("payment"));
   };
 
@@ -44,14 +58,14 @@ const Adress = () => {
     <section className="w-full flex justify-center">
       <form className="w-full flex flex-col gap-[2vw] bg-gray-200 p-[6vw]">
         <h2 className="text-[5vw] font-bold mb-[5vw]">Lieferadresse</h2>
-        {adressInputs.map(({ label, inputId, type, placeholder, options }) => {
+        {addressInputs.map(({ label, inputId, type, placeholder, options }) => {
           return type === "select" ? (
             <div key={inputId} className="flex flex-col gap-[2vw]">
               <label htmlFor={inputId}>{label}</label>
               <select
                 id={inputId}
                 className="h-[12vw]"
-                value={formValues[inputId]}
+                value={addressFormValues[inputId]}
                 onChange={handleChange}>
                 <option value="Bitte wählen" hidden>
                   Bitte wählen
@@ -68,7 +82,7 @@ const Adress = () => {
               <label htmlFor={inputId}>{label}</label>
               <input
                 id={inputId}
-                value={formValues[inputId]}
+                value={addressFormValues[inputId]}
                 className="h-[12vw] p-[3vw]"
                 placeholder={placeholder}
                 onChange={handleChange}
@@ -76,13 +90,11 @@ const Adress = () => {
             </div>
           );
         })}
-        {warning && (
-          <p className="bg-red-200 text-[4vw] p-[2vw] text-center">{warning}</p>
-        )}
         <button
           type="button"
           onClick={handleNext}
-          className="h-input bg-black text-white">
+          className="h-input bg-black text-white disabled:bg-slate-300"
+          disabled={!isFormValid}>
           Weiter
         </button>
       </form>
@@ -90,4 +102,4 @@ const Adress = () => {
   );
 };
 
-export default Adress;
+export default Address;

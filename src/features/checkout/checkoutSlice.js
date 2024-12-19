@@ -2,22 +2,48 @@ import { createSlice } from "@reduxjs/toolkit";
 import { set } from "lodash";
 
 const initialState = {
-  isCompleted: {
-    adress: false,
-    payment: false,
+  isProgressStepDisabled: {
+    payment: true,
+    overview: true,
   },
+  addressFormValues: {
+    title: "",
+    firstName: "",
+    lastName: "",
+    street: "",
+    houseNumber: "",
+    zipCode: "",
+    city: "",
+    country: "",
+  },
+  selectedPaymentMethod: "",
 };
 
 export const checkoutSlice = createSlice({
   name: "checkout",
   initialState,
   reducers: {
-    setIsCompleted: (state, action) => {
+    setIsProgressStepDisabled: (state, action) => {
       const { component, value } = action.payload;
-      state.isCompleted = set(state.isCompleted, component, value);
+      state.isProgressStepDisabled = set(
+        state.isProgressStepDisabled,
+        component,
+        value
+      );
+    },
+    setAddressFormValues: (state, action) => {
+      const { id, value } = action.payload;
+      state.addressFormValues = set(state.addressFormValues, id, value);
+    },
+    setSelectedPaymentMethod: (state, action) => {
+      state.selectedPaymentMethod = action.payload;
     },
   },
 });
 
-export const { setIsCompleted } = checkoutSlice.actions;
+export const {
+  setIsProgressStepDisabled,
+  setAddressFormValues,
+  setSelectedPaymentMethod,
+} = checkoutSlice.actions;
 export default checkoutSlice.reducer;

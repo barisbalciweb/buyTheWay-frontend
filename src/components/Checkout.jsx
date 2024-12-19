@@ -1,4 +1,4 @@
-import Adress from "./Checkout/Adress";
+import Address from "./Checkout/Address";
 import CheckoutProcess from "./Checkout/CheckoutProcess";
 import Overview from "./Checkout/Overview";
 import Payment from "./Checkout/Payment";
@@ -12,7 +12,7 @@ const Checkout = () => {
   const renderActiveComponent = () => {
     switch (checkoutActiveComponent) {
       case "adress":
-        return <Adress />;
+        return <Address />;
       case "payment":
         return <Payment />;
       case "overview":

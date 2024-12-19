@@ -7,6 +7,9 @@ const CheckoutProcess = () => {
   const dispatch = useDispatch();
 
   const { checkoutActiveComponent } = useSelector((state) => state.ui);
+  const { payment, overview } = useSelector(
+    (state) => state.checkout.isProgressStepDisabled
+  );
 
   return (
     <div className="w-full flex justify-between gap-[3vw] text-[4vw] my-[5vw]">
@@ -14,7 +17,10 @@ const CheckoutProcess = () => {
         <button
           key={title}
           className="flex gap-[1vw] justify-center items-center disabled:opacity-50"
-          disabled={checkoutActiveComponent === component}
+          disabled={
+            (component === "payment" && payment) ||
+            (component === "overview" && overview)
+          }
           onClick={() => dispatch(setCheckoutActiveComponent(component))}>
           <p
             className={`w-[5vw] h-[5vw] flex justify-center items-center rounded-full text-[3.5vw] text-white pt-[0.5vw] ${

@@ -60,7 +60,7 @@ export const userDataInputs = [
   },
 ];
 
-export const adressInputs = [
+export const addressInputs = [
   {
     label: "Anrede",
     inputId: "title",
