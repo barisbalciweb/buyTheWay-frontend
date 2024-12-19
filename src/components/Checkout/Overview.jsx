@@ -7,13 +7,20 @@ import {
   getUserData,
 } from "../../features/account/accountSlice";
 import _ from "lodash";
-import { postOrder } from "../../features/checkout/checkoutSlice";
+import {
+  postOrder,
+  resetOrderStatus,
+} from "../../features/checkout/checkoutSlice";
+import { useNavigate } from "react-router-dom";
 
 const Overview = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // LOCAL STATES
   const [success, setSuccess] = useState(false);
+  const [countdown, setCountdown] = useState(5);
+  const [warning, setWarning] = useState(null);
 
   // GLOBAL STATES
   const { cartItems } = useSelector((state) => state.cart);
@@ -50,13 +57,34 @@ const Overview = () => {
     }
   }, [userData.status]);
 
+  // CHECK IF ORDER WAS SUCCESSFUL
   useEffect(() => {
     if (order.status === "succeeded") {
       setSuccess(true);
     }
+    if (order.status === "failed") {
+      setWarning(
+        "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+      );
+    }
   }, [order.status]);
 
+  // COUNTDOWN TO REDIRECT
+  useEffect(() => {
+    if (success && countdown > 0) {
+      const timer = setTimeout(() => {
+        setCountdown((prev) => prev - 1);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+    if (countdown === 0) {
+      navigate("/");
+      dispatch(resetOrderStatus());
+    }
+  }, [success, countdown]);
+
   const handleOrder = () => {
+    setWarning(null);
     dispatch(
       postOrder({
         adress: addressFormValues,
@@ -116,15 +144,22 @@ const Overview = () => {
         </div>
       </div>
       <button
-        className="h-input w-full items-center bg-black text-white mt-[5vw]"
+        className="h-input w-full items-center disabled:bg-green-500 bg-black text-white mt-[5vw]"
+        disabled={success}
         onClick={handleOrder}>
-        ZAHLUNGSPFLICHTIG BESTELLEN
+        {success ? "BESTELLUNG ABGESCHLOSSEN!" : " ZAHLUNGSPFLICHTIG BESTELLEN"}
       </button>
-      <p className="bg-green-200 p-[2vw] mt-[5vw]">
-        Ihre Bestellung wurde erfolgreich aufgegeben! Wir haben Ihnen eine
-        E-Mail mit den Auftragsdetails gesendet. Sie werden in ... Sekunden
-        weitergeleitet.
-      </p>
+      {success && (
+        <div className="bg-green-200 text-[4vw] mt-[5vw] p-[2vw]">
+          <p>Vielen Dank für Ihre Bestellung!</p>
+          <p>Sie werden in {countdown} Sekunden weitergeleitet.</p>
+        </div>
+      )}
+      {warning && (
+        <div className="bg-red-200 text-[4vw] mt-[5vw] p-[2vw]">
+          <p>{warning}</p>
+        </div>
+      )}
     </section>
   );
 };

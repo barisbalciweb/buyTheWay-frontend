@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { set } from "lodash";
+import { apiUrlSwitch } from "../../utils/apiUrlSwitch";
+import axios from "axios";
+
+const api_url = apiUrlSwitch();
 
 const initialState = {
   isProgressStepDisabled: {
@@ -30,7 +34,7 @@ export const postOrder = createAsyncThunk(
   async (checkoutData, { rejectWithValue }) => {
     try {
       const url = `${api_url}/orders`;
-      const { data } = await axios.post(url);
+      const { data } = await axios.post(url, checkoutData);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -57,6 +61,11 @@ export const checkoutSlice = createSlice({
     setSelectedPaymentMethod: (state, action) => {
       state.selectedPaymentMethod = action.payload;
     },
+    resetOrderStatus: (state) => {
+      state.order.status = null;
+      state.order.data = null;
+      state.order.error = null;
+    },
   },
   extraReducers: (builder) => {
     // POST ORDER
@@ -78,5 +87,6 @@ export const {
   setIsProgressStepDisabled,
   setAddressFormValues,
   setSelectedPaymentMethod,
+  resetOrderStatus,
 } = checkoutSlice.actions;
 export default checkoutSlice.reducer;
