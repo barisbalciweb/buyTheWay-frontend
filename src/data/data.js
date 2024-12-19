@@ -110,3 +110,9 @@ export const adressInputs = [
     options: ["Deutschland", "Österreich", "Schweiz"],
   },
 ];
+
+export const checkoutNavigation = [
+  { title: "Adresse", component: "adress" },
+  { title: "Zahlung", component: "payment" },
+  { title: "Übersicht", component: "overview" },
+];

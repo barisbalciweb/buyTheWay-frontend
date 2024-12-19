@@ -1,4 +1,5 @@
 import Adress from "./Checkout/Adress";
+import CheckoutProcess from "./Checkout/CheckoutProcess";
 import Overview from "./Checkout/Overview";
 import Payment from "./Checkout/Payment";
 // REDUX
@@ -22,8 +23,11 @@ const Checkout = () => {
   };
 
   return (
-    <div className="w-full flex flex-col flex-grow">
-      <h1 className="text-[7vw] font-bold m-[4vw]">Kasse</h1>
+    <div className="w-full flex flex-col flex-grow p-[4vw]">
+      <h1 className="text-[7vw] font-bold">Kasse</h1>
+      {/* CHECHOKUT PROCESS */}
+      <CheckoutProcess />
+      {/* ACTIVE COMPONENT */}
       {renderActiveComponent()}
     </div>
   );
