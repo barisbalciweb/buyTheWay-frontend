@@ -46,6 +46,7 @@ const Adress = () => {
   return (
     <section className="w-full flex justify-center">
       <form className="w-[90%] flex flex-col gap-[2vw] bg-gray-200 p-[6vw]">
+        <h2 className="text-[5vw] font-bold mb-[5vw]">Lieferadresse</h2>
         {adressInputs.map(({ label, inputId, type, placeholder, options }) => {
           return type === "select" ? (
             <div key={inputId} className="flex flex-col gap-[2vw]">
