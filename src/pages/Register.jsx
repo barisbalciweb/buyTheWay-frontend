@@ -198,7 +198,6 @@ const Register = () => {
   }, [registration]);
 
   const handleRegister = (e) => {
-    e.preventDefault();
     setWarning(null);
     setSuccessMessage(null);
     // CHECK IF PASSWORDS MATCH

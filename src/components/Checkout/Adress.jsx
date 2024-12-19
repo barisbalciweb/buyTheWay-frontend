@@ -22,16 +22,13 @@ const Adress = () => {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    console.log(e.target);
-
     setFormValues((prevValues) => ({
       ...prevValues,
       [id]: value,
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleNext = () => {
     const isFormValid = Object.values(formValues).every(
       (value) => value.trim() !== ""
     );
@@ -82,7 +79,10 @@ const Adress = () => {
         {warning && (
           <p className="bg-red-200 text-[4vw] p-[2vw] text-center">{warning}</p>
         )}
-        <button onClick={handleSubmit} className="h-input bg-black text-white">
+        <button
+          type="button"
+          onClick={handleNext}
+          className="h-input bg-black text-white">
           Weiter
         </button>
       </form>

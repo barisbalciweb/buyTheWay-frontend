@@ -1,4 +1,5 @@
 import Adress from "./Checkout/Adress";
+import Overview from "./Checkout/Overview";
 import Payment from "./Checkout/Payment";
 // REDUX
 import { useSelector } from "react-redux";
@@ -13,6 +14,8 @@ const Checkout = () => {
         return <Adress />;
       case "payment":
         return <Payment />;
+      case "overview":
+        return <Overview />;
       default:
         return null;
     }
