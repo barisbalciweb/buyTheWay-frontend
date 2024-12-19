@@ -57,6 +57,9 @@ export const uiSlice = createSlice({
     setCheckoutActiveComponent: (state, action) => {
       state.checkoutActiveComponent = action.payload;
     },
+    resetCheckoutActiveComponent: (state) => {
+      state.checkoutActiveComponent = "adress";
+    },
   },
 });
 
@@ -71,5 +74,6 @@ export const {
   setInnerWidth,
   setAccountActiveComponent,
   setCheckoutActiveComponent,
+  resetCheckoutActiveComponent,
 } = uiSlice.actions;
 export default uiSlice.reducer;

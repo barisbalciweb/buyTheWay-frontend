@@ -9,10 +9,11 @@ import {
 import _ from "lodash";
 import {
   postOrder,
-  resetOrderStatus,
+  resetAllStates,
 } from "../../features/checkout/checkoutSlice";
 import { useNavigate } from "react-router-dom";
 import { emptyCart } from "../../features/cart/cartSlice";
+import { resetCheckoutActiveComponent } from "../../features/ui/uiSlice";
 
 const Overview = () => {
   const dispatch = useDispatch();
@@ -79,8 +80,9 @@ const Overview = () => {
       return () => clearTimeout(timer);
     }
     if (countdown === 0) {
-      dispatch(resetOrderStatus());
+      dispatch(resetAllStates());
       dispatch(emptyCart());
+      dispatch(resetCheckoutActiveComponent());
       navigate("/");
     }
   }, [success, countdown]);

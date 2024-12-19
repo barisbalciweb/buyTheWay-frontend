@@ -61,10 +61,25 @@ export const checkoutSlice = createSlice({
     setSelectedPaymentMethod: (state, action) => {
       state.selectedPaymentMethod = action.payload;
     },
-    resetOrderStatus: (state) => {
-      state.order.status = null;
-      state.order.data = null;
-      state.order.error = null;
+    resetAllStates: (state) => {
+      state.isProgressStepDisabled.payment = true;
+      state.isProgressStepDisabled.overview = true;
+      state.addressFormValues = {
+        title: "",
+        firstName: "",
+        lastName: "",
+        street: "",
+        houseNumber: "",
+        zipCode: "",
+        city: "",
+        country: "",
+      };
+      state.selectedPaymentMethod = "";
+      state.order = {
+        status: "idle",
+        data: null,
+        error: null,
+      };
     },
   },
   extraReducers: (builder) => {
@@ -87,6 +102,6 @@ export const {
   setIsProgressStepDisabled,
   setAddressFormValues,
   setSelectedPaymentMethod,
-  resetOrderStatus,
+  resetAllStates,
 } = checkoutSlice.actions;
 export default checkoutSlice.reducer;
