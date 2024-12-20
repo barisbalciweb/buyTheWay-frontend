@@ -57,7 +57,7 @@ export const getOrder = createAsyncThunk(
   "checkout/getOrder",
   async (userId, { rejectWithValue }) => {
     try {
-      const url = `${api_url}/orders/${userId}`;
+      const url = `${api_url}/orders?userId=${userId}`;
       const { data } = await axios.get(url);
       return data;
     } catch (error) {
@@ -69,9 +69,9 @@ export const getOrder = createAsyncThunk(
 // GET ORDER DETAILLED DATA
 export const getOrderDetail = createAsyncThunk(
   "checkout/getOrderDetail",
-  async (_, { rejectWithValue }) => {
+  async ({ userId, orderId }, { rejectWithValue }) => {
     try {
-      const url = `${api_url}/orders/${userId}`;
+      const url = `${api_url}/orders/?userId=${userId}&orderId=${orderId}`;
       const { data } = await axios.get(url);
       return data;
     } catch (error) {
@@ -141,6 +141,7 @@ export const checkoutSlice = createSlice({
       })
       .addCase(getOrder.fulfilled, (state, action) => {
         state.orderSummary.status = "succeeded";
+        state.orderSummary.result = action.payload;
         state.orderSummary.data = action.payload;
       })
       .addCase(getOrder.rejected, (state, action) => {
