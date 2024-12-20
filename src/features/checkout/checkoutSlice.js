@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { set } from "lodash";
+import { result, set } from "lodash";
 import { apiUrlSwitch } from "../../utils/apiUrlSwitch";
 import axios from "axios";
 
@@ -26,6 +26,16 @@ const initialState = {
     data: null,
     error: null,
   },
+  orderSummary: {
+    status: "idle",
+    result: null,
+    data: null,
+  },
+  orderDetail: {
+    status: "idle",
+    result: null,
+    data: null,
+  },
 };
 
 // POST ORDER DATA
@@ -35,6 +45,34 @@ export const postOrder = createAsyncThunk(
     try {
       const url = `${api_url}/orders`;
       const { data } = await axios.post(url, checkoutData);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// GET ORDER SUMMARY
+export const getOrder = createAsyncThunk(
+  "checkout/getOrder",
+  async (userId, { rejectWithValue }) => {
+    try {
+      const url = `${api_url}/orders/${userId}`;
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// GET ORDER DETAILLED DATA
+export const getOrderDetail = createAsyncThunk(
+  "checkout/getOrderDetail",
+  async (_, { rejectWithValue }) => {
+    try {
+      const url = `${api_url}/orders/${userId}`;
+      const { data } = await axios.get(url);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -84,17 +122,44 @@ export const checkoutSlice = createSlice({
   },
   extraReducers: (builder) => {
     // POST ORDER
-    builder.addCase(postOrder.pending, (state, action) => {
-      state.order.status = "loading";
-    });
-    builder.addCase(postOrder.fulfilled, (state, action) => {
-      state.order.status = "succeeded";
-      state.order.data = action.payload;
-    });
-    builder.addCase(postOrder.rejected, (state, action) => {
-      state.order.status = "failed";
-      state.order.error = action.payload;
-    });
+    builder
+      .addCase(postOrder.pending, (state, action) => {
+        state.order.status = "loading";
+      })
+      .addCase(postOrder.fulfilled, (state, action) => {
+        state.order.status = "succeeded";
+        state.order.data = action.payload;
+      })
+      .addCase(postOrder.rejected, (state, action) => {
+        state.order.status = "failed";
+        state.order.error = action.payload;
+      })
+
+      // GET ORDER SUMMARY
+      .addCase(getOrder.pending, (state, action) => {
+        state.orderSummary.status = "loading";
+      })
+      .addCase(getOrder.fulfilled, (state, action) => {
+        state.orderSummary.status = "succeeded";
+        state.orderSummary.data = action.payload;
+      })
+      .addCase(getOrder.rejected, (state, action) => {
+        state.orderSummary.status = "failed";
+        state.orderSummary.error = action.payload;
+      })
+
+      // GET ORDER DETAILLED DATA
+      .addCase(getOrderDetail.pending, (state, action) => {
+        state.orderDetail.status = "loading";
+      })
+      .addCase(getOrderDetail.fulfilled, (state, action) => {
+        state.orderDetail.status = "succeeded";
+        state.orderDetail.data = action.payload;
+      })
+      .addCase(getOrderDetail.rejected, (state, action) => {
+        state.orderDetail.status = "failed";
+        state.orderDetail.error = action.payload;
+      });
   },
 });
 
