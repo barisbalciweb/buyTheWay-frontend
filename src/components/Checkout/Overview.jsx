@@ -95,6 +95,8 @@ const Overview = () => {
         adress: addressFormValues,
         paymentMethod: selectedPaymentMethod,
         cartItems,
+        total,
+        userId: userData.result.id,
       })
     );
   };
