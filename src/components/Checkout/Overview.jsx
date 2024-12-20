@@ -38,7 +38,7 @@ const Overview = () => {
     lastName,
     street,
     houseNumber,
-    zipCode,
+    postalCode,
     city,
     country,
   } = addressFormValues;
@@ -92,7 +92,7 @@ const Overview = () => {
     setWarning(null);
     dispatch(
       postOrder({
-        adress: addressFormValues,
+        address: addressFormValues,
         paymentMethod: selectedPaymentMethod,
         cartItems,
         total,
@@ -127,7 +127,7 @@ const Overview = () => {
               {street} {houseNumber}
             </p>
             <p>
-              {zipCode} {city}
+              {postalCode} {city}
             </p>
             <p>{country}</p>
           </div>

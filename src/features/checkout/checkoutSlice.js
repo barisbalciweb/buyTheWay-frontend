@@ -16,7 +16,7 @@ const initialState = {
     lastName: "",
     street: "",
     houseNumber: "",
-    zipCode: "",
+    postalCode: "",
     city: "",
     country: "",
   },
@@ -70,7 +70,7 @@ export const checkoutSlice = createSlice({
         lastName: "",
         street: "",
         houseNumber: "",
-        zipCode: "",
+        postalCode: "",
         city: "",
         country: "",
       };

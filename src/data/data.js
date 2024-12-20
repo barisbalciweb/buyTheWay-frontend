@@ -93,7 +93,7 @@ export const addressInputs = [
   },
   {
     label: "PLZ",
-    inputId: "zipCode",
+    inputId: "postalCode",
     type: "text",
     placeholder: "PLZ",
   },
