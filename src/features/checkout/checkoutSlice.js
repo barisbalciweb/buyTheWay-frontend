@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { result, set } from "lodash";
+import { set } from "lodash";
 import { apiUrlSwitch } from "../../utils/apiUrlSwitch";
 import axios from "axios";
 
@@ -23,13 +23,13 @@ const initialState = {
   selectedPaymentMethod: "",
   order: {
     status: "idle",
-    data: null,
+    result: null,
     error: null,
   },
   orderSummary: {
     status: "idle",
     result: null,
-    data: null,
+    error: null,
   },
   orderDetail: {
     status: "idle",
@@ -71,7 +71,7 @@ export const getOrderDetail = createAsyncThunk(
   "checkout/getOrderDetail",
   async ({ userId, orderId }, { rejectWithValue }) => {
     try {
-      const url = `${api_url}/orders/?userId=${userId}&orderId=${orderId}`;
+      const url = `${api_url}/orders/details/?userId=${userId}&orderId=${orderId}`;
       const { data } = await axios.get(url);
       return data;
     } catch (error) {
@@ -128,7 +128,7 @@ export const checkoutSlice = createSlice({
       })
       .addCase(postOrder.fulfilled, (state, action) => {
         state.order.status = "succeeded";
-        state.order.data = action.payload;
+        state.order.result = action.payload;
       })
       .addCase(postOrder.rejected, (state, action) => {
         state.order.status = "failed";
@@ -142,7 +142,6 @@ export const checkoutSlice = createSlice({
       .addCase(getOrder.fulfilled, (state, action) => {
         state.orderSummary.status = "succeeded";
         state.orderSummary.result = action.payload;
-        state.orderSummary.data = action.payload;
       })
       .addCase(getOrder.rejected, (state, action) => {
         state.orderSummary.status = "failed";
@@ -155,7 +154,7 @@ export const checkoutSlice = createSlice({
       })
       .addCase(getOrderDetail.fulfilled, (state, action) => {
         state.orderDetail.status = "succeeded";
-        state.orderDetail.data = action.payload;
+        state.orderDetail.result = action.payload;
       })
       .addCase(getOrderDetail.rejected, (state, action) => {
         state.orderDetail.status = "failed";
