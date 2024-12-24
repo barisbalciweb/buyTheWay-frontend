@@ -84,7 +84,7 @@ const Home = () => {
             {fakeTopCategories.map((category) => (
               <button
                 key={category}
-                className="w-[25vw] h-[12vw] text-[4vw] border-customBorder border-black rounded-md shadow-[0_2vw_2vw_0_rgba(0,0,0,0.2)]">
+                className="w-[25vw] h-[12vw] text-[4vw] font-bold border-customBorder border-black rounded-md shadow-[0_1vw_1vw_0_rgba(0,0,0,0.2)]">
                 <Link
                   to={`store?category=${category}`}
                   className="w-full h-full flex justify-center items-center">
