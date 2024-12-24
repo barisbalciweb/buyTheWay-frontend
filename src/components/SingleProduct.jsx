@@ -10,21 +10,20 @@ import {
   removeFromWishlist,
 } from "../features/wishlist/wishlistSlice";
 
-const SingleProduct = ({ product }) => {
-  const { id, name, price, images, brand } = product;
-
-  const productTitle = brand + " " + name;
-
-  // const { selectedProduct } = useSelector((state) => state.products);
+const SingleProduct = ({ item }) => {
   const dispatch = useDispatch();
 
-  const isInWishlist = useSelector((state) => inWishlist(state, product));
+  const { id, name, price, images, brand } = item.product;
+
+  const isInWishlist = useSelector((state) => inWishlist(state, item.product));
+
+  const productTitle = brand + " " + name;
 
   const handleAddToWishlist = (e) => {
     e.preventDefault();
     isInWishlist
-      ? dispatch(removeFromWishlist(product))
-      : dispatch(addToWishlist(product));
+      ? dispatch(removeFromWishlist(id))
+      : dispatch(addToWishlist(item.product));
   };
 
   return (

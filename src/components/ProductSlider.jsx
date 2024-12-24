@@ -21,7 +21,7 @@ const ProductSlider = ({ products }) => {
       modules={[Navigation, Pagination]}>
       {products.map((product) => (
         <SwiperSlide key={product.id}>
-          <SingleProduct product={product} />
+          <SingleProduct item={{ product }} />
         </SwiperSlide>
       ))}
     </Swiper>

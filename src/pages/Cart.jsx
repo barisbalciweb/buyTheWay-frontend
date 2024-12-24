@@ -1,20 +1,16 @@
-import { useEffect } from "react";
 // REDUX
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ProductInCart from "../components/Cart/ProductInCart";
-import { updateTotal } from "../features/cart/cartSlice";
 import { Link, useNavigate } from "react-router-dom";
 import OrderSummary from "../components/OrderSummary";
 
 const Cart = () => {
-  const { cartItems, cartItemsCount } = useSelector((state) => state.cart);
-  const { total } = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(updateTotal());
-  }, [cartItems]);
+  // GLOBAL STATES
+  const { cartItems, cartItemsCount, total } = useSelector(
+    (state) => state.cart
+  );
 
   return (
     <>
@@ -37,7 +33,7 @@ const Cart = () => {
             <section>
               {/* PRODUCTS IN CART */}
               {cartItems.map((item) => (
-                <ProductInCart key={item.item.id + item.size} item={item} />
+                <ProductInCart key={item.product.id + item.size} item={item} />
               ))}
             </section>
 

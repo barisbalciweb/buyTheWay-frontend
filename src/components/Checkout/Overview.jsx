@@ -5,7 +5,7 @@ import OrderSummary from "../OrderSummary";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getUserAccountInfo,
-  getUserData,
+  getUserId,
 } from "../../features/account/accountSlice";
 import _ from "lodash";
 import {
@@ -26,7 +26,7 @@ const Overview = () => {
 
   // GLOBAL STATES
   const { cartItems } = useSelector((state) => state.cart);
-  const { userData } = useSelector((state) => state.account);
+  const { userIdState } = useSelector((state) => state.account);
   const { userAccountInfo } = useSelector((state) => state.account);
   const { selectedPaymentMethod } = useSelector((state) => state.checkout);
   const { total, cartItemsCount } = useSelector((state) => state.cart);
@@ -43,22 +43,17 @@ const Overview = () => {
     country,
   } = addressFormValues;
 
-  // GET USER DATA FROM COOKIES
-  useEffect(() => {
-    dispatch(getUserData());
-  }, []);
-
   // GET USER ACCOUNT INFO (FIRSNAME, LASTNAME, EMAIL)
   useEffect(() => {
-    if (userData.status === "succeeded") {
+    if (userIdState.status === "succeeded") {
       dispatch(
         getUserAccountInfo({
-          userId: userData.result.id,
+          userId: userIdState.result.id,
           requestedFields: ["email", "firstname", "lastname"],
         })
       );
     }
-  }, [userData.status]);
+  }, [userIdState.status]);
 
   // CHECK IF ORDER WAS SUCCESSFUL
   useEffect(() => {
@@ -96,7 +91,7 @@ const Overview = () => {
         paymentMethod: selectedPaymentMethod,
         cartItems,
         total,
-        userId: userData.result.id,
+        userId: userIdState.result.id,
       })
     );
   };

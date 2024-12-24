@@ -172,7 +172,7 @@ const Store = () => {
         <section className="grid grid-cols-2 p-[5vw] gap-[4vw]">
           {fetchStatus === "succeeded" || renderedProducts
             ? renderedProducts.map((product) => (
-                <SingleProduct key={product.id} product={product} />
+                <SingleProduct key={product.id} item={{ product }} />
               ))
             : "Loading..."}
         </section>

@@ -5,7 +5,7 @@ import axios from "axios";
 const api_url = apiUrlSwitch();
 
 const initialState = {
-  userData: {
+  userIdState: {
     result: null,
     status: "idle",
     error: null,
@@ -22,9 +22,9 @@ const initialState = {
   },
 };
 
-// FETCH USER DATA
-export const getUserData = createAsyncThunk(
-  "account/getUserData",
+// FETCH USER ID
+export const getUserId = createAsyncThunk(
+  "account/getUserId",
   async (_, { rejectWithValue }) => {
     try {
       const url = `${api_url}/user`;
@@ -50,7 +50,7 @@ export const getUserAccountInfo = createAsyncThunk(
     }
 
     try {
-      const url = `${api_url}/user/accountInfo?userId=${userId}&${requestedFieldsQuery}`;
+      const url = `${api_url}/user/accountInfo?${requestedFieldsQuery}`;
       const { data } = await axios.get(url, {
         withCredentials: true,
       });
@@ -90,16 +90,17 @@ export const accountSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // GET USER DATA
-      .addCase(getUserData.pending, (state) => {
-        state.userData.status = "loading";
+      .addCase(getUserId.pending, (state) => {
+        state.userIdState.status = "loading";
       })
-      .addCase(getUserData.fulfilled, (state, action) => {
-        state.userData.status = "succeeded";
-        state.userData.result = action.payload;
+      .addCase(getUserId.fulfilled, (state, action) => {
+        state.userIdState.status = "succeeded";
+        state.userIdState.result = action.payload;
+        state.userIdState.error = null;
       })
-      .addCase(getUserData.rejected, (state, action) => {
-        state.userData.status = "failed";
-        state.userData.error = action.payload;
+      .addCase(getUserId.rejected, (state, action) => {
+        state.userIdState.status = "failed";
+        state.userIdState.error = action.payload;
       })
 
       // GET USER ACCOUNT INFO
@@ -109,6 +110,7 @@ export const accountSlice = createSlice({
       .addCase(getUserAccountInfo.fulfilled, (state, action) => {
         state.userAccountInfo.status = "succeeded";
         state.userAccountInfo.result = action.payload;
+        state.userAccountInfo.error = null;
       })
       .addCase(getUserAccountInfo.rejected, (state, action) => {
         state.userAccountInfo.status = "failed";
@@ -122,6 +124,7 @@ export const accountSlice = createSlice({
       .addCase(updateUserData.fulfilled, (state, action) => {
         state.userUpdate.status = "succeeded";
         state.userUpdate.result = action.payload;
+        state.userUpdate.error = null;
       })
       .addCase(updateUserData.rejected, (state, action) => {
         state.userUpdate.status = "failed";

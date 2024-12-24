@@ -1,23 +1,24 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import routes from "./routers/routes";
 import Layout from "./layout/Layout";
 import ScrollToTop from "./components/ScrollTop";
+import CartSync from "./features/cart/cartSync";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { verifyCookie } from "./features/auth/authSlice";
+import { getUserId } from "./features/account/accountSlice";
 
 const App = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
 
   const { warningScreen } = useSelector((state) => state.ui);
+  const { login } = useSelector((state) => state.auth);
   const { isMobileMenuOpen, isSearchOpen } = useSelector((state) => state.ui);
 
-  // VERIFY COOKIE ON LOAD
+  // GET USER ID FROM COOKIES ON LOAD OR LOGIN
   useEffect(() => {
-    dispatch(verifyCookie());
-  }, [location]);
+    dispatch(getUserId());
+  }, [login.status]);
 
   return (
     <div
@@ -29,6 +30,7 @@ const App = () => {
       }`}>
       <Layout>
         <ScrollToTop />
+        <CartSync />
         <Routes>
           {routes.map((route) => {
             return (

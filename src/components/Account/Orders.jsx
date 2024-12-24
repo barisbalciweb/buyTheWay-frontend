@@ -4,9 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { getUserData } from "../../features/account/accountSlice";
 import {
-  getOrder,
+  getOrdersSummary,
   getOrderDetail,
 } from "../../features/checkout/checkoutSlice";
 
@@ -17,25 +16,20 @@ const Orders = () => {
   const [openOrderId, setOpenOrderId] = useState(null);
 
   // GLOBAL STATES
-  const { userData } = useSelector((state) => state.account);
-  const { orderSummary } = useSelector((state) => state.checkout);
+  const { userIdState } = useSelector((state) => state.account);
+  const { ordersSummary } = useSelector((state) => state.checkout);
   const { orderDetail } = useSelector((state) => state.checkout);
-
-  // GET USER ID FROM COOKIES
-  useEffect(() => {
-    dispatch(getUserData());
-  }, []);
 
   // GET USER ORDERS SUMMARY
   useEffect(() => {
-    if (userData.status === "succeeded") {
-      dispatch(getOrder(userData.result.id));
+    if (userIdState.status === "succeeded") {
+      dispatch(getOrdersSummary());
     }
-  }, [userData.status]);
+  }, [userIdState.status]);
 
   const handleAccordion = (orderId) => {
     setOpenOrderId(openOrderId === orderId ? null : orderId);
-    dispatch(getOrderDetail({ userId: userData.result.id, orderId }));
+    dispatch(getOrderDetail(orderId));
   };
 
   return (
@@ -45,8 +39,8 @@ const Orders = () => {
         <h2 className="text-[5vw] font-bold">Bestellungen</h2>
         <div className="flex flex-col gap-[3vw] mt-[2vw]">
           {/* FAKE DATA FOR TESTING */}
-          {orderSummary.result &&
-            orderSummary.result.map(({ id, created_at, total }) => (
+          {ordersSummary.result && ordersSummary.length > 0 ? (
+            ordersSummary.result.map(({ id, created_at, total }) => (
               <div
                 key={id}
                 className="w-full shadow-md border-gray-300 border-customBorder rounded-lg bg-gray-100 p-[2vw]"
@@ -102,7 +96,12 @@ const Orders = () => {
                   />
                 </div>
               </div>
-            ))}
+            ))
+          ) : (
+            <div className="shadow-md flex justify-center align-center border-gray-300 border-customBorder rounded-lg bg-gray-100 p-[5vw]">
+              <p>Es liegen keine Bestellungen vor.</p>
+            </div>
+          )}
         </div>
       </section>
     </div>

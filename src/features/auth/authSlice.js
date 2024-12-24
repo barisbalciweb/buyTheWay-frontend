@@ -59,12 +59,12 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-// VERIFY COOKIE
-export const verifyCookie = createAsyncThunk(
-  "auth/verifyCookie",
+// AUTHENTICATE USER
+export const authenticateUser = createAsyncThunk(
+  "auth/authenticateUser",
   async (_, { rejectWithValue }) => {
     try {
-      const url = `${api_url}/auth/verifyCookie`;
+      const url = `${api_url}/auth/authentication`;
       const { data } = await axios.get(url, {
         withCredentials: true,
       });
@@ -135,21 +135,23 @@ export const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.login.status = "succeeded";
         state.login.result = action.payload;
+        state.login.error = null;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.login.status = "failed";
         state.login.error = action.payload;
       })
 
-      // VERIFY COOKIE
-      .addCase(verifyCookie.pending, (state, action) => {
+      // AUTHENTICATE USER
+      .addCase(authenticateUser.pending, (state, action) => {
         state.authentication.status = "loading";
       })
-      .addCase(verifyCookie.fulfilled, (state, action) => {
+      .addCase(authenticateUser.fulfilled, (state, action) => {
         state.authentication.status = "succeeded";
         state.authentication.result = action.payload.isValid;
+        state.authentication.error = null;
       })
-      .addCase(verifyCookie.rejected, (state, action) => {
+      .addCase(authenticateUser.rejected, (state, action) => {
         state.authentication.status = "failed";
         state.authentication.error = action.payload;
         state.authentication.result = false;
@@ -162,7 +164,10 @@ export const authSlice = createSlice({
       .addCase(logoutUser.fulfilled, (state, action) => {
         state.logout.status = "succeeded";
         state.logout.result = action.payload.message;
-        state.authentication.result = false;
+
+        state.authentication.status = "idle";
+        state.authentication.result = null;
+        state.authentication.error = null;
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.logout.status = "failed";

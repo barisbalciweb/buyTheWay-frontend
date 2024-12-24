@@ -25,9 +25,6 @@ const Header = () => {
     {
       name: faUser,
       path: "/account",
-      clickEvent: () => {
-        dispatch(setAccountActiveComponent(null));
-      },
     },
     { name: faHeart, path: "/wishlist" },
     { name: faBagShopping, path: "/cart" },
@@ -67,12 +64,15 @@ const Header = () => {
             />
           </li>
           {/* ICONS WITH LINKS */}
-          {iconsWithLinks.map(({ name, path, clickEvent }, index) => (
+          {iconsWithLinks.map(({ name, path }, index) => (
             <li key={index}>
               <Link
                 to={path}
                 className="flex items-center justify-center relative"
-                onClick={clickEvent ? clickEvent : null}>
+                onClick={() =>
+                  path === "/account" &&
+                  dispatch(setAccountActiveComponent(null))
+                }>
                 <FontAwesomeIcon className="h-[6vw]" icon={name} />
                 {/* COUNT OF ITEMS IN CART */}
                 {path === "/cart" && cartItemsCount > 0 && (

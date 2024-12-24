@@ -39,7 +39,7 @@ const UserData = () => {
   const [warning, setWarning] = useState(null);
 
   // GLOBAL STATES
-  const { userData } = useSelector((state) => state.account);
+  const { userIdState } = useSelector((state) => state.account);
   const { userAccountInfo } = useSelector((state) => state.account);
   const infoStatus = userAccountInfo.status;
   const infoResult = userAccountInfo.result;
@@ -48,15 +48,15 @@ const UserData = () => {
 
   // GET USER ACCOUNT INFO (FIRSNAME, LASTNAME, EMAIL)
   useEffect(() => {
-    if (userData.status === "succeeded") {
+    if (userIdState.status === "succeeded") {
       dispatch(
         getUserAccountInfo({
-          userId: userData.result.id,
+          userId: userIdState.result.id,
           requestedFields: ["email", "firstname", "lastname"],
         })
       );
     }
-  }, [userData.status, updateStatus]);
+  }, [userIdState.status, updateStatus]);
 
   useEffect(() => {
     // SET FORM VALUES AFTER FETCHING USER ACCOUNT INFO
@@ -124,7 +124,7 @@ const UserData = () => {
       updateUserData({
         fieldToEdit: fieldId,
         newValue: formValues[fieldId],
-        userId: userData.result.id,
+        userId: userIdState.result.id,
       })
     );
   };

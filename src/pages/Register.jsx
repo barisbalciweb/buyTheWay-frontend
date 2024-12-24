@@ -260,7 +260,7 @@ const Register = () => {
           </div>
           <div className="w-full">
             <button
-              type="submit"
+              type="button"
               className="h-input w-full flex justify-center disabled:bg-slate-300 items-center bg-black text-white"
               onClick={handleRegister}
               disabled={disableSubmit}>

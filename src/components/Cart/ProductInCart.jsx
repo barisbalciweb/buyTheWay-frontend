@@ -13,35 +13,35 @@ import {
 import { removeFromCart } from "../../features/cart/cartSlice";
 
 const ProductInCart = ({ item }) => {
-  const { id, name, price, images, brand } = item.item;
+  const { product, size, quantity } = item;
 
-  const productTitle = brand + " " + name;
+  const productTitle = product.brand + " " + product.name;
 
   const dispatch = useDispatch();
-  const isInWishlist = useSelector((state) => inWishlist(state, item.item));
+  const isInWishlist = useSelector((state) => inWishlist(state, product));
 
   const handleAddToWishlist = (e) => {
     e.preventDefault();
     isInWishlist
-      ? dispatch(removeFromWishlist(item.item))
-      : dispatch(addToWishlist(item.item));
+      ? dispatch(removeFromWishlist(product.id))
+      : dispatch(addToWishlist(product));
   };
 
   return (
     <div className="flex relative m-[4vw] gap-[2vw]">
       <img
         className="w-[40%] bg-productImgBg"
-        src={images[0].url}
-        alt={images[0].alt}
+        src={product.images[0].url}
+        alt={product.images[0].alt}
       />
       <div className="flex flex-col justify-between">
         <h3 className="text-[5vw]">{productTitle}</h3>
         <div>
           <p className="text-[4vw]">
-            <b>Preis:</b> {price} €
+            <b>Preis:</b> {product.price} €
           </p>
           <p className="text-[4vw]">
-            <b>Größe:</b> {item.size}
+            <b>Größe:</b> {size}
           </p>
         </div>
         <div className="flex items-center gap-[3vw]">
@@ -57,7 +57,7 @@ const ProductInCart = ({ item }) => {
       {/* REMOVE ITEM FROM CART */}
       <button
         className="absolute z-10 top-0 right-0"
-        onClick={() => dispatch(removeFromCart({ id, size: item.size }))}>
+        onClick={() => dispatch(removeFromCart({ id: product.id, size }))}>
         <FontAwesomeIcon className="text-[5vw] text-gray-600" icon={faTrash} />
       </button>
     </div>

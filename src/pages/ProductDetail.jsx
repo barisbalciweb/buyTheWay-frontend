@@ -92,7 +92,12 @@ const ProductDetail = () => {
   };
 
   const handleAddToCart = () => {
-    dispatch(addToCart({ item: singleProduct, size: selectedSize }));
+    dispatch(
+      addToCart({
+        product: singleProduct,
+        size: selectedSize,
+      })
+    );
     if (!success) {
       setSuccess(true);
       setTimeout(() => {
@@ -151,7 +156,7 @@ const ProductDetail = () => {
                   className={`text-[6vw] ${isInWishlist && "text-red-500"}`}
                   onClick={() =>
                     isInWishlist
-                      ? dispatch(removeFromWishlist(singleProduct))
+                      ? dispatch(removeFromWishlist(singleProduct.id))
                       : dispatch(addToWishlist(singleProduct))
                   }
                 />

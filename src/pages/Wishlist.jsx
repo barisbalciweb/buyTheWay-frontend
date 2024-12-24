@@ -28,17 +28,17 @@ const Wishlist = () => {
     };
   }, [isSizeSelectionOpen]);
 
-  const handleSizeSelection = (item) => {
-    setSelectedItem(item);
+  const handleSizeSelection = (product) => {
+    setSelectedItem(product);
     setIsSizeSelectionOpen(true);
   };
 
   const handleAddToCart = () => {
-    dispatch(addToCart({ item: selectedItem, size: selectedSize }));
+    dispatch(addToCart({ product: selectedItem, size: selectedSize }));
     setSuccess(true);
     setIsSizeSelectionOpen(false);
     setTimeout(() => {
-      dispatch(removeFromWishlist(selectedItem));
+      dispatch(removeFromWishlist(selectedItem.id));
       setSuccess(false);
       setSelectedSize(null);
       setSelectedItem(null);
@@ -65,10 +65,10 @@ const Wishlist = () => {
         ) : (
           // WISHLIST ITEMS
           <div className="grid grid-cols-2 gap-[2vw] p-[4vw]">
-            {wishlist.map((item) => (
-              <div className="relative" key={item.id}>
+            {wishlist.map((product) => (
+              <div className="relative" key={product.id}>
                 {/* SUCCESS FEEDBACK */}
-                {success && selectedItem.id === item.id && (
+                {success && selectedItem.id === product.id && (
                   <div className="w-full h-full flex flex-col justify-center gap-[2vw] items-center absolute top-0 left-0 z-20 text-black">
                     <FontAwesomeIcon
                       icon={faCircleCheck}
@@ -81,17 +81,17 @@ const Wishlist = () => {
                 )}
                 <div
                   className={`flex flex-col gap-[2vw] relative ${
-                    success && selectedItem.id === item.id && "opacity-20"
+                    success && selectedItem.id === product.id && "opacity-20"
                   }`}
-                  key={item.id}>
-                  <SingleProduct product={item} />
+                  key={product.id}>
+                  <SingleProduct item={{ product }} />
                   <button
                     className={`w-full flex justify-center items-center p-[3vw] ${
-                      success && selectedItem.id === item.id
+                      success && selectedItem.id === product.id
                         ? "bg-[#52D441]"
                         : "bg-black"
                     }`}
-                    onClick={() => handleSizeSelection(item)}>
+                    onClick={() => handleSizeSelection(product)}>
                     <FontAwesomeIcon
                       className="text-white text-[5vw]"
                       icon={faShoppingBag}

@@ -7,10 +7,7 @@ import { useNavigate } from "react-router-dom";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { setAccountActiveComponent } from "../features/ui/uiSlice";
-import {
-  getUserAccountInfo,
-  getUserData,
-} from "../features/account/accountSlice";
+import { getUserAccountInfo } from "../features/account/accountSlice";
 import { logoutUser } from "../features/auth/authSlice";
 
 const Account = () => {
@@ -19,38 +16,33 @@ const Account = () => {
 
   // GLOBAL STATE
   const { accountActiveComponent } = useSelector((state) => state.ui);
-  const { userData } = useSelector((state) => state.account);
+  const { userIdState } = useSelector((state) => state.account);
   const { userAccountInfo } = useSelector((state) => state.account);
-
-  // GET USER DATA FROM COOKIES
-  useEffect(() => {
-    dispatch(getUserData());
-  }, []);
 
   // GET USER ACCOUNT INFO (ONLY FIRSTNAME)
   useEffect(() => {
-    if (userData.status === "succeeded") {
+    if (userIdState.status === "succeeded") {
       dispatch(
         getUserAccountInfo({
-          userId: userData.result.id,
+          userId: userIdState.result.id,
           requestedFields: ["firstname"],
         })
       );
     }
-  }, [userData.status]);
+  }, [userIdState.status]);
 
-  const handleClick = (title, id) => {
+  const handleClick = ({ title, settingId }) => {
     // LOGOUT USER
-    if (id === "logout") {
+    if (settingId === "logout") {
       dispatch(logoutUser());
       navigate("/");
       return;
     }
-    dispatch(setAccountActiveComponent({ title, id }));
+    dispatch(setAccountActiveComponent({ title, settingId }));
   };
 
   const renderActiveComponent = () => {
-    switch (accountActiveComponent.id) {
+    switch (accountActiveComponent.settingId) {
       case "orders":
         return <Orders />;
       case "user-data":
@@ -67,7 +59,7 @@ const Account = () => {
         <h2 className="text-[5vw]">
           Wilkommen, {_.capitalize(userAccountInfo.result?.data?.firstname)}
         </h2>
-        <p className="text-[4vw]">Kundennummer: {userData.result?.id}</p>
+        <p className="text-[4vw]">Kundennummer: {userIdState.result?.id}</p>
       </section>
 
       {accountActiveComponent ? (
@@ -81,7 +73,7 @@ const Account = () => {
                   className={`w-full border-gray-400 border-customBorder rounded-md text-[4vw] shadow-md font-bold text-center py-[5vw] px-[2vw] ${
                     id === "logout" && "bg-black text-white"
                   }`}
-                  onClick={() => handleClick(title, id)}>
+                  onClick={() => handleClick({ title, settingId: id })}>
                   {title}
                 </button>
               </li>
