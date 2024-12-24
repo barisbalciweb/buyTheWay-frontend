@@ -20,6 +20,7 @@ import {
   removeFromWishlist,
 } from "../features/wishlist/wishlistSlice";
 import { toggleLoginModal } from "../features/ui/uiSlice";
+import { calculateDiscountedPrice } from "../utils/calculateDiscountedPrice";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -127,16 +128,39 @@ const ProductDetail = () => {
       {singleProductStatus === "succeeded" && singleProduct ? (
         <div className="flex flex-col gap-[10vw]">
           <section className="px-[4vw] mt-[4vw] flex flex-col gap-[2vw]">
-            <img
-              src={singleProduct.images[0].url}
-              alt={singleProduct.images[0].alt}
-              className="bg-productImgBg"
-            />
+            <div className="relative">
+              {singleProduct.discountPercentage > 0 && (
+                <p className="text-[6vw] text-customOrange font-bold absolute top-[2vw] left-[2vw]">
+                  -{singleProduct.discountPercentage}%
+                </p>
+              )}
+              <img
+                src={singleProduct.images[0].url}
+                alt={singleProduct.images[0].alt}
+                className="bg-productImgBg"
+              />
+            </div>
             <h1 className="w-full font-bold text-[7vw]">
               {singleProduct.brand + " " + singleProduct.name}
             </h1>
-            <p className="text-[4vw]">{singleProduct.description}</p>
-            <p className="w-full text-[6vw]">{singleProduct.price} €</p>
+            <p className="w-full text-[4vw]">{singleProduct.description}</p>
+            <div className="flex gap-[2vw] text-[6vw]">
+              <p
+                className={`${
+                  singleProduct.discountPercentage > 0 && "line-through"
+                }`}>
+                {singleProduct.price}€
+              </p>
+              {singleProduct.discountPercentage > 0 && (
+                <p className="text-customOrange font-bold">
+                  {calculateDiscountedPrice(
+                    singleProduct.price,
+                    singleProduct.discountPercentage
+                  )}
+                  €
+                </p>
+              )}
+            </div>
           </section>
 
           <section className="w-full flex flex-col justify-center items-center">

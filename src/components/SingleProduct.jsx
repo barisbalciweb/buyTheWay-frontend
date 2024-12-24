@@ -65,15 +65,12 @@ const SingleProduct = ({ item }) => {
             ? productTitle.slice(0, 18) + "..."
             : productTitle}
         </h3>
-        <div className="flex gap-[1vw]">
-          <p
-            className={`text-[3.5vw] ${
-              discountPercentage > 0 && "line-through"
-            }`}>
+        <div className="flex gap-[1vw] text-[3.5vw]">
+          <p className={`${discountPercentage > 0 && "line-through"}`}>
             {price}€
           </p>
           {discountPercentage > 0 && (
-            <p className="text-[3.5vw] text-customOrange font-bold">
+            <p className="text-customOrange font-bold">
               {calculateDiscountedPrice(price, discountPercentage)}€
             </p>
           )}
