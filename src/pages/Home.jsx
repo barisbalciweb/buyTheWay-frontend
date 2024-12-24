@@ -64,7 +64,7 @@ const Home = () => {
             {selections.map((selection) => (
               <button
                 key={selection}
-                className="w-full h-[12vw] bg-[rgba(0,0,0,0.2)] font-bold border-customBorder border-white text-[4.5vw] rounded-sm">
+                className="w-full h-[12vw] bg-[rgba(0,0,0,0.5)] tracking-wider font-bold border-customBorder border-white text-[4.5vw] rounded-sm">
                 <Link
                   to={`store?targetGroup=${selection}`}
                   className="w-full h-full flex justify-center items-center">
@@ -78,13 +78,13 @@ const Home = () => {
 
       {/* TOP CATEGORIES */}
       <section className="flex flex-col gap-[4vw] mt-[12vw]">
-        <h2 className="c-h2">Meist gesucht</h2>
+        <h2 className="c-h2">Top Kategorien</h2>
         <div className="flex justify-center">
           <div className="grid grid-rows-2 grid-cols-3 gap-[3vw]">
             {fakeTopCategories.map((category) => (
               <button
                 key={category}
-                className="w-[25vw] h-[10vw] text-[4vw] border-customBorder border-black rounded-sm">
+                className="w-[25vw] h-[12vw] text-[4vw] border-customBorder border-black rounded-md shadow-[0_2vw_2vw_0_rgba(0,0,0,0.2)]">
                 <Link
                   to={`store?category=${category}`}
                   className="w-full h-full flex justify-center items-center">
