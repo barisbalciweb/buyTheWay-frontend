@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { calculateDiscountedPrice } from "../utils/calculateDiscountedPrice";
+
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,7 +19,7 @@ const SingleProduct = ({ item }) => {
   // GLOBAL STATES
   const { authentication } = useSelector((state) => state.auth);
 
-  const { id, name, price, images, brand } = item.product;
+  const { id, name, price, images, brand, discountPercentage } = item.product;
 
   const isInWishlist = useSelector((state) => inWishlist(state, item.product));
 
@@ -45,18 +47,37 @@ const SingleProduct = ({ item }) => {
         }`}
         onClick={handleAddToWishlist}
       />
-      <img
-        className="bg-productImgBg"
-        src={images[0].url}
-        alt={images[0].alt}
-      />
+      <div className="relative">
+        <img
+          className="bg-productImgBg"
+          src={images[0].url}
+          alt={images[0].alt}
+        />
+        {discountPercentage > 0 && (
+          <p className="text-[4vw] text-customOrange font-bold absolute top-[1vw] left-[1vw]">
+            -{discountPercentage}%
+          </p>
+        )}
+      </div>
       <div>
         <h3 className="text-[4vw]">
           {productTitle.length > 20
             ? productTitle.slice(0, 18) + "..."
             : productTitle}
         </h3>
-        <p className="text-[3.5vw]">{price}€</p>
+        <div className="flex gap-[1vw]">
+          <p
+            className={`text-[3.5vw] ${
+              discountPercentage > 0 && "line-through"
+            }`}>
+            {price}€
+          </p>
+          {discountPercentage > 0 && (
+            <p className="text-[3.5vw] text-customOrange font-bold">
+              {calculateDiscountedPrice(price, discountPercentage)}€
+            </p>
+          )}
+        </div>
       </div>
     </Link>
   );
