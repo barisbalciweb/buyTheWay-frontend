@@ -17,6 +17,9 @@ import {
 import { BeatLoader } from "react-spinners";
 import { validateEmail } from "../utils/validateEmail";
 import { testPassword } from "../utils/testPassword";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, resetRegistration } from "../features/auth/authSlice";
@@ -47,7 +50,7 @@ const Register = () => {
   const { registration, isLoggedIn } = useSelector((state) => state.auth);
 
   const labelStyle = "flex flex-col";
-  const inputStyle = "h-input bg-[#F4F4F4] p-[4vw] outline-none";
+  const inputStyle = "w-full h-input bg-[#F4F4F4] p-[4vw] outline-none";
   const inputs = [
     {
       labelText: "Vorname",
@@ -231,29 +234,48 @@ const Register = () => {
               ({ labelText, value, id, type, setter, placeholder }, index) => (
                 <label key={id} className={labelStyle}>
                   {labelText}
-                  <input
-                    ref={index === 0 ? inputRef : null}
-                    value={value}
-                    id={id}
-                    type={type}
-                    className={inputStyle}
-                    placeholder={placeholder || labelText}
-                    onChange={(e) => setter(e.target.value)}
-                  />
-                  {/* SHOW HINTS SELECTIVELY */}
-                  {id === "register-email" ? (
-                    <p className="w-full text-[3.5vw] text-red-500">
-                      {emailHint}
-                    </p>
-                  ) : id === "register-password" ? (
-                    <p className="w-full text-[3.5vw] text-red-500">
-                      {passwordHint}
-                    </p>
-                  ) : id === "register-password-repeat" ? (
-                    <p className="w-full text-[3.5vw] text-red-500">
-                      {passwordMatchHint}
-                    </p>
-                  ) : null}
+                  <div className="w-full h-full relative">
+                    {(id === "register-password" ||
+                      id === "register-password-repeat") && (
+                      <div
+                        className="w-[8vw] h-input flex justify-center items-center bg-gray-300 absolute right-0"
+                        onClick={() => setPasswordHidden(!passwordHidden)}>
+                        <FontAwesomeIcon
+                          icon={passwordHidden ? faEyeSlash : faEye}
+                        />
+                      </div>
+                    )}
+                    <input
+                      ref={index === 0 ? inputRef : null}
+                      value={value}
+                      id={id}
+                      type={
+                        id === "register-password" ||
+                        id === "register-password-repeat"
+                          ? passwordHidden
+                            ? "password"
+                            : "text"
+                          : type
+                      }
+                      className={inputStyle}
+                      placeholder={placeholder || labelText}
+                      onChange={(e) => setter(e.target.value)}
+                    />
+                    {/* SHOW HINTS SELECTIVELY */}
+                    {id === "register-email" ? (
+                      <p className="w-full text-[3.5vw] text-red-500">
+                        {emailHint}
+                      </p>
+                    ) : id === "register-password" ? (
+                      <p className="w-full text-[3.5vw] text-red-500">
+                        {passwordHint}
+                      </p>
+                    ) : id === "register-password-repeat" ? (
+                      <p className="w-full text-[3.5vw] text-red-500">
+                        {passwordMatchHint}
+                      </p>
+                    ) : null}
+                  </div>
                 </label>
               )
             )}
