@@ -95,7 +95,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setIsLoggedIn: (state, action) => {
+    setIsLoggedIn: (state) => {
       state.isLoggedIn = !state.isLoggedIn;
     },
     resetRegistration: (state) => {
@@ -122,6 +122,7 @@ export const authSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, action) => {
         state.registration.status = "succeeded";
         state.registration.result = action.payload;
+        state.registration.error = null;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.registration.status = "failed";
@@ -129,7 +130,7 @@ export const authSlice = createSlice({
       })
 
       // LOGIN
-      .addCase(loginUser.pending, (state, action) => {
+      .addCase(loginUser.pending, (state) => {
         state.login.status = "loading";
       })
       .addCase(loginUser.fulfilled, (state, action) => {
@@ -143,7 +144,7 @@ export const authSlice = createSlice({
       })
 
       // AUTHENTICATE USER
-      .addCase(authenticateUser.pending, (state, action) => {
+      .addCase(authenticateUser.pending, (state) => {
         state.authentication.status = "loading";
       })
       .addCase(authenticateUser.fulfilled, (state, action) => {
@@ -158,7 +159,7 @@ export const authSlice = createSlice({
       })
 
       // LOGOUT
-      .addCase(logoutUser.pending, (state, action) => {
+      .addCase(logoutUser.pending, (state) => {
         state.logout.status = "loading";
       })
       .addCase(logoutUser.fulfilled, (state, action) => {
