@@ -1,6 +1,6 @@
 import React from "react";
 import LoginForm from "../components/Login/LoginForm";
-import { faX } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // REDUX
 import { useDispatch } from "react-redux";
@@ -20,7 +20,7 @@ const LoginModal = () => {
       <div className="w-full fixed top-1/2 left-1/2 transform-gpu -translate-x-1/2 -translate-y-1/2 z-30 px-[5vw]">
         {/* CLOSE BUTTON */}
         <FontAwesomeIcon
-          icon={faX}
+          icon={faXmark}
           className="text-[8vw] text-white fixed top-[-10vw] right-[5vw] z-30"
           onClick={() => dispatch(toggleLoginModal())}
         />
