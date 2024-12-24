@@ -19,6 +19,7 @@ import {
   inWishlist,
   removeFromWishlist,
 } from "../features/wishlist/wishlistSlice";
+import { toggleLoginModal } from "../features/ui/uiSlice";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const ProductDetail = () => {
   const [recentlyViewed, setRecentlyViewed] = useState([]);
 
   // GLOBAL STATES
+  const { authentication } = useSelector((state) => state.auth);
   const { singleProduct, similar, statuses } = useSelector(
     (state) => state.products
   );
@@ -107,6 +109,17 @@ const ProductDetail = () => {
     }
   };
 
+  const handleAddToWishlist = () => {
+    if (authentication.status === "succeeded") {
+      isInWishlist
+        ? dispatch(removeFromWishlist(singleProduct.id))
+        : dispatch(addToWishlist(singleProduct));
+    } else {
+      dispatch(toggleLoginModal());
+      return;
+    }
+  };
+
   const isInWishlist = useSelector((state) => inWishlist(state, singleProduct));
 
   return (
@@ -154,11 +167,7 @@ const ProductDetail = () => {
                 <FontAwesomeIcon
                   icon={isInWishlist ? faHeartSolid : faHeartRegular}
                   className={`text-[6vw] ${isInWishlist && "text-red-500"}`}
-                  onClick={() =>
-                    isInWishlist
-                      ? dispatch(removeFromWishlist(singleProduct.id))
-                      : dispatch(addToWishlist(singleProduct))
-                  }
+                  onClick={handleAddToWishlist}
                 />
               </button>
             </div>

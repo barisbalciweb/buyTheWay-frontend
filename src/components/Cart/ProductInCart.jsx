@@ -11,17 +11,22 @@ import {
   removeFromWishlist,
 } from "../../features/wishlist/wishlistSlice";
 import { removeFromCart } from "../../features/cart/cartSlice";
+import { toggleLoginModal } from "../../features/ui/uiSlice";
 
 const ProductInCart = ({ item }) => {
-  const { product, size, quantity } = item;
-
-  const productTitle = product.brand + " " + product.name;
-
   const dispatch = useDispatch();
-  const isInWishlist = useSelector((state) => inWishlist(state, product));
 
-  const handleAddToWishlist = (e) => {
-    e.preventDefault();
+  const { product, size, quantity } = item;
+  const productTitle = product.brand + " " + product.name;
+  const isInWishlist = useSelector((state) => inWishlist(state, product));
+  const { authentication } = useSelector((state) => state.auth);
+
+  const handleAddToWishlist = () => {
+    if (authentication.status !== "succeeded") {
+      dispatch(toggleLoginModal());
+      return;
+    }
+
     isInWishlist
       ? dispatch(removeFromWishlist(product.id))
       : dispatch(addToWishlist(product));

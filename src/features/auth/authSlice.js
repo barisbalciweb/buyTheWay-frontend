@@ -112,6 +112,13 @@ export const authSlice = createSlice({
         error: null,
       };
     },
+    resetAuthentication: (state) => {
+      state.authentication = {
+        result: null,
+        status: "idle",
+        error: null,
+      };
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -166,12 +173,6 @@ export const authSlice = createSlice({
         state.logout.status = "succeeded";
         state.logout.result = action.payload.message;
         state.error = null;
-
-        state.authentication.status = "idle";
-        state.authentication.result = null;
-        state.authentication.error = null;
-
-        
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.logout.status = "failed";
@@ -180,6 +181,10 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setIsLoggedIn, resetRegistration, resetLogin } =
-  authSlice.actions;
+export const {
+  setIsLoggedIn,
+  resetRegistration,
+  resetLogin,
+  resetAuthentication,
+} = authSlice.actions;
 export default authSlice.reducer;

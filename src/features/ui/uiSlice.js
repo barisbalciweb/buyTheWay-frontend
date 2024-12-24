@@ -11,6 +11,7 @@ const initialState = {
   isSortOpen: false,
   accountActiveComponent: null,
   checkoutActiveComponent: "adress",
+  loginModal: false,
 };
 
 export const uiSlice = createSlice({
@@ -67,6 +68,9 @@ export const uiSlice = createSlice({
     resetCheckoutActiveComponent: (state) => {
       state.checkoutActiveComponent = "adress";
     },
+    toggleLoginModal: (state) => {
+      state.loginModal = !state.loginModal;
+    },
   },
 });
 
@@ -82,5 +86,6 @@ export const {
   setAccountActiveComponent,
   setCheckoutActiveComponent,
   resetCheckoutActiveComponent,
+  toggleLoginModal,
 } = uiSlice.actions;
 export default uiSlice.reducer;

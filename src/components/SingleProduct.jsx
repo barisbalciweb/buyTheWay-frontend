@@ -9,9 +9,13 @@ import {
   inWishlist,
   removeFromWishlist,
 } from "../features/wishlist/wishlistSlice";
+import { toggleLoginModal } from "../features/ui/uiSlice";
 
 const SingleProduct = ({ item }) => {
   const dispatch = useDispatch();
+
+  // GLOBAL STATES
+  const { authentication } = useSelector((state) => state.auth);
 
   const { id, name, price, images, brand } = item.product;
 
@@ -21,6 +25,12 @@ const SingleProduct = ({ item }) => {
 
   const handleAddToWishlist = (e) => {
     e.preventDefault();
+
+    if (authentication.status !== "succeeded") {
+      dispatch(toggleLoginModal());
+      return;
+    }
+
     isInWishlist
       ? dispatch(removeFromWishlist(id))
       : dispatch(addToWishlist(item.product));

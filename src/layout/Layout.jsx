@@ -8,12 +8,14 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setInnerWidth,
   setWarningScreen,
+  toggleLoginModal,
   toggleMobileMenu,
   toggleSearch,
 } from "../features/ui/uiSlice";
 import ScrollTopButton from "../components/ScrollTopButton";
 import Search from "./Search";
 import { useLocation } from "react-router-dom";
+import LoginModal from "./LoginModal";
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
@@ -23,9 +25,8 @@ const Layout = ({ children }) => {
   const [showScrollButton, setShowScrollButton] = useState(false);
 
   // GLOBAL STATES
-  const { warningScreen, isSearchOpen, isMobileMenuOpen } = useSelector(
-    (state) => state.ui
-  );
+  const { warningScreen, isSearchOpen, isMobileMenuOpen, loginModal } =
+    useSelector((state) => state.ui);
 
   // SHOW WARNING SCREEN IF INNER WIDTH IS LESS THAN DEFINED
   useEffect(() => {
@@ -54,10 +55,11 @@ const Layout = ({ children }) => {
     };
   }, []);
 
-  // CLOSE MOBILE MENU ON ROUTE CHANGE
+  // CLOSE MOBILE MENU AND SEARCH ON ROUTE CHANGE
   useEffect(() => {
     if (isMobileMenuOpen) dispatch(toggleMobileMenu());
     if (isSearchOpen) dispatch(toggleSearch());
+    if (loginModal) dispatch(toggleLoginModal());
   }, [location]);
 
   const handleScrollToTop = () => {
@@ -66,6 +68,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      {loginModal && <LoginModal />}
       {warningScreen && <Warning />}
       <Header />
       {isSearchOpen && <Search />}

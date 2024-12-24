@@ -134,6 +134,10 @@ const cartSlice = createSlice({
       state.cartItemsCount = cartItemsCount;
       state.total = total;
     },
+    resetTotals: (state) => {
+      state.cartItemsCount = 0;
+      state.total = 0;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -186,5 +190,6 @@ export const {
   decrementQuantity,
   setCartItems,
   calculateTotals,
+  resetTotals,
 } = cartSlice.actions;
 export default cartSlice.reducer;
