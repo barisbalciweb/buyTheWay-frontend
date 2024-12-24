@@ -14,7 +14,7 @@ const OrderSummary = ({ children, total, cartItemsCount }) => {
         <p>kostenlos</p>
       </div>
       <hr className="border-black" />
-      <div className="flex justify-between">
+      <div className="flex justify-between font-bold">
         <p>Gesamtsumme</p>
         <p>{total.toFixed(2)} €</p>
       </div>

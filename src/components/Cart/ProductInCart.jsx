@@ -2,6 +2,7 @@ import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Counter from "./Counter";
+import { calculateDiscountedPrice } from "../../utils/calculateDiscountedPrice";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +17,7 @@ import { toggleLoginModal } from "../../features/ui/uiSlice";
 const ProductInCart = ({ item }) => {
   const dispatch = useDispatch();
 
-  const { product, size, quantity } = item;
+  const { product, size } = item;
   const productTitle = product.brand + " " + product.name;
   const isInWishlist = useSelector((state) => inWishlist(state, product));
   const { authentication } = useSelector((state) => state.auth);
@@ -43,10 +44,22 @@ const ProductInCart = ({ item }) => {
         <h3 className="text-[5vw]">{productTitle}</h3>
         <div>
           <p className="text-[4vw]">
-            <b>Preis:</b> {product.price} €
+            <span className="font-bold">Preis:</span>{" "}
+            <span className={`${product.discountPercentage && "line-through"}`}>
+              {product.price}€
+            </span>{" "}
+            {product.discountPercentage > 0 && (
+              <span className="text-customOrange font-bold">
+                {calculateDiscountedPrice(
+                  product.price,
+                  product.discountPercentage
+                )}
+                €
+              </span>
+            )}
           </p>
           <p className="text-[4vw]">
-            <b>Größe:</b> {size}
+            <span className="font-bold">Größe:</span> {size}
           </p>
         </div>
         <div className="flex items-center gap-[3vw]">
