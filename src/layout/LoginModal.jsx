@@ -24,7 +24,7 @@ const LoginModal = () => {
           className="text-[8vw] text-white fixed top-[-10vw] right-[5vw] z-30"
           onClick={() => dispatch(toggleLoginModal())}
         />
-        <div className="bg-white py-[8vw]">
+        <div className="bg-white py-[8vw] rounded-md">
           <LoginForm />
         </div>
       </div>
