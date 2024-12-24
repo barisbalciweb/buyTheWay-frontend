@@ -6,6 +6,8 @@ import {
   serverErrorMsg,
   userNotFoundMsg,
 } from "../../utils/feedbacks";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, resetLogin } from "../../features/auth/authSlice";
@@ -21,6 +23,7 @@ const LoginForm = () => {
   const [passwordValue, setPasswordValue] = useState("testUSER123");
   const [waiting, isWaiting] = useState(false);
   const [warning, setWarning] = useState(null);
+  const [passwordHidden, setPasswordHidden] = useState(true);
 
   // GLOBAL STATES
   const { login } = useSelector((state) => state.auth);
@@ -103,14 +106,21 @@ const LoginForm = () => {
 
             <label htmlFor="password" className="flex flex-col">
               Passwort
-              <input
-                value={passwordValue}
-                type="password"
-                id="password"
-                className="h-input bg-[#F4F4F4] p-[4vw] outline-none"
-                placeholder="Passwort"
-                onChange={(e) => setPasswordValue(e.target.value)}
-              />
+              <div className="w-full h-full relative">
+                <div
+                  className="w-[8vw] h-input flex justify-center items-center bg-gray-300 absolute right-0"
+                  onClick={() => setPasswordHidden(!passwordHidden)}>
+                  <FontAwesomeIcon icon={passwordHidden ? faEyeSlash : faEye} />
+                </div>
+                <input
+                  value={passwordValue}
+                  type={passwordHidden ? "password" : "text"}
+                  id="password"
+                  className="w-full h-input bg-[#F4F4F4] p-[4vw] outline-none"
+                  placeholder="Passwort"
+                  onChange={(e) => setPasswordValue(e.target.value)}
+                />
+              </div>
             </label>
             <p className="w-full text-end underline">Passwort vergessen</p>
           </div>
