@@ -12,6 +12,8 @@ const initialState = {
   accountActiveComponent: null,
   checkoutActiveComponent: "adress",
   loginModal: false,
+  proceedOptionsModal: false,
+  isSizeSelectionOpen: false,
 };
 
 export const uiSlice = createSlice({
@@ -68,8 +70,17 @@ export const uiSlice = createSlice({
     resetCheckoutActiveComponent: (state) => {
       state.checkoutActiveComponent = "adress";
     },
+    // OTHERS
     toggleLoginModal: (state) => {
       state.loginModal = !state.loginModal;
+    },
+    toggleProceedOptionsModal: (state) => {
+      state.proceedOptionsModal = !state.proceedOptionsModal;
+    },
+    toggleSizeSelection: (state) => {
+      console.log("hier");
+
+      state.isSizeSelectionOpen = !state.isSizeSelectionOpen;
     },
   },
 });
@@ -87,5 +98,7 @@ export const {
   setCheckoutActiveComponent,
   resetCheckoutActiveComponent,
   toggleLoginModal,
+  toggleProceedOptionsModal,
+  toggleSizeSelection,
 } = uiSlice.actions;
 export default uiSlice.reducer;

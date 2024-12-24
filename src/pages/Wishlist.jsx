@@ -5,18 +5,22 @@ import {
   faShoppingBag,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../features/cart/cartSlice";
 import { removeFromWishlist } from "../features/wishlist/wishlistSlice";
-import { Link } from "react-router-dom";
+import { toggleSizeSelection } from "../features/ui/uiSlice";
 
 const Wishlist = () => {
+  // LOCAL STATES
   const [selectedItem, setSelectedItem] = useState(null);
-  const [isSizeSelectionOpen, setIsSizeSelectionOpen] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
   const [success, setSuccess] = useState(false);
   const { wishlist } = useSelector((state) => state.wishlist);
+
+  // GLOBAL STATES
+  const { isSizeSelectionOpen } = useSelector((state) => state.ui);
 
   const dispatch = useDispatch();
 
@@ -30,13 +34,13 @@ const Wishlist = () => {
 
   const handleSizeSelection = (product) => {
     setSelectedItem(product);
-    setIsSizeSelectionOpen(true);
+    dispatch(toggleSizeSelection());
   };
 
   const handleAddToCart = () => {
     dispatch(addToCart({ product: selectedItem, size: selectedSize }));
     setSuccess(true);
-    setIsSizeSelectionOpen(false);
+    dispatch(toggleSizeSelection());
     setTimeout(() => {
       dispatch(removeFromWishlist(selectedItem.id));
       setSuccess(false);
@@ -108,7 +112,7 @@ const Wishlist = () => {
           <section>
             <div
               className="w-full h-full bg-[rgba(0,0,0,0.5)] fixed bottom-0 left-0 z-20"
-              onClick={() => setIsSizeSelectionOpen(false)}
+              onClick={() => dispatch(toggleSizeSelection())}
             />
             <div className="w-full h-[30%] flex flex-col justify-center items-center gap-[3vw] bg-white fixed bottom-0 left-0 z-20">
               <div className="w-[80%] flex flex-col items-center justify-center gap-[3vw]">

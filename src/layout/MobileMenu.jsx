@@ -10,6 +10,11 @@ import {
   toggleMobileMenu,
   setSelectedCategoryGroup,
   toggleSearch,
+  toggleLoginModal,
+  toggleFilter,
+  toggleSort,
+  toggleProceedOptionsModal,
+  toggleSizeSelection,
 } from "../features/ui/uiSlice";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,11 +30,22 @@ const MobileMenu = () => {
     selectedPerson,
     selectedCategoryGroup,
     isSearchOpen,
+    loginModal,
+    proceedOptionsModal,
+    isFilterOpen,
+    isSortOpen,
+    isSizeSelectionOpen,
   } = useSelector((state) => state.ui);
 
   useEffect(() => {
     handlePersonSelect(selectedPerson);
+    // CLOSE IF OPEN
     if (isSearchOpen) dispatch(toggleSearch());
+    if (isFilterOpen) dispatch(toggleFilter());
+    if (isSortOpen) dispatch(toggleSort());
+    if (loginModal) dispatch(toggleLoginModal());
+    if (proceedOptionsModal) dispatch(toggleProceedOptionsModal());
+    if (isSizeSelectionOpen) dispatch(toggleSizeSelection());
   }, []);
 
   const handlePersonSelect = (person) => {

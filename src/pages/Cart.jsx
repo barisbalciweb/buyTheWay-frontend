@@ -1,16 +1,29 @@
-// REDUX
-import { useSelector } from "react-redux";
-import ProductInCart from "../components/Cart/ProductInCart";
 import { Link, useNavigate } from "react-router-dom";
+import ProductInCart from "../components/Cart/ProductInCart";
 import OrderSummary from "../components/OrderSummary";
+// REDUX
+import { useDispatch, useSelector } from "react-redux";
+import { toggleProceedOptionsModal } from "../features/ui/uiSlice";
 
 const Cart = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // GLOBAL STATES
+  const { authentication } = useSelector((state) => state.auth);
   const { cartItems, cartItemsCount, total } = useSelector(
     (state) => state.cart
   );
+
+  const handleCheckoutButton = () => {
+    // IF USER IS NOT LOGGED IN SHOW PROCEED OPTIONS
+    if (authentication.status !== "succeeded") {
+      dispatch(toggleProceedOptionsModal());
+    } else {
+      // IF USER IS LOGGED IN NAVIGATE TO CHECKOUT
+      navigate("/checkout");
+    }
+  };
 
   return (
     <>
@@ -41,7 +54,7 @@ const Cart = () => {
             <OrderSummary total={total} cartItemsCount={cartItemsCount}>
               <button
                 className="bg-black text-[5vw] text-white px-[20vw] py-[4vw] mt-[5vw]"
-                onClick={() => navigate("/checkout")}>
+                onClick={handleCheckoutButton}>
                 ZUR KASSE
               </button>
             </OrderSummary>

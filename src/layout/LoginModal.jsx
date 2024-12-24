@@ -17,11 +17,11 @@ const LoginModal = () => {
       />
 
       {/* LOGIN DIV */}
-      <div className="w-full fixed top-1/2 left-1/2 transform-gpu -translate-x-1/2 -translate-y-1/2 z-30 px-[5vw]">
+      <div className="w-[90%] fixed top-1/2 left-1/2 transform-gpu -translate-x-1/2 -translate-y-1/2 z-30">
         {/* CLOSE BUTTON */}
         <FontAwesomeIcon
           icon={faXmark}
-          className="text-[8vw] text-white fixed top-[-10vw] right-[5vw] z-30"
+          className="text-[8vw] text-black absolute top-[3vw] right-[3vw]"
           onClick={() => dispatch(toggleLoginModal())}
         />
         <div className="bg-white py-[8vw] rounded-md">

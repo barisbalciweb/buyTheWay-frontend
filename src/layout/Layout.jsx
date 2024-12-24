@@ -1,8 +1,13 @@
+import { useLocation } from "react-router-dom";
+import ProceedOptionsModal from "./ProceedOptionsModal";
+import LoginModal from "./LoginModal";
 import Header from "./Header";
 import Footer from "./Footer";
 import MobileMenu from "./MobileMenu";
 import { useEffect, useState } from "react";
 import Warning from "../components/Warning";
+import ScrollTopButton from "../components/ScrollTopButton";
+import Search from "./Search";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,12 +15,9 @@ import {
   setWarningScreen,
   toggleLoginModal,
   toggleMobileMenu,
+  toggleProceedOptionsModal,
   toggleSearch,
 } from "../features/ui/uiSlice";
-import ScrollTopButton from "../components/ScrollTopButton";
-import Search from "./Search";
-import { useLocation } from "react-router-dom";
-import LoginModal from "./LoginModal";
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
@@ -25,8 +27,13 @@ const Layout = ({ children }) => {
   const [showScrollButton, setShowScrollButton] = useState(false);
 
   // GLOBAL STATES
-  const { warningScreen, isSearchOpen, isMobileMenuOpen, loginModal } =
-    useSelector((state) => state.ui);
+  const {
+    warningScreen,
+    isSearchOpen,
+    isMobileMenuOpen,
+    loginModal,
+    proceedOptionsModal,
+  } = useSelector((state) => state.ui);
 
   // SHOW WARNING SCREEN IF INNER WIDTH IS LESS THAN DEFINED
   useEffect(() => {
@@ -55,11 +62,12 @@ const Layout = ({ children }) => {
     };
   }, []);
 
-  // CLOSE MOBILE MENU AND SEARCH ON ROUTE CHANGE
+  // CLOSE ON ROUTE CHANGE
   useEffect(() => {
     if (isMobileMenuOpen) dispatch(toggleMobileMenu());
     if (isSearchOpen) dispatch(toggleSearch());
     if (loginModal) dispatch(toggleLoginModal());
+    if (proceedOptionsModal) dispatch(toggleProceedOptionsModal());
   }, [location]);
 
   const handleScrollToTop = () => {
@@ -69,6 +77,7 @@ const Layout = ({ children }) => {
   return (
     <>
       {loginModal && <LoginModal />}
+      {proceedOptionsModal && <ProceedOptionsModal />}
       {warningScreen && <Warning />}
       <Header />
       {isSearchOpen && <Search />}
