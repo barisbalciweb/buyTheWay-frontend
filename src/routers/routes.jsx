@@ -3,6 +3,7 @@ import Account from "../pages/Account";
 import Cart from "../pages/Cart";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import NotFound from "../pages/NotFound";
 import ProductDetail from "../pages/ProductDetail";
 import Register from "../pages/Register";
 import Store from "../pages/Store";
@@ -16,7 +17,6 @@ const routes = [
   { path: "/cart", element: <Cart /> },
   { path: "/checkout", element: <Checkout /> },
   { path: "/wishlist", element: <Wishlist /> },
-
   {
     path: "/login",
     element: (
@@ -33,7 +33,6 @@ const routes = [
       </ProtectedRoute>
     ),
   },
-
   {
     path: "/account",
     element: (
@@ -41,6 +40,10 @@ const routes = [
         <Account />
       </ProtectedRoute>
     ),
+  },
+  {
+    path: "/*",
+    element: <NotFound />,
   },
 ];
 
