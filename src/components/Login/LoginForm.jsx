@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser, resetLogin } from "../../features/auth/authSlice";
 import { toggleLoginModal } from "../../features/ui/uiSlice";
 
-const LoginForm = () => {
+const LoginForm = ({ renderedFromLoginModal }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const inputRef = useRef();
@@ -46,8 +46,12 @@ const LoginForm = () => {
     }
     if (login.status === "succeeded") {
       isWaiting(false);
-      // REDIRECT TO HOME AFTER LOGIN
-      navigate("/");
+      // REDIRECT TO LAST LOCATION OR TOGGLE AFTER LOGIN
+      if (!renderedFromLoginModal) {
+        navigate(-2);
+      } else {
+        dispatch(toggleLoginModal());
+      }
     }
     if (login.status === "failed") {
       isWaiting(false);
