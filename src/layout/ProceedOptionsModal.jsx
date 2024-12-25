@@ -3,11 +3,18 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 // REDUX
 import { useDispatch } from "react-redux";
 import { toggleProceedOptionsModal } from "../features/ui/uiSlice";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ProceedOptionsModal = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleLoginButton = () => {
+    localStorage.setItem("lastLocation", location.pathname);
+    dispatch(toggleProceedOptionsModal());
+    navigate("/login");
+  };
 
   return (
     <>
@@ -33,7 +40,7 @@ const ProceedOptionsModal = () => {
         <div className="flex flex-col justify-center items-center gap-4 mt-[5vw]">
           <button
             className="w-full h-input bg-black text-white px-4 py-2"
-            onClick={() => navigate("/login")}>
+            onClick={handleLoginButton}>
             ANMELDEN
           </button>
           <button

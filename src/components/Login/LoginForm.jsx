@@ -47,10 +47,13 @@ const LoginForm = ({ renderedFromLoginModal }) => {
     if (login.status === "succeeded") {
       isWaiting(false);
       // REDIRECT TO LAST LOCATION OR TOGGLE AFTER LOGIN
-      if (!renderedFromLoginModal) {
-        navigate(-2);
-      } else {
+      if (localStorage.getItem("lastLocation") === "/cart") {
+        navigate("/checkout");
+        localStorage.removeItem("lastLocation");
+      } else if (renderedFromLoginModal) {
         dispatch(toggleLoginModal());
+      } else {
+        navigate(-2);
       }
     }
     if (login.status === "failed") {
