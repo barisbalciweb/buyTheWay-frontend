@@ -89,7 +89,6 @@ const Overview = () => {
         paymentMethod: selectedPaymentMethod,
         cartItems,
         total,
-        userId: userIdState.result.id,
       })
     );
   };

@@ -32,14 +32,15 @@ const Orders = () => {
     dispatch(getOrderDetail(orderId));
   };
 
+  console.log(orderDetail);
+
   return (
     <div>
       <AccountNavigation />
       <section className="mt-[5vw]">
         <h2 className="text-[5vw] font-bold">Bestellungen</h2>
         <div className="flex flex-col gap-[3vw] mt-[2vw]">
-          {/* FAKE DATA FOR TESTING */}
-          {ordersSummary.result && ordersSummary.length > 0 ? (
+          {ordersSummary.result && ordersSummary.result.length > 0 ? (
             ordersSummary.result.map(({ id, created_at, total }) => (
               <div
                 key={id}
@@ -76,7 +77,7 @@ const Orders = () => {
                         {orderDetail.status === "succeeded" &&
                           orderDetail.result.map((product) => (
                             <tr key={product.id}>
-                              <td className="w-1/5">{product.id}</td>
+                              <td className="w-1/5">{product.product_id}</td>
                               <td className="w-2/5">
                                 {product.name.slice(0, 13)}
                               </td>
