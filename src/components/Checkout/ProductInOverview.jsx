@@ -1,5 +1,5 @@
 const ProductInOverview = ({ item }) => {
-  const { name, price, images, brand } = item.item;
+  const { name, price, images, brand } = item.product;
 
   const productTitle = brand + " " + name;
 

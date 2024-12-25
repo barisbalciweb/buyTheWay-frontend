@@ -3,10 +3,7 @@ import { useEffect, useState } from "react";
 import OrderSummary from "../OrderSummary";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getUserAccountInfo,
-  getUserId,
-} from "../../features/account/accountSlice";
+import { getUserAccountInfo } from "../../features/account/accountSlice";
 import _ from "lodash";
 import {
   postOrder,
@@ -15,6 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { emptyCart } from "../../features/cart/cartSlice";
 import { resetCheckoutActiveComponent } from "../../features/ui/uiSlice";
+
 const Overview = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -96,6 +94,8 @@ const Overview = () => {
     );
   };
 
+  console.log(cartItems);
+
   return (
     <section>
       <h2 className="text-[5vw] font-bold mb-[5vw]">Zusammenfassung</h2>
@@ -141,7 +141,7 @@ const Overview = () => {
         <div className="flex flex-col gap-[2vw] text-[4vw]">
           <h3 className="font-bold mb-[2vw]">Warenkorb:</h3>
           {cartItems.map((item) => (
-            <ProductInOverview key={item.item.id + item.size} item={item} />
+            <ProductInOverview key={item.product.id + item.size} item={item} />
           ))}
         </div>
       </div>
