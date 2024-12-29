@@ -5,6 +5,7 @@ import {
   missingInputMsg,
   serverErrorMsg,
   userNotFoundMsg,
+  userNotVerifiedMsg,
 } from "../../utils/feedbacks";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -67,6 +68,9 @@ const LoginForm = ({ renderedFromLoginModal }) => {
           break;
         case "invalidCredentials":
           setWarning(userNotFoundMsg);
+          break;
+        case "userNotVerified":
+          setWarning(userNotVerifiedMsg);
           break;
         default:
           setWarning(serverErrorMsg);

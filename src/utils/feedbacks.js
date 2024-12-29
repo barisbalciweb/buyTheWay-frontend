@@ -28,3 +28,6 @@ export const emailHintMsg = "Ungültige E-Mail-Adresse.";
 export const passwordHintMsg = "mind. 8 Zeichen, A-Z, a-z, 0-9";
 
 export const passwordsMatchMsg = "Passwörter stimmen nicht überein.";
+
+export const userNotVerifiedMsg =
+  "Sie haben Ihre E-Mail-Adresse noch nicht bestätigt. Bitte überprüfen Sie Ihr Postfach.";
