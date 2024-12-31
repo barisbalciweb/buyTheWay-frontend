@@ -1,6 +1,7 @@
 import ProductInOverview from "./ProductInOverview";
 import { useEffect, useState } from "react";
 import OrderSummary from "../OrderSummary";
+import { BeatLoader } from "react-spinners";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { getUserAccountInfo } from "../../features/account/accountSlice";
@@ -21,6 +22,7 @@ const Overview = () => {
   const [success, setSuccess] = useState(false);
   const [countdown, setCountdown] = useState(5);
   const [warning, setWarning] = useState(null);
+  const [waiting, setWaiting] = useState(false);
 
   // GLOBAL STATES
   const { cartItems } = useSelector((state) => state.cart);
@@ -57,11 +59,13 @@ const Overview = () => {
   useEffect(() => {
     if (order.status === "succeeded") {
       setSuccess(true);
+      setWaiting(false);
     }
     if (order.status === "failed") {
       setWarning(
         "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
       );
+      setWaiting(false);
     }
   }, [order.status]);
 
@@ -82,6 +86,7 @@ const Overview = () => {
   }, [success, countdown]);
 
   const handleOrder = () => {
+    setWaiting(true);
     setWarning(null);
     dispatch(
       postOrder({
@@ -92,8 +97,6 @@ const Overview = () => {
       })
     );
   };
-
-  console.log(cartItems);
 
   return (
     <section>
@@ -151,7 +154,13 @@ const Overview = () => {
           className="h-input w-full items-center disabled:bg-green-500 bg-black text-white mt-[5vw]"
           disabled={success}
           onClick={handleOrder}>
-          {success ? "KAUF ABGESCHLOSSEN!" : "JETZT KAUFEN"}
+          {waiting ? (
+            <BeatLoader size={"2vw"} color="white" />
+          ) : success ? (
+            "KAUF ABGESCHLOSSEN!"
+          ) : (
+            "JETZT KAUFEN"
+          )}
         </button>
       </OrderSummary>
 

@@ -64,7 +64,7 @@ const Address = () => {
               <label htmlFor={inputId}>{label}</label>
               <select
                 id={inputId}
-                className="h-[12vw]"
+                className="h-[12vw] bg-white"
                 value={addressFormValues[inputId]}
                 onChange={handleChange}>
                 <option value="Bitte wählen" hidden>
