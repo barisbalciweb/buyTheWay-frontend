@@ -28,10 +28,7 @@ You can view the UI design of the page at the following link: [buyTheWay Figma D
   - [x] Authentication is implemented using JWT (JSON Web Token).
 
 - **Profile Management**:
-  - [ ] Users can manage their profiles, update information, and save their favorites. 🚧
-
-- **Payment Integration**:
-  - [ ] Integration with payment providers like PayPal or Stripe for completing orders. 🚧
+  - [x] Users can manage their profiles, update information, and save their favorites.
 
 - **Customer Support**:
   - [ ] Chat support based on multi-agent systems with ChatGPT. 🚧
@@ -165,10 +162,7 @@ Das UI-Design der Seite können Sie unter folgendem Link ansehen: [buyTheWay Fig
   - [x] Die Authentifizierung erfolgt über JWT (JSON Web Token).
 
 - **Profilverwaltung**:
-  - [ ] Benutzer können ihr Profil verwalten, Informationen aktualisieren und ihre Favoriten speichern. 🚧
-
-- **Zahlungsintegration**:
-  - [ ] Integration von Zahlungsanbietern wie PayPal oder Stripe, um Bestellungen abzuschließen. 🚧
+  - [x] Benutzer können ihr Profil verwalten, Informationen aktualisieren und ihre Favoriten speichern. 
 
 - **Kundendienst**:
   - [ ] Chat-Support basierend auf Multi-Agent-Systemen mit ChatGPT. 🚧
