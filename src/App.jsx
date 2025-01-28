@@ -4,7 +4,7 @@ import Layout from "./layout/Layout";
 import ScrollToTop from "./components/ScrollTop";
 import CartSync from "./features/cart/cartSync";
 import { Suspense } from "react";
-import { ClipLoader } from "react-spinners";
+import LoadingScreen from "./components/LoadingScreen";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -56,8 +56,8 @@ const App = () => {
       <Layout>
         <ScrollToTop />
         <CartSync />
-        {/* LAZY-LOADED ROUTES */}
-        <Suspense fallback={<ClipLoader size={"20vw"} />}>
+        <Suspense fallback={<LoadingScreen />}>
+          {/* LAZY-LOADED ROUTES */}
           <Routes>
             {routes.map((route) => {
               return (
