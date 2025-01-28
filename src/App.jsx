@@ -8,8 +8,7 @@ import LoadingScreen from "./components/LoadingScreen";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getUserId } from "./features/account/accountSlice";
-import {
+ import {
   authenticateUser,
   resetAuthentication,
   resetLogin,
@@ -22,20 +21,20 @@ const App = () => {
   const dispatch = useDispatch();
 
   const { warningScreen } = useSelector((state) => state.ui);
-  const { login, logout } = useSelector((state) => state.auth);
+  const { login } = useSelector((state) => state.auth);
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const { isMobileMenuOpen, isSearchOpen, loginModal } = useSelector(
     (state) => state.ui
   );
 
-  // AUTHENTICATE USER AND GET USER ID FROM COOKIES ON LOAD OR LOGIN
+  // AUTHENTICATE USER AND GET USER ID FROM COOKIES ON FIRST LOAD OR LOGIN
   useEffect(() => {
     dispatch(authenticateUser());
-    dispatch(getUserId());
   }, [login.status]);
 
   // RESET STATES ON LOGOUT
   useEffect(() => {
-    if (logout.status === "succeeded") {
+    if (!isAuthenticated) {
       dispatch(resetAuthentication());
       dispatch(resetLogin());
       dispatch(resetRegistration());
@@ -43,7 +42,7 @@ const App = () => {
       dispatch(resetTotals());
       dispatch(emptyWishlist());
     }
-  }, [logout.status]);
+  }, [isAuthenticated]);
 
   return (
     <div

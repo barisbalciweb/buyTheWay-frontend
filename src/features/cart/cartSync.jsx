@@ -10,17 +10,17 @@ const CartSync = () => {
   const dispatch = useDispatch();
 
   // GLOBAL STATES
-  const { userIdState } = useSelector((state) => state.account);
+  const { userId } = useSelector((state) => state.auth.authentication);
   const { isInitialSync, cartItems, cartItemsFromDB } = useSelector(
     (state) => state.cart
   );
 
   // 1- GET PRODUCTS FROM CART IN DB ONLY ON LOAD AND WHEN USER ID IS FETCHED
   useEffect(() => {
-    if (userIdState.status === "succeeded") {
+    if (userId) {
       dispatch(getProductsFromCartInDB());
     }
-  }, [userIdState.status]);
+  }, [userId]);
 
   // 2- SET CARTITEMS STATE WHEN PRODUCTS ARE FETCHED FROM DB
   useEffect(() => {

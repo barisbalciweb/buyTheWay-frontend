@@ -5,6 +5,7 @@ import axios from "axios";
 const api_url = apiUrlSwitch();
 
 const initialState = {
+  isAuthenticated: false,
   login: {
     result: null,
     status: "idle",
@@ -16,7 +17,7 @@ const initialState = {
     error: null,
   },
   authentication: {
-    result: null,
+    userId: null,
     status: "idle",
     error: null,
   },
@@ -68,6 +69,7 @@ export const authenticateUser = createAsyncThunk(
       const { data } = await axios.get(url, {
         withCredentials: true,
       });
+
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -113,6 +115,7 @@ export const authSlice = createSlice({
       };
     },
     resetAuthentication: (state) => {
+      state.isAuthenticated = false;
       state.authentication = {
         result: null,
         status: "idle",
@@ -156,13 +159,17 @@ export const authSlice = createSlice({
       })
       .addCase(authenticateUser.fulfilled, (state, action) => {
         state.authentication.status = "succeeded";
-        state.authentication.result = action.payload.isValid;
+        state.authentication.userId = action.payload.userId;
         state.authentication.error = null;
+
+        state.isAuthenticated = true;
       })
       .addCase(authenticateUser.rejected, (state, action) => {
         state.authentication.status = "failed";
         state.authentication.error = action.payload;
         state.authentication.result = false;
+
+        state.isAuthenticated = false;
       })
 
       // LOGOUT
@@ -173,6 +180,8 @@ export const authSlice = createSlice({
         state.logout.status = "succeeded";
         state.logout.result = action.payload.message;
         state.error = null;
+
+        state.isAuthenticated = false;
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.logout.status = "failed";

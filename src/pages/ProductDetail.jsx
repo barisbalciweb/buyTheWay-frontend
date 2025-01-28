@@ -4,7 +4,6 @@ import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
-import { ClipLoader } from "react-spinners";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -21,6 +20,7 @@ import {
 } from "../features/wishlist/wishlistSlice";
 import { toggleLoginModal } from "../features/ui/uiSlice";
 import { calculateDiscountedPrice } from "../utils/calculateDiscountedPrice";
+import LoadingScreen from "../components/LoadingScreen";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const ProductDetail = () => {
   const [recentlyViewed, setRecentlyViewed] = useState([]);
 
   // GLOBAL STATES
-  const { authentication } = useSelector((state) => state.auth);
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const { singleProduct, similar, statuses } = useSelector(
     (state) => state.products
   );
@@ -111,7 +111,7 @@ const ProductDetail = () => {
   };
 
   const handleAddToWishlist = () => {
-    if (authentication.status === "succeeded") {
+    if (isAuthenticated) {
       isInWishlist
         ? dispatch(removeFromWishlist(singleProduct.id))
         : dispatch(addToWishlist(singleProduct));
@@ -268,9 +268,7 @@ const ProductDetail = () => {
           </section>
         </div>
       ) : (
-        <div className="w-full h-screen flex justify-center items-center">
-          <ClipLoader size={"20vw"} />
-        </div>
+        <LoadingScreen />
       )}
     </main>
   );

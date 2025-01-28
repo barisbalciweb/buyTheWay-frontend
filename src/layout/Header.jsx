@@ -20,11 +20,12 @@ const Header = () => {
   // GLOBAL STATES
   const { isMobileMenuOpen } = useSelector((state) => state.ui);
   const { cartItemsCount } = useSelector((state) => state.cart);
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   const iconsWithLinks = [
     {
       name: faUser,
-      path: "/account",
+      path: isAuthenticated ? "/account" : "/login",
     },
     { name: faHeart, path: "/wishlist" },
     { name: faBagShopping, path: "/cart" },

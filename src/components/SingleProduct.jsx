@@ -17,7 +17,7 @@ const SingleProduct = ({ item }) => {
   const dispatch = useDispatch();
 
   // GLOBAL STATES
-  const { authentication } = useSelector((state) => state.auth);
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   const { id, name, price, images, brand, discountPercentage } = item.product;
 
@@ -28,7 +28,7 @@ const SingleProduct = ({ item }) => {
   const handleAddToWishlist = (e) => {
     e.preventDefault();
 
-    if (authentication.status !== "succeeded") {
+    if (!isAuthenticated) {
       dispatch(toggleLoginModal());
       return;
     }

@@ -20,10 +20,10 @@ const ProductInCart = ({ item }) => {
   const { product, size } = item;
   const productTitle = product.brand + " " + product.name;
   const isInWishlist = useSelector((state) => inWishlist(state, product));
-  const { authentication } = useSelector((state) => state.auth);
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   const handleAddToWishlist = () => {
-    if (authentication.status !== "succeeded") {
+    if (!isAuthenticated) {
       dispatch(toggleLoginModal());
       return;
     }

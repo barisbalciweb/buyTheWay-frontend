@@ -26,7 +26,7 @@ const Overview = () => {
 
   // GLOBAL STATES
   const { cartItems } = useSelector((state) => state.cart);
-  const { userIdState } = useSelector((state) => state.account);
+  const { userId } = useSelector((state) => state.auth.authentication);
   const { userAccountInfo } = useSelector((state) => state.account);
   const { selectedPaymentMethod } = useSelector((state) => state.checkout);
   const { total, cartItemsCount } = useSelector((state) => state.cart);
@@ -45,15 +45,15 @@ const Overview = () => {
 
   // GET USER ACCOUNT INFO (FIRSNAME, LASTNAME, EMAIL)
   useEffect(() => {
-    if (userIdState.status === "succeeded") {
+    if (userId) {
       dispatch(
         getUserAccountInfo({
-          userId: userIdState.result.id,
+          userId,
           requestedFields: ["email", "firstname", "lastname"],
         })
       );
     }
-  }, [userIdState.status]);
+  }, [userId]);
 
   // CHECK IF ORDER WAS SUCCESSFUL
   useEffect(() => {

@@ -10,14 +10,14 @@ const Cart = () => {
   const navigate = useNavigate();
 
   // GLOBAL STATES
-  const { authentication } = useSelector((state) => state.auth);
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const { cartItems, cartItemsCount, total } = useSelector(
     (state) => state.cart
   );
 
   const handleCheckoutButton = () => {
     // IF USER IS NOT LOGGED IN SHOW PROCEED OPTIONS
-    if (authentication.status !== "succeeded") {
+    if (!isAuthenticated) {
       dispatch(toggleProceedOptionsModal());
     } else {
       // IF USER IS LOGGED IN NAVIGATE TO CHECKOUT

@@ -5,11 +5,6 @@ import axios from "axios";
 const api_url = apiUrlSwitch();
 
 const initialState = {
-  userIdState: {
-    result: null,
-    status: "idle",
-    error: null,
-  },
   userAccountInfo: {
     result: null,
     status: "idle",
@@ -22,26 +17,10 @@ const initialState = {
   },
 };
 
-// FETCH USER ID
-export const getUserId = createAsyncThunk(
-  "account/getUserId",
-  async (_, { rejectWithValue }) => {
-    try {
-      const url = `${api_url}/user`;
-      const { data } = await axios.get(url, {
-        withCredentials: true,
-      });
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.response.data.message);
-    }
-  }
-);
-
 // FETCH USER ACCOUNT INFO
 export const getUserAccountInfo = createAsyncThunk(
   "account/getUserAccountInfo",
-  async ({ userId, requestedFields }, { rejectWithValue }) => {
+  async ({ requestedFields }, { rejectWithValue }) => {
     let requestedFieldsQuery = "";
     if (requestedFields) {
       requestedFieldsQuery = requestedFields
@@ -89,20 +68,6 @@ export const accountSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // GET USER DATA
-      .addCase(getUserId.pending, (state) => {
-        state.userIdState.status = "loading";
-      })
-      .addCase(getUserId.fulfilled, (state, action) => {
-        state.userIdState.status = "succeeded";
-        state.userIdState.result = action.payload;
-        state.userIdState.error = null;
-      })
-      .addCase(getUserId.rejected, (state, action) => {
-        state.userIdState.status = "failed";
-        state.userIdState.error = action.payload;
-      })
-
       // GET USER ACCOUNT INFO
       .addCase(getUserAccountInfo.pending, (state) => {
         state.userAccountInfo.status = "loading";

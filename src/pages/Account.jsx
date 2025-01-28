@@ -16,20 +16,20 @@ const Account = () => {
 
   // GLOBAL STATE
   const { accountActiveComponent } = useSelector((state) => state.ui);
-  const { userIdState } = useSelector((state) => state.account);
+  const { userId } = useSelector((state) => state.auth.authentication);
   const { userAccountInfo } = useSelector((state) => state.account);
 
   // GET USER ACCOUNT INFO (ONLY FIRSTNAME)
   useEffect(() => {
-    if (userIdState.status === "succeeded") {
+    if (userId) {
       dispatch(
         getUserAccountInfo({
-          userId: userIdState.result.id,
+          userId,
           requestedFields: ["firstname"],
         })
       );
     }
-  }, [userIdState.status]);
+  }, [userId]);
 
   const handleClick = ({ title, settingId }) => {
     // LOGOUT USER
@@ -59,7 +59,7 @@ const Account = () => {
         <h2 className="text-[5vw]">
           Wilkommen, {_.capitalize(userAccountInfo.result?.data?.firstname)}
         </h2>
-        <p className="text-[4vw]">Kundennummer: {userIdState.result?.id}</p>
+        <p className="text-[4vw]">Kundennummer: {userId}</p>
       </section>
 
       {accountActiveComponent ? (

@@ -16,23 +16,21 @@ const Orders = () => {
   const [openOrderId, setOpenOrderId] = useState(null);
 
   // GLOBAL STATES
-  const { userIdState } = useSelector((state) => state.account);
+  const { userId } = useSelector((state) => state.auth.authentication);
   const { ordersSummary } = useSelector((state) => state.checkout);
   const { orderDetail } = useSelector((state) => state.checkout);
 
   // GET USER ORDERS SUMMARY
   useEffect(() => {
-    if (userIdState.status === "succeeded") {
+    if (userId) {
       dispatch(getOrdersSummary());
     }
-  }, [userIdState.status]);
+  }, [userId]);
 
   const handleAccordion = (orderId) => {
     setOpenOrderId(openOrderId === orderId ? null : orderId);
     dispatch(getOrderDetail(orderId));
   };
-
-  console.log(orderDetail);
 
   return (
     <div>
