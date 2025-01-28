@@ -3,6 +3,8 @@ import routes from "./routers/routes";
 import Layout from "./layout/Layout";
 import ScrollToTop from "./components/ScrollTop";
 import CartSync from "./features/cart/cartSync";
+import { Suspense } from "react";
+import { ClipLoader } from "react-spinners";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -54,17 +56,20 @@ const App = () => {
       <Layout>
         <ScrollToTop />
         <CartSync />
-        <Routes>
-          {routes.map((route) => {
-            return (
-              <Route
-                key={route.path}
-                path={route.path}
-                element={route.element}
-              />
-            );
-          })}
-        </Routes>
+        {/* LAZY-LOADED ROUTES */}
+        <Suspense fallback={<ClipLoader size={"20vw"} />}>
+          <Routes>
+            {routes.map((route) => {
+              return (
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  element={route.element}
+                />
+              );
+            })}
+          </Routes>
+        </Suspense>
       </Layout>
     </div>
   );

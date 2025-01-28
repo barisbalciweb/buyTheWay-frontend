@@ -1,14 +1,17 @@
-import Checkout from "../components/Checkout";
-import Account from "../pages/Account";
-import Cart from "../pages/Cart";
-import Home from "../pages/Home";
-import Login from "../pages/Login";
-import NotFound from "../pages/NotFound";
-import ProductDetail from "../pages/ProductDetail";
-import Register from "../pages/Register";
-import Store from "../pages/Store";
-import Wishlist from "../pages/Wishlist";
+import { lazy } from "react";
 import { ProtectedRoute } from "./ProtectedRoute";
+
+// LAZY-LOADED PAGES
+const Checkout = lazy(() => import("../components/Checkout"));
+const Account = lazy(() => import("../pages/Account"));
+const Cart = lazy(() => import("../pages/Cart"));
+const Home = lazy(() => import("../pages/Home"));
+const Login = lazy(() => import("../pages/Login"));
+const NotFound = lazy(() => import("../pages/NotFound"));
+const ProductDetail = lazy(() => import("../pages/ProductDetail"));
+const Register = lazy(() => import("../pages/Register"));
+const Store = lazy(() => import("../pages/Store"));
+const Wishlist = lazy(() => import("../pages/Wishlist"));
 
 const routes = [
   { path: "/", element: <Home /> },

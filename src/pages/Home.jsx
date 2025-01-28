@@ -3,7 +3,7 @@ import secondHeroImg from "../assets/images/Herbstaktion.jpg";
 import thirdHeroImg from "../assets/images/shopping.jpg";
 import { fakeTopCategories } from "../data/fakeData";
 import { selections } from "../data/data";
-import ProductSlider from "../components/ProductSlider";
+import LazyProductSlider from "../components/LazyProductSlider";
 import { Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 // REDUX
@@ -100,7 +100,7 @@ const Home = () => {
       <section className="c-home-slider-sections">
         <h2 className="c-h2">Bestsellers</h2>
         {bestsellersStatus === "succeeded" ? (
-          <ProductSlider products={bestsellers} />
+          <LazyProductSlider products={bestsellers} />
         ) : (
           <div className="h-slider flex justify-center items-center">
             <ClipLoader size={"20vw"} className="" />
@@ -123,7 +123,7 @@ const Home = () => {
       <section className="c-home-slider-sections">
         <h2 className="c-h2">Reduzierte Artikel</h2>
         {discountedStatus === "succeeded" ? (
-          <ProductSlider products={discounted} />
+          <LazyProductSlider products={discounted} />
         ) : (
           <div className="h-slider flex justify-center items-center">
             <ClipLoader size={"20vw"} className="" />
@@ -142,7 +142,7 @@ const Home = () => {
       <section className="c-home-slider-sections">
         <h2 className="c-h2">Beliebte Artikel</h2>
         {favoritesStatus === "succeeded" ? (
-          <ProductSlider products={favorites} />
+          <LazyProductSlider products={favorites} />
         ) : (
           <div className="h-slider flex justify-center items-center">
             <ClipLoader size={"20vw"} />
