@@ -39,7 +39,7 @@ const ProceedOptionsModal = () => {
         {/* BUTTONS */}
         <div className="flex flex-col justify-center items-center gap-4 mt-[5vw]">
           <button
-            className="w-full h-input bg-black text-white px-4 py-2"
+            className="w-full h-input bg-black text-white text-button px-4 py-2"
             onClick={handleLoginButton}>
             ANMELDEN
           </button>

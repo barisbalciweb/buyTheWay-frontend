@@ -60,7 +60,7 @@ const Wishlist = () => {
           // EMPTY WISHLIST
           <section className="w-full h-[30vw] flex flex-col justify-center items-center gap-[5vw] text-[4vw]">
             <p>Deine Wunschliste ist leer</p>
-            <button className="w-[50%] bg-black text-white p-[4vw] text-[4vw]">
+            <button className="w-[50%] h-button bg-black text-white p-[4vw] text-button">
               <Link to="/" className="w-full">
                 JETZT SHOPPEN!
               </Link>
@@ -90,7 +90,8 @@ const Wishlist = () => {
                   key={product.id}>
                   <SingleProduct item={{ product }} />
                   <button
-                    className={`w-full flex justify-center items-center p-[3vw] ${
+                    aria-label="In den Warenkorb"
+                    className={`w-full h-button flex justify-center items-center p-[3vw] ${
                       success && selectedItem.id === product.id
                         ? "bg-[#52D441]"
                         : "bg-black"
@@ -132,7 +133,7 @@ const Wishlist = () => {
                 </div>
               </div>
               <button
-                className="w-[80%] flex items-center justify-center h-[14vw] col-start-1 col-end-5 outline-none text-white text-[5vw] p-[5vw] font-bold disabled:bg-gray-400 bg-black"
+                className="w-[80%] h-button flex items-center justify-center col-start-1 col-end-5 outline-none text-white text-button p-[5vw] font-bold disabled:bg-gray-400 bg-black"
                 disabled={!selectedSize}
                 onClick={handleAddToCart}>
                 IN DEN WARENKORB

@@ -51,7 +51,7 @@ const Header = () => {
               dispatch(toggleMobileMenu());
             }}
           />
-          <Link to={"/"}>
+          <Link to={"/"} aria-label="Startseite">
             <h1 className="text-[6vw] mt-[1vw]">BuyTheWay</h1>
           </Link>
         </div>
@@ -60,6 +60,7 @@ const Header = () => {
           <li className="flex">
             <FontAwesomeIcon
               className="h-[6vw]"
+              aria-label="Suche"
               icon={faMagnifyingGlass}
               onClick={() => dispatch(toggleSearch())}
             />
@@ -69,6 +70,15 @@ const Header = () => {
             <li key={index}>
               <Link
                 to={path}
+                aria-label={
+                  path === "/account" || "/login"
+                    ? "Benutzerkonto"
+                    : path === "/wishlist"
+                    ? "Wunschliste"
+                    : path === "/cart"
+                    ? "Warenkorb"
+                    : ""
+                }
                 className="flex items-center justify-center relative"
                 onClick={() =>
                   path === "/account" &&

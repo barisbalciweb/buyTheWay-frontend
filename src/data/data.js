@@ -1,4 +1,4 @@
-export const selections = ["Damen", "Herren", "Unisex"];
+export const selections = ["DAMEN", "HERREN", "UNISEX"];
 
 export const accordion = [
   {
@@ -39,7 +39,7 @@ export const collections = [
 export const settings = [
   { title: "Meine Bestellungen", id: "orders" },
   { title: "Meine Benutzerdaten", id: "user-data" },
-  { title: "Abmelden", id: "logout" },
+  { title: "ABMELDEN", id: "logout" },
 ];
 
 export const userDataInputs = [

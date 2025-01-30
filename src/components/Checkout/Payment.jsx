@@ -50,9 +50,9 @@ const Payment = () => {
         </div>
         <button
           onClick={handleNext}
-          className="h-input w-full bg-black text-white mt-[10vw] disabled:bg-slate-300"
+          className="h-input w-full bg-black text-white mt-[10vw] text-button disabled:bg-slate-300"
           disabled={!selectedPaymentMethod}>
-          Weiter
+          WEITER
         </button>
       </div>
     </section>

@@ -11,6 +11,7 @@ const AccountNavigation = () => {
   return (
     <section>
       <button
+        aria-label="Zurück"
         className="w-full flex items-center gap-[2vw] text-[4vw] text-customOrange"
         onClick={() => dispatch(setAccountActiveComponent(null))}>
         <FontAwesomeIcon

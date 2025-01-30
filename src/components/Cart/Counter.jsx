@@ -14,6 +14,7 @@ const Counter = ({ item }) => {
   return (
     <div className="w-[25vw] grid grid-cols-3 border">
       <button
+        aria-label="Anzahl Verringern"
         className="h-[8vw] flex justify-center items-center text-[6vw] bg-[#E2E2E2] disabled:opacity-50"
         onClick={() => dispatch(decrementQuantity({ id: product.id, size }))}
         disabled={quantity <= 1}>
@@ -23,6 +24,7 @@ const Counter = ({ item }) => {
         {quantity}
       </p>
       <button
+        aria-label="Anzahl Erhöhen"
         className="h-[8vw] flex justify-center items-center text-[6vw] bg-[#E2E2E2]"
         onClick={() => dispatch(incrementQuantity({ id: product.id, size }))}>
         +

@@ -139,7 +139,7 @@ const LoginForm = ({ renderedFromLoginModal }) => {
           <div className="w-full">
             <button
               type="submit"
-              className="h-input w-full bg-black text-white disabled:bg-slate-300"
+              className="w-full h-button bg-black text-white text-button disabled:bg-slate-300"
               onClick={handleLogin}
               disabled={disableSubmit}>
               {waiting ? <BeatLoader size={"2vw"} color="white" /> : "ANMELDEN"}
@@ -161,7 +161,7 @@ const LoginForm = ({ renderedFromLoginModal }) => {
           <p className="w-full text-center mt-[10vw]">Hast du kein Konto?</p>
           <button
             type="button"
-            className="h-input w-full border-customBorder border-black"
+            className="w-full h-button border-customBorder border-black"
             onClick={handleRegisterClick}>
             REGISTRIEREN
           </button>

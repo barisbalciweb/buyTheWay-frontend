@@ -66,11 +66,11 @@ const Account = () => {
         renderActiveComponent()
       ) : (
         <section className="mb-[10vw]">
-          <ul className="flex flex-col gap-[2vw]">
+          <ul className="flex flex-col gap-[4vw]">
             {settings.map(({ title, id }) => (
               <li key={id}>
                 <button
-                  className={`w-full border-gray-400 border-customBorder rounded-md text-[4vw] shadow-md font-bold text-center py-[5vw] px-[2vw] ${
+                  className={`w-full h-button border-gray-400 border-customBorder rounded-sm text-[4vw] shadow-sm font-bold text-center ${
                     id === "logout" && "bg-black text-white"
                   }`}
                   onClick={() => handleClick({ title, settingId: id })}>

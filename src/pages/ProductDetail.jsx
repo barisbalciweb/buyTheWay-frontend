@@ -180,7 +180,7 @@ const ProductDetail = () => {
               ))}
               {/* ADD TO CART BUTTON */}
               <button
-                className={`flex items-center justify-center h-[14vw] col-start-1 col-end-5 outline-none text-white text-[5vw] font-bold disabled:bg-gray-300 ${
+                className={`flex items-center justify-center h-[14vw] col-start-1 col-end-5 outline-none text-white text-button font-bold disabled:bg-gray-300 ${
                   success ? "bg-[#52D441]" : "bg-black"
                 }`}
                 disabled={selectedSize === null}

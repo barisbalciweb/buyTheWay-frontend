@@ -56,15 +56,15 @@ const Home = () => {
       {/* SELECTIONS */}
       <section className="w-full h-[120vw] flex flex-col items-center justify-center bg-cover bg-center relative">
         <HeroSlider />
-        <div className="w-full mt-[60vw] absolute flex flex-col items-center justify-center z-20 text-white">
-          <h2 className="text-shadow-black text-[6vw] text-center font-bold">
+        <div className="w-full mt-[54vw] absolute flex flex-col items-center justify-center z-20 text-white">
+          <h2 className="text-shadow-black text-[6vw] text-center font-bold mb-[2vw]">
             Für wen suchts du?
           </h2>
-          <div className="w-[70%] flex flex-col items-center justify-center gap-[2vw]">
+          <div className="w-[70%] flex flex-col items-center justify-center gap-[2.5vw]">
             {selections.map((selection) => (
               <button
                 key={selection}
-                className="w-full h-[12vw] bg-[rgba(0,0,0,0.5)] tracking-wider font-bold border-customBorder border-white text-[4.5vw] rounded-sm">
+                className="w-full h-[14vw] bg-[rgba(0,0,0,0.5)] tracking-wider font-bold border-customBorder border-white text-[4.5vw] rounded-sm">
                 <Link
                   to={`store?targetGroup=${selection}`}
                   className="w-full h-full flex justify-center items-center">
@@ -80,11 +80,11 @@ const Home = () => {
       <section className="flex flex-col gap-[4vw] mt-[12vw]">
         <h2 className="c-h2">Top Kategorien</h2>
         <div className="flex justify-center">
-          <div className="grid grid-rows-2 grid-cols-3 gap-[3vw]">
+          <div className="grid grid-rows-2 grid-cols-3 gap-[4vw]">
             {fakeTopCategories.map((category) => (
               <button
                 key={category}
-                className="w-[25vw] h-[12vw] text-[4vw] font-bold border-customBorder border-black rounded-md shadow-[0_1vw_1vw_0_rgba(0,0,0,0.2)]">
+                className="w-[25vw] h-[25vw] text-[4vw] font-bold border-customBorder border-gray-400 rounded-sm shadow-[0_1vw_1vw_0_rgba(0,0,0,0.1)]">
                 <Link
                   to={`store?category=${category}`}
                   className="w-full h-full flex justify-center items-center">

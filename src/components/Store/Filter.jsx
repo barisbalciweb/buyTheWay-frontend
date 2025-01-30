@@ -213,12 +213,14 @@ const Filter = () => {
 
       <button
         onClick={handleFilterResults}
-        className="mt-4 bg-black text-white p-[4vw] disabled:bg-slate-500">
-        Ergebnisse anzeigen{" "}
+        className="w-full h-button mt-4 bg-black text-white p-[4vw] text-button disabled:bg-slate-500">
+        ERGEBNISSE ANZEIGEN{" "}
         {`(${filterOptionsStatus === "succeeded" && filteredCount})`}
       </button>
 
-      <button onClick={handleClearFilters}>alle Filter löschen</button>
+      <button className="text-bold text-button" onClick={handleClearFilters}>
+        alle Filter löschen
+      </button>
     </section>
   );
 };

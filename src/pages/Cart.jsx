@@ -35,8 +35,8 @@ const Cart = () => {
         {cartItems.length === 0 ? (
           <section className="w-full h-[30vw] flex flex-col justify-center items-center gap-[5vw] text-[4vw]">
             <p>Dein Warenkorb ist leer</p>
-            <button className="w-[50%] bg-black text-white p-[4vw] text-[4vw]">
-              <Link to="/" className="w-full">
+            <button className="w-[50%] h-button bg-black text-white p-[4vw] text-button">
+              <Link to="/" className="w-full h-full block">
                 JETZT SHOPPEN!
               </Link>
             </button>
@@ -53,7 +53,7 @@ const Cart = () => {
             {/* ORDER SUMMARY*/}
             <OrderSummary total={total} cartItemsCount={cartItemsCount}>
               <button
-                className="bg-black text-[5vw] text-white px-[20vw] py-[4vw] mt-[5vw]"
+                className="w-full h-button bg-black text-button text-white px-[20vw] py-[4vw] mt-[5vw]"
                 onClick={handleCheckoutButton}>
                 ZUR KASSE
               </button>

@@ -55,7 +55,7 @@ const Footer = () => {
             </button>
 
             {openIndex === index && (
-              <div className={"max-h-[200px] overflow-y-auto bg-orange-50"}>
+              <div className={"max-h-[200px] overflow-y-auto bg-gray-100"}>
                 {/* ACCORDION CONTENT */}
                 <p className="text-[4vw] p-[4vw]">{el.content}</p>
               </div>
@@ -82,10 +82,12 @@ const Footer = () => {
             </div>
           </div>
         </section>
-        <ul className="flex justify-center items-center gap-[4vw] font-bold text-white text-[3vw]">
-          <li>AGB</li>|<li>Datenschutz</li>|<li>Impressum</li>
+        <ul className="flex justify-center items-center gap-[5vw] font-bold text-white text-[4vw]">
+          <li>AGB</li>
+          <li>Datenschutz</li>
+          <li>Impressum</li>
         </ul>
-        <small className="text-[2vw]">
+        <small className="text-[3vw]">
           © 2024 Barış Balcı. Alle Rechte vorbehalten.
         </small>
       </section>

@@ -93,9 +93,9 @@ const Address = () => {
         <button
           type="button"
           onClick={handleNext}
-          className="h-input bg-black text-white disabled:bg-slate-300"
+          className="w-full h-input bg-black text-white text-button disabled:bg-slate-300"
           disabled={!isFormValid}>
-          Weiter
+          WEITER
         </button>
       </form>
     </section>

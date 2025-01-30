@@ -151,7 +151,7 @@ const Overview = () => {
       {/* ORDER SUMMARY */}
       <OrderSummary total={total} cartItemsCount={cartItemsCount}>
         <button
-          className="h-input w-full items-center disabled:bg-green-500 bg-black text-white mt-[5vw]"
+          className="w-full h-button items-center disabled:bg-green-500 bg-black text-white text-button mt-[5vw]"
           disabled={success}
           onClick={handleOrder}>
           {waiting ? (

@@ -283,7 +283,7 @@ const Register = () => {
           <div className="w-full">
             <button
               type="button"
-              className="h-input w-full flex justify-center disabled:bg-slate-300 items-center bg-black text-white"
+              className="w-full h-button flex justify-center disabled:bg-slate-300 items-center bg-black text-white text-button"
               onClick={handleRegister}
               disabled={disableSubmit}>
               {waiting ? (
@@ -318,7 +318,7 @@ const Register = () => {
           <p className="w-full text-center">Hast du schon ein Konto?</p>
           <button
             type="button"
-            className="h-input w-full border-customBorder border-black"
+            className="w-full h-button border-customBorder border-black"
             onClick={() => navigate("/login")}>
             ANMELDEN
           </button>

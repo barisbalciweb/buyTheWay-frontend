@@ -14,6 +14,7 @@ export default {
       },
       fontSize: {
         customH1: "5.5vw",
+        button: "4vw",
       },
       fontFamily: {
         comfortaa: ['"Comfortaa"', "sans-serif"],
@@ -25,6 +26,7 @@ export default {
       height: {
         slider: "65vw",
         input: "13vw",
+        button: "14vw",
       },
     },
   },
