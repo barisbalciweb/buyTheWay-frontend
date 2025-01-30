@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import secondHeroImg from "../assets/images/Herbstaktion.jpg";
-import thirdHeroImg from "../assets/images/shopping.jpg";
+import secondHeroImg from "../assets/images/Herbstaktion.webp";
+import thirdHeroImg from "../assets/images/shopping.webp";
 import { fakeTopCategories } from "../data/fakeData";
 import { selections } from "../data/data";
 import LazyProductSlider from "../components/LazyProductSlider";
@@ -103,7 +103,7 @@ const Home = () => {
           <LazyProductSlider products={bestsellers} />
         ) : (
           <div className="h-slider flex justify-center items-center">
-            <ClipLoader size={"20vw"} className="" />
+            <ClipLoader size={"20vw"} />
           </div>
         )}
       </section>
@@ -126,7 +126,7 @@ const Home = () => {
           <LazyProductSlider products={discounted} />
         ) : (
           <div className="h-slider flex justify-center items-center">
-            <ClipLoader size={"20vw"} className="" />
+            <ClipLoader size={"20vw"} />
           </div>
         )}
       </section>

@@ -29,10 +29,7 @@ const LazyProductSlider = ({ products }) => {
   }, []);
 
   return (
-    <div
-      className="flex justify-center items-center"
-      ref={sliderRef}
-      style={{ minHeight: "300px" }}>
+    <div className="flex justify-center items-center" ref={sliderRef}>
       {isVisible && (
         <Suspense fallback={<ClipLoader size={"20vw"} color="#EA580C" />}>
           <ProductSlider products={products} />

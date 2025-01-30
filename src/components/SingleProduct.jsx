@@ -3,6 +3,7 @@ import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { calculateDiscountedPrice } from "../utils/calculateDiscountedPrice";
+import { BeatLoader } from "react-spinners";
 
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
@@ -39,7 +40,7 @@ const SingleProduct = ({ item }) => {
   };
 
   return (
-    <Link to={`/store/product/${id}`} className="relative block">
+    <Link to={`/store/product/${id}`} className="h-full relative flex flex-col">
       <FontAwesomeIcon
         icon={isInWishlist ? faHeartSolid : faHeartRegular}
         className={`text-[6vw] absolute right-[2vw] top-[2vw] z-10 ${
@@ -47,22 +48,26 @@ const SingleProduct = ({ item }) => {
         }`}
         onClick={handleAddToWishlist}
       />
-      <div className="relative">
-        <img
-          className="bg-productImgBg"
-          src={images[0].url}
-          alt={images[0].alt}
-        />
+      <div className="relative flex justify-center items-center flex-grow ">
+        {images ? (
+          <img
+            className="bg-productImgBg"
+            src={images[0].url}
+            alt={images[0].alt}
+          />
+        ) : (
+          <BeatLoader size={"2vw"} />
+        )}
         {discountPercentage > 0 && (
           <p className="text-[4vw] text-customOrange font-bold absolute top-[1vw] left-[1vw]">
             -{discountPercentage}%
           </p>
         )}
       </div>
-      <div>
+      <div className="h-[30%]">
         <h3 className="text-[4vw]">
-          {productTitle.length > 20
-            ? productTitle.slice(0, 18) + "..."
+          {productTitle.length > 30
+            ? productTitle.slice(0, 30) + "..."
             : productTitle}
         </h3>
         <div className="flex gap-[1vw] text-[3.5vw]">

@@ -8,7 +8,7 @@ import LoadingScreen from "./components/LoadingScreen";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
- import {
+import {
   authenticateUser,
   resetAuthentication,
   resetLogin,
@@ -58,15 +58,26 @@ const App = () => {
         <Suspense fallback={<LoadingScreen />}>
           {/* LAZY-LOADED ROUTES */}
           <Routes>
-            {routes.map((route) => {
-              return (
+            {routes.map((route) =>
+              route.lazy ? (
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  element={
+                    <Suspense fallback={<LoadingScreen />}>
+                      {route.element}
+                    </Suspense>
+                  }
+                />
+              ) : (
+                // NON-LAZY ROUTES: HOME
                 <Route
                   key={route.path}
                   path={route.path}
                   element={route.element}
                 />
-              );
-            })}
+              )
+            )}
           </Routes>
         </Suspense>
       </Layout>
