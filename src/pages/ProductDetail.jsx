@@ -187,7 +187,9 @@ const ProductDetail = () => {
                 onClick={handleAddToCart}>
                 {success ? "HINZUGEFÜGT!" : "IN DEN WARENKORB"}
               </button>
-              <button className="flex items-center justify-center border-customBorder border-gray-400">
+              <button
+                aria-label="Wunschliste"
+                className="flex items-center justify-center border-customBorder border-gray-400">
                 <FontAwesomeIcon
                   icon={isInWishlist ? faHeartSolid : faHeartRegular}
                   className={`text-[6vw] ${isInWishlist && "text-red-500"}`}
