@@ -20,7 +20,7 @@ const HeroSlider = () => {
           className="h-full w-full object-cover brightness-[0.8]"
           src={"/images/hero-woman.webp"}
           alt="hero-woman"
-          fetchPriority="high"
+          fetchpriority="high"
         />
       </SwiperSlide>
       <SwiperSlide>
@@ -28,7 +28,7 @@ const HeroSlider = () => {
           className="h-full w-full object-cover"
           src={"/images/hero-man.webp"}
           alt="hero-man"
-          fetchPriority="high"
+          fetchpriority="high"
         />
       </SwiperSlide>
     </Swiper>
