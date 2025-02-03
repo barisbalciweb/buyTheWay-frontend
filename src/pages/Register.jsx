@@ -225,7 +225,7 @@ const Register = () => {
     !passwordRepeatValue;
 
   return (
-    <div className="w-full flex justify-center">
+    <main className="w-full flex flex-grow justify-center">
       <section className="w-[80%] flex flex-col items-center">
         <h1 className="w-[85%] text-[7vw] font-bold py-[4vw]">Registrierung</h1>
         <form className="w-[85%] flex flex-col gap-[5vw]">
@@ -324,7 +324,7 @@ const Register = () => {
           </button>
         </div>
       </section>
-    </div>
+    </main>
   );
 };
 

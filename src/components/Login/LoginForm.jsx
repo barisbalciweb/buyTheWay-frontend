@@ -97,7 +97,7 @@ const LoginForm = ({ renderedFromLoginModal }) => {
   const disableSubmit = waiting || emailValue === "" || passwordValue === "";
 
   return (
-    <div className="w-full flex justify-center">
+    <main className="w-full flex flex-grow justify-center">
       <section className="w-[80%] flex flex-col items-center">
         <h1 className="w-[85%] text-[7vw] font-bold py-[4vw]">Anmeldung</h1>
         <form className="w-[85%] flex flex-col gap-[5vw]">
@@ -167,7 +167,7 @@ const LoginForm = ({ renderedFromLoginModal }) => {
           </button>
         </div>
       </section>
-    </div>
+    </main>
   );
 };
 

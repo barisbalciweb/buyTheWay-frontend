@@ -50,7 +50,7 @@ const Wishlist = () => {
   };
 
   return (
-    <>
+    <main className="flex flex-col flex-grow">
       <h1 className="text-[7vw] font-bold m-[4vw]">
         Wunschliste {wishlist.length > 0 && `(${wishlist.length})`}
       </h1>
@@ -142,7 +142,7 @@ const Wishlist = () => {
           </section>
         )}
       </div>
-    </>
+    </main>
   );
 };
 

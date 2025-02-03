@@ -26,7 +26,7 @@ const Cart = () => {
   };
 
   return (
-    <>
+    <main className="flex flex-col flex-grow">
       <h1 className="text-[7vw] font-bold m-[4vw]">
         Warenkorb {cartItems.length > 0 && `(${cartItemsCount})`}
       </h1>
@@ -61,7 +61,7 @@ const Cart = () => {
           </>
         )}
       </div>
-    </>
+    </main>
   );
 };
 
