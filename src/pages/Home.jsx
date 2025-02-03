@@ -58,7 +58,7 @@ const Home = () => {
         <HeroSlider />
         <div className="w-full mt-[54vw] absolute flex flex-col items-center justify-center z-20 text-white">
           <h2 className="text-shadow-black text-[6vw] text-center font-bold mb-[2vw]">
-            Für wen suchts du?
+            Für wen suchts du??
           </h2>
           <div className="w-[70%] flex flex-col items-center justify-center gap-[2.5vw]">
             {selections.map((selection) => (

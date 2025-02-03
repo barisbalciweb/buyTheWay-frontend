@@ -1,15 +1,19 @@
- # [buyTheWay](btw.barisbalci.de)
+# [buyTheWay](btw.barisbalci.de)
 
 ⚠️ **Note**: This project is currently under development. Some sections and functionalities are still in progress.
 
 ## Introduction
+
 "buyTheWay" is a modern e-commerce application that allows users to shop conveniently and efficiently. With intuitive features and seamless navigation, "buyTheWay" becomes a practical companion for everyday shopping.
 
 ## Design
+
 You can view the UI design I created in Figma at the following link: [buyTheWay Figma Design](https://barisbalci.de/buyTheWay-UI.pdf)
 
 ## Features
+
 - **Shopping Experience**
+
   - [x] Users can save desired products to a wishlist and later add them to or remove them from the cart.
   - [x] Users can view recently viewed products.
   - [x] Users are suggested similar products from the same category and gender when available.
@@ -18,16 +22,19 @@ You can view the UI design I created in Figma at the following link: [buyTheWay 
   - [x] Users can search for products.
 
 - **User Management**:
+
   - [x] Users can register and log in with a secure password.
   - [x] Authentication is implemented using JWT (JSON Web Token).
 
 - **Profile Management**:
+
   - [x] Users can manage their profiles, update information, and save their favorites.
 
 - **Customer Support**:
   - [ ] Chat support based on multi-agent systems with ChatGPT. 🚧
 
 ## Technologies
+
 - **Frontend**: React
 - **Backend**: Node.js, Express
 - **Database**: MySQL
@@ -37,28 +44,34 @@ You can view the UI design I created in Figma at the following link: [buyTheWay 
 - **Design Tools**: Figma
 
 ## Client-Side Routing
+
 - [x] The application uses **React Router** to enable fast and user-friendly navigation.
 
 ## Performance Optimization
-- [x] **Lazy Loading**: Components and resources are loaded as needed to minimize load times. 
+
+- [x] **Lazy Loading**: Components and resources are loaded as needed to minimize load times.
 
 ## SEO and Accessibility
+
 - [ ] **Lighthouse Score**: The application is optimized for SEO, performance, and accessibility. 🚧
 - [x] **Semantic HTML**: For better user experience and accessibility.
 
 ## Testing and Code Quality
+
 - [ ] **Unit Tests**: Jest for test coverage. 🚧
 - [x] **Code Style**: ESLint and Prettier for consistency.
 - [x] **Version Control**: Git with a clear branching strategy.
 
 ## Security
+
 - [x] **Proxy Server**: All API requests are routed through a proxy server before reaching the API server, keeping the direct API address hidden for additional security.
-- [x] **Data Encryption**: Sensitive data such as passwords and authentication tokens are encrypted during transmission and in the database. 
-- [x] **CORS Policies**: Strict Cross-Origin Resource Sharing (CORS) policies are implemented to prevent unauthorized requests. 
+- [x] **Data Encryption**: Sensitive data such as passwords and authentication tokens are encrypted during transmission and in the database.
+- [x] **CORS Policies**: Strict Cross-Origin Resource Sharing (CORS) policies are implemented to prevent unauthorized requests.
 
 ## Installation
 
 ### Frontend
+
 <details>
  
 1. Clone the repository:
@@ -80,6 +93,7 @@ You can view the UI design I created in Figma at the following link: [buyTheWay 
 </details>
 
 ### Backend
+
 <details>
  
 1. Clone the repository:
@@ -101,6 +115,7 @@ You can view the UI design I created in Figma at the following link: [buyTheWay 
    </details>
 
 ### Proxy Server
+
 <details>
  
 1. Clone the repository:
