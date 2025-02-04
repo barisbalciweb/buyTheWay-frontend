@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 // REDUX
 import { useDispatch } from "react-redux";
 import { sendMessage } from "../../features/customerSupport/customerSupportSlice";
-import { set } from "lodash";
 
 const suggestions = [
   "Wann wird meine Bestellung geliefert?",
@@ -23,6 +22,7 @@ const CustomerSupport = () => {
   const [typing, setTyping] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [selectedSuggestion, setSelectedSuggestion] = useState("");
+  const [windowOpened, setWindowOpened] = useState(false);
 
   useEffect(() => {
     if (selectedSuggestion) {
@@ -32,10 +32,13 @@ const CustomerSupport = () => {
   }, [selectedSuggestion]);
 
   const handleSubmit = () => {
-    dispatch(sendMessage(inputValue));
+    if (inputValue.trim()) {
+      dispatch(sendMessage(inputValue));
+      setInputValue("");
+    }
   };
 
-  return (
+  return windowOpened ? (
     <section className="w-[80%] h-[85%] bg-orange-100 flex flex-col items-center justify-center fixed bottom-0 right-0 z-50">
       {/* MESSAGES FIELD */}
       <div className="w-full h-[90%] p-[2vw] text-[4vw] relative">
@@ -46,7 +49,7 @@ const CustomerSupport = () => {
               <div
                 key={index}
                 className="w-full h-[10%] bg-[rgba(0,0,0,0.1)] p-[2vw] cursor-pointer"
-                onClick={(e) => setSelectedSuggestion(e.target.innerText)}>
+                onClick={(e) => setSelectedSuggestion(suggestion)}>
                 {suggestion}
               </div>
             ))}
@@ -72,8 +75,13 @@ const CustomerSupport = () => {
       <FontAwesomeIcon
         icon={faRectangleXmark}
         className="text-[7vw] absolute right-[2vw] top-[2vw]"
+        onClick={() => setWindowOpened(false)}
       />
     </section>
+  ) : (
+    <section
+      className="w-[20vw] h-[20vw] rounded-full bg-[rgba(0,0,0,0.6)] absolute right-[3vw] bottom-[3vw] cursor-pointer z-50"
+      onClick={() => setWindowOpened(true)}></section>
   );
 };
 
