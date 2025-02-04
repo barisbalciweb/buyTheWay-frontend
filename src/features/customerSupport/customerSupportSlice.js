@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { add } from "lodash";
 
 const initialState = {
+  messages: [],
   messageSent: {
     status: "idle",
     result: null,
@@ -31,7 +31,11 @@ export const sendMessage = createAsyncThunk(
 export const customerSupportSlice = createSlice({
   name: "customerSupport",
   initialState,
-  reducers: {},
+  reducers: {
+    addMessage: (state, action) => {
+      state.messages.push(action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(sendMessage.pending, (state) => {
@@ -48,5 +52,5 @@ export const customerSupportSlice = createSlice({
   },
 });
 
-export const {} = customerSupportSlice.actions;
+export const { addMessage } = customerSupportSlice.actions;
 export default customerSupportSlice.reducer;

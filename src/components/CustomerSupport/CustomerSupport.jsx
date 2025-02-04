@@ -6,8 +6,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 
 // REDUX
-import { useDispatch } from "react-redux";
-import { sendMessage } from "../../features/customerSupport/customerSupportSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addMessage,
+  sendMessage,
+} from "../../features/customerSupport/customerSupportSlice";
 
 const suggestions = [
   "Wann wird meine Bestellung geliefert?",
@@ -21,19 +24,22 @@ const CustomerSupport = () => {
   // LOCAL STATES
   const [typing, setTyping] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [selectedSuggestion, setSelectedSuggestion] = useState("");
   const [windowOpened, setWindowOpened] = useState(false);
+  const [suggestionsVisible, setSuggestionsVisible] = useState(true);
 
-  useEffect(() => {
-    if (selectedSuggestion) {
-      dispatch(sendMessage(selectedSuggestion));
-      setSelectedSuggestion("");
-    }
-  }, [selectedSuggestion]);
+  // GLOBAL STATES
+  const { messages } = useSelector((state) => state.customerSupport);
 
+  const handleSuggestionSelection = (suggestion) => {
+    dispatch(sendMessage({ message: suggestion, type: "customer" }));
+    dispatch(addMessage({ message: suggestion, type: "customer" }));
+    setSuggestionsVisible(false);
+  };
+
+  // SEND MESSAGE TO CUSTOMER SUPPORT
   const handleSubmit = () => {
     if (inputValue.trim()) {
-      dispatch(sendMessage(inputValue));
+      dispatch(sendMessage({ message: inputValue, type: "customer" }));
       setInputValue("");
     }
   };
@@ -42,18 +48,36 @@ const CustomerSupport = () => {
     <section className="w-[80%] h-[85%] bg-orange-100 flex flex-col items-center justify-center fixed bottom-0 right-0 z-50">
       {/* MESSAGES FIELD */}
       <div className="w-full h-[90%] p-[2vw] text-[4vw] relative">
-        <div className="w-full h-full flex flex-col justify-center items-center bg-white p-[4vw]">
-          {/* SUGGESTIONS FIELD */}
-          <div className="w-full flex flex-col justify-center items-center gap-[2vw] absolute bottom-0 p-[4vw]">
-            {suggestions.map((suggestion, index) => (
+        <div className="w-full h-full flex flex-col items-center bg-white p-[4vw]">
+          {/* RENDER MESSAGES */}
+          {messages &&
+            messages.map((message, index) => (
               <div
                 key={index}
-                className="w-full h-[10%] bg-[rgba(0,0,0,0.1)] p-[2vw] cursor-pointer"
-                onClick={(e) => setSelectedSuggestion(suggestion)}>
-                {suggestion}
+                className={`w-full flex justify-end gap-[2vw] ${
+                  message.type === "customer" ? "items-end" : "items-start"
+                } `}>
+                <p
+                  className={`flex justify-center items-center w-[80%] p-[2vw] rounded-md ${
+                    message.type === "customer" ? "bg-green-300" : "bg-blue-300"
+                  } `}>
+                  {message.message}
+                </p>
               </div>
             ))}
-          </div>
+          {/* SUGGESTIONS FIELD */}
+          {suggestionsVisible && (
+            <div className="w-full flex flex-col justify-center items-center gap-[2vw] absolute bottom-0 p-[4vw]">
+              {suggestions.map((suggestion, index) => (
+                <div
+                  key={index}
+                  className="w-full h-[10%] bg-[rgba(0,0,0,0.1)] p-[2vw] cursor-pointer"
+                  onClick={() => handleSuggestionSelection(suggestion)}>
+                  {suggestion}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -80,7 +104,7 @@ const CustomerSupport = () => {
     </section>
   ) : (
     <section
-      className="w-[20vw] h-[20vw] rounded-full bg-[rgba(0,0,0,0.6)] absolute right-[3vw] bottom-[3vw] cursor-pointer z-50"
+      className="w-[20vw] h-[20vw] rounded-full bg-[rgba(0,0,0,0.6)] fixed right-[3vw] bottom-[3vw] cursor-pointer z-50"
       onClick={() => setWindowOpened(true)}></section>
   );
 };
