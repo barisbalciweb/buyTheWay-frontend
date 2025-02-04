@@ -9,6 +9,7 @@ import wishlistReducer from "../features/wishlist/wishlistSlice";
 import searchReducer from "../features/search/searchSlice";
 import accountReducer from "../features/account/accountSlice";
 import checkoutReducer from "../features/checkout/checkoutSlice";
+import customerSupportReducer from "../features/customerSupport/customerSupportSlice";
 
 export const store = configureStore({
   reducer: {
@@ -22,5 +23,6 @@ export const store = configureStore({
     search: searchReducer,
     account: accountReducer,
     checkout: checkoutReducer,
+    customerSupport: customerSupportReducer,
   },
 });

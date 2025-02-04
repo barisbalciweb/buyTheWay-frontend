@@ -16,6 +16,8 @@ const CustomerSupport = () => {
   const [typing, setTyping] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
+  const handleSubmit = () => {};
+
   return (
     <section className="w-[80%] h-[85%] bg-orange-100 flex flex-col items-center justify-center fixed bottom-0 right-0 z-50">
       {/* MESSAGES FIELD */}
@@ -43,7 +45,9 @@ const CustomerSupport = () => {
           placeholder="deine Nachricht"
           onChange={(e) => setInputValue(e.target.value)}
         />
-        <button className="w-[15vw] h-full bg-gray-400 rounded-md">
+        <button
+          className="w-[15vw] h-full bg-gray-400 rounded-md"
+          onClick={handleSubmit}>
           <FontAwesomeIcon icon={faPaperPlane} className="w-full text-[8vw]" />
         </button>
       </div>
