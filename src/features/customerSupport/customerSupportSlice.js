@@ -14,6 +14,8 @@ const initialState = {
 export const sendMessage = createAsyncThunk(
   "customerSupport/sendMessage",
   async (message, { rejectWithValue }) => {
+    console.log("message", message);
+
     try {
       const url = `${api_url}/messages`;
       const { data } = await axios.post(url, message, {
