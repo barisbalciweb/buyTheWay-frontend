@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Warning from "../components/Warning";
 import ScrollTopButton from "../components/ScrollTopButton";
 import Search from "./Search";
+import CustomerSupport from "../components/CustomerSupport/CustomerSupport";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -85,6 +86,7 @@ const Layout = ({ children }) => {
         <ScrollTopButton handleScrollToTop={handleScrollToTop} />
       )}
       {isMobileMenuOpen && <MobileMenu />}
+      {<CustomerSupport />}
       {children}
       <Footer />
     </>
