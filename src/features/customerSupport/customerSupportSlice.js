@@ -5,7 +5,7 @@ import { apiUrlSwitch } from "../../utils/apiUrlSwitch";
 const api_url = apiUrlSwitch();
 
 const initialState = {
-  messages: [],
+  messagesFromSS: [],
   messageSent: {
     status: "idle",
     result: null,
@@ -17,16 +17,11 @@ const initialState = {
 export const sendMessage = createAsyncThunk(
   "customerSupport/sendMessage",
   async (message, { rejectWithValue }) => {
-    console.log(message);
-
     try {
       const url = `${api_url}/customerSupport`;
-
       const { data } = await axios.post(url, message, {
         withCredentials: true,
       });
-      console.log(data.answer);
-
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -38,10 +33,36 @@ export const customerSupportSlice = createSlice({
   name: "customerSupport",
   initialState,
   reducers: {
-    addMessage: (state, action) => {
-      state.messages.push(action.payload);
+    addMessageToSS: (state, action) => {
+      // ADD MESSAGE TO STATE
+      state.messagesFromSS.push(action.payload);
+
+      // UPDATE SESSION STORAGE
+      const messagesBefore = sessionStorage.getItem("messages");
+      const parsedMessages = messagesBefore ? JSON.parse(messagesBefore) : [];
+
+      sessionStorage.setItem(
+        "messages",
+        JSON.stringify([...parsedMessages, action.payload])
+      );
+    },
+
+    // GET MESSAGES FROM LOCAL STORAGE
+    getMessagesFromSS: (state) => {
+      const messages = sessionStorage.getItem("messages");
+
+      if (messages) {
+        try {
+          const parsedMessages = JSON.parse(messages);
+          state.messagesFromSS = parsedMessages;
+        } catch (error) {
+          console.error("Error parsing messages from sessionStorage:", error);
+          state.messagesFromSS = [];
+        }
+      }
     },
   },
+
   extraReducers: (builder) => {
     builder
       .addCase(sendMessage.pending, (state) => {
@@ -58,5 +79,6 @@ export const customerSupportSlice = createSlice({
   },
 });
 
-export const { addMessage } = customerSupportSlice.actions;
+export const { addMessageToSS, getMessagesFromSS } =
+  customerSupportSlice.actions;
 export default customerSupportSlice.reducer;

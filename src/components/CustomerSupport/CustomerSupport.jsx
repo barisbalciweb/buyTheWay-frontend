@@ -8,7 +8,8 @@ import { useEffect, useState } from "react";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addMessage,
+  addMessageToSS,
+  getMessagesFromSS,
   sendMessage,
 } from "../../features/customerSupport/customerSupportSlice";
 
@@ -28,18 +29,23 @@ const CustomerSupport = () => {
   const [suggestionsVisible, setSuggestionsVisible] = useState(true);
 
   // GLOBAL STATES
-  const { messages } = useSelector((state) => state.customerSupport);
+  const { messagesFromSS } = useSelector((state) => state.customerSupport);
+
+  useEffect(() => {
+    // GET MESSAGES FROM SESSION STORAGE
+    dispatch(getMessagesFromSS());
+  }, []);
 
   const handleSuggestionSelection = (suggestion) => {
-    dispatch(sendMessage({ message: suggestion, type: "customer" }));
-    dispatch(addMessage({ message: suggestion, type: "customer" }));
+    dispatch(addMessageToSS({ content: suggestion, role: "customer" }));
+    dispatch(sendMessage({ content: suggestion, role: "customer" }));
     setSuggestionsVisible(false);
   };
 
   // SEND MESSAGE TO CUSTOMER SUPPORT
   const handleSubmit = () => {
     if (inputValue.trim()) {
-      dispatch(sendMessage({ message: inputValue, type: "customer" }));
+      dispatch(addMessageToSS({ content: inputValue, type: "customer" }));
       setInputValue("");
     }
   };
@@ -50,8 +56,9 @@ const CustomerSupport = () => {
       <div className="w-full h-[90%] p-[2vw] text-[4vw] relative">
         <div className="w-full h-full flex flex-col items-center bg-white p-[4vw]">
           {/* RENDER MESSAGES */}
-          {messages &&
-            messages.map((message, index) => (
+          {messagesFromSS &&
+            messagesFromSS.length > 0 &&
+            messagesFromSS.map((message, index) => (
               <div
                 key={index}
                 className={`w-full flex justify-end gap-[2vw] ${
@@ -61,7 +68,7 @@ const CustomerSupport = () => {
                   className={`flex justify-center items-center w-[80%] p-[2vw] rounded-md ${
                     message.type === "customer" ? "bg-green-300" : "bg-blue-300"
                   } `}>
-                  {message.message}
+                  {message.content}
                 </p>
               </div>
             ))}
@@ -88,6 +95,7 @@ const CustomerSupport = () => {
           type="text"
           className="w-full h-full p-[2vw] rounded md"
           placeholder="deine Nachricht"
+          //! this causes unnecessary re-renders (use react.memo)
           onChange={(e) => setInputValue(e.target.value)}
         />
         <button
