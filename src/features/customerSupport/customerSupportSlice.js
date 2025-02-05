@@ -5,7 +5,9 @@ import { apiUrlSwitch } from "../../utils/apiUrlSwitch";
 const api_url = apiUrlSwitch();
 
 const initialState = {
-  messagesFromSS: [],
+  messagesFromSS: [
+    { content: "Hallo, wie kann ich Ihnen helfen?", role: "AI" },
+  ],
   messageSent: {
     status: "idle",
     result: null,

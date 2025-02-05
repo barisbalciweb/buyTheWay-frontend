@@ -1,9 +1,7 @@
-import {
-  faPaperPlane,
-  faRectangleXmark,
-} from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComments, faPaperPlane } from "@fortawesome/free-regular-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
@@ -34,9 +32,15 @@ const CustomerSupport = () => {
   useEffect(() => {
     // GET MESSAGES FROM SESSION STORAGE
     dispatch(getMessagesFromSS());
-    // HIDE SUGGESTIONS IF MESSAGES AREN'T EMPTY
-    if (messagesFromSS.length > 0) setSuggestionsVisible(false);
   }, []);
+
+  useEffect(() => {
+    // HIDE SUGGESTIONS IF MESSAGES AREN'T EMPTY
+    if (messagesFromSS.length > 1) {
+      setSuggestionsVisible(false);
+      console.log(messagesFromSS.length > 0);
+    }
+  }, [messagesFromSS]);
 
   const handleSuggestionSelection = (suggestion) => {
     dispatch(addMessageToSS({ content: suggestion, role: "customer" }));
@@ -47,42 +51,55 @@ const CustomerSupport = () => {
   // SEND MESSAGE TO CUSTOMER SUPPORT
   const handleSubmit = () => {
     if (inputValue.trim()) {
-      dispatch(addMessageToSS({ content: inputValue, type: "customer" }));
+      dispatch(addMessageToSS({ content: inputValue, role: "customer" }));
       setInputValue("");
     }
   };
 
   return windowOpened ? (
-    <section className="w-[80%] h-[85%] bg-orange-100 flex flex-col items-center justify-center fixed bottom-0 right-0 z-50">
+    <section className="w-[80%] h-[85%] bg-white flex flex-col fixed bottom-0 right-0 z-50 shadow-2xl ">
+      {/* HEADER */}
+      <div className="w-full bg-gray-900 p-[2vw] flex justify-between items-center">
+        <h2 className="text-gray-100 text-[4vw]">Kundensupport</h2>
+        <button
+          onClick={() => setWindowOpened(false)}
+          className="flex justify-center items-center text-gray-300 p-2">
+          <FontAwesomeIcon icon={faXmark} className="text-[7vw]" />
+        </button>
+      </div>
+
       {/* MESSAGES FIELD */}
-      <div className="w-full h-[90%] p-[2vw] text-[4vw] relative">
-        <div className="w-full h-full flex flex-col items-center bg-white p-[4vw]">
+      <div className="w-full h-[90%] p-[2vw] text-[3.5vw] relative bg-gray-50">
+        <div className="w-full h-full flex flex-col p-[3vw] overflow-y-auto">
           {/* RENDER MESSAGES */}
           {messagesFromSS &&
             messagesFromSS.length > 0 &&
             messagesFromSS.map((message, index) => (
               <div
                 key={index}
-                className={`w-full flex justify-end gap-[2vw] ${
-                  message.type === "customer" ? "items-end" : "items-start"
-                } `}>
-                <p
-                  className={`flex justify-center items-center w-[80%] p-[2vw] rounded-md ${
-                    message.type === "customer" ? "bg-green-300" : "bg-blue-300"
-                  } `}>
+                className={`w-full flex ${
+                  message.role === "customer" ? "justify-end" : "justify-start"
+                } mb-[2vw]`}>
+                <div
+                  className={`max-w-[80%] p-[2vw] ${
+                    message.role === "customer"
+                      ? "bg-gray-900 text-white rounded-2xl rounded-br-none"
+                      : "bg-white text-gray-800 rounded-2xl rounded-bl-none border border-gray-200"
+                  } shadow-sm`}>
                   {message.content}
-                </p>
+                </div>
               </div>
             ))}
+
           {/* SUGGESTIONS FIELD */}
           {suggestionsVisible && (
-            <div className="w-full flex flex-col justify-center items-center gap-[2vw] absolute bottom-0 p-[4vw]">
+            <div className="w-full flex flex-col gap-[1.5vw] absolute bottom-0 left-0 p-[3vw] bg-white border-t border-gray-100">
               {suggestions.map((suggestion, index) => (
                 <div
                   key={index}
-                  className="w-full h-[10%] bg-[rgba(0,0,0,0.1)] p-[2vw] cursor-pointer"
+                  className="w-full bg-white p-[2vw] rounded-lg cursor-pointer border border-gray-200 flex items-center"
                   onClick={() => handleSuggestionSelection(suggestion)}>
-                  {suggestion}
+                  <span className="text-gray-700">{suggestion}</span>
                 </div>
               ))}
             </div>
@@ -91,31 +108,27 @@ const CustomerSupport = () => {
       </div>
 
       {/* INPUT FIELD */}
-      <div className="w-full h-[15%] flex justify-center items-center bg-orange-400 gap-[1vw] p-[2vw]">
+      <div className="w-full h-[15%] flex justify-center items-center bg-white border-t border-gray-200 gap-[1.5vw] px-[2vw] py-[4vw]">
         <input
           value={inputValue}
           type="text"
-          className="w-full h-full p-[2vw] rounded md"
-          placeholder="deine Nachricht"
-          //! this causes unnecessary re-renders (use react.memo)
+          className="w-full h-full px-[2vw] rounded-lg border border-gray-200 focus:outline-none focus:border-customOrange bg-gray-50"
+          placeholder="Mesajınızı yazın..."
           onChange={(e) => setInputValue(e.target.value)}
         />
         <button
-          className="w-[15vw] h-full bg-gray-400 rounded-md"
+          className="w-[12vw] h-full text-gray-300 bg-gray-900 hover:bg-gray-800 active:bg-gray-700 transition-colors rounded-lg flex items-center justify-center"
           onClick={handleSubmit}>
-          <FontAwesomeIcon icon={faPaperPlane} className="w-full text-[8vw]" />
+          <FontAwesomeIcon icon={faPaperPlane} className="text-[7vw]" />
         </button>
       </div>
-      <FontAwesomeIcon
-        icon={faRectangleXmark}
-        className="text-[7vw] absolute right-[2vw] top-[2vw]"
-        onClick={() => setWindowOpened(false)}
-      />
     </section>
   ) : (
-    <section
-      className="w-[20vw] h-[20vw] rounded-full bg-[rgba(0,0,0,0.6)] fixed right-[3vw] bottom-[3vw] cursor-pointer z-50"
-      onClick={() => setWindowOpened(true)}></section>
+    <button
+      className="w-[18vw] h-[18vw] rounded-full bg-[rgba(0,0,0,0.8)] fixed right-[3vw] bottom-[3vw] cursor-pointer z-50 flex items-center justify-center shadow-lg"
+      onClick={() => setWindowOpened(true)}>
+      <FontAwesomeIcon icon={faComments} className="text-white text-[8vw]" />
+    </button>
   );
 };
 
