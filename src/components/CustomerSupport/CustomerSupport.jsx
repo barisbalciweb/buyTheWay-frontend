@@ -34,6 +34,8 @@ const CustomerSupport = () => {
   useEffect(() => {
     // GET MESSAGES FROM SESSION STORAGE
     dispatch(getMessagesFromSS());
+    // HIDE SUGGESTIONS IF MESSAGES AREN'T EMPTY
+    if (messagesFromSS.length > 0) setSuggestionsVisible(false);
   }, []);
 
   const handleSuggestionSelection = (suggestion) => {
