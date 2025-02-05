@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { apiUrlSwitch } from "../../utils/apiUrlSwitch";
+
+const api_url = apiUrlSwitch();
 
 const initialState = {
   messages: [],
@@ -14,13 +17,16 @@ const initialState = {
 export const sendMessage = createAsyncThunk(
   "customerSupport/sendMessage",
   async (message, { rejectWithValue }) => {
-    console.log("message", message);
+    console.log(message);
 
     try {
-      const url = `${api_url}/messages`;
+      const url = `${api_url}/customerSupport`;
+
       const { data } = await axios.post(url, message, {
         withCredentials: true,
       });
+      console.log(data.answer);
+
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
