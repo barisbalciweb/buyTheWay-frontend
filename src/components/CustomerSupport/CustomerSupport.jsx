@@ -75,7 +75,7 @@ const CustomerSupport = () => {
       </div>
 
       {/* MESSAGES FIELD */}
-      <div className="w-full h-[90%] p-[2vw] text-[3.5vw] relative bg-gray-50">
+      <div className="w-full h-[90%] p-[2vw] text-[3.5vw] relative bg-gray-50 overflow-y-auto">
         <div className="w-full h-full flex flex-col p-[3vw] overflow-y-auto">
           {/* RENDER MESSAGES */}
           {messagesFromSS &&

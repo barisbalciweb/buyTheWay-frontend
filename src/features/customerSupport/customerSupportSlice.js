@@ -17,8 +17,7 @@ const initialState = {
 
 // HELPER FUNCTION
 const addMessage = (state, message) => {
-  console.log(message);
-
+  // UPDATE STATE FOR IMMEDIATE RENDERING
   state.messagesFromSS.push(message);
 
   const messagesBefore = sessionStorage.getItem("messages");
@@ -26,7 +25,13 @@ const addMessage = (state, message) => {
 
   sessionStorage.setItem(
     "messages",
-    JSON.stringify([...parsedMessages, message])
+    JSON.stringify(
+      [
+        ...parsedMessages,
+        !messagesBefore ? state.messagesFromSS[0] : null,
+        message,
+      ].filter(Boolean)
+    )
   );
 };
 
@@ -78,10 +83,7 @@ export const customerSupportSlice = createSlice({
       .addCase(sendMessage.fulfilled, (state, action) => {
         state.messageSent.status = "succeeded";
         state.messageSent.result = action.payload;
-        state.messagesFromSS.push({
-          content: action.payload.answer,
-          role: "AI",
-        });
+        // ADD ANSWER TO SESSION STORAGE FOR PERSISTENCE
         addMessage(state, action.payload);
       })
       .addCase(sendMessage.rejected, (state, action) => {
