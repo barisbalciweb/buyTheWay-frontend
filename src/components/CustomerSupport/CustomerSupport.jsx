@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments, faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -19,6 +19,7 @@ const suggestions = [
 
 const CustomerSupport = () => {
   const dispatch = useDispatch();
+  const messagesFieldRef = useRef();
 
   // LOCAL STATES
   const [typing, setTyping] = useState(false);
@@ -39,6 +40,14 @@ const CustomerSupport = () => {
     if (messagesFromSS.length > 1) {
       setSuggestionsVisible(false);
       console.log(messagesFromSS.length > 0);
+    }
+  }, [messagesFromSS]);
+
+  useEffect(() => {
+    // AUTO SCROLL TO BOTTOM
+    if (messagesFieldRef?.current) {
+      const messagesFieldDiv = messagesFieldRef.current;
+      messagesFieldDiv.scrollTop = messagesFieldDiv.scrollHeight;
     }
   }, [messagesFromSS]);
 
@@ -75,8 +84,10 @@ const CustomerSupport = () => {
       </div>
 
       {/* MESSAGES FIELD */}
-      <div className="w-full h-[90%] p-[2vw] text-[3.5vw] relative bg-gray-50 overflow-y-auto">
-        <div className="w-full h-full flex flex-col p-[3vw] overflow-y-auto">
+      <div
+        ref={messagesFieldRef}
+        className="w-full h-[90%] p-[2vw] text-[3.5vw] relative bg-gray-50 overflow-y-auto">
+        <div className="w-full h-full flex flex-col p-[3vw]">
           {/* RENDER MESSAGES */}
           {messagesFromSS &&
             messagesFromSS.length > 0 &&
@@ -131,7 +142,7 @@ const CustomerSupport = () => {
     </section>
   ) : (
     <button
-      className="w-[18vw] h-[18vw] rounded-full bg-[rgba(0,0,0,0.8)] fixed right-[3vw] bottom-[3vw] cursor-pointer z-50 flex items-center justify-center shadow-lg"
+      className="w-[16vw] h-[16vw] rounded-full bg-[rgba(0,0,0,0.8)] fixed right-[3vw] bottom-[3vw] cursor-pointer z-50 flex items-center justify-center shadow-lg"
       onClick={() => setWindowOpened(true)}>
       <FontAwesomeIcon icon={faComments} className="text-white text-[8vw]" />
     </button>
