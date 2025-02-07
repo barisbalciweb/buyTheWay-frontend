@@ -43,9 +43,9 @@ const CustomerSupport = () => {
   }, [messagesFromSS]);
 
   const handleSuggestionSelection = (suggestion) => {
-    console.log("test");
-
+    // ADD SUGGESTION TO STATE FOR RENDERING
     dispatch(addMessageToSS({ content: suggestion, role: "customer" }));
+    // ADD SUGGESTION TO SESSION STORAGE FOR PERSISTENCE
     dispatch(sendMessage({ content: suggestion, role: "customer" }));
     setInputValue("");
     setSuggestionsVisible(false);
@@ -54,7 +54,9 @@ const CustomerSupport = () => {
   // SEND MESSAGE TO CUSTOMER SUPPORT
   const handleSubmit = () => {
     if (inputValue.trim()) {
+      // ADD MESSAGE TO STATE FOR RENDERING
       dispatch(addMessageToSS({ content: inputValue, role: "customer" }));
+      // ADD MESSAGE TO SESSION STORAGE FOR PERSISTENCE
       dispatch(sendMessage({ content: inputValue, role: "customer" }));
       setInputValue("");
     }

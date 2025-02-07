@@ -15,19 +15,30 @@ const initialState = {
   },
 };
 
+// HELPER FUNCTION
+const addMessage = (state, message) => {
+  console.log(message);
+
+  state.messagesFromSS.push(message);
+
+  const messagesBefore = sessionStorage.getItem("messages");
+  const parsedMessages = messagesBefore ? JSON.parse(messagesBefore) : [];
+
+  sessionStorage.setItem(
+    "messages",
+    JSON.stringify([...parsedMessages, message])
+  );
+};
+
 // SEND MESSAGE
 export const sendMessage = createAsyncThunk(
   "customerSupport/sendMessage",
   async (message, { rejectWithValue }) => {
     try {
-      console.log("test");
-
       const url = `${api_url}/customerSupport`;
       const { data } = await axios.post(url, message, {
         withCredentials: true,
       });
-      console.log(data);
-
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -40,17 +51,7 @@ export const customerSupportSlice = createSlice({
   initialState,
   reducers: {
     addMessageToSS: (state, action) => {
-      // ADD MESSAGE TO STATE
-      state.messagesFromSS.push(action.payload);
-
-      // UPDATE SESSION STORAGE
-      const messagesBefore = sessionStorage.getItem("messages");
-      const parsedMessages = messagesBefore ? JSON.parse(messagesBefore) : [];
-
-      sessionStorage.setItem(
-        "messages",
-        JSON.stringify([...parsedMessages, action.payload])
-      );
+      addMessage(state, action.payload);
     },
 
     // GET MESSAGES FROM LOCAL STORAGE
@@ -81,6 +82,7 @@ export const customerSupportSlice = createSlice({
           content: action.payload.answer,
           role: "AI",
         });
+        addMessage(state, action.payload);
       })
       .addCase(sendMessage.rejected, (state, action) => {
         state.messageSent.status = "failed";
