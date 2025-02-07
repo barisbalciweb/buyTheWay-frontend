@@ -20,10 +20,14 @@ export const sendMessage = createAsyncThunk(
   "customerSupport/sendMessage",
   async (message, { rejectWithValue }) => {
     try {
+      console.log("test");
+
       const url = `${api_url}/customerSupport`;
       const { data } = await axios.post(url, message, {
         withCredentials: true,
       });
+      console.log(data);
+
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -73,6 +77,10 @@ export const customerSupportSlice = createSlice({
       .addCase(sendMessage.fulfilled, (state, action) => {
         state.messageSent.status = "succeeded";
         state.messageSent.result = action.payload;
+        state.messagesFromSS.push({
+          content: action.payload.answer,
+          role: "AI",
+        });
       })
       .addCase(sendMessage.rejected, (state, action) => {
         state.messageSent.status = "failed";

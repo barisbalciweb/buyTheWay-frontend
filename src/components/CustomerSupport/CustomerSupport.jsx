@@ -43,8 +43,11 @@ const CustomerSupport = () => {
   }, [messagesFromSS]);
 
   const handleSuggestionSelection = (suggestion) => {
+    console.log("test");
+
     dispatch(addMessageToSS({ content: suggestion, role: "customer" }));
     dispatch(sendMessage({ content: suggestion, role: "customer" }));
+    setInputValue("");
     setSuggestionsVisible(false);
   };
 
@@ -52,6 +55,7 @@ const CustomerSupport = () => {
   const handleSubmit = () => {
     if (inputValue.trim()) {
       dispatch(addMessageToSS({ content: inputValue, role: "customer" }));
+      dispatch(sendMessage({ content: inputValue, role: "customer" }));
       setInputValue("");
     }
   };
