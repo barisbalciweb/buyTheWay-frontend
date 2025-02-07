@@ -43,7 +43,7 @@ const SingleProduct = ({ item }) => {
     <Link to={`/store/product/${id}`} className="h-full relative flex flex-col">
       <FontAwesomeIcon
         icon={isInWishlist ? faHeartSolid : faHeartRegular}
-        className={`text-[6vw] absolute right-[2vw] top-[2vw] z-10 ${
+        className={`text-[6vw] absolute right-[2vw] top-[2vw] z-[1] ${
           isInWishlist && "text-red-500"
         }`}
         onClick={handleAddToWishlist}

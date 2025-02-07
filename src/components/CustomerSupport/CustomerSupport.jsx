@@ -10,6 +10,7 @@ import {
   getMessagesFromSS,
   sendMessage,
 } from "../../features/customerSupport/customerSupportSlice";
+import { toggleSupportWindow } from "../../features/ui/uiSlice";
 
 const suggestions = [
   "Wann wird meine Bestellung geliefert?",
@@ -24,11 +25,11 @@ const CustomerSupport = () => {
   // LOCAL STATES
   const [typing, setTyping] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [windowOpened, setWindowOpened] = useState(false);
   const [suggestionsVisible, setSuggestionsVisible] = useState(true);
 
   // GLOBAL STATES
   const { messagesFromSS } = useSelector((state) => state.customerSupport);
+  const { isSupportWindowOpen } = useSelector((state) => state.ui);
 
   useEffect(() => {
     // GET MESSAGES FROM SESSION STORAGE
@@ -71,13 +72,13 @@ const CustomerSupport = () => {
     }
   };
 
-  return windowOpened ? (
-    <section className="w-[80%] h-[85%] bg-white flex flex-col fixed bottom-0 right-0 z-50 shadow-2xl ">
+  return isSupportWindowOpen ? (
+    <section className="w-[82%] h-[75vh] bg-white flex flex-col fixed bottom-0 right-0 z-[3] rounded-tl-md shadow-2xl">
       {/* HEADER */}
-      <div className="w-full bg-gray-900 p-[2vw] flex justify-between items-center">
+      <div className="w-full bg-gray-900 p-[2vw] flex justify-between items-center rounded-tl-md">
         <h2 className="text-gray-100 text-[4vw]">Kundensupport</h2>
         <button
-          onClick={() => setWindowOpened(false)}
+          onClick={() => dispatch(toggleSupportWindow())}
           className="flex justify-center items-center text-gray-300 p-2">
           <FontAwesomeIcon icon={faXmark} className="text-[7vw]" />
         </button>
@@ -86,7 +87,7 @@ const CustomerSupport = () => {
       {/* MESSAGES FIELD */}
       <div
         ref={messagesFieldRef}
-        className="w-full h-[90%] p-[2vw] text-[3.5vw] relative bg-gray-50 overflow-y-auto">
+        className="w-full h-[85%] p-[2vw] text-[3.5vw] relative bg-gray-50 overflow-y-auto">
         <div className="w-full h-full flex flex-col p-[3vw]">
           {/* RENDER MESSAGES */}
           {messagesFromSS &&
@@ -125,7 +126,7 @@ const CustomerSupport = () => {
       </div>
 
       {/* INPUT FIELD */}
-      <div className="w-full h-[15%] flex justify-center items-center bg-white border-t border-gray-200 gap-[1.5vw] px-[2vw] py-[4vw]">
+      <div className="w-full h-[18%] flex justify-center items-center bg-white border-t border-gray-200 gap-[1.5vw] px-[2vw] py-[4vw]">
         <input
           value={inputValue}
           type="text"
@@ -134,7 +135,7 @@ const CustomerSupport = () => {
           onChange={(e) => setInputValue(e.target.value)}
         />
         <button
-          className="w-[12vw] h-full text-gray-300 bg-gray-900 hover:bg-gray-800 active:bg-gray-700 transition-colors rounded-lg flex items-center justify-center"
+          className="w-[15vw] h-full text-gray-300 bg-gray-900 hover:bg-gray-800 active:bg-gray-700 transition-colors rounded-lg flex items-center justify-center"
           onClick={handleSubmit}>
           <FontAwesomeIcon icon={faPaperPlane} className="text-[7vw]" />
         </button>
@@ -142,8 +143,8 @@ const CustomerSupport = () => {
     </section>
   ) : (
     <button
-      className="w-[16vw] h-[16vw] rounded-full bg-[rgba(0,0,0,0.8)] fixed right-[3vw] bottom-[3vw] cursor-pointer z-50 flex items-center justify-center shadow-lg"
-      onClick={() => setWindowOpened(true)}>
+      className="w-[16vw] h-[16vw] rounded-full bg-[rgba(0,0,0,0.8)] fixed right-[3vw] bottom-[3vw] cursor-pointer z-[2] flex items-center justify-center shadow-lg"
+      onClick={() => dispatch(toggleSupportWindow())}>
       <FontAwesomeIcon icon={faComments} className="text-white text-[8vw]" />
     </button>
   );

@@ -15,6 +15,7 @@ import {
   toggleSort,
   toggleProceedOptionsModal,
   toggleSizeSelection,
+  toggleSupportWindow,
 } from "../features/ui/uiSlice";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -35,6 +36,7 @@ const MobileMenu = () => {
     isFilterOpen,
     isSortOpen,
     isSizeSelectionOpen,
+    isSupportWindowOpen,
   } = useSelector((state) => state.ui);
 
   useEffect(() => {
@@ -46,6 +48,7 @@ const MobileMenu = () => {
     if (loginModal) dispatch(toggleLoginModal());
     if (proceedOptionsModal) dispatch(toggleProceedOptionsModal());
     if (isSizeSelectionOpen) dispatch(toggleSizeSelection());
+    if (isSupportWindowOpen) dispatch(toggleSupportWindow());
   }, []);
 
   const handlePersonSelect = (person) => {
@@ -62,7 +65,7 @@ const MobileMenu = () => {
     <>
       {/* MODAL BACKGROUND */}
       <div
-        className="w-full h-full bg-[rgba(0,0,0,0.6)] fixed top-0 left-0 z-30"
+        className="w-full h-full bg-[rgba(0,0,0,0.6)] fixed top-0 left-0 z-[3]"
         onClick={() => dispatch(toggleMobileMenu())}>
         <FontAwesomeIcon
           icon={faXmark}
@@ -73,7 +76,7 @@ const MobileMenu = () => {
       {/* MOBILE MENU FIELD */}
       <div
         id="ham-field"
-        className="w-[80%] h-[calc(100svh-17vw)] flex flex-col bg-white fixed left-0 top-header z-50 overflow-y-auto scrollbar-hide">
+        className="w-[80%] h-[calc(100svh-17vw)] flex flex-col bg-white fixed left-0 top-header z-[5] overflow-y-auto scrollbar-hide">
         {/* PERSON SELECTION */}
         <div className="w-full flex text-[4.5vw] bg-[#D0D0D0]">
           {persons.map((person) => (

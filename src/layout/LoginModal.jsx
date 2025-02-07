@@ -12,7 +12,7 @@ const LoginModal = () => {
     <>
       {/* BACKGROUND OVERLAY */}
       <div
-        className="w-screen h-screen bg-[rgba(0,0,0,0.6)] fixed top-0 left-0 z-30"
+        className="w-screen h-screen bg-[rgba(0,0,0,0.6)] fixed top-0 left-0 z-[3]"
         onClick={() => dispatch(toggleLoginModal())}
       />
 

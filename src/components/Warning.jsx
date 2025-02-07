@@ -5,7 +5,7 @@ const Warning = () => {
   const { innerWidth } = useSelector((state) => state.ui);
 
   return (
-    <div className="w-screen h-screen flex flex-col justify-center items-center overflow-y-hidden fixed top-0 left-0 z-50 bg-black">
+    <div className="w-screen h-screen flex flex-col justify-center items-center overflow-y-hidden fixed top-0 left-0 z-[5] bg-black">
       <div className="w-[80%] max-w-[750px] flex flex-col gap-[1.5em] text-white text-[3vw] md:text-2xl">
         <p>
           Welcome to <b>BuyTheWay!</b>
