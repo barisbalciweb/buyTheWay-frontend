@@ -119,7 +119,7 @@ const CustomerSupport = () => {
           value={inputValue}
           type="text"
           className="w-full h-full px-[2vw] rounded-lg border border-gray-200 focus:outline-none focus:border-customOrange bg-gray-50"
-          placeholder="Mesajınızı yazın..."
+          placeholder="Ihre Nachricht..."
           onChange={(e) => setInputValue(e.target.value)}
         />
         <button
