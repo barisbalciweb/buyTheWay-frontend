@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments, faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { BeatLoader } from "react-spinners";
 
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
@@ -30,6 +31,7 @@ const CustomerSupport = () => {
   // GLOBAL STATES
   const { messagesFromSS } = useSelector((state) => state.customerSupport);
   const { isSupportWindowOpen } = useSelector((state) => state.ui);
+  const { status } = useSelector((state) => state.customerSupport.messageSent);
 
   useEffect(() => {
     // GET MESSAGES FROM SESSION STORAGE
@@ -46,36 +48,50 @@ const CustomerSupport = () => {
 
   useEffect(() => {
     // AUTO SCROLL TO BOTTOM
+    scrollToBottom();
+    // WAIT FOR STATE CHANGE FOR TYPING STATUS AND SCROLL TO BOTTOM AGAIN
+    const timeout = setTimeout(() => {
+      scrollToBottom();
+    }, 100);
+
+    return () => clearTimeout(timeout);
+  }, [messagesFromSS]);
+
+  // UPDATE TYPING STATUS
+  useEffect(() => {
+    setTyping(status === "loading");
+  }, [status]);
+
+  const scrollToBottom = () => {
     if (messagesFieldRef?.current) {
       const messagesFieldDiv = messagesFieldRef.current;
       messagesFieldDiv.scrollTop = messagesFieldDiv.scrollHeight;
     }
-  }, [messagesFromSS]);
-
-  const handleSuggestionSelection = (suggestion) => {
-    // ADD SUGGESTION TO STATE FOR RENDERING
-    dispatch(addMessageToSS({ content: suggestion, role: "customer" }));
-    // ADD SUGGESTION TO SESSION STORAGE FOR PERSISTENCE
-    dispatch(sendMessage({ content: suggestion, role: "customer" }));
-    setInputValue("");
-    setSuggestionsVisible(false);
   };
 
-  // SEND MESSAGE TO CUSTOMER SUPPORT
+  const sendMessageHelper = (message, type) => {
+    // ADD MESSAGE TO STATE FOR RENDERING
+    dispatch(addMessageToSS({ content: message, role: "customer" }));
+    // ADD MESSAGE TO SESSION STORAGE FOR PERSISTENCE
+    dispatch(sendMessage({ content: message, role: "customer" }));
+    setInputValue("");
+    if (type === "suggestion") setSuggestionsVisible(false);
+  };
+
+  const handleSuggestionSelection = (suggestion) => {
+    sendMessageHelper(suggestion, "suggestion");
+  };
+
   const handleSubmit = () => {
     if (inputValue.trim()) {
-      // ADD MESSAGE TO STATE FOR RENDERING
-      dispatch(addMessageToSS({ content: inputValue, role: "customer" }));
-      // ADD MESSAGE TO SESSION STORAGE FOR PERSISTENCE
-      dispatch(sendMessage({ content: inputValue, role: "customer" }));
-      setInputValue("");
+      sendMessageHelper(inputValue, "input");
     }
   };
 
   return isSupportWindowOpen ? (
     <section className="w-[82%] h-[75vh] bg-white flex flex-col fixed bottom-0 right-0 z-[3] rounded-tl-md shadow-2xl">
       {/* HEADER */}
-      <div className="w-full bg-gray-900 p-[2vw] flex justify-between items-center rounded-tl-md">
+      <div className="w-full bg-gray-900 p-[2vw] flex justify-between items-center rounded-tl-md relative">
         <h2 className="text-gray-100 text-[4vw]">Kundensupport</h2>
         <button
           onClick={() => dispatch(toggleSupportWindow())}
@@ -88,7 +104,7 @@ const CustomerSupport = () => {
       <div
         ref={messagesFieldRef}
         className="w-full h-[85%] p-[2vw] text-[3.5vw] relative bg-gray-50 overflow-y-auto">
-        <div className="w-full h-full flex flex-col p-[3vw]">
+        <div className="w-full h-full flex flex-col justify-start items-center p-[3vw]">
           {/* RENDER MESSAGES */}
           {messagesFromSS &&
             messagesFromSS.length > 0 &&
@@ -122,6 +138,7 @@ const CustomerSupport = () => {
               ))}
             </div>
           )}
+          {typing && <BeatLoader color="#000" size={10} />}
         </div>
       </div>
 

@@ -39,7 +39,7 @@ const Header = () => {
 
   return (
     <header
-      className="w-full h-header bg-white flex items-center shadow-md fixed top-0 left-0 z-40"
+      className="w-full h-header bg-white flex items-center shadow-md fixed top-0 left-0 z-[4]"
       onClick={handleClick}>
       <nav className="w-full flex justify-between">
         <div className="flex justify-center items-center gap-[4vw] ml-[4vw]">

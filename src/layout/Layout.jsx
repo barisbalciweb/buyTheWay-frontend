@@ -81,17 +81,32 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      {/* SHOW LOGIN MODAL */}
       {loginModal && <LoginModal />}
+
+      {/* SHOW PROCEED OPTIONS */}
       {proceedOptionsModal && <ProceedOptionsModal />}
+
+      {/* SHOW WARNING SCREEN IN DESKTOP VIEW */}
       {warningScreen && <Warning />}
+
       <Header />
+
+      {/* SHOW SEARCH SECTION */}
       {isSearchOpen && <Search />}
+
+      {/* SHOW SCROLL BUTTON */}
       {showScrollButton && (
         <ScrollTopButton handleScrollToTop={handleScrollToTop} />
       )}
+
+      {/* SHOW MOBILE MENU  */}
       {isMobileMenuOpen && <MobileMenu />}
-      {<CustomerSupport />}
+
+      {/* SHOW MODAL FOR CUSTOMER SUPPORT WINDOW */}
       {isSupportWindowOpen && <CustomerSupportModal />}
+
+      {<CustomerSupport />}
       {children}
       <Footer />
     </>
