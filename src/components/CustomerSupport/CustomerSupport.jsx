@@ -34,21 +34,15 @@ const CustomerSupport = () => {
   const { status } = useSelector((state) => state.customerSupport.messageSent);
 
   useEffect(() => {
-    // GET MESSAGES FROM SESSION STORAGE
+    // GET MESSAGES FROM SESSION STORAGE ON COMPONENT MOUNT
     dispatch(getMessagesFromSS());
-  }, []);
+  }, [isSupportWindowOpen]);
 
   useEffect(() => {
-    // HIDE SUGGESTIONS IF MESSAGES AREN'T EMPTY
-    if (messagesFromSS.length > 1) {
-      setSuggestionsVisible(false);
-      console.log(messagesFromSS.length > 0);
-    }
-  }, [messagesFromSS]);
-
-  useEffect(() => {
-    // AUTO SCROLL TO BOTTOM
+    // AUTO SCROLL TO BOTTOM WHEN NEW MESSAGE IS ADDED
     scrollToBottom();
+    // HIDE SUGGESTIONS IF MESSAGES AREN'T EMPTY
+    setSuggestionsVisible(messagesFromSS.length > 1);
     // WAIT FOR STATE CHANGE FOR TYPING STATUS AND SCROLL TO BOTTOM AGAIN
     const timeout = setTimeout(() => {
       scrollToBottom();
