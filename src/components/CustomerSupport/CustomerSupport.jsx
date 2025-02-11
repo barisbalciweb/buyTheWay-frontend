@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments, faPaperPlane } from "@fortawesome/free-regular-svg-icons";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { BeatLoader } from "react-spinners";
 
 // REDUX
@@ -27,6 +27,7 @@ const CustomerSupport = () => {
   const [typing, setTyping] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [suggestionsVisible, setSuggestionsVisible] = useState(true);
+  const [popUpVisible, setPopUpVisible] = useState(false);
 
   // GLOBAL STATES
   const { messagesFromSS } = useSelector((state) => state.customerSupport);
@@ -82,15 +83,24 @@ const CustomerSupport = () => {
     }
   };
 
+  const handleCloseChat = () => {
+    setPopUpVisible(true);
+  };
+
   return isSupportWindowOpen ? (
-    <section className="w-[82%] h-[75vh] bg-white flex flex-col fixed bottom-0 right-0 z-[3] rounded-tl-md shadow-2xl">
+    <section className="w-[82%] h-[75vh] flex flex-col fixed bottom-0 right-0 z-[3] rounded-tl-md shadow-2xl">
       {/* HEADER */}
       <div className="w-full bg-gray-900 p-[2vw] flex justify-between items-center rounded-tl-md relative">
         <h2 className="text-gray-100 text-[4vw]">Kundensupport</h2>
         <button
+          onClick={handleCloseChat}
+          className="flex justify-center bg-red-700 items-center text-[3vw] text-gray-50 p-2">
+          Chat beenden
+        </button>
+        <button
           onClick={() => dispatch(toggleSupportWindow())}
-          className="flex justify-center items-center text-gray-300 p-2">
-          <FontAwesomeIcon icon={faXmark} className="text-[7vw]" />
+          className="flex justify-center items-center text-gray-300">
+          <FontAwesomeIcon icon={faChevronDown} className="text-[7vw]" />
         </button>
       </div>
 
@@ -151,6 +161,25 @@ const CustomerSupport = () => {
           <FontAwesomeIcon icon={faPaperPlane} className="text-[7vw]" />
         </button>
       </div>
+
+      {/* POPUP */}
+      {popUpVisible && (
+        <div className="w-full h-full absolute flex justify-center items-center bg-[rgba(0,0,0,0.8)]">
+          <div className="w-full flex flex-col gap-[4vw] justify-center items-center text-gray-50 text-[4.5vw]">
+            <p className=" text-center">
+              Möchten Sie den Chat wirklich beenden?
+            </p>
+            <div className="flex gap-[2vw]">
+              <button className="bg-red-700 p-[3vw]">Beenden</button>
+              <button
+                className="bg-black p-[3vw]"
+                onClick={() => setPopUpVisible(false)}>
+                Abbrechen
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   ) : (
     <button
