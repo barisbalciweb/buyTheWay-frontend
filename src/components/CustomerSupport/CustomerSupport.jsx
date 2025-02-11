@@ -171,16 +171,16 @@ const CustomerSupport = () => {
       {/* POPUP */}
       {popUpVisible && (
         <div className="w-full h-full absolute flex justify-center items-center bg-[rgba(0,0,0,0.8)]">
-          <div className="w-full flex flex-col gap-[4vw] justify-center items-center text-gray-50 text-[4.5vw]">
-            <p className=" text-center">
+          <div className="w-full flex flex-col gap-[4vw] justify-center items-center bg-gray-50 p-[5vw] text-[4.5vw]">
+            <p className="text-center">
               Möchten Sie den Chat wirklich beenden?
             </p>
-            <div className="flex gap-[2vw]">
+            <div className="flex gap-[4vw] text-gray-50">
               <button className="bg-red-700 p-[3vw]" onClick={handleEndChat}>
                 Beenden
               </button>
               <button
-                className="bg-black p-[3vw]"
+                className="bg-black p-[3vw] text-gray-50"
                 onClick={() => setPopUpVisible(false)}>
                 Abbrechen
               </button>
