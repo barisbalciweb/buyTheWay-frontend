@@ -75,7 +75,7 @@ const ProductInCart = ({ item }) => {
       {/* REMOVE ITEM FROM CART */}
       <button
         aria-label="Produkt entfernen"
-        className="absolute z-10 top-0 right-0"
+        className="absolute z-[1] top-0 right-0"
         onClick={() => dispatch(removeFromCart({ id: product.id, size }))}>
         <FontAwesomeIcon className="text-[5vw] text-gray-600" icon={faTrash} />
       </button>

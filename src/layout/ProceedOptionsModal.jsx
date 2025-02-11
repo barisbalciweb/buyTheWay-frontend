@@ -20,12 +20,12 @@ const ProceedOptionsModal = () => {
     <>
       {/* BACKGROUND OVERLAY */}
       <div
-        className="w-screen h-screen bg-[rgba(0,0,0,0.6)] fixed top-0 left-0 z-30"
+        className="w-screen h-screen bg-[rgba(0,0,0,0.6)] fixed top-0 left-0 z-[3]"
         onClick={() => dispatch(toggleProceedOptionsModal())}
       />
 
       {/* OPTIONS DIV */}
-      <div className="w-[90%] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 bg-white py-[10vw] px-[10vw] rounded-md">
+      <div className="w-[90%] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[3] bg-white py-[10vw] px-[10vw] rounded-md">
         <p className="text-[4vw]">
           Sie sind nicht angemeldet. Bitte wählen Sie, wie Sie fortfahren
           möchten:

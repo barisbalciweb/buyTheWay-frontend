@@ -14,6 +14,7 @@ const initialState = {
   loginModal: false,
   proceedOptionsModal: false,
   isSizeSelectionOpen: false,
+  isSupportWindowOpen: false,
 };
 
 export const uiSlice = createSlice({
@@ -78,9 +79,10 @@ export const uiSlice = createSlice({
       state.proceedOptionsModal = !state.proceedOptionsModal;
     },
     toggleSizeSelection: (state) => {
-      console.log("hier");
-
       state.isSizeSelectionOpen = !state.isSizeSelectionOpen;
+    },
+    toggleSupportWindow: (state) => {
+      state.isSupportWindowOpen = !state.isSupportWindowOpen;
     },
   },
 });
@@ -100,5 +102,6 @@ export const {
   toggleLoginModal,
   toggleProceedOptionsModal,
   toggleSizeSelection,
+  toggleSupportWindow,
 } = uiSlice.actions;
 export default uiSlice.reducer;

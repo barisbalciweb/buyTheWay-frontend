@@ -73,7 +73,7 @@ const Wishlist = () => {
               <div className="relative" key={product.id}>
                 {/* SUCCESS FEEDBACK */}
                 {success && selectedItem.id === product.id && (
-                  <div className="w-full h-full flex flex-col justify-center gap-[2vw] items-center absolute top-0 left-0 z-20 text-black">
+                  <div className="w-full h-full flex flex-col justify-center gap-[2vw] items-center absolute top-0 left-0 z-[2] text-black">
                     <FontAwesomeIcon
                       icon={faCircleCheck}
                       className="text-[#52D441] text-[7vw]"
@@ -112,10 +112,10 @@ const Wishlist = () => {
         {isSizeSelectionOpen && (
           <section>
             <div
-              className="w-full h-full bg-[rgba(0,0,0,0.5)] fixed bottom-0 left-0 z-20"
+              className="w-full h-full bg-[rgba(0,0,0,0.5)] fixed bottom-0 left-0 z-[2]"
               onClick={() => dispatch(toggleSizeSelection())}
             />
-            <div className="w-full h-[30%] flex flex-col justify-center items-center gap-[3vw] bg-white fixed bottom-0 left-0 z-20">
+            <div className="w-full h-[30%] flex flex-col justify-center items-center gap-[3vw] bg-white fixed bottom-0 left-0 z-[2]">
               <div className="w-[80%] flex flex-col items-center justify-center gap-[3vw]">
                 <p className="w-full">Größe auswählen:</p>
                 <div className="w-full grid grid-cols-5 gap-[2vw]">

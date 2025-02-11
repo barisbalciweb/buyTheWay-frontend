@@ -23,9 +23,8 @@ const App = () => {
   const { warningScreen } = useSelector((state) => state.ui);
   const { login } = useSelector((state) => state.auth);
   const { isAuthenticated } = useSelector((state) => state.auth);
-  const { isMobileMenuOpen, isSearchOpen, loginModal } = useSelector(
-    (state) => state.ui
-  );
+  const { isMobileMenuOpen, isSearchOpen, loginModal, isSupportWindowOpen } =
+    useSelector((state) => state.ui);
 
   // AUTHENTICATE USER AND GET USER ID FROM COOKIES ON FIRST LOAD OR LOGIN
   useEffect(() => {
@@ -48,7 +47,11 @@ const App = () => {
     <div
       id="container"
       className={`w-full h-full flex flex-col ${
-        warningScreen || isMobileMenuOpen || isSearchOpen || loginModal
+        warningScreen ||
+        isMobileMenuOpen ||
+        isSearchOpen ||
+        loginModal ||
+        isSupportWindowOpen
           ? "overflow-hidden"
           : ""
       }`}>

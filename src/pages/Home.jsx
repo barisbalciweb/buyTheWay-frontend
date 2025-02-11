@@ -56,7 +56,7 @@ const Home = () => {
       {/* SELECTIONS */}
       <section className="w-full h-[120vw] flex flex-col items-center justify-center bg-cover bg-center relative">
         <HeroSlider />
-        <div className="w-full mt-[54vw] absolute flex flex-col items-center justify-center z-20 text-white">
+        <div className="w-full mt-[54vw] absolute flex flex-col items-center justify-center z-[1] text-white">
           <h2 className="text-shadow-black text-[6vw] text-center font-bold mb-[2vw]">
             Für wen suchts du?
           </h2>
