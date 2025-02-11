@@ -73,6 +73,10 @@ export const customerSupportSlice = createSlice({
         }
       }
     },
+    deleteMessagesFromSS: (state) => {
+      sessionStorage.removeItem("messages");
+      state.messagesFromSS = initialState.messagesFromSS;
+    },
   },
 
   extraReducers: (builder) => {
@@ -93,6 +97,6 @@ export const customerSupportSlice = createSlice({
   },
 });
 
-export const { addMessageToSS, getMessagesFromSS } =
+export const { addMessageToSS, getMessagesFromSS, deleteMessagesFromSS } =
   customerSupportSlice.actions;
 export default customerSupportSlice.reducer;

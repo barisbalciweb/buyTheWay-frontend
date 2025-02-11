@@ -8,6 +8,7 @@ import { BeatLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addMessageToSS,
+  deleteMessagesFromSS,
   getMessagesFromSS,
   sendMessage,
 } from "../../features/customerSupport/customerSupportSlice";
@@ -83,20 +84,25 @@ const CustomerSupport = () => {
     }
   };
 
-  const handleCloseChat = () => {
-    setPopUpVisible(true);
+  const handleEndChat = () => {
+    setPopUpVisible(false);
+    setSuggestionsVisible(true);
+    dispatch(toggleSupportWindow());
+    dispatch(deleteMessagesFromSS());
   };
 
   return isSupportWindowOpen ? (
     <section className="w-[82%] h-[75vh] flex flex-col fixed bottom-0 right-0 z-[3] rounded-tl-md shadow-2xl">
       {/* HEADER */}
-      <div className="w-full bg-gray-900 p-[2vw] flex justify-between items-center rounded-tl-md relative">
+      <div className="w-full h-[18vw] bg-gray-900 p-[2vw] flex justify-between items-center rounded-tl-md relative">
         <h2 className="text-gray-100 text-[4vw]">Kundensupport</h2>
-        <button
-          onClick={handleCloseChat}
-          className="flex justify-center bg-red-700 items-center text-[3vw] text-gray-50 p-2">
-          Chat beenden
-        </button>
+        {messagesFromSS.length > 1 && (
+          <button
+            onClick={() => setPopUpVisible(true)}
+            className="flex justify-center bg-red-700 items-center text-[3vw] text-gray-50 p-2">
+            Chat beenden
+          </button>
+        )}
         <button
           onClick={() => dispatch(toggleSupportWindow())}
           className="flex justify-center items-center text-gray-300">
@@ -121,9 +127,9 @@ const CustomerSupport = () => {
                 <div
                   className={`max-w-[80%] p-[2vw] ${
                     message.role === "customer"
-                      ? "bg-gray-900 text-white rounded-2xl rounded-br-none"
-                      : "bg-white text-gray-800 rounded-2xl rounded-bl-none border border-gray-200"
-                  } shadow-sm`}>
+                      ? "bg-gray-900 text-white rounded-br-none"
+                      : "bg-white text-gray-800 rounded-bl-none border border-gray-200"
+                  } break-words rounded-2xl shadow-sm`}>
                   {message.content}
                 </div>
               </div>
@@ -170,7 +176,9 @@ const CustomerSupport = () => {
               Möchten Sie den Chat wirklich beenden?
             </p>
             <div className="flex gap-[2vw]">
-              <button className="bg-red-700 p-[3vw]">Beenden</button>
+              <button className="bg-red-700 p-[3vw]" onClick={handleEndChat}>
+                Beenden
+              </button>
               <button
                 className="bg-black p-[3vw]"
                 onClick={() => setPopUpVisible(false)}>
