@@ -42,7 +42,7 @@ const CustomerSupport = () => {
     // AUTO SCROLL TO BOTTOM WHEN NEW MESSAGE IS ADDED
     scrollToBottom();
     // HIDE SUGGESTIONS IF MESSAGES AREN'T EMPTY
-    setSuggestionsVisible(messagesFromSS.length > 1);
+    if (messagesFromSS.length > 1) setSuggestionsVisible(false);
     // WAIT FOR STATE CHANGE FOR TYPING STATUS AND SCROLL TO BOTTOM AGAIN
     const timeout = setTimeout(() => {
       scrollToBottom();
@@ -69,7 +69,7 @@ const CustomerSupport = () => {
     // ADD MESSAGE TO SESSION STORAGE FOR PERSISTENCE
     dispatch(sendMessage({ content: message, role: "customer" }));
     setInputValue("");
-    if (type === "suggestion") setSuggestionsVisible(false);
+    if (type === "suggestion") setSuggestionsVisible(true);
   };
 
   const handleSuggestionSelection = (suggestion) => {
@@ -132,7 +132,7 @@ const CustomerSupport = () => {
               ))}
             </div>
           )}
-          {typing && <BeatLoader color="#000" size={10} />}
+          {typing && <BeatLoader color="#000" size={10} className="mt-[4vw]" />}
         </div>
       </div>
 
