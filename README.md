@@ -4,7 +4,7 @@
 
 ## Introduction
 
-"buyTheWay" is a modern e-commerce application that allows users to shop conveniently and efficiently. With intuitive features and seamless navigation, "buyTheWay" becomes a practical companion for everyday shopping.
+"buyTheWay" is a modern e-commerce application that enables users to shop quickly and efficiently. With a user-friendly design and intuitive features, it makes everyday shopping easier.
 
 ## Design
 
@@ -31,7 +31,7 @@ You can view the UI design I created in Figma at the following link: [buyTheWay 
   - [x] Users can manage their profiles, update information, and save their favorites.
 
 - **Customer Support**:
-  - [ ] Chat support based on multi-agent systems with ChatGPT. 🚧
+  - [x] Users can interact with a chat support system powered by ChatGPT.
 
 ## Technologies
 
@@ -42,6 +42,7 @@ You can view the UI design I created in Figma at the following link: [buyTheWay 
 - **Styling**: Tailwind CSS
 - **API Type**: RESTful API
 - **Design Tools**: Figma
+- **AI**: Powered by OpenAI's GPT technology.
 
 ## Client-Side Routing
 
@@ -53,7 +54,7 @@ You can view the UI design I created in Figma at the following link: [buyTheWay 
 
 ## SEO and Accessibility
 
-- [ ] **Lighthouse Score**: The application is optimized for SEO, performance, and accessibility. 🚧
+- [x] **Lighthouse Score**: The application is optimized for SEO, performance, and accessibility.
 - [x] **Semantic HTML**: For better user experience and accessibility.
 
 ## Testing and Code Quality
@@ -140,7 +141,8 @@ You can view the UI design I created in Figma at the following link: [buyTheWay 
 
 [buyTheWay Live Demo](https://btw.barisbalci.de)
 
-<img src="https://github.com/user-attachments/assets/b0e24693-c37c-4737-8d0e-6dbad7ae6fc5" alt="screenshot" width="200">
+<img src="https://github.com/user-attachments/assets/bcaa80c8-7e0d-4cfa-98e6-487b361b2041" alt="screenshot" width="200">
+<img src="https://github.com/user-attachments/assets/5007994f-0efc-4ff0-8198-4a7ac77978e5" alt="screenshot" width="200">
 <img src="https://github.com/user-attachments/assets/8384fa77-d4e1-4686-badc-857b62842a725" alt="screenshot" width="200">
 <img src="https://github.com/user-attachments/assets/5f4b4108-3409-4b6c-b4d6-1c36bda46de0" alt="screenshot" width="200">
 <img src="https://github.com/user-attachments/assets/4073d1cc-64b7-4e92-b788-768b38bdb45c" alt="screenshot" width="200">
