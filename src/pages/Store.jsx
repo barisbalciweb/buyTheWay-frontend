@@ -49,8 +49,44 @@ const Store = () => {
       searchResults,
     })
   );
-
   const count = renderedProducts.length;
+
+  // SORT PRODUCTS ACCORDING TO SORT OPTION
+  let sortedProducts;
+
+  switch (sortBy) {
+    case "Preis aufsteigend":
+      sortedProducts = [...renderedProducts].sort(
+        (a, b) => Number(a.price) - Number(b.price)
+      );
+      break;
+    case "Preis absteigend":
+      sortedProducts = [...renderedProducts].sort(
+        (a, b) => Number(b.price) - Number(a.price)
+      );
+      break;
+    case "Name A-Z":
+      sortedProducts = [...renderedProducts].sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      break;
+    case "Name Z-A":
+      sortedProducts = [...renderedProducts].sort((a, b) =>
+        b.name.localeCompare(a.name)
+      );
+      break;
+    case "Rabatt":
+      sortedProducts = [...renderedProducts].sort(
+        (a, b) => b.discountPercentage - a.discountPercentage
+      );
+      break;
+    case "Meistverkauft":
+      sortedProducts = [...renderedProducts].sort(
+        (a, b) => b.soldCount - a.soldCount
+      );
+    default:
+      break;
+  }
 
   // SPECIFY FETCH STATUS DYANMICALLY
   const fetchStatus =
@@ -170,8 +206,8 @@ const Store = () => {
         </section>
       ) : (
         <section className="grid grid-cols-2 p-[5vw] gap-[4vw]">
-          {fetchStatus === "succeeded" || renderedProducts
-            ? renderedProducts.map((product) => (
+          {fetchStatus === "succeeded" || renderedProducts || sortedProducts
+            ? sortedProducts.map((product) => (
                 <SingleProduct key={product.id} item={{ product }} />
               ))
             : "Loading..."}

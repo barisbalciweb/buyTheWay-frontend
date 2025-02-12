@@ -13,7 +13,6 @@ const initialState = {
   discounted: [],
   favorites: [],
   similar: [],
-  // recentlyViewed: [],
   statuses: {
     allProducts: "idle",
     productsByCategory: "idle",
@@ -23,7 +22,6 @@ const initialState = {
     discounted: "idle",
     favorites: "idle",
     similar: "idle",
-    // recentlyViewed: "idle",
   },
   errors: {
     allProducts: null,
@@ -34,7 +32,6 @@ const initialState = {
     discounted: null,
     favorites: null,
     similar: null,
-    // recentlyViewed: null,
   },
 };
 

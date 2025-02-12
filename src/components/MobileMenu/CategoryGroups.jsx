@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { categoryGroups } from "../../data/fakeData";
+import { categoryGroups } from "../../data/data";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedCategoryGroup } from "../../features/ui/uiSlice";
 
-const Categories = ({ isAnimating }) => {
+const CategoryGroups = ({ isAnimating }) => {
   const [filteredCategoryGroups, setFilteredCategoryGroups] = useState([]);
 
   const dispatch = useDispatch();
@@ -43,4 +43,4 @@ const Categories = ({ isAnimating }) => {
   );
 };
 
-export default Categories;
+export default CategoryGroups;

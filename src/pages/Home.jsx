@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import secondHeroImg from "../assets/images/Herbstaktion.webp";
 import thirdHeroImg from "../assets/images/shopping.webp";
-import { fakeTopCategories } from "../data/fakeData";
+import { fakeTopCategories } from "../data/data";
 import { selections } from "../data/data";
 import LazyProductSlider from "../components/LazyProductSlider";
 import { Link } from "react-router-dom";
