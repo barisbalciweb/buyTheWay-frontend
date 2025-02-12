@@ -1,4 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { apiUrlSwitch } from "../../utils/apiUrlSwitch";
+
+const api_url = apiUrlSwitch();
 
 const initialState = {
   sortBy: "Meistverkauft",
