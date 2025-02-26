@@ -1,6 +1,6 @@
 const OpenWindowButton = () => {
   const openWindow = () => {
-    const url = "http://localhost:5173";
+    const url = "https://btw.barisbalci.de";
     const width = 393;
     const height = 852;
     const left = (window.screen.width - width) / 2;
