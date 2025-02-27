@@ -1,7 +1,5 @@
 # [buyTheWay](btw.barisbalci.de)
 
-⚠️ **Note**: This project is currently under development. Some sections and functionalities are still in progress.
-
 ## Introduction
 
 "buyTheWay" is a modern e-commerce application that enables users to shop quickly and efficiently. With a user-friendly design and intuitive features, it makes everyday shopping easier.
