@@ -1,4 +1,4 @@
-# [buyTheWay](btw.barisbalci.de)
+# [buyTheWay](https://btw.barisbalci.de)
 
 ## Introduction
 
